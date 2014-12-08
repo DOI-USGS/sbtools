@@ -6,7 +6,7 @@
 #'@param key The identifier key
 #'@param session (optional) SB Session to use, not provided queries public items only
 #'
-#'@return The SB item id for the matching item
+#'@return The SB item id for the matching item. NULL if no matching item found.
 #'
 #'
 #'@export
@@ -26,3 +26,5 @@ query_item_identifier = function(scheme, type, key, session=NULL){
 	
 	return(content(r,'parsed')$id)
 }
+
+

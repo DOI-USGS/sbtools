@@ -14,5 +14,7 @@ item_update = function(id, info, session){
 	r = PUT(paste0(url_item, id), handle=session,
 					body=toJSON(info, auto_unbox=TRUE))
 	
+	#catch 405, which is, I think, expired login
+	
 	return(r)
 }
