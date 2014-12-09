@@ -3,7 +3,7 @@
 \alias{query_item_identifier}
 \title{Query SB for item based on custom identifier}
 \usage{
-query_item_identifier(scheme, type, key, session)
+query_item_identifier(scheme, type, key, session = NULL)
 }
 \arguments{
 \item{scheme}{The identifier scheme}
@@ -11,9 +11,11 @@ query_item_identifier(scheme, type, key, session)
 \item{type}{The identifier type}
 
 \item{key}{The identifier key}
+
+\item{session}{(optional) SB Session to use, not provided queries public items only}
 }
 \value{
-The SB item id for the matching item
+The SB item id for the matching item. NULL if no matching item found.
 }
 \description{
 

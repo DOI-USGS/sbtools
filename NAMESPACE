@@ -2,10 +2,12 @@
 
 export(authenticate_sb)
 export(folder_create)
-export(get_item)
 export(item_append_file)
 export(item_create)
+export(item_get)
+export(item_list_files)
 export(item_update)
+export(item_update_identifier)
 export(query_item_identifier)
 export(query_items)
 import(httr)
