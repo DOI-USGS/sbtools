@@ -1,7 +1,7 @@
 #'
 #'@title Query SB for items using generic query parameters
 #'
-#'
+#'@param query_list 
 #'
 #'
 #'

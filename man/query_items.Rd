@@ -5,6 +5,9 @@
 \usage{
 query_items(query_list, session)
 }
+\arguments{
+\item{query_list}{}
+}
 \description{
 
 }

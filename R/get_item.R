@@ -8,9 +8,11 @@
 #'@return List serialization of complete metadata for SB item
 #'
 #'@export
-get_item = function(id, session){
+item_get = function(id, session){
 	r = GET(paste0(url_item, id, '?type=json'), handle=session)
 	
-	return(r)
+	##TODO: Check that item successfully found
+	
+	return(content(r))
 	
 }
