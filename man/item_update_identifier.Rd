@@ -14,9 +14,20 @@ item_update_identifier(id, scheme, type, key, session)
 
 \item{key}{The identifier key}
 
-\item{session}{}
+\item{session}{SB session from \code{\link{authenticate_sb}}}
 }
 \description{
 Add custom identifier to an existing item
+}
+\examples{
+\dontrun{
+
+session = authenticate_sb("user@usgs.gov")
+item_update_identifier("5485fd99e4b02acb4f0c7e81", "scheme", "type", "key", session)
+
+}
+}
+\author{
+Luke Winslow
 }
 
