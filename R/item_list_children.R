@@ -24,8 +24,12 @@ item_list_children = function(id, session, limit=20){
 					handle = session)
 	
 	items = content(r, 'parsed')$items
-	out = data.frame(id=NA)
 	
+	if(length(items) < 1){
+		return(data.frame())
+	}
+	
+	out = data.frame(id=NA)
 	for(i in 1:length(items)){
 		out[i,]$id = items[[i]]$id
 	}
