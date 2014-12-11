@@ -12,10 +12,14 @@
 #'@export
 authenticate_sb = function(username, password){
 	
+	if(missing(username)){
+		stop('username required for authentication')
+	}
+	
 	if(!interactive() & missing(password)){
-		stop('No password supplied to authenticat_sciencebase in a non-interactive session.')
+		stop('No password supplied to authenticate_sciencebase in a non-interactive session.')
 	}else{
-		password = readPassword('Please enter your Sciencebase password:')
+		password = ifelse(missing(password), readPassword('Please enter your Sciencebase password:'), password)
 	}
 	
 	h = handle(url_base)
