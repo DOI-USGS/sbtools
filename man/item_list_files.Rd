@@ -6,9 +6,12 @@
 item_list_files(id, session)
 }
 \arguments{
-\item{SB}{item ID}
+\item{id}{item ID}
 
-\item{Session}{from \link{authenticate_sb}}
+\item{Session}{Session object from \link{authenticate_sb}}
+}
+\value{
+A data.frame with columns fname, size, and url.
 }
 \description{
 Get list of files attached to SB item

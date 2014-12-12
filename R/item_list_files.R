@@ -1,9 +1,9 @@
 #'@title Get list of files attached to SB item
 #'
-#'@param SB item ID
-#'@param Session from \link{authenticate_sb}
+#'@param id item ID
+#'@param Session Session object from \link{authenticate_sb}
 #'
-#'
+#'@return A data.frame with columns fname, size, and url.
 #'
 #'
 #'@export
