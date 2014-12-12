@@ -3,7 +3,7 @@
 \alias{item_file_download}
 \title{Download files attached to item}
 \usage{
-item_file_download(id, names, destination)
+item_file_download(id, names, destinations, session = NULL)
 }
 \description{
 
