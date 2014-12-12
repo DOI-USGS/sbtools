@@ -22,7 +22,7 @@ item_upload_create = function(parent_id, files, session){
 	names(body) = rep('file', length(body))
 	
 	url = paste0(url_upload_create, parent_id)
-	r = POST(url, body=body, accept_json(), handle=session, verbose(), query=list(title='title'))
+	r = POST(url, body=body, accept_json(), handle=session, query=list(title='title'))
 	
 	return(content(r)$id)
 }
