@@ -5,7 +5,19 @@
 \usage{
 item_file_download(id, names, destinations, session = NULL)
 }
+\arguments{
+\item{id}{SB item ID}
+
+\item{names}{String vector list of file names attached to item that you wish to download.}
+
+\item{destinations}{String vector list of destinations for requested files. Must be same length as \code{names}}
+
+\item{session}{Session object from \code{\link{authenticate_sb}}}
+}
 \description{
 
+}
+\author{
+Luke Winslow
 }
 
