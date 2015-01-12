@@ -4,7 +4,8 @@
 \alias{query_item_identifier}
 \title{Query SB for items based on custom identifier}
 \usage{
-query_item_identifier(scheme, type, key, session, limit = 20)
+query_item_identifier(scheme, type = NULL, key = NULL, session = NULL,
+  limit = 20)
 }
 \arguments{
 \item{scheme}{The identifier scheme}

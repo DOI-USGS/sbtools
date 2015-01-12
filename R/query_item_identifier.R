@@ -11,26 +11,17 @@
 #'
 #'
 #'@export
-query_item_identifier = function(scheme, type, key, session, limit=20){
+query_item_identifier = function(scheme, type = NULL, key = NULL, session = NULL, limit=20){
 	
 	#not sure if this is necessary
 	if(missing(session) || is.null(session)){
 		session = handle(url_base)
 	}
 	
-	filter_items = list()
-	if(missing(type) & missing(key)){
-		filter_items = list('scheme'=scheme)
-		
-	}else if(missing(key)){
-		filter_items = list('scheme'=scheme, 'type'=type)
-		
-	}else if(!missing(scheme) && !missing(type) && !missing(key)){
-		filter_items = list('scheme'=scheme, 'type'=type, 'key'=key)
-		
-	}else{
-		stop('Must supply scheme, scheme & type, or scheme & type & key. No other combos allowed')
-	}
+	filter_items = list('scheme'=scheme, 'type'=type, 'key'=key)
+	
+	filter_items = Filter(Negate(is.null), filter_items)
+
 	
 	filter = paste0('itemIdentifier=', toJSON(filter_items, auto_unbox=TRUE))
 	
