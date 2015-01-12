@@ -29,7 +29,7 @@ item_list_children = function(id, session, limit=20){
 		return(data.frame())
 	}
 	
-	out = data.frame(id=NA)
+	out = data.frame(id = rep(NA, length(items)))
 	for(i in 1:length(items)){
 		out[i,]$id = items[[i]]$id
 	}
