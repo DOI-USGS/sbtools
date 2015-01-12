@@ -18,9 +18,9 @@ query_item_identifier = function(scheme, type = NULL, key = NULL, session = NULL
 		session = handle(url_base)
 	}
 	
-	filter_items = list('scheme'=scheme, 'type'=type, 'key'=key)
+	filter_all = list('scheme'=scheme, 'type'=type, 'key'=key)
 	
-	filter_items = Filter(Negate(is.null), filter_items)
+	filter_items = Filter(Negate(is.null), filter_all)
 
 	
 	filter = paste0('itemIdentifier=', toJSON(filter_items, auto_unbox=TRUE))
