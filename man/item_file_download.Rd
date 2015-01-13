@@ -4,7 +4,8 @@
 \alias{item_file_download}
 \title{Download files attached to item}
 \usage{
-item_file_download(id, names, destinations, session = NULL)
+item_file_download(id, names, destinations, session = NULL,
+  overwrite_file = FALSE)
 }
 \arguments{
 \item{id}{SB item ID}

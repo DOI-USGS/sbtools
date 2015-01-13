@@ -11,8 +11,10 @@
 item_get = function(id, session){
 	r = GET(paste0(url_item, id, '?type=json'), handle=session)
 	
-	##TODO: Check that item successfully found
 	
+	if('errors' %in% names(content(r))){
+		stop(content(r)$errors$message)
+	}
 	return(content(r))
 	
 }

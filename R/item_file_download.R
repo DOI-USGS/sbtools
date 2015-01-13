@@ -9,7 +9,7 @@
 #'@author Luke Winslow
 #'
 #'@export
-item_file_download = function(id, names, destinations, session=NULL){
+item_file_download = function(id, names, destinations, session=NULL, overwrite_file = FALSE){
 	
 	if(length(names) != length(destinations)){
 		stop('Length of names and destinations must be identical')
@@ -25,7 +25,7 @@ item_file_download = function(id, names, destinations, session=NULL){
 	flist = merge(flist, data.frame(fname=names, dest=destinations, stringsAsFactors=FALSE))
 	
 	for(i in 1:nrow(flist)){
-		GET(url=flist[i,]$url, handle=session, write_disk(flist[i,]$dest))
+		GET(url=flist[i,]$url, handle=session, write_disk(flist[i,]$dest, overwrite = overwrite_file))
 	}
 	
 	return(TRUE)
