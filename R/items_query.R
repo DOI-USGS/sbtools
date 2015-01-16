@@ -10,6 +10,6 @@
 #'@export
 query_items = function(query_list, session){
 	
-	return(GET(url_items, handle=session, query=query_list))
+	return(GET(pkg.env$url_items, handle=session, query=query_list))
 	
 }

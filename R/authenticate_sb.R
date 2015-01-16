@@ -22,10 +22,10 @@ authenticate_sb = function(username, password){
 		password = ifelse(missing(password), readPassword('Please enter your Sciencebase password:'), password)
 	}
 	
-	h = handle(url_base)
+	h = handle(pkg.env$url_base)
 	
 	## authenticate
-	resp = GET(url_base, accept_json(), authenticate(username, password, type='basic'),
+	resp = GET(pkg.env$url_base, accept_json(), authenticate(username, password, type='basic'),
 						 handle=h)
 	
 	sid = resp$cookies$JSESSIONID

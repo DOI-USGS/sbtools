@@ -15,7 +15,7 @@ query_item_identifier = function(scheme, type = NULL, key = NULL, session = NULL
 	
 	#not sure if this is necessary
 	if(missing(session) || is.null(session)){
-		session = handle(url_base)
+		session = handle(pkg.env$url_base)
 	}
 	
 	filter_all = list('scheme'=scheme, 'type'=type, 'key'=key)
@@ -27,7 +27,7 @@ query_item_identifier = function(scheme, type = NULL, key = NULL, session = NULL
 	
 	query = list('filter'=filter, 'max'=limit, 'format'='json')
 	
-	r = GET(url_items, query=query, handle=session)
+	r = GET(pkg.env$url_items, query=query, handle=session)
 	
 	if(r$status_code == 409){
 		stop('Multiple items described by that ID')

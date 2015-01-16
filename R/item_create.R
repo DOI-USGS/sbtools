@@ -19,7 +19,7 @@ item_create = function(parent_id, title, session, info){
 		body = c(body, info)
 	}
 	
-	r = POST(url_item, body=toJSON(body, auto_unbox=TRUE), handle=session, encode="json")
+	r = POST(pkg.env$url_item, body=toJSON(body, auto_unbox=TRUE), handle=session, encode="json")
 	
 	if(r$status_code != 200){
 		stop('Error creating new item')
