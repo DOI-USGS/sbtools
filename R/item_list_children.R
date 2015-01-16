@@ -16,10 +16,10 @@
 item_list_children = function(id, session, limit=20){
 	
 	if(missing(session)){
-		session = handle(url_base)
+		session = handle(pkg.env$url_base)
 	}
 	
-	r = GET(url_items, 
+	r = GET(pkg.env$url_items, 
 					query=list('parentId'=id, 'max'=limit, 'format'='json', 'fields'='id'), 
 					handle = session)
 	

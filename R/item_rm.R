@@ -16,7 +16,7 @@ item_rm = function(id, session){
 		stop('Item has children. Remove all children before deleting.')
 	}
 	
-	r = DELETE(paste0(url_item, id), handle=session, accept_json())
+	r = DELETE(paste0(pkg.env$url_item, id), handle=session, accept_json())
 	
 	return(url_ok(r))
 	

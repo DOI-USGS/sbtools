@@ -11,7 +11,7 @@ item_update = function(id, info, session){
 		stop('Info must be a list of name-value pairs that can be serialized into JSON')
 	}
 	
-	r = PUT(paste0(url_item, id), handle=session,
+	r = PUT(paste0(pkg.env$url_item, id), handle=session,
 					body=toJSON(info, auto_unbox=TRUE), accept_json())
 	
 	#catch 405, which is, I think, expired login

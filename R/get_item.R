@@ -9,7 +9,7 @@
 #'
 #'@export
 item_get = function(id, session){
-	r = GET(paste0(url_item, id, '?type=json'), handle=session)
+	r = GET(paste0(pkg.env$url_item, id, '?type=json'), handle=session)
 	
 	
 	if('errors' %in% names(content(r))){

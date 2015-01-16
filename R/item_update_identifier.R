@@ -45,7 +45,7 @@ item_update_identifier = function(id, scheme, type, key, session){
 	
 	info = list(identifiers=data)
 	
-	r = PUT(paste0(url_item, id), handle=session,
+	r = PUT(paste0(pkg.env$url_item, id), handle=session,
 					body=toJSON(info), accept_json())
 	
 	return(r)
