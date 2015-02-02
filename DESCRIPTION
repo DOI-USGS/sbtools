@@ -4,6 +4,8 @@ Maintainer: Luke Winslow <lwinslow@usgs.gov>
 Version: 0.3.0
 Author: Luke Winslow
 Description: Tools for interacting with SB interfaces. 
-Imports: jsonlite, httr
+Imports: 
+	jsonlite, 
+	httr (>= 0.5),
 License: CC0
 Repository: http://github.com/lawinslow/sbtools
