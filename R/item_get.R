@@ -8,7 +8,7 @@
 #'@return List serialization of complete metadata for SB item
 #'
 #'@export
-item_get = function(id, session){
+item_get = function(id, session=NULL){
 	
 	if(!session_validate(session)){
 		stop('Session state is invalid, please re-authenticate')
