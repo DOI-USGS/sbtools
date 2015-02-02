@@ -4,7 +4,7 @@
 \alias{item_get}
 \title{Retrieve SB item}
 \usage{
-item_get(id, session)
+item_get(id, session = NULL)
 }
 \arguments{
 \item{id}{SB item ID}
