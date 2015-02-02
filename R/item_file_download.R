@@ -21,7 +21,7 @@
 #'
 #'#downloads a specific file attached to this item
 #'item_file_download('548b2b31e4b03f64633662a4', names='gdp.txt', 
-#'		destinations=file.path(tempdir(), 'fname.txt') 
+#'		destinations=file.path(tempdir(), 'fname.txt'))
 #'
 #'@export
 item_file_download = function(id, names, destinations, dest_dir, session=NULL, overwrite_file = FALSE){

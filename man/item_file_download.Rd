@@ -32,7 +32,7 @@ item_file_download('548b2b31e4b03f64633662a4', dest_dir=tempdir())
 
 #downloads a specific file attached to this item
 item_file_download('548b2b31e4b03f64633662a4', names='gdp.txt',
-		destinations=file.path(tempdir(), 'fname.txt')
+		destinations=file.path(tempdir(), 'fname.txt'))
 }
 \author{
 Luke Winslow
