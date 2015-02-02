@@ -14,6 +14,11 @@
 #'}
 #'@export
 item_exists = function(scheme, type, key, session = NULL){
+	
+	if(!session_validate(session)){
+		stop('Session state is invalid, please re-authenticate')
+	}
+	
 	items <- query_item_identifier(scheme, type, key, session)
 	if (nrow(items) > 0){
 		return(TRUE)

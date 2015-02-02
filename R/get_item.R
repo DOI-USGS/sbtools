@@ -9,6 +9,11 @@
 #'
 #'@export
 item_get = function(id, session){
+	
+	if(!session_validate(session)){
+		stop('Session state is invalid, please re-authenticate')
+	}
+	
 	r = GET(paste0(pkg.env$url_item, id, '?type=json'), handle=session)
 	
 	

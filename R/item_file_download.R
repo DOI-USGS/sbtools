@@ -11,6 +11,10 @@
 #'@export
 item_file_download = function(id, names, destinations, session=NULL, overwrite_file = FALSE){
 	
+	if(!session_validate(session)){
+		stop('Session state is invalid, please re-authenticate')
+	}
+	
 	if(length(names) != length(destinations)){
 		stop('Length of names and destinations must be identical')
 	}

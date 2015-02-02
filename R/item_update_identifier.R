@@ -20,6 +20,10 @@
 #'@export
 item_update_identifier = function(id, scheme, type, key, session){
 	
+	if(!session_validate(session)){
+		stop('Session state is invalid, please re-authenticate')
+	}
+	
 	#first, query for that identifier
 	existing_id = query_item_identifier(scheme, type, key, session)
 	

@@ -11,6 +11,10 @@
 #'@export
 item_upload_create = function(parent_id, files, session){
 	
+	if(!session_validate(session)){
+		stop('Session state is invalid, please re-authenticate')
+	}
+	
 	body = list()
 	for(i in 1:length(files)){
 		if(!file.exists(files[i])){
