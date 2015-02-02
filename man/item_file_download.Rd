@@ -4,7 +4,7 @@
 \alias{item_file_download}
 \title{Download files attached to item}
 \usage{
-item_file_download(id, names, destinations, session = NULL,
+item_file_download(id, names, destinations, dest_dir, session = NULL,
   overwrite_file = FALSE)
 }
 \arguments{
@@ -14,10 +14,25 @@ item_file_download(id, names, destinations, session = NULL,
 
 \item{destinations}{String vector list of destinations for requested files. Must be same length as \code{names}}
 
+\item{dest_dir}{A directory path for saving files when \code{names} parameter is omitted}
+
 \item{session}{Session object from \code{\link{authenticate_sb}}}
 }
 \description{
+Function to downlod files attached to an item on SB. Either files can be specified directly
+using the \code{names} and \code{destinations} paramters, or a \code{dest_dir} can be
+supplied where all attached files will be written with the names as stored on SB.
+}
+\details{
 
+}
+\examples{
+#downloads two files attached to this item
+item_file_download('548b2b31e4b03f64633662a4', dest_dir=tempdir())
+
+#downloads a specific file attached to this item
+item_file_download('548b2b31e4b03f64633662a4', names='gdp.txt',
+		destinations=file.path(tempdir(), 'fname.txt'))
 }
 \author{
 Luke Winslow
