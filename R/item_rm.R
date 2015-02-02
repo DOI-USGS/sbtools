@@ -10,6 +10,10 @@
 #'@export
 item_rm = function(id, session){
 	
+	if(!session_validate(session)){
+		stop('Session state is invalid, please re-authenticate')
+	}
+	
 	children = item_list_children(id, session, limit=2)
 	
 	if(nrow(children) > 0){

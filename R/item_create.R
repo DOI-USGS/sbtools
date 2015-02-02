@@ -12,6 +12,10 @@
 #'@export
 item_create = function(parent_id, title, session, info){
 	
+	if(!session_validate(session)){
+		stop('Session state is invalid, please re-authenticate')
+	}
+	
 	body = list('parentId'=parent_id, 'title'=title)
 	
 	#Bring in additional metadata if supplied

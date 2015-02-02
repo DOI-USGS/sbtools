@@ -13,10 +13,10 @@
 #'
 #'
 #'@export
-item_list_children = function(id, session, limit=20){
+item_list_children = function(id, session=NULL, limit=20){
 	
-	if(missing(session)){
-		session = handle(pkg.env$url_base)
+	if(!session_validate(session)){
+		stop('Session state is invalid, please re-authenticate')
 	}
 	
 	r = GET(pkg.env$url_items, 

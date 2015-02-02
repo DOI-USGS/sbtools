@@ -8,6 +8,11 @@
 #'
 #'@export
 item_list_files = function(id, session){
+	
+	if(!session_validate(session)){
+		stop('Session state is invalid, please re-authenticate')
+	}
+	
 	item = item_get(id, session)
 	
 	files = item$files

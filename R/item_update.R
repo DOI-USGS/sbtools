@@ -7,8 +7,13 @@
 #'
 #'@export
 item_update = function(id, info, session){
+	
 	if(!is.list(info)){
 		stop('Info must be a list of name-value pairs that can be serialized into JSON')
+	}
+	
+	if(!session_validate(session)){
+		stop('Session state is invalid, please re-authenticate')
 	}
 	
 	r = PUT(paste0(pkg.env$url_item, id), handle=session,
