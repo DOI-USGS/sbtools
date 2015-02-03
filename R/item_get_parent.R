@@ -10,10 +10,6 @@
 #'@export
 item_get_parent = function(id, session=NULL){
 	
-	if(!session_validate(session)){
-		stop('Session state is invalid, please re-authenticate')
-	}
-	
 	item_json = item_get(id, session)
 	
 	parentid = item_json[['parentId']]
