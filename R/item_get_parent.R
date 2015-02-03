@@ -16,10 +16,6 @@ item_get_parent = function(id, session=NULL){
 	
 	item_json = item_get(id, session)
 	
-	if('errors' %in% names(content(r))){
-		stop(content(r)$errors$message)
-	}
-	
 	parentid = item_json[['parentId']]
 	return(parentid)
 }
