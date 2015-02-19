@@ -1,4 +1,3 @@
-#'
 #'@title Retrieve SB item
 #'
 #'
@@ -6,6 +5,8 @@
 #'@param session Session object from \code{\link{authenticate_sb}}
 #'
 #'@return List serialization of complete metadata for SB item
+#'
+#'@import httr
 #'
 #'@export
 item_get = function(id, session=NULL){
@@ -15,7 +16,6 @@ item_get = function(id, session=NULL){
 	}
 	
 	r = GET(paste0(pkg.env$url_item, id, '?type=json'), handle=session)
-	
 	
 	if('errors' %in% names(content(r))){
 		stop(content(r)$errors$message)
