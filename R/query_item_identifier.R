@@ -9,7 +9,7 @@
 #'
 #'@return The SB item id for the matching item. NULL if no matching item found.
 #'
-#'
+#'@import httr
 #'@export
 query_item_identifier = function(scheme, type = NULL, key = NULL, session = NULL, limit=20){
 	
