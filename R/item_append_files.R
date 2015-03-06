@@ -11,7 +11,7 @@
 #'
 #'@examples \dontrun{
 #'  sb_session<-authenticate_sb(sbusername)
-#'  item_append_file("54e265a4e4b08de9379b4dfb", '/foo/bar/baz.zip', sb)
+#'  item_append_files("54e265a4e4b08de9379b4dfb", '/foo/bar/baz.zip', sb)
 #' }
 #'@export
 item_append_files = function(id, files, session){	
