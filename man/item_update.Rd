@@ -6,7 +6,17 @@
 \usage{
 item_update(id, info, session)
 }
-\description{
+\arguments{
+\item{id}{SB item ID}
 
+\item{info}{list of metadata info for the new item}
+
+\item{session}{Authenticated session object (from \link{authenticate_sb})}
+}
+\value{
+List serialization of complete metadata for SB item
+}
+\description{
+Update a SB item with new metadata
 }
 

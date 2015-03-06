@@ -15,6 +15,6 @@ item_get(id, session = NULL)
 List serialization of complete metadata for SB item
 }
 \description{
-
+Retrieve SB item
 }
 
