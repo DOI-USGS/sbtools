@@ -22,6 +22,6 @@ item_rm = function(id, session){
 	
 	r = DELETE(paste0(pkg.env$url_item, id), handle=session, accept_json())
 	
-	return(url_ok(r))
+	return(r)
 	
 }
