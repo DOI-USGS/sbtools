@@ -6,17 +6,14 @@
 
 language: objective-c
 
+env:
+   global:
+     - CRAN: http://owi.usgs.gov/R
+     - R_BUILD_ARGS=" "
+     - R_CHECK_ARGS="--as-cran"
+     - NOT_CRAN="true" 
+
 before_install:
-  - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
-  - chmod 755 ./travis-tool.sh
-  - ./travis-tool.sh bootstrap
+
 install:
-  - ./travis-tool.sh install_deps
 
-after_failure:
-  - ./travis-tool.sh dump_logs
-
-notifications:
-  email:
-    on_success: change
-    on_failure: change
