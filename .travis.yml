@@ -8,7 +8,6 @@ language: r
 
 env:
    global:
-     - CRAN: http://owi.usgs.gov/R
      - R_BUILD_ARGS=" "
      - R_CHECK_ARGS="--as-cran"
      - NOT_CRAN="true" 
