@@ -6,6 +6,7 @@
 #'@param destinations String vector list of destinations for requested files. Must be same length as \code{names}
 #'@param dest_dir A directory path for saving files when \code{names} parameter is omitted
 #'@param session Session object from \code{\link{authenticate_sb}}
+#'@param overwrite_file Boolean indicating if file should be overwritten if it already exists locally
 #'
 #'@description 
 #'Function to downlod files attached to an item on SB. Either files can be specified directly

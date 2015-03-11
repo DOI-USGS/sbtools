@@ -2,11 +2,12 @@
 #'@title Create a new SB item
 #'
 #'@param parent_id ID of the parent item
+#'@param title The title of the new SB item
 #'@param session Authenticated session object (from \link{authenticate_sb})
 #'@param info (optional) list of metadata info for the new item
 #'@return SB ID for the newly created item
 #'
-#'
+#'x
 #'@import httr 
 #'
 #'@export
