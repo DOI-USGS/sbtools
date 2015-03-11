@@ -9,5 +9,5 @@
 #'@export
 item_replace_files <- function(item_id, files, session){	
 	item_rm_files(item_id, session)
-	item_append_files(id = item_id, filename = files, session)
+	item_append_files(id = item_id, files = files, session)
 }
