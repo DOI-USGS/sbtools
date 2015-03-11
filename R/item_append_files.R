@@ -2,7 +2,7 @@
 #'@description Adds a file to an item
 #'
 #'@param id A ScienceBase item ID to upload to.
-#'@param filename A file path to upload.
+#'@param files A file path to upload.
 #'@param sb_session A ScienceBase session object from authenticate_sb.
 #'
 #'@return ScienceBase Item.
@@ -11,20 +11,21 @@
 #'
 #'@examples \dontrun{
 #'  sb_session<-authenticate_sb(sbusername)
-#'  item_append_file("54e265a4e4b08de9379b4dfb", '/foo/bar/baz.zip', sb)
+#'  item_append_files("54e265a4e4b08de9379b4dfb", '/foo/bar/baz.zip', sb)
 #' }
 #'@export
-item_append_file = function(id, filename, session){	
+item_append_files = function(id, files, session){	
 	
 	if(!session_validate(session)){
 		stop('Session state is invalid, please re-authenticate')
 	}
 	
+	body <- multi_file_body(files)
   url<-paste0(pkg.env$url_upload,'?id=', id)
   
-	POST(url, accept_json(), 
-			 body=list(file=upload_file(filename)), handle=session)
+	r = POST(url, accept_json(), 
+			 body=body, handle=session)
   
-  return(item_get(id,session))
+  return(content(r))
 	
 }
