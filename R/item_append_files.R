@@ -3,13 +3,14 @@
 #'
 #'@param id A ScienceBase item ID to upload to.
 #'@param files A file path to upload.
-#'@param sb_session A ScienceBase session object from authenticate_sb.
+#'@param session A ScienceBase session object from authenticate_sb.
 #'
 #'@return ScienceBase Item.
 #'
 #'@import httr
 #'
-#'@examples \dontrun{
+#'@examples 
+#'\dontrun{
 #'  sb_session<-authenticate_sb(sbusername)
 #'  item_append_files("54e265a4e4b08de9379b4dfb", '/foo/bar/baz.zip', sb)
 #' }

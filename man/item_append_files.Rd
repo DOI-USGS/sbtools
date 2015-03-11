@@ -11,7 +11,7 @@ item_append_files(id, files, session)
 
 \item{files}{A file path to upload.}
 
-\item{sb_session}{A ScienceBase session object from authenticate_sb.}
+\item{session}{A ScienceBase session object from authenticate_sb.}
 }
 \value{
 ScienceBase Item.

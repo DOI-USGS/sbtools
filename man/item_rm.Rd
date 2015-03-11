@@ -7,9 +7,9 @@
 item_rm(id, session)
 }
 \arguments{
-\item{session}{Session object from \code{\link{authenticate_sb}}}
+\item{id}{item ID}
 
-\item{SB}{item ID}
+\item{session}{Session object from \code{\link{authenticate_sb}}}
 }
 \value{
 TRUE to indicate success

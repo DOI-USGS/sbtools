@@ -6,7 +6,16 @@
 \usage{
 authenticate_sb(username, password)
 }
+\arguments{
+\item{username}{Sciencebase username}
+
+\item{password}{(optional) Sciencebase password, prompts user if not supplied}
+}
 \description{
+This connects to SB, authenticates and gets a session token for
+communicating with SB.
+}
+\details{
 
 }
 
