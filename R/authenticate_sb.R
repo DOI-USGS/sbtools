@@ -2,13 +2,16 @@
 #'
 #'@title Authenticate to SB for subsequent calls
 #'
+#'@param username Sciencebase username
+#'@param password (optional) Sciencebase password, prompts user if not supplied
 #'
-#'
-#'
-#'
-#'
+#'@description 
+#'This connects to SB, authenticates and gets a session token for 
+#'communicating with SB.
 #'
 #'@import httr
+#'
+#'
 #'@export
 authenticate_sb = function(username, password){
 	

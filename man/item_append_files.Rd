@@ -11,7 +11,7 @@ item_append_files(id, files, session)
 
 \item{files}{A file path to upload.}
 
-\item{sb_session}{A ScienceBase session object from authenticate_sb.}
+\item{session}{A ScienceBase session object from authenticate_sb.}
 }
 \value{
 ScienceBase Item.
@@ -21,8 +21,8 @@ Adds a file to an item
 }
 \examples{
 \dontrun{
- sb_session<-authenticate_sb(sbusername)
- item_append_files("54e265a4e4b08de9379b4dfb", '/foo/bar/baz.zip', sb)
+ session<-authenticate_sb(sbusername)
+ item_append_files("54e265a4e4b08de9379b4dfb", '/foo/bar/baz.zip', session)
 }
 }
 

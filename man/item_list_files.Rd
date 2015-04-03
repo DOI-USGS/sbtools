@@ -9,7 +9,7 @@ item_list_files(id, session = NULL)
 \arguments{
 \item{id}{item ID}
 
-\item{Session}{Session object from \link{authenticate_sb}}
+\item{session}{Session object from \link{authenticate_sb}}
 }
 \value{
 A data.frame with columns fname, size, and url.

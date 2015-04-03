@@ -3,8 +3,8 @@
 #'
 #'@param query_list 
 #'
-#'
-#'
+#'@param query_list List of item query selectors
+#'@param session Session object from \code{\link{authenticate_sb}}
 #'
 #'
 #'@export

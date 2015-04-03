@@ -1,6 +1,6 @@
 #'@title Remove item from SB
 #'
-#'@param SB item ID
+#'@param id item ID
 #'@param session Session object from \code{\link{authenticate_sb}}
 #'
 #'@return TRUE to indicate success
