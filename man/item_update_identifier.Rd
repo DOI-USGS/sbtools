@@ -4,7 +4,7 @@
 \alias{item_update_identifier}
 \title{Add custom identifier to an existing item}
 \usage{
-item_update_identifier(id, scheme, type, key, session)
+item_update_identifier(id, scheme, type, key, session = current_session())
 }
 \arguments{
 \item{id}{SB item ID}

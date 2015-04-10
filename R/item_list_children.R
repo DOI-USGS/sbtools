@@ -13,7 +13,7 @@
 #'
 #'
 #'@export
-item_list_children = function(id, session=NULL, limit=20){
+item_list_children = function(id, session=current_session(), limit=20){
 	
 	if(!session_validate(session)){
 		stop('Session state is invalid, please re-authenticate')

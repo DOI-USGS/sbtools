@@ -4,7 +4,7 @@
 \alias{item_update}
 \title{Update a SB item with new metadata}
 \usage{
-item_update(id, info, session)
+item_update(id, info, session = current_session())
 }
 \arguments{
 \item{id}{SB item ID}

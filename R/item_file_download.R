@@ -25,7 +25,7 @@
 #'		destinations=file.path(tempdir(), 'fname.txt'))
 #'
 #'@export
-item_file_download = function(id, names, destinations, dest_dir, session=NULL, overwrite_file = FALSE){
+item_file_download = function(id, names, destinations, dest_dir, session=current_session(), overwrite_file = FALSE){
 	
 	if(!session_validate(session)){
 		stop('Session state is invalid, please re-authenticate')

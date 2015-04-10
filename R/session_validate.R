@@ -1,7 +1,7 @@
 #'
 #'@title Validate sbtools session state
 #'
-#'@param session sbtools session object (from\code{\link{authenticate_sb}})
+#'@param session sbtools session object (from \code{\link{authenticate_sb}})
 #'
 #'@return 
 #'\code{TRUE/FALSE} indicating if session is valid and can be used. 

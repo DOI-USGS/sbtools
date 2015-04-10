@@ -4,7 +4,7 @@
 \alias{item_list_files}
 \title{Get list of files attached to SB item}
 \usage{
-item_list_files(id, session = NULL)
+item_list_files(id, session = current_session())
 }
 \arguments{
 \item{id}{item ID}

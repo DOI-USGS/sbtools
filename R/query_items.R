@@ -8,7 +8,7 @@
 #'
 #'
 #'@export
-query_items = function(query_list, session){
+query_items = function(query_list, session=current_session()){
 	
 	return(GET(pkg.env$url_items, handle=session, query=query_list))
 	

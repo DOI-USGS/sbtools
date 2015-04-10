@@ -10,7 +10,7 @@
 #'@import jsonlite
 #'
 #'@export
-item_update = function(id, info, session){
+item_update = function(id, info, session=current_session()){
 	
 	if(!is.list(info)){
 		stop('Info must be a list of name-value pairs that can be serialized into JSON')

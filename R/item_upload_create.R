@@ -9,7 +9,7 @@
 #'@import httr
 #'
 #'@export
-item_upload_create = function(parent_id, files, session){
+item_upload_create = function(parent_id, files, session=current_session()){
 	
 	if(!session_validate(session)){
 		stop('Session state is invalid, please re-authenticate')

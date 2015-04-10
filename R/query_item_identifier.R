@@ -11,7 +11,7 @@
 #'
 #'@import httr
 #'@export
-query_item_identifier = function(scheme, type = NULL, key = NULL, session = NULL, limit=20){
+query_item_identifier = function(scheme, type=NULL, key=NULL, session=current_session(), limit=20){
 	
 	#not sure if this is necessary
 	if(missing(session) || is.null(session)){

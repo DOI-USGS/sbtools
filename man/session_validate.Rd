@@ -7,7 +7,7 @@
 session_validate(session)
 }
 \arguments{
-\item{session}{sbtools session object (from\code{\link{authenticate_sb}})}
+\item{session}{sbtools session object (from \code{\link{authenticate_sb}})}
 }
 \value{
 \code{TRUE/FALSE} indicating if session is valid and can be used.

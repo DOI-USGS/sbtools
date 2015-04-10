@@ -4,7 +4,7 @@
 \alias{item_create}
 \title{Create a new SB item}
 \usage{
-item_create(parent_id, title, session, info)
+item_create(parent_id, title, session = current_session(), info)
 }
 \arguments{
 \item{parent_id}{ID of the parent item}

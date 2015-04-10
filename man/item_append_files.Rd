@@ -4,7 +4,7 @@
 \alias{item_append_files}
 \title{Upload File to Item}
 \usage{
-item_append_files(id, files, session)
+item_append_files(id, files, session = current_session())
 }
 \arguments{
 \item{id}{A ScienceBase item ID to upload to.}
