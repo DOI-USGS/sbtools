@@ -8,7 +8,7 @@
 #'
 #'
 #'@export
-item_get_parent = function(id, session=NULL){
+item_get_parent = function(id, session=current_session()){
 	
 	item_json = item_get(id, session)
 	

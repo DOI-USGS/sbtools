@@ -37,7 +37,9 @@ authenticate_sb = function(username, password){
 		stop('Unable to authenticate to SB. Check username and password')
 	}
 	
-	return(h)
+	pkg.env$session = h
+	
+	invisible(h)
 }
 
 

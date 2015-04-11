@@ -13,7 +13,7 @@
 #'item_exists('mda_streams','site_root','nwis_01018035')
 #'}
 #'@export
-item_exists = function(scheme, type, key, session = NULL){
+item_exists = function(scheme, type, key, session=current_session()){
 	
 	if(!session_validate(session)){
 		stop('Session state is invalid, please re-authenticate')

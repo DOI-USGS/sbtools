@@ -4,7 +4,7 @@
 \alias{query_items}
 \title{Query SB for items using generic query parameters}
 \usage{
-query_items(query_list, session)
+query_items(query_list, session = current_session())
 }
 \arguments{
 \item{query_list}{}

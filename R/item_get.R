@@ -9,7 +9,7 @@
 #'@import httr
 #'
 #'@export
-item_get = function(id, session=NULL){
+item_get = function(id, session=current_session()){
 	
 	if(!session_validate(session)){
 		stop('Session state is invalid, please re-authenticate')

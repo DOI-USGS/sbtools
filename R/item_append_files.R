@@ -15,7 +15,7 @@
 #'  item_append_files("54e265a4e4b08de9379b4dfb", '/foo/bar/baz.zip', session)
 #' }
 #'@export
-item_append_files = function(id, files, session){	
+item_append_files = function(id, files, session=current_session()){	
 	
 	if(!session_validate(session)){
 		stop('Session state is invalid, please re-authenticate')
