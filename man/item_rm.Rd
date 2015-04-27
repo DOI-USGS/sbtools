@@ -4,7 +4,7 @@
 \alias{item_rm}
 \title{Remove item from SB}
 \usage{
-item_rm(id, session)
+item_rm(id, session = current_session())
 }
 \arguments{
 \item{id}{item ID}

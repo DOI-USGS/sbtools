@@ -7,7 +7,7 @@
 #'This function will not append an existing collection of files. If that 
 #'is desired, use \code{\link{item_append_file}}
 #'@export
-item_replace_files <- function(item_id, files, session){	
+item_replace_files <- function(item_id, files, session=current_session()){	
 	item_rm_files(item_id, session)
 	item_append_files(id = item_id, files = files, session)
 }

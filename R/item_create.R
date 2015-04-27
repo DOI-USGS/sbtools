@@ -11,7 +11,7 @@
 #'@import httr 
 #'
 #'@export
-item_create = function(parent_id, title, session, info){
+item_create = function(parent_id, title, session=current_session(), info){
 	
 	if(!session_validate(session)){
 		stop('Session state is invalid, please re-authenticate')

@@ -8,7 +8,7 @@
 #'@import httr
 #'
 #'@export
-item_rm = function(id, session){
+item_rm = function(id, session=current_session()){
 	
 	if(!session_validate(session)){
 		stop('Session state is invalid, please re-authenticate')

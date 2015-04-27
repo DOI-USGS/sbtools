@@ -4,14 +4,12 @@
 \alias{query_items}
 \title{Query SB for items using generic query parameters}
 \usage{
-query_items(query_list, session)
+query_items(query_list, session = current_session())
 }
 \arguments{
-\item{query_list}{}
+\item{query_list}{List of item query selectors}
 
 \item{session}{Session object from \code{\link{authenticate_sb}}}
-
-\item{query_list}{List of item query selectors}
 }
 \description{
 

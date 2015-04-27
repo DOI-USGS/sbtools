@@ -4,7 +4,7 @@
 \alias{item_exists}
 \title{check if identifier touple already exists on SB}
 \usage{
-item_exists(scheme, type, key, session = NULL)
+item_exists(scheme, type, key, session = current_session())
 }
 \arguments{
 \item{scheme}{}

@@ -4,7 +4,7 @@
 \alias{item_replace_files}
 \title{Replace files associated with an item}
 \usage{
-item_replace_files(item_id, files, session)
+item_replace_files(item_id, files, session = current_session())
 }
 \arguments{
 \item{item_id}{a sciencebase item identifier}

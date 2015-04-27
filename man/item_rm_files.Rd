@@ -4,7 +4,7 @@
 \alias{item_rm_files}
 \title{Remove all files associated with an item}
 \usage{
-item_rm_files(item_id, session)
+item_rm_files(item_id, session = current_session())
 }
 \arguments{
 \item{item_id}{a sciencebase item identifier}

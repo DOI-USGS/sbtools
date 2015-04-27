@@ -9,7 +9,7 @@
 #'
 #'
 #'@export
-item_list_files = function(id, session=NULL){
+item_list_files = function(id, session=current_session()){
 	
 	if(!session_validate(session)){
 		stop('Session state is invalid, please re-authenticate')

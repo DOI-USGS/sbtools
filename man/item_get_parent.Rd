@@ -4,7 +4,7 @@
 \alias{item_get_parent}
 \title{Get an item's parent ID}
 \usage{
-item_get_parent(id, session = NULL)
+item_get_parent(id, session = current_session())
 }
 \arguments{
 \item{id}{ID of SB item}

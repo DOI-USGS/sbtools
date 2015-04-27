@@ -28,11 +28,11 @@ set_endpoint = function(endpoint="production"){
 	endpoint = tolower(endpoint)
 	
 	if(endpoint=="production" || endpoint=="prod"){
-		cat('Setting endpoint to www.sciencebase.gov\n');
+		message('Setting endpoint to www.sciencebase.gov');
 		pkg.env$url_base = "https://www.sciencebase.gov/catalog/"
 		
 	}else if(endpoint=="development" || endpoint=="dev"){
-		cat('Setting endpoint to beta.sciencebase.gov\n');
+		message('Setting endpoint to beta.sciencebase.gov');
 		pkg.env$url_base = "https://beta.sciencebase.gov/catalog/"
 	}else{
 		stop('Unsupported endpoint option')

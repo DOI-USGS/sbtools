@@ -4,7 +4,7 @@
 \alias{item_list_children}
 \title{Return IDs for all child items}
 \usage{
-item_list_children(id, session = NULL, limit = 20)
+item_list_children(id, session = current_session(), limit = 20)
 }
 \arguments{
 \item{id}{SB item ID}

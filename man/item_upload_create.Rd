@@ -4,7 +4,7 @@
 \alias{item_upload_create}
 \title{Upload file(s) and create a new item}
 \usage{
-item_upload_create(parent_id, files, session)
+item_upload_create(parent_id, files, session = current_session())
 }
 \arguments{
 \item{parent_id}{SB id of parent item for the newly created item}
