@@ -13,11 +13,6 @@
 #'@export
 query_item_identifier = function(scheme, type=NULL, key=NULL, session=current_session(), limit=20){
 	
-	#not sure if this is necessary
-	if(missing(session) || is.null(session)){
-		session = handle(pkg.env$url_base)
-	}
-	
 	filter_all = list('scheme'=scheme, 'type'=type, 'key'=key)
 	
 	filter_items = Filter(Negate(is.null), filter_all)
