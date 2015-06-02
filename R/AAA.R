@@ -2,6 +2,7 @@
 #for storing session state and service URLs
 pkg.env <- new.env()
 pkg.env$session = NULL
+pkg.env$username = ""
 
 .onLoad = function(libname, pkgname){
 	set_endpoint()
