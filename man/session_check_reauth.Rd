@@ -18,7 +18,7 @@ session_check_reauth(username, password, session, ...)
 \description{
 This checks the state of your Sciencebase session and, if invalid or if you've supplied
 a new user name, it will re-authenticate. This is primarily a helper function for
-packages that reverse-depend on sbtools.
+packages that depend on sbtools.
 }
 \examples{
 \dontrun{
