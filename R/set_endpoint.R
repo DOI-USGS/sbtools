@@ -45,4 +45,6 @@ set_endpoint = function(endpoint="production"){
 	pkg.env$url_upload_update = paste0(pkg.env$url_base, 'file/uploadAndUpdateItem/')
 	pkg.env$url_download = paste0(pkg.env$url_base, 'file/get/')
 	pkg.env$url_login = 'https://my.usgs.gov/josso/signon/usernamePasswordLogin.do'
+	
+	
 }

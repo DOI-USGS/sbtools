@@ -50,7 +50,8 @@ session_check_reauth = function(username, password, session, ...){
 	}else{ #if we have passed nothing, use cached session
 		
 		session = current_session()
-		if(!session_validate(session) || is.null(session)){
+		
+		if(!session_validate(session)){
 			if(pkg.env$username != ""){
 				authenticate_sb(pkg.env$username)
 			}else{
