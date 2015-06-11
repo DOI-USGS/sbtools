@@ -3,11 +3,12 @@
 #'@title Authenticate to SB for subsequent calls
 #'
 #'@param username Sciencebase username
-#'@param password (optional) Sciencebase password, prompts user if not supplied
+#'@param password Sciencebase password, prompts user if not supplied
 #'
 #'@description 
 #'This connects to SB, authenticates and gets a session token for 
-#'communicating with SB.
+#'communicating with SB. If you do not supply a username or password,
+#'you will be prompted to enter them.
 #'
 #'@import httr
 #'
@@ -15,8 +16,17 @@
 #'@export
 authenticate_sb = function(username, password){
 	
-	if(missing(username)){
+	if(missing(username) && !interactive()){
+		
 		stop('username required for authentication')
+	
+	}else if(missing(username) && interactive()){
+		
+		username = readline('Please enter your username:')
+		if(username == ""){
+			stop('Empty username supplied, stopping')
+		}
+		
 	}
 	
 	if(!interactive() & missing(password)){
@@ -37,7 +47,8 @@ authenticate_sb = function(username, password){
 		stop('Unable to authenticate to SB. Check username and password')
 	}
 	
-	pkg.env$session = h
+	pkg.env$session  = h
+	pkg.env$username = username
 	
 	invisible(h)
 }

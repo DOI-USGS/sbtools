@@ -9,11 +9,12 @@ authenticate_sb(username, password)
 \arguments{
 \item{username}{Sciencebase username}
 
-\item{password}{(optional) Sciencebase password, prompts user if not supplied}
+\item{password}{Sciencebase password, prompts user if not supplied}
 }
 \description{
 This connects to SB, authenticates and gets a session token for
-communicating with SB.
+communicating with SB. If you do not supply a username or password,
+you will be prompted to enter them.
 }
 \details{
 
