@@ -1,7 +1,7 @@
 #'@title Checks current session and re-authenticates if necessary
 #'
-#'@inheritParams authenticate_sb
 #'@param session (Advanced) Alternatively supply a specific session to be checked
+#'@inheritParams authenticate_sb
 #'@param ... Any additional parameters are ignored. 
 #'
 #'@description
@@ -25,7 +25,7 @@
 #'
 #'
 #'@export
-session_check_reauth = function(username, password, session, ...){
+session_check_reauth = function(session, username, password, ...){
 	
 	
 	if(!missing(username)){
@@ -33,18 +33,19 @@ session_check_reauth = function(username, password, session, ...){
 		#if new username, re-auth
 		if(username != pkg.env$username){
 			if(missing(password)){
-				authenticate_sb(username)
+				return(authenticate_sb(username))
 			}else{
-				authenticate_sb(username, password)
+				return(authenticate_sb(username, password))
 			}
 		}
 		
 	}else if(!missing(session)){ #if we've passed in a session, check
-		
-		if(!session_validate(session) && pkg.env$username != ""){
-			authenticate_sb(pkg.env$username)
+		if(session_validate(session))
+			return(session)
+		if(pkg.env$username != ""){
+			return(authenticate_sb(pkg.env$username))
 		}else{
-			authenticate_sb()
+			return(authenticate_sb())
 		}
 			
 	}else{ #if we have passed nothing, use cached session
@@ -53,10 +54,11 @@ session_check_reauth = function(username, password, session, ...){
 		
 		if(!session_validate(session)){
 			if(pkg.env$username != ""){
-				authenticate_sb(pkg.env$username)
+				return(authenticate_sb(pkg.env$username))
 			}else{
-				authenticate_sb()
+				return(authenticate_sb())
 			}
 		}
 	}
+	
 }

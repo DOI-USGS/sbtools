@@ -26,7 +26,7 @@ session_expired <- function(session = current_session()){
 	if(is.null(session)){
 		return(FALSE)
 	}
-	return(ifelse(session_age(session) > pkg.env$session_expires, TRUE, FALSE))
+	return(session_age(session) > pkg.env$session_expires)
 	
 }
 

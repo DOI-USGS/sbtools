@@ -18,7 +18,7 @@ item_upload_create = function(parent_id, files, session=current_session()){
 	body <- multi_file_body(files)
 	
 	url = paste0(pkg.env$url_upload_create, parent_id)
-	r = POST(url, body=body, accept_json(), handle=session, query=list(title='title'))
+	r = POST(url, body=body, accept_json(), handle=session, query=list(title='title')) 
 	
 	return(content(r)$id)
 }
