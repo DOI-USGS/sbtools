@@ -11,14 +11,11 @@
 #'@export
 item_upload_create = function(parent_id, files, session=current_session()){
 	
-	if(!session_validate(session)){
-		stop('Session state is invalid, please re-authenticate')
-	}
-	
-	body <- multi_file_body(files)
-	
-	url = paste0(pkg.env$url_upload_create, parent_id)
-	r = POST(url, body=body, accept_json(), handle=session, query=list(title='title')) 
+
+	r = sbtools_POST(url = paste0(pkg.env$url_upload_create, parent_id,'?title=title'),
+									 body = multi_file_body(files), 
+									 session = session)
+
 	
 	return(content(r)$id)
 }

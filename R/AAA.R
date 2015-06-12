@@ -20,4 +20,8 @@ set_expiration <- function(expiration_age = as.difftime("00:59:00")){
 	pkg.env$session_expires = expiration_age
 }
 
+default_timeout <- function(){
+	return(10) #seconds
+}
+
 set_expiration()

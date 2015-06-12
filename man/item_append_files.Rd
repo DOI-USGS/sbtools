@@ -4,8 +4,7 @@
 \alias{item_append_files}
 \title{Upload File to Item}
 \usage{
-item_append_files(id, files, session = current_session(),
-  on_error = "error", ...)
+item_append_files(id, files, session = current_session())
 }
 \arguments{
 \item{id}{A ScienceBase item ID to upload to.}
@@ -13,8 +12,6 @@ item_append_files(id, files, session = current_session(),
 \item{files}{A file path to upload.}
 
 \item{session}{A ScienceBase session object from authenticate_sb.}
-
-\item{...}{additional parameters passed to \code{\link{session_check_reauth}}}
 }
 \value{
 ScienceBase Item.
