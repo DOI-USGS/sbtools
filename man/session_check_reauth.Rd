@@ -4,14 +4,14 @@
 \alias{session_check_reauth}
 \title{Checks current session and re-authenticates if necessary}
 \usage{
-session_check_reauth(username, password, session, ...)
+session_check_reauth(session, username, password, ...)
 }
 \arguments{
+\item{session}{(Advanced) Alternatively supply a specific session to be checked}
+
 \item{username}{Sciencebase username}
 
 \item{password}{Sciencebase password, prompts user if not supplied}
-
-\item{session}{(Advanced) Alternatively supply a specific session to be checked}
 
 \item{...}{Any additional parameters are ignored.}
 }

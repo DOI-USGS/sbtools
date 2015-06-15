@@ -13,10 +13,6 @@
 #'@export
 query_item_identifier = function(scheme, type=NULL, key=NULL, session=current_session(), limit=20){
 	
-	if(!session_validate(session)){
-		stop('Session state is invalid, please re-authenticate')
-	}
-	
 	filter_all = list('scheme'=scheme, 'type'=type, 'key'=key)
 	
 	filter_items = Filter(Negate(is.null), filter_all)
@@ -26,7 +22,7 @@ query_item_identifier = function(scheme, type=NULL, key=NULL, session=current_se
 	
 	query = list('filter'=filter, 'max'=limit, 'format'='json')
 	
-	r = GET(pkg.env$url_items, query=query, handle=session)
+	r = sbtools_GET(url = pkg.env$url_items, query=query, session=session)
 	
 	if(r$status_code == 409){
 		stop('Multiple items described by that ID')

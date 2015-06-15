@@ -47,6 +47,7 @@ authenticate_sb = function(username, password){
 		stop('Unable to authenticate to SB. Check username and password')
 	}
 	
+	attributes(h) <- c(attributes(h), list(birthdate=Sys.time()))
 	pkg.env$session  = h
 	pkg.env$username = username
 	
