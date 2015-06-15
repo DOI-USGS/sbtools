@@ -2,8 +2,7 @@
 % Please edit documentation in R/REST_helpers.R
 \name{sbtools_GET}
 \alias{sbtools_GET}
-\title{generic GETs for sbtools package package wrapped for generic GETs that test
-sessions internally and wrap some errors}
+\title{generic GETs for sbtools package}
 \usage{
 sbtools_GET(url, ..., session, timeout = default_timeout())
 }
@@ -18,8 +17,8 @@ including \code{query}}
 \item{timeout}{a timeout for the request in seconds}
 }
 \description{
-generic GETs for sbtools package package wrapped for generic GETs that test
-sessions internally and wrap some errors
+package wrapped for generic GETs that test sessions internally and wrap some
+errors
 }
 \keyword{internal}
 
