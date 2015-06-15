@@ -16,4 +16,23 @@ test_that("generic post fails w/o auth", {
 	
 })
 
+context("sbtools_GET")
+public_item <- '557ec671e4b023124e8ef590' # public read access
+private_item <- '55569325e4b0a92fa7e9cf36'
+
+test_that("generic get w/ and w/o auth", {
+	expect_is(item_get(public_item, session = NULL), 'list')
+	expect_error(item_get(private_item, session = NULL), 'Item not found')
+	
+	session <- httr::handle("http://google.com", cookies = FALSE)
+	attributes(session) <- c(attributes(session), list(birthdate=Sys.time()))
+	expect_is(item_get(public_item, session = session), 'list') # public get with 'valid' session
+	
+	expect_error(item_get(private_item, session = session), 'Item not found')
+	set_expiration(as.difftime("00:00:01"))
+	Sys.sleep(2)
+	expect_error(item_get(public_item, session = session), 'session is not valid')
+	
+})
+
 

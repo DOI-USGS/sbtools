@@ -8,6 +8,6 @@
 #'@export
 query_items = function(query_list, session=current_session()){
 	
-	return(GET(pkg.env$url_items, handle=session, query=query_list))
+	return(sbtools_GET(url = pkg.env$url_items, query=query_list, session=session))
 	
 }

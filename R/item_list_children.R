@@ -19,9 +19,8 @@ item_list_children = function(id, session=current_session(), limit=20){
 		stop('Session state is invalid, please re-authenticate')
 	}
 	
-	r = GET(pkg.env$url_items, 
-					query=list('parentId'=id, 'max'=limit, 'format'='json', 'fields'='id'), 
-					handle = session)
+	query=list('parentId'=id, 'max'=limit, 'format'='json', 'fields'='id')
+	r = sbtools_GET(url = pkg.env$url_items, query=query, session=session)
 	
 	items = content(r, 'parsed')$items
 	
