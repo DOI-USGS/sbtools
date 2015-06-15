@@ -12,8 +12,6 @@ env:
      - R_CHECK_ARGS="--as-cran"
      - NOT_CRAN="true" 
 
-r_packages:
- - XML
 before_install:
 
 install:
