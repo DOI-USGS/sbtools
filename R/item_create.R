@@ -13,9 +13,6 @@
 #'@export
 item_create = function(parent_id, title, session=current_session(), info){
 	
-	if(!session_validate(session)){
-		stop('Session state is invalid, please re-authenticate')
-	}
 	
 	body = list('parentId'=parent_id, 'title'=title)
 	
@@ -24,13 +21,7 @@ item_create = function(parent_id, title, session=current_session(), info){
 		body = c(body, info)
 	}
 	
-	r = POST(pkg.env$url_item, body=toJSON(body, auto_unbox=TRUE), handle=session, encode="json")
-	
-	if(r$status_code != 200){
-		stop('Error creating new item')
-	}
-	
-	#content(r,'parsed')$id
+	r = sbtools_POST(url=pkg.env$url_item, body=toJSON(body, auto_unbox=TRUE), session = session)
 	
 	return(content(r,'parsed')$id)
 }

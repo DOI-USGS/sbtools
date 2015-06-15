@@ -26,15 +26,21 @@
 #'}
 #'
 #'@export
-session_validate = function(session){
+session_validate = function(session=current_session()){
+	
+	
+	if(!is.null(session) & !is(session, 'handle')){
+		return(FALSE)
+	}
 	
 	if(is.null(session)){
 		return(TRUE)
 	}
 	
-	if(!inherits(session, 'handle')){
+	if(session_expired(session)){
 		return(FALSE)
 	}
+	
 	
 	#from here:
 	#http://stackoverflow.com/questions/26666614/how-do-i-check-if-an-externalptr-is-null-from-within-r

@@ -10,16 +10,8 @@
 #'
 #'@export
 item_get = function(id, session=current_session()){
-	
-	if(!session_validate(session)){
-		stop('Session state is invalid, please re-authenticate')
-	}
-	
-	r = GET(paste0(pkg.env$url_item, id, '?type=json'), handle=session)
-	
-	if('errors' %in% names(content(r))){
-		stop(content(r)$errors$message)
-	}
+
+	r <- sbtools_GET(url = paste0(pkg.env$url_item, id),query = list('type'='json'), session=session)
+
 	return(content(r))
-	
 }

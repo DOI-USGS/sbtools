@@ -4,7 +4,7 @@
 \alias{session_validate}
 \title{Validate sbtools session state}
 \usage{
-session_validate(session)
+session_validate(session = current_session())
 }
 \arguments{
 \item{session}{sbtools session object (from \code{\link{authenticate_sb}})}
