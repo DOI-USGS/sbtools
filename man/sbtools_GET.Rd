@@ -2,25 +2,23 @@
 % Please edit documentation in R/REST_helpers.R
 \name{sbtools_GET}
 \alias{sbtools_GET}
-\title{generic GETs for sbtools package
-package wrapped for generic GETs that test sessions internally and wrap some errors}
+\title{generic GETs for sbtools package}
 \usage{
-sbtools_GET(url, query, session, timeout = default_timeout(), ...)
+sbtools_GET(url, ..., session, timeout = default_timeout())
 }
 \arguments{
 \item{url}{a base url for the GET}
 
-\item{query}{a list of query params}
+\item{...}{additional params passed to \code{\link[httr]{GET}}, often
+including \code{query}}
 
 \item{session}{a sbtools session object}
 
 \item{timeout}{a timeout for the request in seconds}
-
-\item{...}{additional params passed to \code{\link[httr]{GET}}}
 }
 \description{
-generic GETs for sbtools package
-package wrapped for generic GETs that test sessions internally and wrap some errors
+package wrapped for generic GETs that test sessions internally and wrap some
+errors
 }
 \keyword{internal}
 
