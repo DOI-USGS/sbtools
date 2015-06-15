@@ -36,12 +36,12 @@ sbtools_POST <- function(url, body, session, timeout = default_timeout(), ...){
 #' @keywords internal
 sbtools_GET <- function(url, ..., session, timeout = default_timeout()){
 	
-	supported_types <- c('text/plain','application/json')
+	supported_types <- c('text/plain','application/json','application/x-gzip')
 	if (!session_validate(session))
 		stop('session is not valid. See ?authenticate_sb')
 	
 	r = GET(url = url, handle=session, timeout(timeout), ...)
-	
+
 	if (!strsplit(headers(r)[['content-type']], '[;]')[[1]][1] %in% supported_types)
 		stop('GET failed to ',url,'. check authorization and/or content')
 	
