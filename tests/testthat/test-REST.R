@@ -28,7 +28,7 @@ test_that("generic get w/ and w/o auth", {
 	attributes(session) <- c(attributes(session), list(birthdate=Sys.time()))
 	expect_is(item_get(public_item, session = session), 'list') # public get with 'valid' session
 	
-	expect_error(item_get(private_item, session = session), 'Item not found')
+	expect_error(item_get(private_item, session = session))
 	set_expiration(as.difftime("00:00:01"))
 	Sys.sleep(2)
 	expect_error(item_get(public_item, session = session), 'session is not valid')
