@@ -4,7 +4,7 @@
 \alias{sbtools_GET}
 \title{generic GETs for sbtools package}
 \usage{
-sbtools_GET(url, ..., session, timeout = default_timeout())
+sbtools_GET(url, ..., session)
 }
 \arguments{
 \item{url}{a base url for the GET}
@@ -13,8 +13,6 @@ sbtools_GET(url, ..., session, timeout = default_timeout())
 including \code{query}}
 
 \item{session}{a sbtools session object}
-
-\item{timeout}{a timeout for the request in seconds}
 }
 \description{
 package wrapped for generic GETs that test sessions internally and wrap some

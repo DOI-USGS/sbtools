@@ -4,10 +4,12 @@
 \alias{item_list_files}
 \title{Get list of files attached to SB item}
 \usage{
-item_list_files(id, session = current_session())
+item_list_files(id, ..., session = current_session())
 }
 \arguments{
 \item{id}{item ID}
+
+\item{...}{Additional parameters are passed on to \link[httr]{GET}}
 
 \item{session}{Session object from \link{authenticate_sb}}
 }

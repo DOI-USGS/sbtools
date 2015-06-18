@@ -2,6 +2,7 @@
 #'
 #'@param id item ID
 #'@param session Session object from \link{authenticate_sb}
+#'@param ... Additional parameters are passed on to \link[httr]{GET}
 #'
 #'@return 
 #'A data.frame with columns fname, size, and url. 
@@ -9,13 +10,13 @@
 #'
 #'
 #'@export
-item_list_files = function(id, session=current_session()){
+item_list_files = function(id, ..., session=current_session()){
 	
 	if(!session_validate(session)){
 		stop('Session state is invalid, please re-authenticate')
 	}
 	
-	item = item_get(id, session)
+	item = item_get(id, ..., session=session)
 	
 	files = item$files
 	out = data.frame()

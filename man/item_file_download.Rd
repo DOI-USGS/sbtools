@@ -4,11 +4,13 @@
 \alias{item_file_download}
 \title{Download files attached to item}
 \usage{
-item_file_download(id, names, destinations, dest_dir,
+item_file_download(id, ..., names, destinations, dest_dir,
   session = current_session(), overwrite_file = FALSE)
 }
 \arguments{
 \item{id}{SB item ID}
+
+\item{...}{Additional parameters are passed on to \link[httr]{GET}}
 
 \item{names}{String vector list of file names attached to item that you wish to download.}
 

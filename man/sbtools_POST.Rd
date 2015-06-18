@@ -5,7 +5,7 @@
 \title{generic POSTs for sbtools package
 package wrapped for generic POSTs that test sessions internally and wrap some errors}
 \usage{
-sbtools_POST(url, body, session, timeout = default_timeout(), ...)
+sbtools_POST(url, body, session, ...)
 }
 \arguments{
 \item{url}{a base url for the POST}
@@ -14,9 +14,7 @@ sbtools_POST(url, body, session, timeout = default_timeout(), ...)
 
 \item{session}{a sbtools session object}
 
-\item{timeout}{a timeout for the request in seconds}
-
-\item{...}{additional params passed to \code{\link[httr]{GET}}}
+\item{...}{additional params passed to \code{\link[httr]{POST}}}
 }
 \description{
 generic POSTs for sbtools package
