@@ -17,5 +17,10 @@ item_upload_create = function(parent_id, files, session=current_session()){
 									 session = session)
 
 	
+	#check to see if we've been redirected to the login page
+	if(grepl('josso/signon', r$url)){
+		stop('Not authenticated or lack of permission to parent object\nAunthenticate with the authenticate_sb function.')
+	}
+	
 	return(content(r)$id)
 }
