@@ -10,25 +10,27 @@ item_file_download(id, ..., names, destinations, dest_dir,
 \arguments{
 \item{id}{SB item ID}
 
-\item{...}{Additional parameters are passed on to \link[httr]{GET}}
+\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}}
 
-\item{names}{String vector list of file names attached to item that you wish to download.}
+\item{names}{String vector list of file names attached to item that you wish
+to download.}
 
-\item{destinations}{String vector list of destinations for requested files. Must be same length as \code{names}}
+\item{destinations}{String vector list of destinations for requested files.
+Must be same length as \code{names}}
 
-\item{dest_dir}{A directory path for saving files when \code{names} parameter is omitted}
+\item{dest_dir}{A directory path for saving files when \code{names} parameter
+is omitted}
 
 \item{session}{Session object from \code{\link{authenticate_sb}}}
 
-\item{overwrite_file}{Boolean indicating if file should be overwritten if it already exists locally}
+\item{overwrite_file}{Boolean indicating if file should be overwritten if it
+  already exists locally}
 }
 \description{
-Function to downlod files attached to an item on SB. Either files can be specified directly
-using the \code{names} and \code{destinations} paramters, or a \code{dest_dir} can be
-supplied where all attached files will be written with the names as stored on SB.
-}
-\details{
-
+Function to downlod files attached to an item on SB. Either files can be
+specified directly using the \code{names} and \code{destinations} paramters,
+or a \code{dest_dir} can be supplied where all attached files will be written
+with the names as stored on SB.
 }
 \examples{
 #downloads two files attached to this item

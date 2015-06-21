@@ -4,10 +4,13 @@
 \alias{item_rm}
 \title{Remove item from SB}
 \usage{
-item_rm(id, session = current_session())
+item_rm(id, ..., session = current_session())
 }
 \arguments{
 \item{id}{item ID}
+
+\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}} and
+\code{\link[httr]{DELETE}}}
 
 \item{session}{Session object from \code{\link{authenticate_sb}}}
 }

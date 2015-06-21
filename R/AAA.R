@@ -12,6 +12,11 @@ pkg.env$username = ""
 	set_endpoint()
 }
 
+#' Set the expiration
+#' 
+#' Called on package build
+#' 
+#' @param expiration_age a difftime describing the length of a session
 #' @export
 #' @keywords internal
 set_expiration <- function(expiration_age = as.difftime("00:59:00")){

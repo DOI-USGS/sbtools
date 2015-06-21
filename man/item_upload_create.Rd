@@ -4,16 +4,18 @@
 \alias{item_upload_create}
 \title{Upload file(s) and create a new item}
 \usage{
-item_upload_create(parent_id, files, session = current_session())
+item_upload_create(parent_id, files, ..., session = current_session())
 }
 \arguments{
 \item{parent_id}{SB id of parent item for the newly created item}
 
 \item{files}{A string vector of paths to files to be uploaded}
 
+\item{...}{Additional parameters are passed on to \code{\link[httr]{POST}}}
+
 \item{session}{Session object from authenticate_sb}
 }
 \description{
-
+Create a new item with files attached, all in one call to SB
 }
 
