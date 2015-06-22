@@ -5,16 +5,16 @@
 \title{generic POSTs for sbtools package
 package wrapped for generic POSTs that test sessions internally and wrap some errors}
 \usage{
-sbtools_POST(url, body, session, ...)
+sbtools_POST(url, body, ..., session)
 }
 \arguments{
 \item{url}{a base url for the POST}
 
 \item{body}{a POST body}
 
-\item{session}{a sbtools session object}
-
 \item{...}{additional params passed to \code{\link[httr]{POST}}}
+
+\item{session}{a sbtools session object}
 }
 \description{
 generic POSTs for sbtools package

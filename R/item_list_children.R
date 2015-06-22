@@ -1,26 +1,25 @@
-#'
-#'@title Return IDs for all child items
-#'
-#'@param id SB item ID
-#'@param session (optional) SB session from \link{authenticate_sb}
-#'@param limit Max children returned
-#'
-#'@return \code{data.frame} with a row for each child item 
-#'
-#'@examples
-#'
-#'item_list_children('5060b03ae4b00fc20c4f3c8b')
-#'
-#'
-#'@export
-item_list_children = function(id, session=current_session(), limit=20){
+#' Return IDs for all child items
+#' 
+#' Returns a list of child IDs for a ScienceBase item
+#' 
+#' @param id SB item ID
+#' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}
+#' @param session (optional) SB session from \link{authenticate_sb}
+#' @param limit Max children returned
+#' 
+#' @return \code{data.frame} with a row for each child item 
+#' 
+#' @examples
+#' item_list_children('5060b03ae4b00fc20c4f3c8b')
+#' @export
+item_list_children = function(id, ..., session=current_session(), limit=20){
 	
 	if(!session_validate(session)){
 		stop('Session state is invalid, please re-authenticate')
 	}
 	
 	query=list('parentId'=id, 'max'=limit, 'format'='json', 'fields'='id')
-	r = sbtools_GET(url = pkg.env$url_items, query=query, session=session)
+	r = sbtools_GET(url = pkg.env$url_items, ..., query=query, session=session)
 	
 	items = content(r, 'parsed')$items
 	

@@ -4,17 +4,20 @@
 \alias{query_item_identifier}
 \title{Query SB for items based on custom identifier}
 \usage{
-query_item_identifier(scheme, type = NULL, key = NULL,
+query_item_identifier(scheme, ..., type = NULL, key = NULL,
   session = current_session(), limit = 20)
 }
 \arguments{
 \item{scheme}{The identifier scheme}
 
+\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}}
+
 \item{type}{(optional) The identifier type}
 
 \item{key}{(optional) The identifier key}
 
-\item{session}{(optional) SB Session to use, not provided queries public items only}
+\item{session}{(optional) SB Session to use, not provided queries public
+items only}
 
 \item{limit}{Max number of matching items to return}
 }
@@ -22,6 +25,6 @@ query_item_identifier(scheme, type = NULL, key = NULL,
 The SB item id for the matching item. NULL if no matching item found.
 }
 \description{
-
+Find all items under a scheme or also query by for a specific type and key
 }
 

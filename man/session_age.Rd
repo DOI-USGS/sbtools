@@ -6,6 +6,9 @@
 \usage{
 session_age(session = current_session())
 }
+\arguments{
+\item{session}{an SB session}
+}
 \value{
 difftime object
 }

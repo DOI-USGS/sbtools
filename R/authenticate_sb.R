@@ -1,19 +1,16 @@
 
-#'
-#'@title Authenticate to SB for subsequent calls
-#'
-#'@param username Sciencebase username
-#'@param password Sciencebase password, prompts user if not supplied
-#'
-#'@description 
-#'This connects to SB, authenticates and gets a session token for 
-#'communicating with SB. If you do not supply a username or password,
-#'you will be prompted to enter them.
-#'
-#'@import httr
-#'
-#'
-#'@export
+#' Authenticate to SB for subsequent calls
+#' 
+#' This connects to SB, authenticates and gets a session token for communicating
+#' with SB. If you do not supply a username or password, you will be prompted to
+#' enter them.
+#' 
+#' @param username Sciencebase username
+#' @param password Sciencebase password, prompts user if not supplied
+#'   
+#' @import httr
+#'   
+#' @export
 authenticate_sb = function(username, password){
 	
 	if(missing(username) && !interactive()){

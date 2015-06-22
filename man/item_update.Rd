@@ -4,12 +4,14 @@
 \alias{item_update}
 \title{Update a SB item with new metadata}
 \usage{
-item_update(id, info, session = current_session())
+item_update(id, info, ..., session = current_session())
 }
 \arguments{
 \item{id}{SB item ID}
 
 \item{info}{list of metadata info for the new item}
+
+\item{...}{Additional parameters are passed on to \code{\link[httr]{PUT}}}
 
 \item{session}{Authenticated session object (from \link{authenticate_sb})}
 }
