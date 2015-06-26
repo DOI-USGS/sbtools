@@ -41,9 +41,7 @@ authenticate_sb = function(username, password){
 	resp = GET(pkg.env$url_base, accept_json(), authenticate(username, password, type='basic'),
 						 handle=h)
 	
-	sid = resp$cookies$JSESSIONID
-	
-	if(is.null(sid)){
+	if(!any(resp$cookies$name %in% 'JSESSIONID')){
 		stop('Unable to authenticate to SB. Check username and password')
 	}
 	

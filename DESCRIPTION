@@ -1,12 +1,12 @@
 Package: sbtools
 Title: USGS SB tools
 Maintainer: Luke Winslow <lwinslow@usgs.gov>
-Version: 0.11.3
+Version: 0.11.4
 Author: Luke Winslow, Jordan Read, Alison Appling
 Description: Tools for interacting with SB interfaces. 
 Imports: 
 	jsonlite, 
-	httr (>= 0.5)
+	httr (>= 1.0.0)
 Suggests:
 	testthat
 License: CC0
