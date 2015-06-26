@@ -10,8 +10,6 @@
 #' @keywords internal
 sbtools_POST <- function(url, body, ..., session){
 	
-	message("sbtools_POST")
-	
 	supported_types <- c('text/plain','application/json')
 	if (!session_authorized(session))
 			stop('session is not authorized. See ?authenticate_sb')
@@ -37,8 +35,6 @@ sbtools_POST <- function(url, body, ..., session){
 #' @export
 #' @keywords internal
 sbtools_GET <- function(url, ..., session) {
-	
-	message("sbtools_GET")
 	
 	supported_types <- c('text/plain','application/json','application/x-gzip')
 	if (!session_validate(session))
@@ -73,8 +69,6 @@ sbtools_PUT <- function(url, body, ..., session) {
 	if (!session_validate(session))
 		stop('session is not valid. See ?authenticate_sb')
 	
-	message("sbtools_PUT")
-	
 	r = PUT(url=url, ..., body=body, handle=session)
 }
 
@@ -93,8 +87,6 @@ sbtools_PUT <- function(url, body, ..., session) {
 sbtools_DELETE <- function(url, ..., session) {
 	if (!session_validate(session))
 		stop('session is not valid. See ?authenticate_sb')
-	
-	message("sbtools_DELETE")
 	
 	r = DELETE(url=url, ..., handle=session)
 }
