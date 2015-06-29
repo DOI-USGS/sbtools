@@ -4,10 +4,12 @@
 \alias{item_get_parent}
 \title{Get an item's parent ID}
 \usage{
-item_get_parent(id, session = current_session())
+item_get_parent(id, ..., session = current_session())
 }
 \arguments{
 \item{id}{ID of SB item}
+
+\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}}
 
 \item{session}{SB session object from \code{\link{authenticate_sb}}}
 }

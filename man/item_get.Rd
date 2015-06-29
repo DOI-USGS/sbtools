@@ -4,10 +4,12 @@
 \alias{item_get}
 \title{Retrieve SB item}
 \usage{
-item_get(id, session = current_session())
+item_get(id, ..., session = current_session())
 }
 \arguments{
 \item{id}{SB item ID}
+
+\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}}
 
 \item{session}{Session object from \code{\link{authenticate_sb}}}
 }

@@ -4,10 +4,12 @@
 \alias{item_list_children}
 \title{Return IDs for all child items}
 \usage{
-item_list_children(id, session = current_session(), limit = 20)
+item_list_children(id, ..., session = current_session(), limit = 20)
 }
 \arguments{
 \item{id}{SB item ID}
+
+\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}}
 
 \item{session}{(optional) SB session from \link{authenticate_sb}}
 
@@ -17,7 +19,7 @@ item_list_children(id, session = current_session(), limit = 20)
 \code{data.frame} with a row for each child item
 }
 \description{
-
+Returns a list of child IDs for a ScienceBase item
 }
 \examples{
 item_list_children('5060b03ae4b00fc20c4f3c8b')

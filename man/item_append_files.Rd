@@ -4,12 +4,14 @@
 \alias{item_append_files}
 \title{Upload File to Item}
 \usage{
-item_append_files(id, files, session = current_session())
+item_append_files(id, files, ..., session = current_session())
 }
 \arguments{
 \item{id}{A ScienceBase item ID to upload to.}
 
 \item{files}{A file path to upload.}
+
+\item{...}{Additional parameters are passed on to \code{\link[httr]{POST}}}
 
 \item{session}{A ScienceBase session object from authenticate_sb.}
 }
@@ -22,7 +24,7 @@ Adds a file to an item
 \examples{
 \dontrun{
  session<-authenticate_sb(sbusername)
- item_append_files("54e265a4e4b08de9379b4dfb", '/foo/bar/baz.zip', session)
+ item_append_files("54e265a4e4b08de9379b4dfb", '/foo/bar/baz.zip', session=session)
 }
 }
 

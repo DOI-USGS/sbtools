@@ -4,16 +4,18 @@
 \alias{item_create}
 \title{Create a new SB item}
 \usage{
-item_create(parent_id, title, session = current_session(), info)
+item_create(parent_id, title, ..., info, session = current_session())
 }
 \arguments{
 \item{parent_id}{ID of the parent item}
 
 \item{title}{The title of the new SB item}
 
-\item{session}{Authenticated session object (from \link{authenticate_sb})}
+\item{...}{Additional parameters are passed on to \code{\link[httr]{POST}}}
 
 \item{info}{(optional) list of metadata info for the new item}
+
+\item{session}{Authenticated session object (from \link{authenticate_sb})}
 }
 \value{
 SB ID for the newly created item
