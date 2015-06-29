@@ -41,6 +41,7 @@ session_validate = function(session=current_session()){
 	#from here:
 	#http://stackoverflow.com/questions/26666614/how-do-i-check-if-an-externalptr-is-null-from-within-r
 	#may have to implement C code
-	return(!identical(session[['handle']]@ref, new('externalptr')))
-	
+	tmp = session[['handle']]
+	attributes(tmp) = NULL
+	return(!identical(tmp, new('externalptr')))
 }
