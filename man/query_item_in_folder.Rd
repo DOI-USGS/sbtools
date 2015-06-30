@@ -20,6 +20,7 @@ items only}
 \item{limit}{Max number of matching items to return}
 }
 \description{
-Search for text in the title, abstract, etc. within an SB folder
+Search for text in the title, abstract, etc. within an SB folder and any
+subfolders.
 }
 
