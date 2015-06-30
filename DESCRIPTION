@@ -6,7 +6,7 @@ Author: Luke Winslow, Jordan Read, Alison Appling
 Description: Tools for interacting with SB interfaces. 
 Imports: 
 	jsonlite, 
-	httr (>= 0.5)
+	httr (>= 1.0.0)
 Suggests:
 	testthat
 License: CC0
