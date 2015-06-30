@@ -18,7 +18,7 @@ item_list_children = function(id, ..., session=current_session(), limit=20){
 		stop('Session state is invalid, please re-authenticate')
 	}
 	
-	query=list('parentId'=id, 'max'=limit, 'format'='json', 'fields'='id')
+	query=list('parentId'=id, 'max'=limit, 'format'='json', 'fields'='id,title')
 	r = sbtools_GET(url = pkg.env$url_items, ..., query=query, session=session)
 	
 	items = content(r, 'parsed')$items
@@ -27,8 +27,9 @@ item_list_children = function(id, ..., session=current_session(), limit=20){
 		return(data.frame())
 	}
 	
-	out = data.frame(id = rep(NA, length(items)))
+	out = data.frame(title=NA, id = rep(NA, length(items)))
 	for(i in 1:length(items)){
+		out$title[i] = if("title" %in% names(items[[i]])) items[[i]]$title else NA
 	  out$id[i] = items[[i]]$id
 	}
 	
