@@ -19,6 +19,7 @@ sbtools_POST <- function(url, body, ..., session){
 	if (!strsplit(headers(r)[['content-type']], '[;]')[[1]][1] %in% supported_types)
 		stop('POST failed to ',url,'. check authorization and/or content')
 	
+	session_age_reset()
 	return(r)
 }
 
@@ -48,7 +49,8 @@ sbtools_GET <- function(url, ..., session) {
 	if('errors' %in% names(content(r))){
 		stop(content(r)$errors$message)
 	}
-
+	
+	session_age_reset()
 	return(r)
 }
 
@@ -70,6 +72,7 @@ sbtools_PUT <- function(url, body, ..., session) {
 		stop('session is not valid. See ?authenticate_sb')
 	
 	r = PUT(url=url, ..., body=body, handle=session)
+	session_age_reset()
 }
 
 #' generic DELETEs for sbtools package
@@ -89,4 +92,5 @@ sbtools_DELETE <- function(url, ..., session) {
 		stop('session is not valid. See ?authenticate_sb')
 	
 	r = DELETE(url=url, ..., handle=session)
+	session_age_reset()
 }
