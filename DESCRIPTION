@@ -1,13 +1,17 @@
 Package: sbtools
-Title: USGS SB tools
+Title: USGS ScienceBase Tools
 Maintainer: Luke Winslow <lwinslow@usgs.gov>
-Version: 0.11.4
+Version: 0.11.5
 Author: Luke Winslow, Jordan Read, Alison Appling
-Description: Tools for interacting with SB interfaces. 
+Description: Tools for interacting with USGS ScienceBase (https://www.sciencebase.gov) 
+		interfaces. ScienceBase is a data cataloging and collaborative 
+		data management platform. Functions included for querying ScienceBase, and 
+		creating and fetching datasets. 
 Imports: 
 	jsonlite, 
 	httr (>= 1.0.0)
 Suggests:
 	testthat
 License: CC0
-Repository: http://github.com/lawinslow/sbtools
+URL: https://github.com/USGS-R/sbtools
+BugReports: https://github.com/USGS-R/sbtools/issues

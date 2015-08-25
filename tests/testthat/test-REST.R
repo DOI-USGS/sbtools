@@ -17,7 +17,7 @@ test_that("generic post fails w/o auth", {
 })
 
 context("sbtools_GET")
-public_item <- '557ec671e4b023124e8ef590' # public read access
+public_item <- '4f4e4a62e4b07f02db636b68' # public read access
 private_item <- '55569325e4b0a92fa7e9cf36'
 
 test_that("generic get w/ and w/o auth", {
