@@ -36,7 +36,7 @@ sbtools_POST <- function(url, body, ..., session){
 #' @keywords internal
 sbtools_GET <- function(url, ..., session) {
 	
-	supported_types <- c('text/plain','text/csv','text/tab-separated-values','application/json','application/x-gzip')
+	supported_types <- c('text/plain','text/tab-separated-values','application/json','application/x-gzip')
 	if (!session_validate(session))
 		stop('session is not valid. See ?authenticate_sb')
 	
