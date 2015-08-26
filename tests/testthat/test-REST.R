@@ -2,7 +2,7 @@ context("sbtools_POST")
 
 test_that("generic post fails w/o auth", {
 	# auth fails locally:
-	expect_error(item_append_files("54e265a4e4b08de9379b4dfb", '/foo/bar/baz.zip'),'session is not authorized')
+	expect_error(item_append_files("54e265a4e4b08de9379b4dfb", '/foo/bar/baz.zip'),'Error in*')
 	session <- httr::handle("http://google.com", cookies = FALSE)
 	attributes(session) <- c(attributes(session), list(birthdate=Sys.time()))
 	
