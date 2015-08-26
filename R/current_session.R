@@ -13,10 +13,5 @@
 #'@export
 current_session = function(){
 	
-	if(!session_validate(pkg.env$session)){		
-		#if the session is invalid, NULL it out just because		
-		pkg.env$session = NULL		
-	}
-	
 	return(pkg.env$session)
 }
