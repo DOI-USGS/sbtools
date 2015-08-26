@@ -6,8 +6,13 @@
 #' @param files A string vector of paths to files to be uploaded
 #' @param ... Additional parameters are passed on to \code{\link[httr]{POST}}
 #' @param session Session object from authenticate_sb
-#' @import httr
 #' @export
+#' @examples \dontrun{
+#' # You'll need a parent id for a folder/item
+#' ### these examples aren't run on check b/c specific to a user account
+#' # file <- system.file("examples", "books.json", package = "sbtools")
+#' # item_upload_create("55ddf814e4b0518e354dfcb4", file)
+#' }
 item_upload_create = function(parent_id, files, ..., session=current_session()){
 	
 

@@ -24,4 +24,14 @@ List serialization of complete metadata for SB item
 \description{
 Retrieve specific fields from an SB item
 }
+\examples{
+\dontrun{
+# Get certain fields from an item
+item_get_fields("4f4e4b24e4b07f02db6aea14", c('title', 'citation', 'contacts'))
+
+# If only 1 field selection, do or don't drop list format
+item_get_fields("4f4e4b24e4b07f02db6aea14", 'title')
+item_get_fields("4f4e4b24e4b07f02db6aea14", 'title', drop = FALSE)
+}
+}
 
