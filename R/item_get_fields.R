@@ -9,6 +9,14 @@
 #' @return List serialization of complete metadata for SB item
 #' @import httr
 #' @export
+#' @examples \dontrun{
+#' # Get certain fields from an item
+#' item_get_fields("4f4e4b24e4b07f02db6aea14", c('title', 'citation', 'contacts'))
+#' 
+#' # If only 1 field selection, do or don't drop list format
+#' item_get_fields("4f4e4b24e4b07f02db6aea14", 'title')
+#' item_get_fields("4f4e4b24e4b07f02db6aea14", 'title', drop = FALSE)
+#' }
 item_get_fields = function(id, fields, ..., drop=TRUE, session=current_session()){
 	query <- list('fields'=paste0(fields, collapse=","), 'type'='json')
 	r <- sbtools_GET(url=paste0(pkg.env$url_item, id), ..., query = query, session=session)

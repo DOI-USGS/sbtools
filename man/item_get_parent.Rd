@@ -13,7 +13,15 @@ item_get_parent(id, ..., session = current_session())
 
 \item{session}{SB session object from \code{\link{authenticate_sb}}}
 }
+\value{
+The parent ID of an item.
+}
 \description{
-Returns the parent ID of an item.
+Get an item's parent ID
+}
+\examples{
+\dontrun{
+item_get_parent("4f4e4b24e4b07f02db6aea14")
+}
 }
 

@@ -20,4 +20,9 @@ If item has no attached files, returns a zero row data.frame.
 \description{
 Get list of files attached to SB item
 }
+\examples{
+\dontrun{
+item_list_files("4f4e4b24e4b07f02db6aea14")
+}
+}
 

@@ -18,4 +18,12 @@ item_upload_create(parent_id, files, ..., session = current_session())
 \description{
 Create a new item with files attached, all in one call to SB
 }
+\examples{
+\dontrun{
+# You'll need a parent id for a folder/item
+### these examples aren't run on check b/c specific to a user account
+# file <- system.file("examples", "books.json", package = "sbtools")
+# item_upload_create("55ddf814e4b0518e354dfcb4", file)
+}
+}
 
