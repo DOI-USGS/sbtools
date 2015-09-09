@@ -9,9 +9,9 @@
 #' @export
 #' @examples \dontrun{
 #' # You'll need a parent id for a folder/item
-#' ### these examples aren't run on check b/c specific to a user account
-#' # file <- system.file("examples", "books.json", package = "sbtools")
-#' # item_upload_create("55ddf814e4b0518e354dfcb4", file)
+#' ## here, using your highest level parent folder
+#' file <- system.file("examples", "books.json", package = "sbtools")
+#' item_upload_create(user_id(), file)
 #' }
 item_upload_create = function(parent_id, files, ..., session=current_session()){
 	
@@ -23,7 +23,7 @@ item_upload_create = function(parent_id, files, ..., session=current_session()){
 
 	
 	#check to see if we've been redirected to the login page
-	if(grepl('josso/signon', r$url)){
+	if (grepl('josso/signon', r$url)) {
 		stop('Not authenticated or lack of permission to parent object\nAunthenticate with the authenticate_sb function.')
 	}
 	
