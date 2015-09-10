@@ -19,10 +19,13 @@ item_create(parent_id, title, ..., info, session = current_session())
 }
 \value{
 SB ID for the newly created item
-
-x
 }
 \description{
 Create a new SB item
+}
+\examples{
+\dontrun{
+item_create(user_id(), "testing 123")
+}
 }
 
