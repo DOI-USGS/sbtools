@@ -73,6 +73,7 @@ sbtools_PUT <- function(url, body, ..., session) {
 	
 	r = PUT(url=url, ..., body=body, handle=session)
 	session_age_reset()
+	return(r)
 }
 
 #' generic DELETEs for sbtools package
@@ -93,4 +94,5 @@ sbtools_DELETE <- function(url, ..., session) {
 	
 	r = DELETE(url=url, ..., handle=session)
 	session_age_reset()
+	return(r)
 }
