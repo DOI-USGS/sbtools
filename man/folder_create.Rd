@@ -4,16 +4,27 @@
 \alias{folder_create}
 \title{Create a folder}
 \usage{
-folder_create(parent_id, name, session = current_session())
+folder_create(parent_id, name, ..., session = current_session())
 }
 \arguments{
-\item{parent_id}{the id of the parent folder/item under which to create this one}
+\item{parent_id}{(character) the id of the parent folder/item under which to create this one}
 
-\item{name}{the folder name}
+\item{name}{(character) the folder name}
 
-\item{session}{an SB session}
+\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}} and
+\code{\link[httr]{DELETE}}}
+
+\item{session}{Session object from \code{\link{authenticate_sb}}}
+}
+\value{
+A \code{\link[httr]{response}} object
 }
 \description{
-Not yet implemented
+Create a folder
+}
+\examples{
+\dontrun{
+folder_create(user_id(), "foobar")
+}
 }
 
