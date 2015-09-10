@@ -18,7 +18,7 @@ item_rm = function(id, ..., session=current_session()){
 		stop('Item has children. Remove all children before deleting.')
 	}
 	
-	r = sbtools_DELETE(paste0(pkg.env$url_item, id), ..., accept_json(), session=session)
+	r = sbtools_DELETE(paste0(pkg.env$url_item, id, '?format=json'), ..., accept_json(), session=session)
 	
 	return(r)
 	
