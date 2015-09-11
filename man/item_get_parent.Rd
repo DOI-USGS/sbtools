@@ -4,14 +4,14 @@
 \alias{item_get_parent}
 \title{Get an item's parent ID}
 \usage{
-item_get_parent(id, ..., session = current_session())
+item_get_parent(sbitem, ..., session = current_session())
 }
 \arguments{
-\item{id}{ID of SB item}
-
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}}
 
 \item{session}{SB session object from \code{\link{authenticate_sb}}}
+
+\item{id}{ID of SB item}
 }
 \value{
 The parent ID of an item.
@@ -22,6 +22,8 @@ Get an item's parent ID
 \examples{
 \dontrun{
 item_get_parent("4f4e4b24e4b07f02db6aea14")
+
+item_get("4f4e4b24e4b07f02db6aea14") \%>\% item_get_parent()
 }
 }
 

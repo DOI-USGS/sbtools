@@ -25,5 +25,5 @@ item_create = function(parent_id, title, ..., info, session=current_session()){
 	
 	r = sbtools_POST(url=pkg.env$url_item, ..., body=toJSON(body, auto_unbox=TRUE), session = session)
 	
-	return(content(r,'parsed')$id)
+	return(as.sbitem(content(r)))
 }

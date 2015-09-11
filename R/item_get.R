@@ -22,5 +22,5 @@ item_get = function(id, ..., session=current_session()){
 
 	r <- sbtools_GET(url = paste0(pkg.env$url_item, id), ..., query = list('type'='json'), session=session)
 
-	return(content(r))
+	return(as.sbitem(content(r)))
 }

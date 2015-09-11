@@ -23,5 +23,8 @@ Returns a list of child IDs for a ScienceBase item
 }
 \examples{
 item_list_children('5060b03ae4b00fc20c4f3c8b')
+
+as.sbitem('5060b03ae4b00fc20c4f3c8b') \%>\% item_list_children
+item_get('5060b03ae4b00fc20c4f3c8b') \%>\% item_list_children
 }
 
