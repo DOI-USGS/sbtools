@@ -2,13 +2,13 @@
 % Please edit documentation in R/sb_item.R
 \name{sbitem}
 \alias{as.sbitem}
-\alias{sb_item}
+\alias{is.sbitem}
 \alias{sbitem}
 \title{ScienceBase item class}
 \usage{
-sb_item(x)
-
 as.sbitem(x, ...)
+
+is.sbitem(x)
 }
 \description{
 ScienceBase item class
@@ -22,7 +22,7 @@ item_get("4f4e4b24e4b07f02db6aea14")
 library("httr")
 res <- query_items(list(s = "Search", q = "water", format = "json"))
 ids <- vapply(httr::content(res)$items, "[[", "", "id")
-lapply(ids[1:3], item_get)
+(out <- lapply(ids[1:3], item_get))
 
 # create item class from only an item ID
 as.sbitem("4f4e4b24e4b07f02db6aea14")
