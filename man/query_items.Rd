@@ -115,7 +115,9 @@ query_items(list(s = "Search",
 query_items(list(s = "Search",
 		dateRange = '{"dateType":"lastUpdated","choice":"month"}', format = "json"))
 query_items(list(s = "Search",
-		dateRange = '{"dateType":"Release","choice":"range","start":"2014-09-01","end":"2015-09-01"}', format = "json"))
+		dateRange =
+		'{"dateType":"Release","choice":"range","start":"2014-09-01","end":"2015-09-01"}',
+		format = "json"))
 
 # Extent query
 ## just a alphanumeric code
