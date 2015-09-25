@@ -41,7 +41,7 @@ item_rm_recursive = function(id, ..., session = current_session()) {
 		# children without children all at once; for now we'll just separate them into
 		# a second lapply loop
 		lapply(kids[kids$hasChildren, 'id'], item_rm_recursive, ..., session=session)
-		lapply(kids[!kids$hasChildren, 'id'], item_rm, ..., session=session)
+		lapply(kids[!kids$hasChildren, 'id'], item_rm, ..., recursive=FALSE, session=session)
 		
 		# maybe FIXME - there's a lag time between the requests above to delete things
 		# and when it actually happens - sleep 2 seconds before moving up one level in
@@ -49,7 +49,7 @@ item_rm_recursive = function(id, ..., session = current_session()) {
 		Sys.sleep(2)
 	}
 	# base case: has no children. just delete.
-	item_rm(id, ..., session=session)	
+	item_rm(id, ..., recursive=FALSE, session=session)	
 	
 	# return TRUE if we made it this so far
 	return(TRUE)
