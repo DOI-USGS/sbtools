@@ -2,7 +2,7 @@
 % Please edit documentation in R/item_rm_recursive.R
 \name{item_rm_recursive}
 \alias{item_rm_recursive}
-\title{Remove an item completely by recursively removing its children}
+\title{Remove an item completely by recursively removing its child items}
 \usage{
 item_rm_recursive(id, ..., session = current_session())
 }
@@ -18,17 +18,19 @@ item_rm_recursive(id, ..., session = current_session())
 \code{TRUE} to indicate success
 }
 \description{
-Remove an item completely by recursively removing its children
+Remove an item completely by recursively removing its child items
 }
 \details{
-BEWARE: This removes all folders/files in an item completely.
+BEWARE: This completely removes ALL CHILD ITEMS AND THEIR CHILDREN
+  as well as the item itself.
 }
 \examples{
 \dontrun{
 # Create an item with nested structure
+authenticate_sb()
 fname <- "chairs"
-folder_create(name = fname)
-df <- item_list_children(user_id())
+folder_create(user_id(), name = fname)
+df <- item_list_children(user_id()) # may need to wait a moment to run this
 id <- df[ df$title == fname, "id" ]
 folder_create(id, name = "one")
 folder_create(id, name = "two")
