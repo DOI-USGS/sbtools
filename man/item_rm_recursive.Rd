@@ -38,7 +38,8 @@ df2 <- item_list_children(id)
 folder_create(df2$id[1], name = "nested")
 
 # then delete the whole folder
-item_rm_recursive(id)
+sbtools:::item_rm_recursive(id)
 }
 }
+\keyword{internal}
 

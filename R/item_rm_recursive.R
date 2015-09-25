@@ -1,6 +1,6 @@
 #' Remove an item completely by recursively removing its child items
 #' 
-#' @export
+#' @keywords internal
 #' @param id (character) item ID
 #' @param ... Additional parameters are passed on to \code{\link[httr]{GET}} and
 #'   \code{\link[httr]{DELETE}}
@@ -21,7 +21,7 @@
 #' folder_create(df2$id[1], name = "nested")
 #' 
 #' # then delete the whole folder
-#' item_rm_recursive(id)
+#' sbtools:::item_rm_recursive(id)
 #' }
 item_rm_recursive = function(id, ..., session = current_session()) {
 	
