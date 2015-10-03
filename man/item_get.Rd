@@ -7,8 +7,7 @@
 item_get(id, ..., session = current_session())
 }
 \arguments{
-\item{id}{A ScienceBase ID or something that can be coerced to a SB item ID
-by \code{\link{as.sbitem}}}
+\item{id}{(character) A ScienceBase ID}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}}
 

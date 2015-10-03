@@ -1,7 +1,6 @@
 #' @title Retrieve SB item
 #'  
-#' @param id A ScienceBase ID or something that can be coerced to a SB item ID
-#' by \code{\link{as.sbitem}}
+#' @param id (character) A ScienceBase ID
 #' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}
 #' @param session Session object from \code{\link{authenticate_sb}}
 #'  
@@ -20,8 +19,7 @@
 #' lapply(ids[1:3], item_get)
 #' }
 item_get <- function(id, ..., session=current_session()) {
-	item <- as.sbitem(id)
-	r <- sbtools_GET(url = paste0(pkg.env$url_item, item$id), ..., 
+	r <- sbtools_GET(url = paste0(pkg.env$url_item, id), ..., 
 									 query = list(type = 'json'), session = session)
 	return(as.sbitem(content(r)))
 }
