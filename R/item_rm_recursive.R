@@ -1,7 +1,7 @@
 #' Remove an item completely by recursively removing its children
 #'   
 #' @export
-#' @param id (character) item ID
+#' @param id A ScienceBase ID or something that can be coerced to a SB item ID
 #' @param ... Additional parameters are passed on to \code{\link[httr]{GET}} and
 #'   \code{\link[httr]{DELETE}}
 #' @param session Session object from \code{\link{authenticate_sb}}
@@ -9,19 +9,21 @@
 #' @details BEWARE: This removes all folders/files in an item completely.
 #' @examples \dontrun{
 #' # Create an item with nested structure
-#' fname <- "chairs"
-#' folder_create(name = fname)
-#' df <- item_list_children(user_id())
-#' id <- df[ df$title == fname, "id" ]
-#' folder_create(id, name = "one")
-#' folder_create(id, name = "two")
-#' df2 <- item_list_children(id)
+#' fname <- "couch"
+#' fold <- folder_create(user_id(), name = fname)
+#' folder_create(fold$id, name = "one")
+#' folder_create(fold$id, name = "two")
+#' df2 <- item_list_children(fold$id)
 #' folder_create(df2$id[1], name = "nested")
 #' 
 #' # then delete the whole folder
-#' item_rm_recursive(id)
+#' ## from the sbitem object
+#' item_rm_recursive(fold)
+#' ## or from the id itself
+#' # item_rm_recursive(fold$id)
 #' }
 item_rm_recursive = function(id, ..., session = current_session()) {
+	id <- as.sbitem(id)$id
 	ogid <- id
 	while (length(id) > 0) {
 		whileid <- id
@@ -40,7 +42,7 @@ item_rm_recursive = function(id, ..., session = current_session()) {
 		# maybe FIXME - there's a lag time between the requests above to delete things
 		# and when it actually happens - sleep 1 second before starting next 
 		# loop iteration
-		Sys.sleep(1)
+		Sys.sleep(2)
 	}
 	# maybe FIXME - same as above note
 	Sys.sleep(2)

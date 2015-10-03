@@ -10,6 +10,13 @@ as.sbitem(x, ...)
 
 is.sbitem(x)
 }
+\arguments{
+\item{x}{Input, variety of things, character, list, or sbitem class
+object}
+
+\item{...}{Further args passed on to \code{\link{item_get}}, only in
+the method for character class inputs}
+}
 \description{
 ScienceBase item class
 }

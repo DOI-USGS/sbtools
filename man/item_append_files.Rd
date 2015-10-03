@@ -7,7 +7,8 @@
 item_append_files(id, files, ..., session = current_session())
 }
 \arguments{
-\item{id}{A ScienceBase item ID to upload to.}
+\item{id}{A ScienceBase ID or something that can be coerced to a SB item ID
+by \code{\link{as.sbitem}}}
 
 \item{files}{A file path to upload.}
 
@@ -16,15 +17,16 @@ item_append_files(id, files, ..., session = current_session())
 \item{session}{A ScienceBase session object from authenticate_sb.}
 }
 \value{
-ScienceBase Item.
+An object of class \code{sbitem}
 }
 \description{
 Adds a file to an item
 }
 \examples{
 \dontrun{
- session<-authenticate_sb(sbusername)
- item_append_files("54e265a4e4b08de9379b4dfb", '/foo/bar/baz.zip', session=session)
+res <- item_create(user_id(), "testing 123")
+cat("foo bar", file = "foobar.txt")
+item_append_files(res$id, "foobar.txt")
 }
 }
 

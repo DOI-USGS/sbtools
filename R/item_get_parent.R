@@ -10,12 +10,7 @@
 #' 
 #' item_get("4f4e4b24e4b07f02db6aea14") %>% item_get_parent()
 #' }
-item_get_parent = function(sbitem, ..., session=current_session()){
-	
-	res <- as.sbitem(sbitem, ...)
+item_get_parent = function(id, ..., session = current_session()) {
+	res <- as.sbitem(id, ...)
 	res$parentId
-	# item_json = item_get(id, ..., session = session)
-	
-	# parentid = item_json[['parentId']]
-	# return(parentid)
 }

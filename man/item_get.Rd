@@ -7,14 +7,15 @@
 item_get(id, ..., session = current_session())
 }
 \arguments{
-\item{id}{SB item ID}
+\item{id}{A ScienceBase ID or something that can be coerced to a SB item ID
+by \code{\link{as.sbitem}}}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}}
 
 \item{session}{Session object from \code{\link{authenticate_sb}}}
 }
 \value{
-List serialization of complete metadata for SB item
+An object of class \code{sbitem}
 }
 \description{
 Retrieve SB item

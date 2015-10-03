@@ -1,28 +1,30 @@
-#'@title Upload File to Item
-#'@description Adds a file to an item
+#' @title Upload File to Item
+#' @description Adds a file to an item
 #'
-#'@param id A ScienceBase item ID to upload to.
-#'@param files A file path to upload.
+#' @param id A ScienceBase ID or something that can be coerced to a SB item ID
+#' by \code{\link{as.sbitem}}
+#' @param files A file path to upload.
 #' @param ... Additional parameters are passed on to \code{\link[httr]{POST}}
-#'@param session A ScienceBase session object from authenticate_sb.
+#' @param session A ScienceBase session object from authenticate_sb.
 #'
-#'@return ScienceBase Item.
+#' @return An object of class \code{sbitem}
 #'
-#'@import httr
+#' @import httr
 #'
-#'@examples 
-#'\dontrun{
-#'  session<-authenticate_sb(sbusername)
-#'  item_append_files("54e265a4e4b08de9379b4dfb", '/foo/bar/baz.zip', session=session)
+#' @examples 
+#' \dontrun{
+#' res <- item_create(user_id(), "testing 123")
+#' cat("foo bar", file = "foobar.txt")
+#' item_append_files(res$id, "foobar.txt")
 #' }
-#'@export
-item_append_files = function(id, files, ..., session=current_session()){	
+#' @export
+item_append_files = function(id, files, ..., session=current_session()){
 
-	
-	r = sbtools_POST(url = paste0(pkg.env$url_upload,'?id=', id), ...,
+	item <- as.sbitem(id)
+	r = sbtools_POST(url = paste0(pkg.env$url_upload,'?id=', item$id), ...,
 									 body = multi_file_body(files), 
 									 session = session)
   
-  return(content(r))
+  return(as.sbitem(content(r)))
 	
 }

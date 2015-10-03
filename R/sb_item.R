@@ -2,6 +2,10 @@
 #' 
 #' @export
 #' @name sbitem
+#' @param x Input, variety of things, character, list, or sbitem class 
+#' object
+#' @param ... Further args passed on to \code{\link{item_get}}, only in 
+#' the method for character class inputs
 #' @examples \dontrun{
 #' # Single item from item_get()
 #' item_get("4f4e4b24e4b07f02db6aea14")

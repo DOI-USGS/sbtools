@@ -33,12 +33,15 @@ or a \code{dest_dir} can be supplied where all attached files will be written
 with the names as stored on SB.
 }
 \examples{
+\dontrun{
+
 #downloads two files attached to this item
 item_file_download('548b2b31e4b03f64633662a4', dest_dir=tempdir())
 
 #downloads a specific file attached to this item
 item_file_download('548b2b31e4b03f64633662a4', names='gdp.txt',
 		destinations=file.path(tempdir(), 'fname.txt'))
+}
 }
 \author{
 Luke Winslow

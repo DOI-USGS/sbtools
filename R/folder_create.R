@@ -15,11 +15,13 @@ folder_create = function(parent_id, name, ..., session = current_session()) {
 							 title = unbox(name), 
 							 parentId = unbox(parent_id), 
 							 systemTypes = "Folder")
-	POST(paste0(pkg.env$url_item, parent_id), 
+	tt <- POST(paste0(pkg.env$url_item, parent_id), 
 							body = jsonlite::toJSON(body),
 							encode = "json",
 							content_type_json(),
 							accept_json(),
 							handle = session,
 							...)
+	stop_for_status(tt)
+	as.sbitem(content(tt))
 }

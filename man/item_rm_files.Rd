@@ -7,13 +7,28 @@
 item_rm_files(id, ..., session = current_session())
 }
 \arguments{
-\item{id}{a sciencebase item identifier}
+\item{id}{A ScienceBase ID or something that can be coerced to a SB item ID
+by \code{\link{as.sbitem}}}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{PUT}}}
 
 \item{session}{Authenticated session object (from \link{authenticate_sb})}
 }
+\value{
+An object of class \code{sbitem}
+}
 \description{
 Removes existing files associated with an item.
+}
+\examples{
+\dontrun{
+res <- item_create(user_id(), "item456")
+cat("foo bar", file = "foobar.txt")
+item_append_files(res, "foobar.txt")
+res <- item_get(res)
+res$files[[1]]$name
+res2 <- item_rm_files(res)
+res2$files
+}
 }
 
