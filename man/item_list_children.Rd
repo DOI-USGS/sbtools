@@ -7,7 +7,8 @@
 item_list_children(id, ..., session = current_session(), limit = 20)
 }
 \arguments{
-\item{id}{SB item ID}
+\item{id}{A ScienceBase ID or something that can be coerced to a SB item ID
+by \code{\link{as.sbitem}}}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}}
 
@@ -22,6 +23,11 @@ item_list_children(id, ..., session = current_session(), limit = 20)
 Returns a list of child IDs for a ScienceBase item
 }
 \examples{
+\dontrun{
 item_list_children('5060b03ae4b00fc20c4f3c8b')
+
+as.sbitem('5060b03ae4b00fc20c4f3c8b') \%>\% item_list_children
+item_get('5060b03ae4b00fc20c4f3c8b') \%>\% item_list_children
+}
 }
 

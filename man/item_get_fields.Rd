@@ -19,7 +19,7 @@ list format be dropped?}
 \item{session}{Session object from \code{\link{authenticate_sb}}}
 }
 \value{
-List serialization of complete metadata for SB item
+List serialization of chosen metadata for an SB item
 }
 \description{
 Retrieve specific fields from an SB item

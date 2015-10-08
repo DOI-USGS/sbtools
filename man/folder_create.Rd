@@ -4,10 +4,11 @@
 \alias{folder_create}
 \title{Create a folder}
 \usage{
-folder_create(parent_id, name, ..., session = current_session())
+folder_create(id, name, ..., session = current_session())
 }
 \arguments{
-\item{parent_id}{(character) the id of the parent folder/item under which to create this one}
+\item{id}{A ScienceBase ID or something that can be coerced to a SB item ID
+by \code{\link{as.sbitem}}}
 
 \item{name}{(character) the folder name}
 
@@ -24,7 +25,7 @@ Create a folder
 }
 \examples{
 \dontrun{
-folder_create(user_id(), "foobar")
+folder_create(user_id(), "foobar345")
 }
 }
 

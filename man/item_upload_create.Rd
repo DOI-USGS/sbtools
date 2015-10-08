@@ -7,13 +7,17 @@
 item_upload_create(parent_id, files, ..., session = current_session())
 }
 \arguments{
-\item{parent_id}{SB id of parent item for the newly created item}
+\item{parent_id}{A ScienceBase ID or something that can be coerced to a SB item ID
+by \code{\link{as.sbitem}}}
 
 \item{files}{A string vector of paths to files to be uploaded}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{POST}}}
 
 \item{session}{Session object from authenticate_sb}
+}
+\value{
+An object of class \code{sbitem}
 }
 \description{
 Create a new item with files attached, all in one call to SB

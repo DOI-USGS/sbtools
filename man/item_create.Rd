@@ -4,10 +4,11 @@
 \alias{item_create}
 \title{Create a new SB item}
 \usage{
-item_create(parent_id, title, ..., info, session = current_session())
+item_create(id = user_id(), title, ..., info, session = current_session())
 }
 \arguments{
-\item{parent_id}{ID of the parent item}
+\item{id}{A ScienceBase ID or something that can be coerced to a SB item ID
+by \code{\link{as.sbitem}}}
 
 \item{title}{The title of the new SB item}
 
@@ -18,14 +19,19 @@ item_create(parent_id, title, ..., info, session = current_session())
 \item{session}{Authenticated session object (from \link{authenticate_sb})}
 }
 \value{
-SB ID for the newly created item
+An object of class \code{sbitem}
 }
 \description{
 Create a new SB item
 }
 \examples{
 \dontrun{
-item_create(user_id(), "testing 123")
+# Create an item - by default we use your user ID
+item_create(title = "testing 123")
+
+# Pass an object of class sbitem
+x <- folder_create(user_id(), "foobar456")
+item_create(x, "foobar456-item")
 }
 }
 

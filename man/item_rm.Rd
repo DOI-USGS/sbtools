@@ -7,17 +7,23 @@
 item_rm(id, ..., session = current_session())
 }
 \arguments{
-\item{id}{item ID}
+\item{id}{A ScienceBase ID or something that can be coerced to a SB item ID
+by \code{\link{as.sbitem}}}
 
-\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}} and
-\code{\link[httr]{DELETE}}}
+\item{...}{Additional parameters are passed on to \code{\link[httr]{DELETE}}}
 
 \item{session}{Session object from \code{\link{authenticate_sb}}}
 }
 \value{
-TRUE to indicate success
+\pkg{httr} \code{\link[httr]{response}} object
 }
 \description{
 Remove item from SB
+}
+\examples{
+\dontrun{
+res <- item_create(user_id(), "item-to-delete")
+item_rm(res)
+}
 }
 

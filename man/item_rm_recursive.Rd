@@ -7,7 +7,7 @@
 item_rm_recursive(id, ..., session = current_session())
 }
 \arguments{
-\item{id}{(character) item ID}
+\item{id}{A ScienceBase ID or something that can be coerced to a SB item ID}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}} and
 \code{\link[httr]{DELETE}}}
@@ -26,17 +26,18 @@ BEWARE: This removes all folders/files in an item completely.
 \examples{
 \dontrun{
 # Create an item with nested structure
-fname <- "chairs"
-folder_create(name = fname)
-df <- item_list_children(user_id())
-id <- df[ df$title == fname, "id" ]
-folder_create(id, name = "one")
-folder_create(id, name = "two")
-df2 <- item_list_children(id)
+fname <- "couch"
+fold <- folder_create(user_id(), name = fname)
+folder_create(fold$id, name = "one")
+folder_create(fold$id, name = "two")
+df2 <- item_list_children(fold$id)
 folder_create(df2$id[1], name = "nested")
 
 # then delete the whole folder
-item_rm_recursive(id)
+## from the sbitem object
+item_rm_recursive(fold)
+## or from the id itself
+# item_rm_recursive(fold$id)
 }
 }
 

@@ -7,18 +7,26 @@
 item_update(id, info, ..., session = current_session())
 }
 \arguments{
-\item{id}{SB item ID}
+\item{id}{A ScienceBase ID or something that can be coerced to a SB item ID
+by \code{\link{as.sbitem}}}
 
-\item{info}{list of metadata info for the new item}
+\item{info}{list of metadata info (key-value pairs) to change on the item}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{PUT}}}
 
 \item{session}{Authenticated session object (from \link{authenticate_sb})}
 }
 \value{
-List serialization of complete metadata for SB item
+An object of class \code{sbitem}
 }
 \description{
 Update a SB item with new metadata
+}
+\examples{
+\dontrun{
+res <- item_create(user_id(), "item-to-update")
+out <- item_update(res, list(title = "item-updated"))
+out$title
+}
 }
 

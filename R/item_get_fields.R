@@ -6,7 +6,7 @@
 #' @param drop logical. If only one field is selected, should the
 #'   list format be dropped?
 #' @param session Session object from \code{\link{authenticate_sb}}
-#' @return List serialization of complete metadata for SB item
+#' @return List serialization of chosen metadata for an SB item
 #' @import httr
 #' @export
 #' @examples \dontrun{
