@@ -2,7 +2,7 @@
 % Please edit documentation in R/item_rm_recursive.R
 \name{item_rm_recursive}
 \alias{item_rm_recursive}
-\title{Remove an item completely by recursively removing its children}
+\title{Remove an item completely by recursively removing its child items}
 \usage{
 item_rm_recursive(id, ..., session = current_session())
 }
@@ -18,14 +18,16 @@ item_rm_recursive(id, ..., session = current_session())
 \code{TRUE} to indicate success
 }
 \description{
-Remove an item completely by recursively removing its children
+Remove an item completely by recursively removing its child items
 }
 \details{
-BEWARE: This removes all folders/files in an item completely.
+BEWARE: This completely removes ALL CHILD ITEMS AND THEIR CHILDREN
+  as well as the item itself.
 }
 \examples{
 \dontrun{
 # Create an item with nested structure
+<<<<<<< HEAD
 fname <- "couch"
 fold <- folder_create(user_id(), name = fname)
 folder_create(fold$id, name = "one")
@@ -38,6 +40,21 @@ folder_create(df2$id[1], name = "nested")
 item_rm_recursive(fold)
 ## or from the id itself
 # item_rm_recursive(fold$id)
+=======
+authenticate_sb()
+fname <- "chairs"
+folder_create(user_id(), name = fname)
+df <- item_list_children(user_id()) # may need to wait a moment to run this
+id <- df[ df$title == fname, "id" ]
+folder_create(id, name = "one")
+folder_create(id, name = "two")
+df2 <- item_list_children(id)
+folder_create(df2$id[1], name = "nested")
+
+# then delete the whole folder
+sbtools:::item_rm_recursive(id)
+>>>>>>> eec5661897d76bdf2b982f3f74b35eabe53db927
 }
 }
+\keyword{internal}
 
