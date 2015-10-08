@@ -7,7 +7,8 @@
 item_list_children(id, ..., session = current_session(), limit = 20)
 }
 \arguments{
-\item{id}{SB item ID}
+\item{id}{A ScienceBase ID or something that can be coerced to a SB item ID
+by \code{\link{as.sbitem}}}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}}
 
