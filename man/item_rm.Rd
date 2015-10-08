@@ -4,13 +4,17 @@
 \alias{item_rm}
 \title{Remove item from SB}
 \usage{
-item_rm(id, ..., session = current_session())
+item_rm(id, ..., recursive = FALSE, session = current_session())
 }
 \arguments{
 \item{id}{A ScienceBase ID or something that can be coerced to a SB item ID
 by \code{\link{as.sbitem}}}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{DELETE}}}
+
+\item{recursive}{logical, FALSE by default. CAUTION: setting recursive=TRUE
+means that not only will this item be deleted, but so will all its child
+items and their child items and so on.}
 
 \item{session}{Session object from \code{\link{authenticate_sb}}}
 }
