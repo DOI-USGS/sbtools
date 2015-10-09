@@ -12,16 +12,14 @@
 #' # Create an item with nested structure
 #' authenticate_sb()
 #' fname <- "chairs"
-#' folder_create(user_id(), name = fname)
-#' df <- item_list_children(user_id()) # may need to wait a moment to run this
-#' id <- df[ df$title == fname, "id" ]
-#' folder_create(id, name = "one")
-#' folder_create(id, name = "two")
-#' df2 <- item_list_children(id)
-#' folder_create(df2$id[1], name = "nested")
+#' folder = folder_create(user_id(), name = fname)
+#' item_create(folder, title='child1')
+#' item_create(folder, title='child2')
+#' 
+#' item_list_children(folder)
 #' 
 #' # then delete the whole folder
-#' sbtools:::item_rm_recursive(id)
+#' sbtools:::item_rm_recursive(folder)
 #' }
 item_rm_recursive = function(id, ..., session = current_session()) {
 	
