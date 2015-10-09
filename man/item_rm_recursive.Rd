@@ -27,33 +27,16 @@ BEWARE: This completely removes ALL CHILD ITEMS AND THEIR CHILDREN
 \examples{
 \dontrun{
 # Create an item with nested structure
-<<<<<<< HEAD
-fname <- "couch"
-fold <- folder_create(user_id(), name = fname)
-folder_create(fold$id, name = "one")
-folder_create(fold$id, name = "two")
-df2 <- item_list_children(fold$id)
-folder_create(df2$id[1], name = "nested")
-
-# then delete the whole folder
-## from the sbitem object
-item_rm_recursive(fold)
-## or from the id itself
-# item_rm_recursive(fold$id)
-=======
 authenticate_sb()
 fname <- "chairs"
-folder_create(user_id(), name = fname)
-df <- item_list_children(user_id()) # may need to wait a moment to run this
-id <- df[ df$title == fname, "id" ]
-folder_create(id, name = "one")
-folder_create(id, name = "two")
-df2 <- item_list_children(id)
-folder_create(df2$id[1], name = "nested")
+folder = folder_create(user_id(), name = fname)
+item_create(folder, title='child1')
+item_create(folder, title='child2')
+
+item_list_children(folder)
 
 # then delete the whole folder
-sbtools:::item_rm_recursive(id)
->>>>>>> eec5661897d76bdf2b982f3f74b35eabe53db927
+sbtools:::item_rm_recursive(folder)
 }
 }
 \keyword{internal}

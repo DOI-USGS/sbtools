@@ -96,3 +96,14 @@ sbtools_DELETE <- function(url, ..., session) {
 	session_age_reset()
 	return(r)
 }
+
+# HEAD fxn
+sbtools_HEAD <- function(url, ..., session) {
+	if (!session_validate(session))
+		stop('session is not valid. See ?authenticate_sb')
+	
+	r <- HEAD(url = url, ..., handle = session)
+	log <- if (r$status_code == 200) TRUE else FALSE
+	session_age_reset()
+	return(log)
+}
