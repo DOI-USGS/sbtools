@@ -11,13 +11,12 @@
 sbtools_POST <- function(url, body, ..., session){
 	
 	supported_types <- c('text/plain','application/json')
-	if (!session_authorized(session))
-			stop('session is not authorized. See ?authenticate_sb')
+	check_session(session)
 	
 	r = POST(url=url, ..., accept_json(), body=body, handle=session) 
-
-	if (!strsplit(headers(r)[['content-type']], '[;]')[[1]][1] %in% supported_types)
-		stop('POST failed to ',url,'. check authorization and/or content')
+	handle_errors(r, url, "POST", supported_types)	
+	# if (!strsplit(headers(r)[['content-type']], '[;]')[[1]][1] %in% supported_types)
+	# 	stop('POST failed to ',url,'. check authorization and/or content')
 	
 	session_age_reset()
 	return(r)
@@ -36,20 +35,10 @@ sbtools_POST <- function(url, body, ..., session){
 #' @export
 #' @keywords internal
 sbtools_GET <- function(url, ..., session) {
-	
 	supported_types <- c('text/plain','text/csv','text/tab-separated-values','application/json','application/x-gzip')
-	if (!session_validate(session))
-		stop('session is not valid. See ?authenticate_sb')
-	
-	r = GET(url=url, ..., handle=session)
-	
-	if (!strsplit(headers(r)[['content-type']], '[;]')[[1]][1] %in% supported_types)
-		stop('GET failed to ',url,'. check authorization and/or content')
-	
-	if('errors' %in% names(content(r))){
-		stop(content(r)$errors$message)
-	}
-	
+	check_session(session)
+	r = GET(url = url, ..., handle = session)
+	handle_errors(r, url, "GET", supported_types)
 	session_age_reset()
 	return(r)
 }
@@ -68,10 +57,9 @@ sbtools_GET <- function(url, ..., session) {
 #' @export
 #' @keywords internal
 sbtools_PUT <- function(url, body, ..., session) {
-	if (!session_validate(session))
-		stop('session is not valid. See ?authenticate_sb')
-	
-	r = PUT(url=url, ..., body=body, handle=session)
+	check_session(session)
+	r = PUT(url = url, ..., body = body, handle = session)
+	handle_errors(r, url, "PUT", NULL)
 	session_age_reset()
 	return(r)
 }
@@ -89,21 +77,36 @@ sbtools_PUT <- function(url, body, ..., session) {
 #' @export
 #' @keywords internal
 sbtools_DELETE <- function(url, ..., session) {
-	if (!session_validate(session))
-		stop('session is not valid. See ?authenticate_sb')
-	
-	r = DELETE(url=url, ..., handle=session)
+	check_session(session)
+	r = DELETE(url = url, ..., handle = session)
+	handle_errors(r, url, "DELETE", NULL)
 	session_age_reset()
 	return(r)
 }
 
 # HEAD fxn
 sbtools_HEAD <- function(url, ..., session) {
-	if (!session_validate(session))
-		stop('session is not valid. See ?authenticate_sb')
-	
+	check_session(session)
 	r <- HEAD(url = url, ..., handle = session)
 	log <- if (r$status_code == 200) TRUE else FALSE
 	session_age_reset()
 	return(log)
+}
+
+# helpers -------------
+handle_errors <- function(x, url, method, types) {
+	if (!is.null(types)) {
+		if (!strsplit(headers(x)[['content-type']], '[;]')[[1]][1] %in% types) {
+			stop(method, ' failed to ', url, '. check authorization and/or content', call. = FALSE)
+		}
+	}
+	
+	if ('errors' %in% names(content(x))) {
+		stop(content(x)$errors$message, call. = FALSE)
+	}
+}
+
+check_session <- function(x) {
+	if (!session_authorized(x))
+		stop('session is not authorized. See ?authenticate_sb', call. = FALSE)	
 }

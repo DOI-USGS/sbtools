@@ -21,13 +21,14 @@
 #' }
 item_rm = function(id, ..., recursive=FALSE, session=current_session()){
 	
-	if(isTRUE(recursive)) return(item_rm_recursive(id, ..., session=session))
+	if (isTRUE(recursive)) return(item_rm_recursive(id, ..., session = session))
 	
 	item <- as.sbitem(id)
 	children = item_list_children(item$id, ..., limit = 2, session = session)
 	
-	if(nrow(children) > 0){
-		stop('Item has children. To remove children, grandchildren, etc. set recursive=TRUE.')
+	if (nrow(children) > 0) {
+		stop('Item has children. To remove children, grandchildren, etc. set recursive=TRUE.', 
+				 call. = FALSE)
 	}
 	
 	r = sbtools_DELETE(paste0(pkg.env$url_item, item$id, '?format=json'), ..., 
