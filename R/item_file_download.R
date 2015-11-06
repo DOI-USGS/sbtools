@@ -1,7 +1,7 @@
 #' Download files attached to item
 #'
 #' Function to downlod files attached to an item on SB. Either files can be
-#' specified directly using the \code{names} and \code{destinations} paramters,
+#' specified directly using the \code{names} and \code{destinations} parameters,
 #' or a \code{dest_dir} can be supplied where all attached files will be written
 #' with the names as stored on SB.
 #'
@@ -16,6 +16,8 @@
 #' @param session Session object from \code{\link{authenticate_sb}}
 #' @param overwrite_file Boolean indicating if file should be overwritten if it
 #'   already exists locally
+#'   
+#' @return Character vector of full paths to local files 
 #'
 #' @author Luke Winslow
 #'
@@ -69,5 +71,5 @@ item_file_download = function(id, ..., names, destinations, dest_dir, session=cu
 		sbtools_GET(url=flist[i,]$url, ..., write_disk(flist[i,]$dest, overwrite = overwrite_file), session=session)
 	}
 
-	return(TRUE)
+	return(path.expand(flist$dest))
 }
