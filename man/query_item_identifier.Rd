@@ -5,7 +5,7 @@
 \title{Query SB for items based on custom identifier}
 \usage{
 query_item_identifier(scheme, ..., type = NULL, key = NULL,
-  session = current_session(), limit = 20)
+  session = current_session(), limit = 20, pagesize = 500)
 }
 \arguments{
 \item{scheme}{The identifier scheme}
@@ -20,6 +20,10 @@ query_item_identifier(scheme, ..., type = NULL, key = NULL,
 items only}
 
 \item{limit}{Max number of matching items to return}
+
+\item{pagesize}{Number of items to retrieve in each call to SB. If limit >
+pagesize and the number of available items > pagesize, multiple calls to SB
+will be made and compiled into a single output here.}
 }
 \value{
 The SB item id for the matching item. NULL if no matching item found.
