@@ -26,9 +26,12 @@ is omitted}
 \item{overwrite_file}{Boolean indicating if file should be overwritten if it
   already exists locally}
 }
+\value{
+Character vector of full paths to local files
+}
 \description{
 Function to downlod files attached to an item on SB. Either files can be
-specified directly using the \code{names} and \code{destinations} paramters,
+specified directly using the \code{names} and \code{destinations} parameters,
 or a \code{dest_dir} can be supplied where all attached files will be written
 with the names as stored on SB.
 }
