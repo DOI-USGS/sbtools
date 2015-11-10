@@ -1,5 +1,5 @@
 context("sbtools_POST")
-
+Sys.sleep(2)
 test_that("generic post fails w/o auth", {
 	# auth fails locally:
 	expect_error(item_append_files("54e265a4e4b08de9379b4dfb", '/foo/bar/baz.zip'),'Item not found for')
