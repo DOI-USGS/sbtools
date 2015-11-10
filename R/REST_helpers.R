@@ -36,7 +36,6 @@ sbtools_POST <- function(url, body, ..., session){
 #' @keywords internal
 sbtools_GET <- function(url, ..., session) {
 	supported_types <- c('text/plain','text/csv','text/tab-separated-values','application/json','application/x-gzip')
-	check_session(session)
 	r = GET(url = url, ..., handle = session)
 	handle_errors(r, url, "GET", supported_types)
 	session_age_reset()
