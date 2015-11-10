@@ -3,7 +3,7 @@ Title: USGS ScienceBase Tools
 Maintainer: Luke Winslow <lwinslow@usgs.gov>
 Version: 0.13.1
 Authors@R: c(person("Luke", "Winslow", role = c("aut","cre"),
-    email = "jread@usgs.gov"),
+    email = "lwinslow@usgs.gov"),
     person("Scott", "Chamberlain", role = c("aut"),
     email = "scott@ropensci.org"),
     person("Alison", "Appling", role = c("aut"),
