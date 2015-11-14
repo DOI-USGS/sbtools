@@ -28,5 +28,5 @@
 item_move <- function(id, id_new, ..., session = current_session()) {
 	id <- as.sbitem(id)
 	id_new <- as.sbitem(id_new)
-	item_update(id, list(parentId = id_new$id), ...)
+	item_update(id, list(parentId = id_new$id), ..., session = session)
 }
