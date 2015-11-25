@@ -4,10 +4,12 @@
 \alias{item_list_files}
 \title{Get list of files attached to SB item}
 \usage{
-item_list_files(id, ..., session = current_session())
+item_list_files(id, recursive = FALSE, ..., session = current_session())
 }
 \arguments{
 \item{id}{item ID}
+
+\item{recursive}{(logical) List files recursively. Default: \code{FALSE}}
 
 \item{...}{Additional parameters are passed on to \link[httr]{GET}}
 
@@ -23,6 +25,24 @@ Get list of files attached to SB item
 \examples{
 \dontrun{
 item_list_files("4f4e4b24e4b07f02db6aea14")
+
+# list files recursively
+## create item
+id <- item_create(user_id(), title="some title")
+## 1. create nested item w/ file
+file <- system.file("examples", "books.json", package = "sbtools")
+id2 <- item_create(id, title = "newest-thing")
+item_upload_create(id2, file)
+## 2. create nested item w/ file
+file <- system.file("examples", "species.json", package = "sbtools")
+id3 <- item_create(id, title = "a-new-thing")
+item_upload_create(id3, file)
+## 3. create nested item w/ file
+file <- system.file("examples", "data.csv", package = "sbtools")
+id4 <- item_create(id, title = "another-thing")
+item_upload_create(id4, file)
+item_list_files(id = '56562348e4b071e7ea53e09d', recursive = FALSE) # default
+item_list_files(id = '56562348e4b071e7ea53e09d', recursive = TRUE)
 }
 }
 
