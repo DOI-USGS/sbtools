@@ -29,7 +29,7 @@
 as.sbitem <- function(x, ...) UseMethod("as.sbitem")
 
 #' @export
-as.sbitem.character <- function(x, ...) item_get(x, ...)
+as.sbitem.character <- function(x, ...) get_item(x, ...)
 
 #' @export
 as.sbitem.sbitem <- function(x, ...) x
@@ -64,4 +64,10 @@ pluck <- function(x, name, type) {
 	} else {
 		vapply(x, "[[", name, FUN.VALUE = type)
 	}
+}
+
+get_item <- function(id, ..., session=current_session()) {
+	res <- sbtools_GET(url = paste0(pkg.env$url_item, id), ..., 
+									 query = list(type = 'json'), session = session)
+	return(as.sbitem(content(res)))
 }

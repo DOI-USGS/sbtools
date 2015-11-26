@@ -104,8 +104,3 @@ handle_errors <- function(x, url, method, types) {
 		stop(content(x)$errors$message, call. = FALSE)
 	}
 }
-
-check_session <- function(x) {
-	if (!session_authorized(x))
-		stop('session is not authorized. See ?authenticate_sb', call. = FALSE)	
-}

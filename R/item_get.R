@@ -1,13 +1,10 @@
 #' @title Retrieve SB item
 #'  
+#' @export
 #' @param id (character) A ScienceBase ID
 #' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}
 #' @param session Session object from \code{\link{authenticate_sb}}
-#'  
 #' @return An object of class \code{sbitem}
-#'  
-#' @export
-#'
 #' @examples \dontrun{
 #' # Get an item
 #' item_get("4f4e4b24e4b07f02db6aea14")
@@ -19,7 +16,5 @@
 #' lapply(ids[1:3], item_get)
 #' }
 item_get <- function(id, ..., session=current_session()) {
-	r <- sbtools_GET(url = paste0(pkg.env$url_item, id), ..., 
-									 query = list(type = 'json'), session = session)
-	return(as.sbitem(content(r)))
+	get_item(as.sbitem(id)$id, ..., session = session)
 }
