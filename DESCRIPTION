@@ -10,15 +10,16 @@ Authors@R: c(person("Luke", "Winslow", role = c("aut","cre"),
     email = "aappling@usgs.gov"),
     person("Jordan", "Read", role = c("aut"),
     email = "jread@usgs.gov"))
-Description: Tools for interacting with USGS ScienceBase (https://www.sciencebase.gov) 
-		interfaces. ScienceBase is a data cataloging and collaborative 
-		data management platform. Functions included for querying ScienceBase, and 
-		creating and fetching datasets. 
-Imports: 
-	jsonlite, 
-	httr (>= 1.0.0)
+Description: Tools for interacting with USGS ScienceBase (https://
+    www.sciencebase.gov) interfaces. ScienceBase is a data cataloging and
+    collaborative data management platform. Functions included for querying
+    ScienceBase, and creating and fetching datasets.
+Imports:
+    jsonlite,
+    httr (>= 1.0.0)
 Suggests:
-	testthat
+    testthat
 License: CC0
 URL: https://github.com/USGS-R/sbtools
 BugReports: https://github.com/USGS-R/sbtools/issues
+RoxygenNote: 5.0.1
