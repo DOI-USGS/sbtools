@@ -47,7 +47,7 @@ item_update_identifier = function(id, scheme, type, key, ..., session=current_se
 	
 	info = list(identifiers=data)
 	
-	r = sbtools_PUT(url=paste0(pkg.env$url_item, id), 
+	r = sbtools_PUT(url=paste0(pkg.env$url_item, as.sbitem(id)$id), 
 									body=toJSON(info), 
 									..., accept_json(), session=session)
 	
