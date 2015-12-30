@@ -8,7 +8,8 @@ item_update_identifier(id, scheme, type, key, ...,
   session = current_session())
 }
 \arguments{
-\item{id}{SB item ID}
+\item{id}{A ScienceBase ID or something that can be coerced to a SB item ID
+by \code{\link{as.sbitem}}}
 
 \item{scheme}{The identifier scheme}
 
@@ -16,10 +17,10 @@ item_update_identifier(id, scheme, type, key, ...,
 
 \item{key}{The identifier key}
 
-\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}} and
-\code{\link[httr]{PUT}}}
+\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
 
-\item{session}{SB session from \code{\link{authenticate_sb}}}
+\item{session}{Session object from \code{\link{authenticate_sb}}}
 }
 \examples{
 

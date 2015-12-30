@@ -12,11 +12,12 @@ by \code{\link{as.sbitem}}}
 
 \item{title}{The title of the new SB item}
 
-\item{...}{Additional parameters are passed on to \code{\link[httr]{POST}}}
+\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
 
 \item{info}{(optional) list of metadata info for the new item}
 
-\item{session}{Authenticated session object (from \link{authenticate_sb})}
+\item{session}{Session object from \code{\link{authenticate_sb}}}
 }
 \value{
 An object of class \code{sbitem}

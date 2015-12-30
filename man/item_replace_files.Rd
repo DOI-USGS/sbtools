@@ -7,14 +7,15 @@
 item_replace_files(id, files, ..., session = current_session())
 }
 \arguments{
-\item{id}{a sciencebase item identifier}
+\item{id}{A ScienceBase ID or something that can be coerced to a SB item ID
+by \code{\link{as.sbitem}}}
 
 \item{files}{a character vector of file paths}
 
-\item{...}{Additional parameters are passed on to \code{\link[httr]{PUT}}
-and \code{\link[httr]{POST}}}
+\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
 
-\item{session}{Authenticated session object (from \link{authenticate_sb})}
+\item{session}{Session object from \code{\link{authenticate_sb}}}
 }
 \description{
 replaces existing files associated with an item with a new one. 

@@ -10,8 +10,8 @@ item_rm(id, ..., recursive = FALSE, session = current_session())
 \item{id}{A ScienceBase ID or something that can be coerced to a SB item ID
 by \code{\link{as.sbitem}}}
 
-\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}} and
-\code{\link[httr]{DELETE}}}
+\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
 
 \item{recursive}{logical, FALSE by default. CAUTION: setting recursive=TRUE
 means that not only will this item be deleted, but so will all its child

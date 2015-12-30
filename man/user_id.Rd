@@ -9,7 +9,7 @@ user_id(..., session = current_session())
 \arguments{
 \item{...}{Additional parameters are passed on to \code{\link[httr]{POST}}}
 
-\item{session}{Session object from authenticate_sb}
+\item{session}{Session object from \code{\link{authenticate_sb}}}
 }
 \description{
 Required for creating items

@@ -13,9 +13,10 @@ by \code{\link{as.sbitem}}}
 \item{id_new}{Folder/item to move \code{id} to. A ScienceBase ID or something 
 that can be coerced to a SB item ID by \code{\link{as.sbitem}}}
 
-\item{...}{Additional parameters are passed on to \code{\link[httr]{PUT}}}
+\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
 
-\item{session}{Authenticated session object (from \link{authenticate_sb})}
+\item{session}{Session object from \code{\link{authenticate_sb}}}
 }
 \value{
 An object of class \code{sbitem}. Same as \code{id}, but with new 

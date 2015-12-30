@@ -4,7 +4,7 @@
 #' 
 #' @export
 #' @param ... Additional parameters are passed on to \code{\link[httr]{POST}}
-#' @param session Session object from authenticate_sb
+#' @param session Session object from \code{\link{authenticate_sb}}
 #' @examples \dontrun{
 #' user_id()
 #' }
