@@ -52,6 +52,7 @@ authenticate_sb = function(username, password){
 
 readPassword <- function(prompt) {
 	# found this cool function in rstudio
+	.rs.askForPassword <- '.global_def'
 	if (exists(".rs.askForPassword")) {
 		pass <- .rs.askForPassword(prompt)
 	} else {
