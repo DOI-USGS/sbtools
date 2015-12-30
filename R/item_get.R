@@ -1,9 +1,7 @@
 #' @title Retrieve SB item
 #'  
 #' @export
-#' @param id (character) A ScienceBase ID
-#' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}
-#' @param session Session object from \code{\link{authenticate_sb}}
+#' @template manipulate_item
 #' @return An object of class \code{sbitem}
 #' @examples \dontrun{
 #' # Get an item

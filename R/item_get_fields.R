@@ -1,11 +1,9 @@
 #' Retrieve specific fields from an SB item
 #' 
-#' @param id SB item ID
+#' @template manipulate_item
 #' @param fields a vector of fields
-#' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}
 #' @param drop logical. If only one field is selected, should the
 #'   list format be dropped?
-#' @param session Session object from \code{\link{authenticate_sb}}
 #' @return List serialization of chosen metadata for an SB item
 #' @import httr
 #' @export

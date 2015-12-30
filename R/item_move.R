@@ -1,12 +1,9 @@
 #' Move item from one folder to another
 #'
 #' @export
-#' @param id A ScienceBase ID or something that can be coerced to a SB item ID
-#' by \code{\link{as.sbitem}} 
+#' @template manipulate_item
 #' @param id_new Folder/item to move \code{id} to. A ScienceBase ID or something 
 #' that can be coerced to a SB item ID by \code{\link{as.sbitem}} 
-#' @param ... Additional parameters are passed on to \code{\link[httr]{PUT}}
-#' @param session Authenticated session object (from \link{authenticate_sb})
 #'
 #' @return An object of class \code{sbitem}. Same as \code{id}, but with new 
 #' parent id

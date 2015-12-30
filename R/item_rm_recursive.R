@@ -1,10 +1,7 @@
 #' @title Remove an item completely by recursively removing its child items
 #' 
 #' @keywords internal
-#' @param id A ScienceBase ID or something that can be coerced to a SB item ID
-#' @param ... Additional parameters are passed on to \code{\link[httr]{GET}} and
-#'   \code{\link[httr]{DELETE}}
-#' @param session Session object from \code{\link{authenticate_sb}}
+#' @template manipulate_item
 #' @return \code{TRUE} to indicate success
 #' @details BEWARE: This completely removes ALL CHILD ITEMS AND THEIR CHILDREN
 #'   as well as the item itself.

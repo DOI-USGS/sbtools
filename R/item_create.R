@@ -1,11 +1,8 @@
 #' @title Create a new SB item
 #'
-#' @param id A ScienceBase ID or something that can be coerced to a SB item ID
-#' by \code{\link{as.sbitem}}
+#' @template manipulate_item
 #' @param title The title of the new SB item
-#' @param ... Additional parameters are passed on to \code{\link[httr]{POST}}
 #' @param info (optional) list of metadata info for the new item
-#' @param session Authenticated session object (from \link{authenticate_sb})
 #' @return An object of class \code{sbitem}
 #'
 #' @export
