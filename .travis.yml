@@ -31,5 +31,5 @@ env:
     - RVERSION=devel
 
 after_success:
-  - Rscript -e 'library(covr);codecov()'
+  - ./pkg-build.sh RunScript -e 'library(covr);codecov()'
   
