@@ -52,7 +52,7 @@ item_file_download = function(id, ..., names, destinations, dest_dir, session=cu
 		destinations = file.path(dest_dir, names)
 
 	#or we have names and destinations
-	}else{
+	}else if(!missing(names) & !missing(destinations)){
 		if(length(names) != length(destinations)){
 			stop('Length of names and destinations must be identical')
 		}
@@ -62,6 +62,9 @@ item_file_download = function(id, ..., names, destinations, dest_dir, session=cu
 		if(!all(names %in% flist$fname)){
 			stop('Item does not contain all requested files')
 		}
+	#otherwise in some other error condition
+	}else{
+		stop('Must have either names & destinations, or dest_dir for all files')
 	}
 
 
