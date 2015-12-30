@@ -11,6 +11,9 @@ user_id(..., session = current_session())
 
 \item{session}{Session object from authenticate_sb}
 }
+\value{
+A single character string, your user id
+}
 \description{
 Required for creating items
 }
