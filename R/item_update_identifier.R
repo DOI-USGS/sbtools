@@ -42,8 +42,8 @@ item_update_identifier = function(id, scheme, type, key, ..., session=current_se
 	}
 	
 	data = list(scheme=unbox(scheme), type=unbox(type), key=unbox(key))
-
-	data = merge_identifiers(original$identifiers, data)
+	
+	data = merge_identifiers(unbox_identifiers(original$identifiers), data)
 	
 	info = list(identifiers=data)
 	
@@ -71,4 +71,17 @@ merge_identifiers = function(original, updated){
 	#if we get here, none matched, so just add it on the end
 	original[[length(original)+1]] = updated
 	return(original)
+}
+
+unbox_identifiers = function(idents){
+	if(length(idents) < 1){
+		return(idents)
+	}
+	
+	for(i in 1:length(idents)){
+		idents[[i]]$type   = unbox(idents[[i]]$type)
+		idents[[i]]$scheme = unbox(idents[[i]]$scheme)
+		idents[[i]]$key    = unbox(idents[[i]]$key)
+	}
+	return(idents)
 }
