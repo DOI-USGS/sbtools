@@ -34,13 +34,13 @@ test_that("item creation, identifiers, and file upload works", {
 	expect_equal(item_update_identifier(item, 'test_scheme', 'test_type', rand_key)$status, 200)
 	
 	#upload file
-	expect_is(item_append_files(item, 'inst/examples/data.csv'), 'sbitem')
+	expect_is(item_append_files(item, system.file("examples/data.csv", package="sbtools")), 'sbitem')
 	
 	#download file
 	dir_name = tempdir()
 	dl_files = item_file_download(item, dest_dir=dir_name)
 	
-	expect_equal(file.info(dl_files)$size, file.info('inst/examples/data.csv')$size)
+	expect_equal(file.info(dl_files)$size, file.info(system.file("examples/data.csv", package="sbtools"))$size)
 	
 	#check item identifier (checking issue #74)
 	ident = item_get(item)$identifier
