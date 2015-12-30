@@ -22,7 +22,7 @@ non_item <-     '4f4e4a62e4b0a92fa7e9cf36' # made-up ID
 
 test_that("generic get w/ and w/o auth", {
 
-	session <- httr::handle("http://google.com") # cookies arg is ignored by httr so don't pass it
+	session <- httr::handle("http://google.com")
 	attributes(session) <- c(attributes(session), list(birthdate=Sys.time()))
 
 	# public access to public items, with or without login
