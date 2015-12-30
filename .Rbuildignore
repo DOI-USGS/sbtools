@@ -2,3 +2,4 @@
 .gitignore
 ^.*\.Rproj$
 ^\.Rproj\.user$
+man-roxygen

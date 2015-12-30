@@ -1,12 +1,9 @@
 #'@title Add custom identifier to an existing item
 #'  
-#'@param id SB item ID
+#' @template manipulate_item
 #'@param scheme The identifier scheme
 #'@param type The identifier type
 #'@param key The identifier key
-#'@param ... Additional parameters are passed on to \code{\link[httr]{GET}} and
-#'  \code{\link[httr]{PUT}}
-#'@param session SB session from \code{\link{authenticate_sb}}
 #'  
 #'@author Luke Winslow
 #'  

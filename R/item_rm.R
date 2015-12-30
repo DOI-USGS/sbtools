@@ -1,13 +1,9 @@
 #' @title Remove item from SB
 #'   
-#' @param id A ScienceBase ID or something that can be coerced to a SB item ID
-#' by \code{\link{as.sbitem}}
-#' @param ... Additional parameters are passed on to \code{\link[httr]{GET}} and
-#'   \code{\link[httr]{DELETE}}
+#' @template manipulate_item
 #' @param recursive logical, FALSE by default. CAUTION: setting recursive=TRUE
 #'   means that not only will this item be deleted, but so will all its child
 #'   items and their child items and so on.
-#' @param session Session object from \code{\link{authenticate_sb}}
 #'   
 #' @return \pkg{httr} \code{\link[httr]{response}} object
 #'   

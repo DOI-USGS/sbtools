@@ -2,10 +2,7 @@
 #'
 #' Returns a list of child IDs for a ScienceBase item
 #'
-#' @param id A ScienceBase ID or something that can be coerced to a SB item ID
-#' by \code{\link{as.sbitem}}
-#' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}
-#' @param session (optional) SB session from \link{authenticate_sb}
+#' @template manipulate_item
 #' @param limit Max children returned
 #'
 #' @return \code{data.frame} with a row for each child item

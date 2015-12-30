@@ -8,9 +8,11 @@ item_file_download(id, ..., names, destinations, dest_dir,
   session = current_session(), overwrite_file = FALSE)
 }
 \arguments{
-\item{id}{SB item ID}
+\item{id}{A ScienceBase ID or something that can be coerced to a SB item ID
+by \code{\link{as.sbitem}}}
 
-\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}}
+\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
 
 \item{names}{String vector list of file names attached to item that you wish
 to download.}

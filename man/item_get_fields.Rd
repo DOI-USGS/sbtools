@@ -7,11 +7,13 @@
 item_get_fields(id, fields, ..., drop = TRUE, session = current_session())
 }
 \arguments{
-\item{id}{SB item ID}
+\item{id}{A ScienceBase ID or something that can be coerced to a SB item ID
+by \code{\link{as.sbitem}}}
 
 \item{fields}{a vector of fields}
 
-\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}}
+\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
 
 \item{drop}{logical. If only one field is selected, should the
 list format be dropped?}

@@ -1,8 +1,6 @@
 #' @title Get an item's parent ID
 #'
-#' @param id ID of SB item
-#' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}
-#' @param session SB session object from \code{\link{authenticate_sb}}
+#' @template manipulate_item
 #' @return The parent ID of an item.
 #' @export
 #' @examples \dontrun{

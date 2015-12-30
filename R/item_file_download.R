@@ -5,15 +5,13 @@
 #' or a \code{dest_dir} can be supplied where all attached files will be written
 #' with the names as stored on SB.
 #'
-#' @param id SB item ID
-#' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}
+#' @template manipulate_item
 #' @param names String vector list of file names attached to item that you wish
 #'   to download.
 #' @param destinations String vector list of destinations for requested files.
 #'   Must be same length as \code{names}
 #' @param dest_dir A directory path for saving files when \code{names} parameter
 #'   is omitted
-#' @param session Session object from \code{\link{authenticate_sb}}
 #' @param overwrite_file Boolean indicating if file should be overwritten if it
 #'   already exists locally
 #'   

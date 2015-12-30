@@ -1,9 +1,7 @@
 #' @title Get list of files attached to SB item
 #'
-#' @param id item ID
+#' @template manipulate_item
 #' @param recursive (logical) List files recursively. Default: \code{FALSE}
-#' @param session Session object from \link{authenticate_sb}
-#' @param ... Additional parameters are passed on to \link[httr]{GET}
 #'
 #' @return 
 #' A data.frame with columns fname, size, and url. 

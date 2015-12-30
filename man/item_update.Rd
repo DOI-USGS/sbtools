@@ -12,9 +12,10 @@ by \code{\link{as.sbitem}}}
 
 \item{info}{list of metadata info (key-value pairs) to change on the item}
 
-\item{...}{Additional parameters are passed on to \code{\link[httr]{PUT}}}
+\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
 
-\item{session}{Authenticated session object (from \link{authenticate_sb})}
+\item{session}{Session object from \code{\link{authenticate_sb}}}
 }
 \value{
 An object of class \code{sbitem}

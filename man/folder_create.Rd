@@ -12,8 +12,8 @@ by \code{\link{as.sbitem}}}
 
 \item{name}{(character) the folder name}
 
-\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}} and
-\code{\link[httr]{DELETE}}}
+\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
 
 \item{session}{Session object from \code{\link{authenticate_sb}}}
 }
