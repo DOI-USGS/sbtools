@@ -1,25 +1,23 @@
-#' Create a folder
+#' @title Create a folder
 #' 
-#' @export
-#' @template manipulate_item
+#' 
+#' @template item_with_parent
 #' @param name (character) the folder name
 #' @return A \code{\link[httr]{response}} object
 #' @examples \dontrun{
-#' folder_create(user_id(), "foobar345")
+#' folder_create(name="foobar345")
 #' }
-folder_create = function(sb_id, name, ..., session = current_session()) {
-	item <- as.sbitem(sb_id)
-	body <- list(id = unbox(""), 
-							 title = unbox(name), 
-							 parentId = unbox(item$id), 
-							 systemTypes = "Folder")
-	tt <- POST(paste0(pkg.env$url_item, item$id), 
-							body = jsonlite::toJSON(body),
-							encode = "json",
-							content_type_json(),
-							accept_json(),
-							handle = session,
-							...)
-	stop_for_status(tt)
-	as.sbitem(content(tt))
+#' @export
+folder_create = function(parent_id = user_id(), name, ..., session = current_session()) {
+	item <- as.sbitem(parent_id)
+	
+ 	body <- list(id = unbox(""), 
+ 							 title = unbox(name), 
+ 							 parentId = unbox(item$id), 
+ 							 systemTypes = "Folder")
+
+	r = sbtools_POST(url = pkg.env$url_item, ..., body = toJSON(body, auto_unbox = FALSE), session = session)
+	
+	stop_for_status(r)
+	return(as.sbitem(content(r)))
 }

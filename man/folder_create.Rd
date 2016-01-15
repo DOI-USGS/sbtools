@@ -4,10 +4,11 @@
 \alias{folder_create}
 \title{Create a folder}
 \usage{
-folder_create(sb_id, name, ..., session = current_session())
+folder_create(parent_id = user_id(), name, ..., session = current_session())
 }
 \arguments{
-\item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
+\item{parent_id}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 
+parent item (folder)}
 
 \item{name}{(character) the folder name}
 
@@ -20,12 +21,9 @@ last authenticated session}
 \value{
 A \code{\link[httr]{response}} object
 }
-\description{
-Create a folder
-}
 \examples{
 \dontrun{
-folder_create(user_id(), "foobar345")
+folder_create(name="foobar345")
 }
 }
 
