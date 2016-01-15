@@ -21,9 +21,6 @@ item_update_identifier(sb_id, scheme, type, key, ...,
 
 \item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
 last authenticated session}
-
-\item{parent_id}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 
-parent item (folder)}
 }
 \examples{
 

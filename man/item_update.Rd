@@ -4,9 +4,11 @@
 \alias{item_update}
 \title{Update a SB item with new metadata}
 \usage{
-item_update(id, info, ..., session = current_session())
+item_update(sb_id, info, ..., session = current_session())
 }
 \arguments{
+\item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
+
 \item{info}{list of metadata info (key-value pairs) to change on the item}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
@@ -14,11 +16,6 @@ item_update(id, info, ..., session = current_session())
 
 \item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
 last authenticated session}
-
-\item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
-
-\item{parent_id}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 
-parent item (folder)}
 }
 \value{
 An object of class \code{sbitem}

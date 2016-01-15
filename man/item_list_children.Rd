@@ -16,9 +16,6 @@ item_list_children(sb_id, ..., session = current_session(), limit = 20)
 last authenticated session}
 
 \item{limit}{Max children returned}
-
-\item{parent_id}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 
-parent item (folder)}
 }
 \value{
 \code{data.frame} with a row for each child item

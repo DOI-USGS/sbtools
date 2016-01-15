@@ -14,9 +14,6 @@ item_rm_recursive(id, ..., session = current_session())
 last authenticated session}
 
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
-
-\item{parent_id}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 
-parent item (folder)}
 }
 \value{
 \code{TRUE} to indicate success

@@ -16,9 +16,6 @@ item_rm_files(sb_id, files, ..., session = current_session())
 
 \item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
 last authenticated session}
-
-\item{parent_id}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 
-parent item (folder)}
 }
 \value{
 An updated object of class \code{sbitem}

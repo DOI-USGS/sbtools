@@ -19,9 +19,6 @@ item_create(sb_id = user_id(), title, ..., info,
 
 \item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
 last authenticated session}
-
-\item{parent_id}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 
-parent item (folder)}
 }
 \value{
 An object of class \code{sbitem}
