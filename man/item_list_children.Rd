@@ -17,7 +17,7 @@ last authenticated session}
 
 \item{limit}{Max children returned}
 
-\item{sb_parent}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 
+\item{parent_id}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 
 parent item (folder)}
 }
 \value{

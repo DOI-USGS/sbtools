@@ -5,8 +5,6 @@
 #' @template manipulate_item
 #'
 #' @param files A string vector of paths to files to be uploaded
-#' @param ... Additional parameters are passed on to \code{\link[httr]{POST}}
-#' @param session Session object from authenticate_sb
 #' @export
 #' @return An object of class \code{sbitem}
 #' @examples \dontrun{

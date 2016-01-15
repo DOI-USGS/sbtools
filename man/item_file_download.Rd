@@ -28,7 +28,7 @@ last authenticated session}
 \item{overwrite_file}{Boolean indicating if file should be overwritten if it
 already exists locally}
 
-\item{sb_parent}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 
+\item{parent_id}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 
 parent item (folder)}
 }
 \value{

@@ -15,7 +15,7 @@ last authenticated session}
 
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
 
-\item{sb_parent}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 
+\item{parent_id}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 
 parent item (folder)}
 }
 \value{

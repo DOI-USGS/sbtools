@@ -73,6 +73,20 @@ test_that("Test that surgical item rm", {
 	#should be two files
 	expect_equal(nrow(item_list_files(item)), 2)
 	
+	#this should replace files, but not remove them all (as per all switch)
+	item_replace_files(item, system.file("extdata/This_works_new_extension.zip", package="sbtools"), all=FALSE)
+	
+	#should still be just two files
+	expect_equal(nrow(item_list_files(item)), 2)
+	
+	#should only be one file now
+	item_replace_files(item, system.file("extdata/This_works_new_extension.zip", package="sbtools"), all=TRUE)
+	expect_equal(nrow(item_list_files(item)), 1)
+	
+	#back to two
+	expect_is(item_append_files(item, system.file("examples/data.csv", package="sbtools")), "sbitem")
+	expect_equal(nrow(item_list_files(item)), 2)
+	
 	#should delete the data.csv file
 	item_rm_files(item, 'data.csv')
 	expect_equal(nrow(item_list_files(item)), 1)

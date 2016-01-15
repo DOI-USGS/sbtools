@@ -16,12 +16,14 @@ item_replace_files(sb_id, files, ..., all = TRUE,
 \code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
 
 \item{all}{A boolean indicating if all attached files should be removed before
-uploading new files. FALSE if only files with matching names should be replaced}
+uploading new files. FALSE if only files with matching names should be replaced. 
+If you wish to upload files with duplicate names, see \code{\link{item_append_files}}.
+Defaults to TRUE.}
 
 \item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
 last authenticated session}
 
-\item{sb_parent}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 
+\item{parent_id}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 
 parent item (folder)}
 }
 \description{
