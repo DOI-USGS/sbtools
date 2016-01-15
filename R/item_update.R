@@ -15,16 +15,16 @@
 #' out <- item_update(res, list(title = "item-updated"))
 #' out$title
 #' }
-item_update = function(id, info, ..., session=current_session()){
+item_update = function(sb_id, info, ..., session=current_session()){
 	
-	item <- as.sbitem(id)
+	item <- as.sbitem(sb_id)
 	
 	if (!is.list(info)) {
 		stop('Info must be a list of name-value pairs that can be serialized into JSON')
 	}
 	
 	r = sbtools_PUT(url = paste0(pkg.env$url_item, item$id), 
-									body = toJSON(info, auto_unbox = TRUE),
+									body = toJSON(info, auto_unbox = TRUE, null='null'),
 									..., accept_json(), session = session)
 	
 	# catch 405, which is, I think, expired login

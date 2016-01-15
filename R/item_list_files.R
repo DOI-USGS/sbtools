@@ -29,11 +29,11 @@
 #' item_list_files(id = '56562348e4b071e7ea53e09d', recursive = FALSE) # default
 #' item_list_files(id = '56562348e4b071e7ea53e09d', recursive = TRUE)
 #' }
-item_list_files = function(id, recursive = FALSE, ..., session=current_session()){
+item_list_files = function(sb_id, recursive = FALSE, ..., session=current_session()){
 	
 	session_val(session)
 	
-	id <- as.sbitem(id)
+	id <- as.sbitem(sb_id)
 	item = item_get(id, session = session)
 	
 	if (recursive) {

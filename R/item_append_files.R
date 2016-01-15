@@ -15,9 +15,9 @@
 #' item_append_files(res$id, "foobar.txt")
 #' }
 #' @export
-item_append_files = function(id, files, ..., session=current_session()){
+item_append_files = function(sb_id, files, ..., session=current_session()){
 
-	item <- as.sbitem(id)
+	item <- as.sbitem(sb_id)
 	r = sbtools_POST(url = paste0(pkg.env$url_upload,'?id=', item$id), ...,
 									 body = multi_file_body(files), 
 									 session = session)

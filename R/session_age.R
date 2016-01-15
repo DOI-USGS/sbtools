@@ -3,7 +3,7 @@
 #' See pkg.env$session_birthdate for time when session was created.
 #' See pkg.env$session_expires for session age when session goes stale
 #' 
-#' @param session an SB session
+#' @template manipulate_item
 #' @return difftime object
 #' @examples 
 #' \dontrun{
@@ -24,7 +24,8 @@ session_age <- function(session = current_session()){
 #' 
 #' Check the expiration using session_age
 #' 
-#' @param session the SB session
+#' @template manipulate_item
+#' 
 #' @export
 #' @keywords internal
 session_expired <- function(session = current_session()){

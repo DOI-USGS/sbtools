@@ -17,22 +17,24 @@
 #'}
 #'
 #'@export
-item_update_identifier = function(id, scheme, type, key, ..., session=current_session()) {
+item_update_identifier = function(sb_id, scheme, type, key, ..., session=current_session()) {
+	
+	sb_id = as.sbitem(sb_id)
 	
 	#first, query for that identifier
 	existing_id = query_item_identifier(scheme=scheme, ..., type=type, key=key, session=session)
 	
 	#if it exists, but has a different ID, we are trying to set a duplicate
-	if(!is.null(existing_id$id) && existing_id$id != id) {
+	if(!is.null(existing_id$id) && existing_id$id != sb_id$id) {
 		stop('Item with that identifier already exists')
 		
 		#if it exists and is the same item, then we don't need to change it
-	} else if(!is.null(existing_id$id) && existing_id$id == id) {
+	} else if(!is.null(existing_id$id) && existing_id$id == sb_id$id) {
 		return(TRUE)
 	}
 	
 	#now, try to fetch the item. This is the item we will be updating
-	original = item_get(id=id, ..., session=session)
+	original = item_get(sb_id, ..., session=session)
 	
 	if(!is.null(original$errors)) {
 		stop('Item with that ID does not exist or you do not have permission to read it.')
@@ -44,7 +46,7 @@ item_update_identifier = function(id, scheme, type, key, ..., session=current_se
 	
 	info = list(identifiers=data)
 	
-	r = sbtools_PUT(url=paste0(pkg.env$url_item, as.sbitem(id)$id), 
+	r = sbtools_PUT(url=paste0(pkg.env$url_item, sb_id$id), 
 									body=toJSON(info), 
 									..., accept_json(), session=session)
 	

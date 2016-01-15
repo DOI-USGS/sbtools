@@ -2,24 +2,28 @@
 % Please edit documentation in R/item_rm_files.R
 \name{item_rm_files}
 \alias{item_rm_files}
-\title{Remove all files associated with an item}
+\title{Remove files associated with an item}
 \usage{
-item_rm_files(id, ..., session = current_session())
+item_rm_files(sb_id, files, ..., session = current_session())
 }
 \arguments{
-\item{id}{A ScienceBase ID or something that can be coerced to a SB item ID
-by \code{\link{as.sbitem}}}
+\item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
+
+\item{files}{A character vector of file names to remove. If not supplied, defaults to removing all attached files.}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
 \code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
 
-\item{session}{Session object from \code{\link{authenticate_sb}}}
+\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
+last authenticated session}
 }
 \value{
-An object of class \code{sbitem}
+An updated object of class \code{sbitem}
 }
 \description{
 Removes existing files associated with an item.
+
+This function is the key way to remove files attached to SB items.
 }
 \examples{
 \dontrun{

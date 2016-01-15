@@ -7,14 +7,15 @@
 item_upload_create(parent_id, files, ..., session = current_session())
 }
 \arguments{
-\item{parent_id}{A ScienceBase ID or something that can be coerced to a SB item ID
-by \code{\link{as.sbitem}}}
-
 \item{files}{A string vector of paths to files to be uploaded}
 
-\item{...}{Additional parameters are passed on to \code{\link[httr]{POST}}}
+\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
 
-\item{session}{Session object from authenticate_sb}
+\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
+last authenticated session}
+
+\item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
 }
 \value{
 An object of class \code{sbitem}

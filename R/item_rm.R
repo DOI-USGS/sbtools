@@ -15,11 +15,11 @@
 #' res <- item_create(user_id(), "item-to-delete")
 #' item_rm(res)
 #' }
-item_rm = function(id, ..., recursive=FALSE, session=current_session()){
+item_rm = function(sb_id, ..., recursive=FALSE, session=current_session()){
 	
-	if (isTRUE(recursive)) return(item_rm_recursive(id, ..., session = session))
+	if (isTRUE(recursive)) return(item_rm_recursive(sb_id, ..., session = session))
 	
-	item <- as.sbitem(id)
+	item <- as.sbitem(sb_id)
 	children = item_list_children(item$id, ..., limit = 2, session = session)
 	
 	if (nrow(children) > 0) {

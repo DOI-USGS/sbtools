@@ -4,20 +4,19 @@
 \alias{identifier_exists}
 \title{Check if identifier exists}
 \usage{
-identifier_exists(id, ..., session = current_session())
+identifier_exists(sb_id, ..., session = current_session())
 }
 \arguments{
-\item{id}{(character) A ScienceBase ID. See Details.}
+\item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
 
-\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}}
+\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
 
-\item{session}{(optional) SB session from \link{authenticate_sb}}
+\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
+last authenticated session}
 }
 \value{
 Logical, \code{TRUE} or \code{FALSE}
-}
-\description{
-Check if identifier exists
 }
 \details{
 This function does not accept a sbitem class object because 

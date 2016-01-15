@@ -4,11 +4,11 @@
 \alias{item_get_fields}
 \title{Retrieve specific fields from an SB item}
 \usage{
-item_get_fields(id, fields, ..., drop = TRUE, session = current_session())
+item_get_fields(sb_id, fields, ..., drop = TRUE,
+  session = current_session())
 }
 \arguments{
-\item{id}{A ScienceBase ID or something that can be coerced to a SB item ID
-by \code{\link{as.sbitem}}}
+\item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
 
 \item{fields}{a vector of fields}
 
@@ -18,7 +18,8 @@ by \code{\link{as.sbitem}}}
 \item{drop}{logical. If only one field is selected, should the
 list format be dropped?}
 
-\item{session}{Session object from \code{\link{authenticate_sb}}}
+\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
+last authenticated session}
 }
 \value{
 List serialization of chosen metadata for an SB item

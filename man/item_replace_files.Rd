@@ -4,18 +4,24 @@
 \alias{item_replace_files}
 \title{Replace files associated with an item}
 \usage{
-item_replace_files(id, files, ..., session = current_session())
+item_replace_files(sb_id, files, ..., all = TRUE,
+  session = current_session())
 }
 \arguments{
-\item{id}{A ScienceBase ID or something that can be coerced to a SB item ID
-by \code{\link{as.sbitem}}}
+\item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
 
-\item{files}{a character vector of file paths}
+\item{files}{A character vector of file paths}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
 \code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
 
-\item{session}{Session object from \code{\link{authenticate_sb}}}
+\item{all}{A boolean indicating if all attached files should be removed before
+uploading new files. FALSE if only files with matching names should be replaced. 
+If you wish to upload files with duplicate names, see \code{\link{item_append_files}}.
+Defaults to TRUE.}
+
+\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
+last authenticated session}
 }
 \description{
 replaces existing files associated with an item with a new one. 
