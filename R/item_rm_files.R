@@ -13,7 +13,7 @@
 #' res2 <- item_rm_files(res)
 #' res2$files
 #' }
-item_rm_files <- function(id, ..., session=current_session()){
-	item <- as.sbitem(id)
+item_rm_files <- function(sb_id, ..., session=current_session()){
+	item <- as.sbitem(sb_id)
 	as.sbitem(item_update(item$id, info = list(files = vector()), ..., session = session))
 }

@@ -14,13 +14,13 @@
 #' item_get('5060b03ae4b00fc20c4f3c8b') %>% item_list_children
 #' }
 #' @export
-item_list_children = function(id, ..., session=current_session(), limit=20){
+item_list_children = function(sb_id, ..., session=current_session(), limit=20){
 
 	if(!session_validate(session)){
 		stop('Session state is invalid, please re-authenticate')
 	}
 
-	item <- as.sbitem(id)
+	item <- as.sbitem(sb_id)
 
 	query=list('parentId'=item$id, 'max'=limit, 'format'='json', 'fields'='id,title')
 	r = sbtools_GET(url = pkg.env$url_items, ..., query=query, session=session)

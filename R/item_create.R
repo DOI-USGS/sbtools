@@ -14,9 +14,9 @@
 #' x <- folder_create(user_id(), "foobar456")
 #' item_create(x, "foobar456-item")
 #' }
-item_create = function(id = user_id(), title, ..., info, session=current_session()){
+item_create = function(sb_id = user_id(), title, ..., info, session=current_session()){
 		
-	item <- as.sbitem(id)
+	item <- as.sbitem(sb_id)
 	body = list('parentId' = item$id, 'title' = title)
 	
 	#Bring in additional metadata if supplied

@@ -13,6 +13,6 @@
 #' ids <- vapply(httr::content(res)$items, "[[", "", "id")
 #' lapply(ids[1:3], item_get)
 #' }
-item_get <- function(id, ..., session=current_session()) {
-	get_item(as.sbitem(id)$id, ..., session = session)
+item_get <- function(sb_id, ..., session=current_session()) {
+	get_item(as.sbitem(sb_id)$id, ..., session = session)
 }

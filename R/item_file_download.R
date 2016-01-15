@@ -29,8 +29,9 @@
 #' 		destinations=file.path(tempdir(), 'fname.txt'))
 #' }
 #' @export
-item_file_download = function(id, ..., names, destinations, dest_dir, session=current_session(), overwrite_file = FALSE){
-
+item_file_download = function(sb_id, ..., names, destinations, dest_dir, session=current_session(), overwrite_file = FALSE){
+	
+	sb_id = as.sbitem(sb_id)
 	if(!session_validate(session)){
 		stop('Session state is invalid, please re-authenticate')
 	}
@@ -42,9 +43,9 @@ item_file_download = function(id, ..., names, destinations, dest_dir, session=cu
 		}
 
 		#populate names and destinations from files that are on SB
-		flist = item_list_files(id, ..., session=session)
+		flist = item_list_files(sb_id, ..., session=session)
 		if(nrow(flist) < 1){
-			stop(id, ':Item has no attached files')
+			stop(sb_id$id, ':Item has no attached files')
 		}
 		names = flist$fname
 		destinations = file.path(dest_dir, names)
@@ -55,10 +56,10 @@ item_file_download = function(id, ..., names, destinations, dest_dir, session=cu
 			stop('Length of names and destinations must be identical')
 		}
 
-		flist = item_list_files(id, ..., session=session)
+		flist = item_list_files(sb_id, ..., session=session)
 
 		if(!all(names %in% flist$fname)){
-			stop('Item does not contain all requested files')
+			stop(sb_id$id, 'Item does not contain all requested files')
 		}
 	#otherwise in some other error condition
 	}else{

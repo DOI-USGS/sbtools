@@ -8,7 +8,7 @@
 #' 
 #' item_get("4f4e4b24e4b07f02db6aea14") %>% item_get_parent()
 #' }
-item_get_parent = function(id, ..., session = current_session()) {
-	res <- as.sbitem(id, ...)
+item_get_parent = function(sb_id, ..., session = current_session()) {
+	res <- as.sbitem(sb_id, ...)
 	res$parentId
 }

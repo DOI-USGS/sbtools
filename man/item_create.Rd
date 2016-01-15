@@ -4,11 +4,11 @@
 \alias{item_create}
 \title{Create a new SB item}
 \usage{
-item_create(id = user_id(), title, ..., info, session = current_session())
+item_create(sb_id = user_id(), title, ..., info,
+  session = current_session())
 }
 \arguments{
-\item{id}{A ScienceBase ID or something that can be coerced to a SB item ID
-by \code{\link{as.sbitem}}}
+\item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
 
 \item{title}{The title of the new SB item}
 
@@ -17,7 +17,11 @@ by \code{\link{as.sbitem}}}
 
 \item{info}{(optional) list of metadata info for the new item}
 
-\item{session}{Session object from \code{\link{authenticate_sb}}}
+\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
+last authenticated session}
+
+\item{sb_parent}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 
+parent item (folder)}
 }
 \value{
 An object of class \code{sbitem}

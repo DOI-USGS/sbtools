@@ -4,12 +4,11 @@
 \alias{item_update_identifier}
 \title{Add custom identifier to an existing item}
 \usage{
-item_update_identifier(id, scheme, type, key, ...,
+item_update_identifier(sb_id, scheme, type, key, ...,
   session = current_session())
 }
 \arguments{
-\item{id}{A ScienceBase ID or something that can be coerced to a SB item ID
-by \code{\link{as.sbitem}}}
+\item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
 
 \item{scheme}{The identifier scheme}
 
@@ -20,7 +19,11 @@ by \code{\link{as.sbitem}}}
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
 \code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
 
-\item{session}{Session object from \code{\link{authenticate_sb}}}
+\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
+last authenticated session}
+
+\item{sb_parent}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 
+parent item (folder)}
 }
 \examples{
 

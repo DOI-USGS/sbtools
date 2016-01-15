@@ -4,12 +4,11 @@
 \alias{item_file_download}
 \title{Download files attached to item}
 \usage{
-item_file_download(id, ..., names, destinations, dest_dir,
+item_file_download(sb_id, ..., names, destinations, dest_dir,
   session = current_session(), overwrite_file = FALSE)
 }
 \arguments{
-\item{id}{A ScienceBase ID or something that can be coerced to a SB item ID
-by \code{\link{as.sbitem}}}
+\item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
 \code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
@@ -23,10 +22,14 @@ Must be same length as \code{names}}
 \item{dest_dir}{A directory path for saving files when \code{names} parameter
 is omitted}
 
-\item{session}{Session object from \code{\link{authenticate_sb}}}
+\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
+last authenticated session}
 
 \item{overwrite_file}{Boolean indicating if file should be overwritten if it
 already exists locally}
+
+\item{sb_parent}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 
+parent item (folder)}
 }
 \value{
 Character vector of full paths to local files

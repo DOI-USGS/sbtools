@@ -4,18 +4,21 @@
 \alias{item_list_files}
 \title{Get list of files attached to SB item}
 \usage{
-item_list_files(id, recursive = FALSE, ..., session = current_session())
+item_list_files(sb_id, recursive = FALSE, ..., session = current_session())
 }
 \arguments{
-\item{id}{A ScienceBase ID or something that can be coerced to a SB item ID
-by \code{\link{as.sbitem}}}
+\item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
 
 \item{recursive}{(logical) List files recursively. Default: \code{FALSE}}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
 \code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
 
-\item{session}{Session object from \code{\link{authenticate_sb}}}
+\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
+last authenticated session}
+
+\item{sb_parent}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 
+parent item (folder)}
 }
 \value{
 A data.frame with columns fname, size, and url. 

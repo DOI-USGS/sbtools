@@ -1,7 +1,7 @@
-#' Check if identifier exists
+#' @title Check if identifier exists
 #' 
 #' @export
-#' @param id (character) A ScienceBase ID. See Details.
+#' @template manipulate_item
 #' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}
 #' @param session (optional) SB session from \link{authenticate_sb}
 #' @details This function does not accept a sbitem class object because 
@@ -15,6 +15,7 @@
 #' # identifier does not exist
 #' identifier_exists(id = "aaaaaaakkkkkkkbbbbbb")
 #' }
-identifier_exists <- function(id, ..., session = current_session()) {
-	sbtools_HEAD(url = paste0(pkg.env$url_item, id), ..., session = session)
+identifier_exists <- function(sb_id, ..., session = current_session()) {
+	sb_id = as.sbitem(sb_id)
+	sbtools_HEAD(url = paste0(pkg.env$url_item, sb_id$id), ..., session = session)
 }

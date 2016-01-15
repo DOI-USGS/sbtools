@@ -7,8 +7,8 @@
 #' @examples \dontrun{
 #' folder_create(user_id(), "foobar345")
 #' }
-folder_create = function(id, name, ..., session = current_session()) {
-	item <- as.sbitem(id)
+folder_create = function(sb_id, name, ..., session = current_session()) {
+	item <- as.sbitem(sb_id)
 	body <- list(id = unbox(""), 
 							 title = unbox(name), 
 							 parentId = unbox(item$id), 

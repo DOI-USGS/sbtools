@@ -4,18 +4,21 @@
 \alias{item_list_children}
 \title{Return IDs for all child items}
 \usage{
-item_list_children(id, ..., session = current_session(), limit = 20)
+item_list_children(sb_id, ..., session = current_session(), limit = 20)
 }
 \arguments{
-\item{id}{A ScienceBase ID or something that can be coerced to a SB item ID
-by \code{\link{as.sbitem}}}
+\item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
 \code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
 
-\item{session}{Session object from \code{\link{authenticate_sb}}}
+\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
+last authenticated session}
 
 \item{limit}{Max children returned}
+
+\item{sb_parent}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 
+parent item (folder)}
 }
 \value{
 \code{data.frame} with a row for each child item

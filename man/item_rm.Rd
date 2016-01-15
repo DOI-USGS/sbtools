@@ -4,11 +4,10 @@
 \alias{item_rm}
 \title{Remove item from SB}
 \usage{
-item_rm(id, ..., recursive = FALSE, session = current_session())
+item_rm(sb_id, ..., recursive = FALSE, session = current_session())
 }
 \arguments{
-\item{id}{A ScienceBase ID or something that can be coerced to a SB item ID
-by \code{\link{as.sbitem}}}
+\item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
 \code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
@@ -17,7 +16,11 @@ by \code{\link{as.sbitem}}}
 means that not only will this item be deleted, but so will all its child
 items and their child items and so on.}
 
-\item{session}{Session object from \code{\link{authenticate_sb}}}
+\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
+last authenticated session}
+
+\item{sb_parent}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 
+parent item (folder)}
 }
 \value{
 \pkg{httr} \code{\link[httr]{response}} object
