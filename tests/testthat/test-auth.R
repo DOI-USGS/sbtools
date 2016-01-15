@@ -58,5 +58,39 @@ test_that("item creation, identifiers, and file upload works", {
 })
 
 
+test_that("Test that surgical item rm", {
+	
+	if(is.na(Sys.getenv("sb_user", unset=NA))){
+		skip("Authenticated tests skipped due to lack of login info")
+	}
+	
+	authenticate_sb(Sys.getenv("sb_user", unset=""), Sys.getenv("sb_pass", unset=""))
+	item = item_create(title="file add rm test item")
+	
+	expect_is(item_append_files(item, system.file("examples/data.csv", package="sbtools")), "sbitem")
+	expect_is(item_append_files(item, system.file("extdata/This_works_new_extension.zip", package="sbtools")), 'sbitem')
+	
+	#should be two files
+	expect_equal(nrow(item_list_files(item)), 2)
+	
+	#should delete the data.csv file
+	item_rm_files(item, 'data.csv')
+	expect_equal(nrow(item_list_files(item)), 1)
+	
+	#should do nothing
+	item_rm_files(item, 'data.csv')
+	expect_equal(nrow(item_list_files(item)), 1)
+	
+	#should delete all files regardless
+	item_rm_files(item)
+	
+	expect_equal(nrow(item_list_files(item)), 0)
+	
+	item_rm(item)
+	
+	expect_silent(session_logout())
+	
+})
+
 
 

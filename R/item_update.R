@@ -24,7 +24,7 @@ item_update = function(id, info, ..., session=current_session()){
 	}
 	
 	r = sbtools_PUT(url = paste0(pkg.env$url_item, item$id), 
-									body = toJSON(info, auto_unbox = TRUE),
+									body = toJSON(info, auto_unbox = TRUE, null='null'),
 									..., accept_json(), session = session)
 	
 	# catch 405, which is, I think, expired login
