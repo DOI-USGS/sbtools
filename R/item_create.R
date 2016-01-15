@@ -1,6 +1,6 @@
 #' @title Create a new SB item
 #'
-#' @template manipulate_item
+#' @template item_with_parent
 #' @param title The title of the new SB item
 #' @param info (optional) list of metadata info for the new item
 #' @return An object of class \code{sbitem}
@@ -14,9 +14,9 @@
 #' x <- folder_create(user_id(), "foobar456")
 #' item_create(x, "foobar456-item")
 #' }
-item_create = function(sb_id = user_id(), title, ..., info, session=current_session()){
+item_create = function(parent_id = user_id(), title, ..., info, session=current_session()){
 		
-	item <- as.sbitem(sb_id)
+	item <- as.sbitem(parent_id)
 	body = list('parentId' = item$id, 'title' = title)
 	
 	#Bring in additional metadata if supplied
