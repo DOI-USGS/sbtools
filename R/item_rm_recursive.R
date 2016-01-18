@@ -26,10 +26,8 @@ item_rm_recursive = function(id, ..., session = current_session()) {
 	
 	# get list of children. no need to identify or delete files; these are deleted
 	# along with their containing items automatically
-	kids <- item_list_children_all(id, session = session)
-	kids <- lapply(kids, function(kid) as.data.frame(kid[c("id","hasChildren")], stringsAsFactors=FALSE))
-	kids <- do.call(rbind, kids)
-	
+	kids <- item_list_children(id, fields=c('id', 'hasChildren'), raw=FALSE, session=session)
+
 	if(nrow(kids) > 0) {
 		# recursive case: has children. delete the children first
 		
@@ -51,16 +49,3 @@ item_rm_recursive = function(id, ..., session = current_session()) {
 	return(TRUE)
 }
 
-#' Like item_list_children except that it returns all fields, not just 'id' and
-#' 'title'
-#' 
-#' @param id SB item ID
-#' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}
-#' @param session (optional) SB session from \link{authenticate_sb}
-#' @param limit Max children returned
-#' @keywords internal
-item_list_children_all <- function(id, ..., session = current_session(), limit = 100) {
-	query <- list(parentId = id, max = limit, format = 'json')
-	r <- sbtools_GET(url = pkg.env$url_items, ..., query = query, session = session)
-	content(r, 'parsed')$items
-}
