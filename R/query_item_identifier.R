@@ -37,11 +37,6 @@ query_item_identifier = function(scheme, ..., type=NULL, key=NULL, session=curre
 		} else {
 			r <- sbtools_GET(url = response$nextlink$url, ..., session=session)
 		}
-	
-		# check results
-		if(r$status_code == 409){
-			stop('Multiple items described by that ID')
-		}
 		
 		response = content(r, 'parsed')
 		
