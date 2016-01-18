@@ -14,7 +14,7 @@
 #'@export
 current_session = function(){
 	if(session_expired(pkg.env$session)){
-		warning('SB authentication expired, SB interaction may fail. Please re-authentication using authenticate_sb().')
+		warning('SB authentication expired, SB interaction may fail. Please re-authenticate using authenticate_sb().')
 	}
 	return(pkg.env$session)
 }
