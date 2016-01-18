@@ -11,7 +11,7 @@ item_list_children(sb_id, fields = c("id", "title"), raw = FALSE, ...,
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
 
 \item{fields}{A character vector of requested data fields. Defaults to 'id' and 'title'. Full list of possible fields 
-is available online in\href{https://my.usgs.gov/confluence/display/sciencebase/ScienceBase+Catalog+Item+REST+Services#ScienceBaseCatalogItemRESTServices-ItemCoreObjects}{SB documentation}.}
+is available online in \href{https://my.usgs.gov/confluence/display/sciencebase/ScienceBase+Catalog+Item+REST+Services#ScienceBaseCatalogItemRESTServices-ItemCoreObjects}{SB documentation}.}
 
 \item{raw}{Boolean flag indicating if the raw parsed JSON result (as a list) should be returned. If FALSE (default), 
 the items are coerced into a data.frame when possible. No guarantees are made when a field with mmultiple

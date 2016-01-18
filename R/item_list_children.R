@@ -6,7 +6,7 @@
 #' @param limit Max children returned
 #' @param fields
 #' A character vector of requested data fields. Defaults to 'id' and 'title'. Full list of possible fields 
-#' is available online in\href{https://my.usgs.gov/confluence/display/sciencebase/ScienceBase+Catalog+Item+REST+Services#ScienceBaseCatalogItemRESTServices-ItemCoreObjects}{SB documentation}. 
+#' is available online in \href{https://my.usgs.gov/confluence/display/sciencebase/ScienceBase+Catalog+Item+REST+Services#ScienceBaseCatalogItemRESTServices-ItemCoreObjects}{SB documentation}. 
 #' @param raw 
 #' Boolean flag indicating if the raw parsed JSON result (as a list) should be returned. If FALSE (default), 
 #' the items are coerced into a data.frame when possible. No guarantees are made when a field with mmultiple
