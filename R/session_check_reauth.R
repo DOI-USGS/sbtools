@@ -9,6 +9,11 @@
 #'a new user name, it will re-authenticate. This is primarily a helper function for 
 #'packages that depend on sbtools.
 #'
+#'
+#'@return 
+#'Returns the session object or NULL if user not logged in or re-authentication failed.
+#' 
+#'
 #'@examples
 #'
 #'\dontrun{
@@ -61,4 +66,5 @@ session_check_reauth = function(session, username, password, ...){
 		}
 	}
 	
+	return(current_session())
 }
