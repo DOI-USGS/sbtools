@@ -15,6 +15,9 @@ session_check_reauth(session, username, password, ...)
 
 \item{...}{Any additional parameters are ignored.}
 }
+\value{
+Returns the session object or NULL if user not logged in or re-authentication failed.
+}
 \description{
 This checks the state of your Sciencebase session and, if invalid or if you've supplied
 a new user name, it will re-authenticate. This is primarily a helper function for 
