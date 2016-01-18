@@ -15,6 +15,27 @@
 #' @return The SB item id for the matching item. NULL if no matching item found.
 #' @import jsonlite
 #' @import httr
+#' 
+#' @examples 
+#' \dontrun{
+#' authenticate_sb()
+#' 
+#' ex_item = item_create(title='identifier example')
+#' item_update_identifier(ex_item, 'project1', 'dataset1', 'key1')
+#' ex2_item = item_create(title='identifier example 2')
+#' item_update_identifier(ex2_item, 'project1', 'dataset1', 'key2')
+#' 
+#' 
+#' #query the specific item
+#' query_item_identifier('project1', 'dataset1', 'key1')
+#' 
+#' #or get the collection of items based on the ID hierarchy
+#' query_item_identifier('project1')
+#' 
+#' item_rm(ex_item)
+#' item_rm(ex2_item)
+#' }
+#' 
 #' @export
 query_item_identifier = function(scheme, ..., type=NULL, key=NULL, session=current_session(), limit=20, pagesize=500){
 	
