@@ -1,5 +1,7 @@
 .travis.yml
+.latex.yml
 .gitignore
 ^.*\.Rproj$
 ^\.Rproj\.user$
 man-roxygen
+manuscript
