@@ -1,5 +1,5 @@
 % !TeX root = RJwrapper.tex
-\title{\pkg{sbtools}: A package connecting collaborative research online using R and ScienceBase}
+\title{\pkg{sbtools}: A package connecting R to data for collaborative online research}
 \author{by Luke A Winslow, Scott Chamberlain, Alison Appling and Jordan Read}
 
 \maketitle
@@ -11,20 +11,43 @@ An abstract of less than 150 words.
 Introductory section which may include references in parentheses
 \citep{R}, or cite a reference such as \citet{R} in the text.
 
-\section{Section title in sentence case}
+\section{The need for collaborative storage}
 
-This section may contain a figure such as Figure~\ref{figure:rlogo}.
+\begin{itemize}
+	\item{Creating powerful and useful tools to open and accelerate science an important issue of our time}
+	\item{One rapidly emerging area is reproducibile research and data archiving}
+	\item{These goals primarily focus creating more useful, open, and accessible products of research}
+	\item{But data- and code-intensive collaborative projects increasingly need collaborative solutions for data storage, sharing, and updating throughout the project lifecycle}
+\end{itemize}
+\begin{itemize}
+	\item{Active collaborations have different needs}
+	\item{Need large-file storage and access, Mixture of public and controlled access, programmatic access to retrieving data and updating results}
+	\item{}
+	
+\end{itemize}
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics{Rlogo}
-  \caption{The logo of R.}
-  \label{figure:rlogo}
-\end{figure}
 
-\section{Another section}
+\section{USGS ScienceBase}
 
 There will likely be several sections, perhaps including code snippets, such as:
+
+\section{The \pkg{sbtools} package}
+
+
+\subsection{Data search}
+
+\begin{example}
+  x <- 1:10
+  result <- myFunction(x)
+\end{example}
+
+
+\subsection{Data access}
+
+\subsection{Data editing and upload}
+
+
+\subsection{}
 
 \begin{example}
   x <- 1:10
@@ -33,24 +56,41 @@ There will likely be several sections, perhaps including code snippets, such as:
 
 \section{Summary}
 
+
 This file is only a basic article template. For full details of \emph{The R Journal} style and information on how to prepare your article for submission, see the \href{http://journal.r-project.org/share/author-guide.pdf}{Instructions for Authors}.
 
-\bibliography{RJreferences}
+\bibliography{winslow}
 
-\address{Author One\\
-  Affiliation\\
-  Address\\
-  Country\\}
-\email{author1@work}
+\address{Luke A Winslow\\
+  U.S. Geological Survey Center for Integrated Data Analytics\\
+  Middleton, Wisconsin\\
+  USA\\}
+\email{lwinslow@usgs.gov}
 
-\address{Author Two\\
+\address{Scott Chamberlain\\
   Affiliation\\
   Address\\
   Country\\}
 \email{author2@work}
 
-\address{Author Three\\
+\address{Alison Appling\\
   Affiliation\\
   Address\\
   Country\\}
 \email{author3@work}
+
+\address{Jordan S Read\\
+  U.S. Geological Survey Center for Integrated Data Analytics\\
+  Middleton, Wisconsin\\
+  USA\\}
+\email{jread@usgs.gov}
+
+
+%some figure code example
+%This section may contain a figure such as Figure~\ref{figure:rlogo}.
+% \begin{figure}[htbp]
+%   \centering
+%   \includegraphics{Rlogo}
+%   \caption{The logo of R.}
+%   \label{figure:rlogo}
+% \end{figure}
