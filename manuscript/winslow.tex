@@ -11,53 +11,91 @@ An abstract of less than 150 words.
 Introductory section which may include references in parentheses
 \citep{R}, or cite a reference such as \citet{R} in the text.
 
-\section{The need for collaborative storage}
+\section{Introduction}
 
 \begin{itemize}
 	\item{Creating powerful and useful tools to open and accelerate science an important issue of our time}
 	\item{One rapidly emerging area is reproducibile research and data archiving}
 	\item{These goals primarily focus creating more useful, open, and accessible products of research}
 	\item{But data- and code-intensive collaborative projects increasingly need collaborative solutions for data storage, sharing, and updating throughout the project lifecycle}
-\end{itemize}
-\begin{itemize}
 	\item{Active collaborations have different needs}
 	\item{Need large-file storage and access, Mixture of public and controlled access, programmatic access to retrieving data and updating results}
-	\item{}
+	\item{With sbtools, we aim to fill these needs.}
+	\item{By building on the web API's of ScienceBase, we }
 	
 \end{itemize}
 
 
 \section{USGS ScienceBase}
 
-There will likely be several sections, perhaps including code snippets, such as:
+\begin{itemize}
+	\item{What is ScienceBase \url{https://www.sciencebase.gov}}
+	\item{Project build for USGS and collaborators}
+	\item{Large, flexible, online repository for scientific data}
+	\item{Fundamentally hierarchical in design, build on uniquely identified items and children}
+	\item{Items have rich metadata functionality that improves data discovery and sharing}
+	\item{Build with first-class REST API in mind. All functionality available via web service}
+	\item{Available to USGS (DOI?) employees and project collaborators}
+\end{itemize}
 
 \section{The \pkg{sbtools} package}
+\begin{itemize}
+	\item{Goal to allow programmatic access to core SB functionality}
+	\item{Harmonize the SB data structures with common R interfaces}
+	\item{Lightweight R package that can be quickly added to existing projects and shared broadly}
+\end{itemize}
+
+\subsection{Search API}
+\begin{itemize}
+	\item{Go over general search API}
+	\item{Free text search}
+	\item{dateRange query}
+	\item{Spatial query}
+	\item{Hierarchical SB queries (sub-items)}
+	\item{Combination of above}
+\end{itemize}
+
+\subsection{Data access API}
+\begin{itemize}
+	\item{Basic item metadata access}
+	\item{Attached file listing and downloading}
+	\item{Accessing special SB extensions}
+	\item{Hierarchy traversal}
+\end{itemize}
+
+\subsection{ScienceBase authenticated}
+\begin{itemize}
+	\item{How authentication changes SB}
+	\item{Authentication in sbtools}
+	\item{Authentication persistence and use throughout package}
+	\item{Examples of authentication and other auth-related functions (check and such)}
+\end{itemize}
 
 
-\subsection{Data search}
+\subsection{Data editing and upload API}
+This will be an extensive section
+\begin{itemize}
+	\item{Item creation}
+	\item{Item deletion}
+	\item{Attached file upload, replacement and deletion}
+	\item{}
+\end{itemize}
 
-\begin{example}
-  x <- 1:10
-  result <- myFunction(x)
-\end{example}
-
-
-\subsection{Data access}
-
-\subsection{Data editing and upload}
-
-
-\subsection{}
-
-\begin{example}
-  x <- 1:10
-  result <- myFunction(x)
-\end{example}
+\subsection{SB Item identifiers}
+\begin{itemize}
+	\item{Functionality of item identifiers}
+	\item{Example of identifier use}
+	\item{How identifiers can be useful for projects}
+\end{itemize}
 
 \section{Summary}
+\begin{itemize}
+	\item{Building tools to improve data access and handling for collaborative projects will be important in the future}
+	\item{sbtools gives users direct access to a large collection of USGS data}
+	\item{It also links online data storage directly to R workflows}
+	\item{With the popularity and power of the R universe growing, opening access to data, along with code online will be important}
+\end{itemize}
 
-
-This file is only a basic article template. For full details of \emph{The R Journal} style and information on how to prepare your article for submission, see the \href{http://journal.r-project.org/share/author-guide.pdf}{Instructions for Authors}.
 
 \bibliography{winslow}
 
@@ -94,3 +132,9 @@ This file is only a basic article template. For full details of \emph{The R Jour
 %   \caption{The logo of R.}
 %   \label{figure:rlogo}
 % \end{figure}
+
+%code example
+% \begin{example}
+  % x <- 1:10
+  % result <- myFunction(x)
+% \end{example}
