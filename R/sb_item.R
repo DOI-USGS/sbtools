@@ -34,6 +34,7 @@ as.sbitem.character <- function(x, ...) get_item(x, ...)
 #' @export
 as.sbitem.sbitem <- function(x, ...) x
 
+#' @export
 as.sbitem.list <- function(x, ...) sb_item(x)
 
 #' @export

@@ -3,33 +3,40 @@
 
 language: c
 sudo: required
+dist: trusty
 
 before_install:
-  - curl -OL https://raw.githubusercontent.com/metacran/r-builder/master/pkg-build.sh
-  - chmod 755 pkg-build.sh
-  - ./pkg-build.sh bootstrap
+  - sudo apt-get update
+  - sudo apt-get install -y gdal-bin libgdal-dev libgdal1-dev netcdf-bin libproj-dev
+  - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
+  - chmod 755 ./travis-tool.sh
+  - ./travis-tool.sh bootstrap
+  - ./travis-tool.sh install_deps
+  
+env:
+ global:
+   - R_LIBS="http://cran.rstudio.com"
+   - R_BUILD_ARGS="--no-build-vignettes --no-manual"
+   - R_CHECK_ARGS="--no-build-vignettes --no-manual --as-cran"
+   - BOOTSTRAP_LATEX=""
+   - NOT_CRAN="true"
 
 install:
-  - ./pkg-build.sh install_deps
-  - ./pkg-build.sh r_install covr
+  - ./travis-tool.sh install_deps
+  - ./travis-tool.sh r_install covr
 
 script:
-  - ./pkg-build.sh run_tests
+  - ./travis-tool.sh run_tests
 
 after_failure:
-  - ./pkg-build.sh dump_logs
+  - ./travis-tool.sh dump_logs
 
 notifications:
   email:
     on_success: change
     on_failure: change
 
-env:
-  matrix:
-    - RVERSION=oldrel
-    - RVERSION=release
-    - RVERSION=devel
 
 after_success:
-  - ./pkg-build.sh run_script -e 'library(covr);codecov()'
+  - ./travis-tool.sh run_script -e 'library(covr);codecov()'
   
