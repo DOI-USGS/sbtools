@@ -3,10 +3,11 @@
 
 language: c
 sudo: required
+dist: trusty
 
 before_install:
   - sudo apt-get update
-  - sudo apt-get install -y gdal-bin libgdal-dev libgdal1-dev netcdf-bin libproj-dev libgdal1h
+  - sudo apt-get install -y gdal-bin libgdal-dev libgdal1-dev netcdf-bin libproj-dev
   - curl -OL https://raw.githubusercontent.com/metacran/r-builder/master/pkg-build.sh
   - chmod 755 pkg-build.sh
   - ./pkg-build.sh bootstrap
