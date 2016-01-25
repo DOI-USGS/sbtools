@@ -23,7 +23,7 @@ to be installed, which may require the external GDAL libraries as well.
 }
 \examples{
 \dontrun{
-
+library(sp)
 layer = item_get_wfs('55e372b9e4b05561fa208212')
 
 plot(layer)

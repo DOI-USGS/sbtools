@@ -88,6 +88,7 @@ query_sb(list(dateRange =
 		'{"dateType":"Release","choice":"range","start":"2014-09-01","end":"2015-09-01"}'))
 }
 
+
 }
 \seealso{
 \code{\link{query_items}}

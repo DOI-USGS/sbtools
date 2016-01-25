@@ -79,7 +79,6 @@
 #' 		'{"dateType":"Release","choice":"range","start":"2014-09-01","end":"2015-09-01"}'))
 #' }
 #' 
-#' @importFrom methods is
 #'
 #' @export
 query_sb = function(query_list, ..., limit=20, session = current_session()){
