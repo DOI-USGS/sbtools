@@ -23,6 +23,8 @@ query_sb_spatial = function(bbox, bb_min, bb_max, ..., limit=20, session=current
 		if(!requireNamespace("sp")){
 			#project first into longlat projection so bounding box is in degrees
 			bb = spTransform(bbox, CRS("+proj=longlat +datum=WGS84"))@bbox
+		}else{
+			stop('sp package required to use bbox parameter. Please: install.packages("sp")')
 		}
 	}else if(!missing(bb_min) & !missing(bb_max)){
 		bb = matrix(nrow=2, ncol=2)
