@@ -4,7 +4,7 @@
 \alias{query_sb_spatial}
 \title{Query SB based on spatial extent}
 \usage{
-query_sb_spatial(bbox, bb_min, bb_max, ..., limit = 20,
+query_sb_spatial(bbox, bb_min, bb_max, bb_wkt, ..., limit = 20,
   session = current_session())
 }
 \arguments{
@@ -13,6 +13,8 @@ query_sb_spatial(bbox, bb_min, bb_max, ..., limit = 20,
 \item{bb_min}{Alternate to bbox param. A vector length 2 defining the c(long, lat) of lower left corner of the bounding box.}
 
 \item{bb_max}{Alternate to bbox param. A vector length 2 defining the c(long, lat) of upper right corner of the bounding box.}
+
+\item{bb_wkt}{A character string using the Well Known Text (WKT) standard for defining spatial data. Must be a POLYGON WKT object.}
 }
 \description{
 Queries ScienceBase based on a spatial bounding box. Accepts either an object of class \code{\link{sp}} 
@@ -20,9 +22,20 @@ Queries ScienceBase based on a spatial bounding box. Accepts either an object of
 right corners.
 }
 \examples{
-
+\dontrun{
+#specify the corners of the bounding box
 query_sb_spatial(bb_min=c(-104.4, 37.5), bb_max=c(-95.1, 41.0))
 
+#use a pre-formatted WKT polygon to grab data
+query_sb_spatial(bb_wkt="POLYGON((-104.4 41.0,-95.1 41.0,-95.1 37.5,-104.4 37.5,-104.4 41.0))")
+
+###Use the bounding box of an sp object 
+#grab an sp object from a pre-determined ScienceBase Item
+layer = item_get_wfs('55e372b9e4b05561fa208212')
+
+#get items in that BB
+query_sb_spatial(layer)
+}
 
 }
 
