@@ -41,33 +41,9 @@ easily traverse the tree structure. In some projects, the hierarchy has
 important meaning. For others, it relates only to the owner user or
 organization.
 
-\begin{example}
-#parent ID always available as item attribute
-parent = item_get(test_item$parentId)
-parent
-
-#getting sibling items
-item_list_children(parent)
-
-\end{example}
-
-ScienceBase allows items to have attached files. Attached files can easily be 
-listed and downloaded directly using \code{item_list_files} and 
-\code{item_file_download}. These functions are only useful on items 
-that have files attached.
-
-\begin{example}
-#returns files attached to item
-item_list_files(test_item)
-#returns local path to downloaded files
-item_file_download(test_item, dest_dir = tempdir())
-\end{example}
 
 ScienceBase has special support for certain datatypes. 
 
-\begin{example}
-	
-\end{example}
 
 \begin{itemize}
 	\item{Accessing special SB extensions}
