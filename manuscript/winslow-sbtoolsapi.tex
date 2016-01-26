@@ -6,6 +6,78 @@
 	\item{Lightweight R package that can be quickly added to existing projects and shared broadly}
 \end{itemize}
 
+
+%code example
+% \begin{example}
+  % x <- 1:10
+  % result <- myFunction(x)
+% \end{example}
+
+\subsection{Data access API}
+The data access functionality of \pkg{sbtools} makes it easy to 
+access any public item's data, attached files and metadata. All items
+in ScienceBase have a unique identifier that can be used to directly 
+access specific items. 
+
+\begin{example}
+	test_item = item_get("4f4e4b24e4b07f02db6aea14")
+	test_item
+\end{example}
+
+For convenience, \pkg{sbtools} defines an \code{sbitem} object, which is 
+returned by \pkg{sbtools} functions when referencing objects. The underlying
+data structure is a list. All available metadata for an item can be listed
+and accessed in the same way as a named list: 
+\being{example}
+	names(test_item)
+	item_get("4f4e4b24e4b07f02db6aea14")$citation
+\end{example}
+
+On ScienceBase, all items are organized in a tree structure, with one 
+parent and potentially many children. \pkg{sbtools} allows the user to 
+easily traverse the tree structure. In some projects, the hierarchy has 
+important meaning. For others, it relates only to the owner user or
+organization.
+
+\being{example}
+	#parent ID always available as item attribute
+	parent = item_get(test_item$parentId)
+	parent
+	
+	#getting sibling items
+	item_list_children(parent)
+	
+\end{example}
+
+ScienceBase allows items to have attached files. Attached files can easily be 
+listed and downloaded directly using \code{item_list_files} and 
+\code{item_file_download}. These functions are only useful on items 
+that have files attached.
+
+\being{example}
+	#returns files attached to item
+	item_list_files(test_item)
+	#returns local path to downloaded files
+	item_file_download(test_item, dest_dir = tempdir())
+\end{example}
+
+ScienceBase has special support for certain datatypes. 
+
+\begin{example}
+	
+\end{example}
+
+\begin{itemize}
+	\item{Accessing special SB extensions}
+	\item{Hierarchy traversal}
+\end{itemize}
+
+%code example
+% \begin{example}
+  % x <- 1:10
+  % result <- myFunction(x)
+% \end{example}
+
 \subsection{Search API}
 \begin{itemize}
 	\item{Go over general search API}
@@ -16,15 +88,8 @@
 	\item{Combination of above}
 \end{itemize}
 
-\subsection{Data access API}
-\begin{itemize}
-	\item{Basic item metadata access}
-	\item{Attached file listing and downloading}
-	\item{Accessing special SB extensions}
-	\item{Hierarchy traversal}
-\end{itemize}
-
 \subsection{ScienceBase authenticated}
+
 \begin{itemize}
 	\item{How authentication changes SB}
 	\item{Authentication in sbtools}
@@ -32,6 +97,11 @@
 	\item{Examples of authentication and other auth-related functions (check and such)}
 \end{itemize}
 
+%code example
+% \begin{example}
+  % x <- 1:10
+  % result <- myFunction(x)
+% \end{example}
 
 \subsection{Data editing and upload API}
 This will be an extensive section
