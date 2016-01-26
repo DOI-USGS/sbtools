@@ -37,8 +37,18 @@ data structure is a list. All available metadata for an item can be listed
 and accessed in the same way as a named list.
 
 \begin{example}
-names(test_item) 
-item_get(test_item)$citation
+> names(test_item) 
+ [1] "link"              "relatedItems"      "id"               
+ [4] "identifiers"       "title"             "citation"         
+ [7] "provenance"        "hasChildren"       "parentId"         
+[10] "contacts"          "webLinks"          "browseCategories" 
+[13] "browseTypes"       "tags"              "dates"            
+[16] "facets"            "files"             "distributionLinks"
+[19] "previewImage"     
+> item_get(test_item)$citation
+[1] "Geological Survey (U.S.), 1999-08-05, Coastal-change 
+and glaciological maps of Antarctica:  Fact SheetCoastal-change and 
+glaciological maps of Antarctica."
 
 \end{example}
 
