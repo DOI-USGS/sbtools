@@ -45,41 +45,71 @@ and accessed in the same way as a named list.
 [13] "browseTypes"       "tags"              "dates"            
 [16] "facets"            "files"             "distributionLinks"
 [19] "previewImage"     
+
 > item_get(test_item)$citation
 [1] "Geological Survey (U.S.), 1999-08-05, Coastal-change 
 and glaciological maps of Antarctica:  Fact SheetCoastal-change and 
 glaciological maps of Antarctica."
-
 \end{example}
 
 On ScienceBase, all items are organized in a tree structure, with one 
 parent and potentially many children. \pkg{sbtools} allows the user to 
-easily traverse the tree structure. In some projects, the hierarchy has 
-important meaning. For others, it relates only to the owner user or
-organization.
+easily traverse the tree structure. For example, in some projects, the hierarchy has 
+important meaning. For other projects, it may relates to the user or
+organizational owner of the data.
 
 \begin{example}
 #parent ID always available as item attribute
-parent = item_get(test_item$parentId)
-parent
-
+> parent = item_get(test_item$parentId)
+> parent
+  Title: USGS Publications Warehouse
+  Creator/LastUpdatedBy:      / 
+  Provenance (Created / Updated):  2012-02-29T15:42:41Z / 2014-07-08T21:42:20Z
+  Children: TRUE
+  Item ID: 4f4e4771e4b07f02db47e1e4
+  Parent ID: 4f4e4771e4b07f02db47e1da
+  
 #getting sibling items
-item_list_children(parent)
+> item_list_children(parent)
+[1] "55b98fbee4b08f6647be5179" "541d45a4e4b0f68901ec30ef"
+[3] "55b361b3e4b09a3b01b5daad" "53516ef9e4b05569d8059f34"
+[5] "4f4e4ab2e4b07f02db66f5e3" "5351704ee4b05569d805a2e4"
 \end{example}
 
-ScienceBase has special support for certain datatypes. 
+ScienceBase items may have data or metadata files attached to them. 
+You can list and download attached files directly using \pkg{sbtools}.
 
+\begin{example}
+#returns files attached to item
+item_list_files(test_item)
+#returns local path to downloaded files
+item_file_download(test_item, dest_dir = tempdir())
+\end{example}
 
-\begin{itemize}
-	\item{Accessing special SB extensions}
-	\item{Hierarchy traversal}
-\end{itemize}
+ScienceBase has special functionality when certain data types are 
+stored. One example is spatial data. When spatial data are properly 
+tagged and uploaded to ScienceBase, they can be accessed using OGC 
+web services. \pkg{sbtools} has included ability to access the Web
+Feature Service (WFS) available for certain items.
 
-%code example
-% \begin{example}
-  % x <- 1:10
-  % result <- myFunction(x)
-% \end{example}
+\begin{example}
+#Source non-sbtools-required but useful mapping packages
+library(maps)
+library(sp)
+#an item with an included OGC WFS service
+layer = item_get_wfs('55e372b9e4b05561fa208212')
+map('state', regions='iowa')
+plot(layer, add=TRUE)
+\end{example}
+
+ \begin{figure}[htbp]
+   \centering
+   \includegraphics{mapfig}
+   \caption{An example spatial dataset from ScienceBase, 
+   visualized on top of the outline for the state of Iowa}
+   \label{figure:iowafig}
+ \end{figure}
+
 
 \subsection{Search API}
 \begin{itemize}
