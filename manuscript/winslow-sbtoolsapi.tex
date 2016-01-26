@@ -20,17 +20,30 @@ in ScienceBase have a unique identifier that can be used to directly
 access specific items. 
 
 \begin{example}
-	test_item = item_get("4f4e4b24e4b07f02db6aea14")
-	test_item
+> test_item = item_get("4f4e4b24e4b07f02db6aea14")
+> test_item
+<ScienceBase Item> 
+  Title: Coastal-change and glaciological maps of Antarctica
+  Creator/LastUpdatedBy:      / 
+  Provenance (Created / Updated):  2010-10-06T04:25:43Z / 2014-07-21T17:45:42Z
+  Children: FALSE
+  Item ID: 4f4e4b24e4b07f02db6aea14
+  Parent ID: 4f4e4771e4b07f02db47e1e4
 \end{example}
 
 For convenience, \pkg{sbtools} defines an \code{sbitem} object, which is 
 returned by \pkg{sbtools} functions when referencing objects. The underlying
 data structure is a list. All available metadata for an item can be listed
 and accessed in the same way as a named list.
-\being{example}
-	names(test_item)
-	item_get("4f4e4b24e4b07f02db6aea14")$citation
+
+\begin{example}
+> names(test_item)
+ [1] "link"              "relatedItems"      "id"                "identifiers"       "title"             "citation"          "provenance"        "hasChildren"      
+ [9] "parentId"          "contacts"          "webLinks"          "browseCategories"  "browseTypes"       "tags"              "dates"             "facets"           
+[17] "files"             "distributionLinks" "previewImage"     
+> item_get("4f4e4b24e4b07f02db6aea14")$citation
+ [1] "Geological Survey (U.S.), 1999-08-05, Coastal-change and glaciological maps of Antarctica:  Fact SheetCoastal-change and glaciological maps of Antarctica."
+> 
 \end{example}
 
 On ScienceBase, all items are organized in a tree structure, with one 
@@ -39,13 +52,13 @@ easily traverse the tree structure. In some projects, the hierarchy has
 important meaning. For others, it relates only to the owner user or
 organization.
 
-\being{example}
-	#parent ID always available as item attribute
-	parent = item_get(test_item$parentId)
-	parent
-	
-	#getting sibling items
-	item_list_children(parent)
+\begin{example}
+#parent ID always available as item attribute
+parent = item_get(test_item$parentId)
+parent
+
+#getting sibling items
+item_list_children(parent)
 	
 \end{example}
 
@@ -54,11 +67,11 @@ listed and downloaded directly using \code{item_list_files} and
 \code{item_file_download}. These functions are only useful on items 
 that have files attached.
 
-\being{example}
-	#returns files attached to item
-	item_list_files(test_item)
-	#returns local path to downloaded files
-	item_file_download(test_item, dest_dir = tempdir())
+\begin{example}
+#returns files attached to item
+item_list_files(test_item)
+#returns local path to downloaded files
+item_file_download(test_item, dest_dir = tempdir())
 \end{example}
 
 ScienceBase has special support for certain datatypes. 
