@@ -123,7 +123,7 @@ plot(layer, add=TRUE)
 	\item{Combination of above}
 \end{itemize}
 
-\subsection{ScienceBase authenticated}
+\subsection{ScienceBase authentication}
 ScienceBase has a large collection of open, reusable datasets and 
 useful metadata. In addition to the public data available, ScienceBase
 is also a platform for sharing and collaboration on private or in-progress 
@@ -137,7 +137,7 @@ session state is persisted between function calls by the package. While
 expiration of the session can be difficult to predict, \pkg{sbtools}
 makes a best effort to supply the user with meaningful error messages.
 
-The authentication function \code{authenticate\_sb} can accept a username
+The authentication function \code{authenticate\_sb()} can accept a username
 and password. Alternatively, to prevent plaintext passwords in R history, 
 the password can be omitted and will be requested by R interactively. 
 Authentication is persisted by the package, allowing for a single sign-in
@@ -159,10 +159,10 @@ Most functions in \pkg{sbtools} can be used both anonymously and when
 authenticated. This includes all query and data retrieval functions. 
 When authenticated, these functions may return different results or fail
 depending on the specific task. For example, when trying to access 
-a private item using \code{item\_get}, you must be authenticated, otherwise
+a private item using \code{item\_get()}, you must be authenticated, otherwise
 it will throw and error ScienceBase does not differentiate between a missing
 item and an item you don't have permission to access. Search follows a similar
-pattern. When querying items with \code{query\_sb}, public items are always 
+pattern. When querying items with \code{query\_sb()}, public items are always 
 visible while private items are not visible unless authenticated. 
 
 \begin{example}
@@ -175,7 +175,7 @@ visible while private items are not visible unless authenticated.
 > authenticate_sb('username@usgs.gov')
 > item_get('55de0027e4b0518e354dfcf0')
  <ScienceBase Item> 
-  Title: Private Item
+  Title: Example Private Item
   Creator/LastUpdatedBy:     username@usgs.gov / username@usgs.gov
   Provenance (Created / Updated):  2015-08-26T18:06:31Z / 2015-12-30T14:59:27Z
   Children: FALSE
@@ -186,7 +186,7 @@ visible while private items are not visible unless authenticated.
 #query while authenticated
 > query_sb(list(q='username@usgs.gov'))
  <ScienceBase Item> 
-  Title: Private Item
+  Title: Example Private Item
   Creator/LastUpdatedBy:     username@usgs.gov / username@usgs.gov
   Provenance (Created / Updated):  2015-08-26T18:06:31Z / 2015-12-30T14:59:27Z
   Children: FALSE
@@ -202,12 +202,61 @@ list()
 
 \subsection{Data editing and upload API}
 For authenticated users, \pkg{sbtools} has functionality to support 
-the full data lifecycle. 
+the full data lifecycle. This includes the creation, editing and removal
+of items. Because item editing and creation cannot be done anonymously, 
+this functionality only works while authenticated.
 
-This will be an extensive section
+When we create new items, the only required inputs are "Parent Item" and "title". 
+All users have a personal home folder (called "My Items" on ScienceBase) and by default,
+new items are created with that parent. The funciton \code{user\_id()} retrieves the
+unique identifier for the user's home folder. 
+
+\begin{example}
+#create new item, by default under "My Items" parent
+> new_item = item_create(title='new test item')
+> new_item
+<ScienceBase Item> 
+  Title: new test item
+  Creator/LastUpdatedBy:     username@usgs.gov / username@usgs.gov
+  Provenance (Created / Updated):  2016-01-27T19:48:28Z / 2016-01-27T19:48:28Z
+  Children: FALSE
+  Item ID: 56a91f0ce4b0b28f1184dda8
+  Parent ID: 54257d8fe4b0e641df8b50af
+\end{example}
+
+Once an item is created, we can edit the metadata or attach data files to that 
+item using \pkg{sbtools}. 
+
+\being{example}
+#when editing, all information can be changed but the unique identifier
+> edited_item = item_update(new_item, list(title='new updated item'))
+> edited_item
+<ScienceBase Item> 
+  Title: new updated item
+  Creator/LastUpdatedBy:     lwinslow@usgs.gov / lwinslow@usgs.gov
+  Provenance (Created / Updated):  2016-01-27T19:48:28Z / 2016-01-27T19:50:21Z
+  Children: FALSE
+  Item ID: 56a91f0ce4b0b28f1184dda8
+  Parent ID: 54257d8fe4b0e641df8b50af
+
+#appending files to item
+> item_list_files(new_item)
+data frame with 0 columns and 0 rows
+
+> item_append_files(edited_item, 'test.dat')
+> item_list_files(edited_item)
+      fname size     url
+1 README.md 1282     https://www.sciencebase.gov/[long URL truncated]
+
+\end{example}
+
+%Item deletion
+
+
+
 \begin{itemize}
 	\item{Item creation}
-	\item{Item deletion}
+	\item{}
 	\item{Attached file upload, replacement and deletion}
 	\item{}
 \end{itemize}
