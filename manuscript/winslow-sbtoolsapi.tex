@@ -124,42 +124,35 @@ plot(layer, add=TRUE)
 \end{itemize}
 
 \subsection{ScienceBase authenticated}
+ScienceBase has a large collection of open, reusable datasets and 
+useful metadata. In addition to the public data available, ScienceBase
+is also a platform for sharing and collaboration on private or in-progress 
+data accessible through authenticated sessions. \pkg{sbtools} supports 
+authentication to interact with access controlled items.
 
-Most functions in \pkg{sbtools} can be used both anonymously and when
-authenticated. For example, \code{item_get} works in both modes, but
-private items are not accessible or visible unless authenticated. 
+Authentication in \pkg{sbtools} is handled through the persistence of 
+an authenticated session. By storing only the session, we do not need to 
+store the plaintext password, which could represent a security issue. This
+session state is persisted between function calls by the package. While  
+expiration of the session can be difficult to predict, \pkg{sbtools}
+makes a best effort to supply the user with meaningful error messages.
 
+The authentication function \code{authenticate_sb} can accept a username
+and password. Alternatively, to prevent plaintext passwords in R history, 
+the password can be omitted and will be requested by R interactively. 
+Authentication is persisted by the package, allowing for a single sign-in
+and no tracking of usernames, passwords, or sessions during interactive or
+script-based use. 
+
+%Authentication in sbtools
 \begin{example}
-#Attempt to get a private item
-> item_get('55de0027e4b0518e354dfcf0')
- Error: Item not found for ID=55de0027e4b0518e354dfcf0. Either the 
- item does not exist or the item is secured and requires authentication to access. 
-
-#Get private item while authenticated
-> authenticate_sb('username@usgs.gov')
-> item_get('55de0027e4b0518e354dfcf0')
- <ScienceBase Item> 
-  Title: Private Item
-  Creator/LastUpdatedBy:     username@usgs.gov / username@usgs.gov
-  Provenance (Created / Updated):  2015-08-26T18:06:31Z / 2015-12-30T14:59:27Z
-  Children: FALSE
-  Item ID: 55de0027e4b0518e354dfcf0
-  Parent ID: 54257d8fe4b0e641df8b50af
-  
-#search expands to include user's private items when authenticated
-#query while authenticated
-> query_sb(list(q='username@usgs.gov'))
- <ScienceBase Item> 
-  Title: Private Item
-  Creator/LastUpdatedBy:     username@usgs.gov / username@usgs.gov
-  Provenance (Created / Updated):  2015-08-26T18:06:31Z / 2015-12-30T14:59:27Z
-  Children: FALSE
-  Item ID: 55de0027e4b0518e354dfcf0
-  Parent ID: 54257d8fe4b0e641df8b50af
-  
+#to start an authenticated session
+> authenticate_sb("username@usgs.gov")
+> is_logged_in()
+[1] TRUE
 > session_logout()
-> query_sb(list(q='username@usgs.gov'))
-list()
+> is_logged_in()
+[1] FALSE
 \end{example}
 
 %Examples of authentication and other auth-related functions (check and such)
