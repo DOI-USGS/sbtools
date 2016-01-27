@@ -101,7 +101,7 @@ query_sb = function(query_list, ..., limit=20, session = current_session()){
 		query_list['max'] = limit
 	}
 	
-	result = query_items(query_list, ..., session)
+	result = query_items(query_list, ..., session=session)
 	
 	#parse the result and turn it into a list of sbitems
 	res_obj = httr::content(result, type='application/json')
@@ -114,7 +114,7 @@ query_sb = function(query_list, ..., limit=20, session = current_session()){
 		while(offset < limit){
 			query_list['offset'] = offset
 			
-			result = query_items(query_list, ..., session)
+			result = query_items(query_list, ..., session=session)
 			res_obj = httr::content(result, type='application/json')
 			#concatenate it onto output list
 			out = c(out, lapply(content(result)$items, as.sbitem))
