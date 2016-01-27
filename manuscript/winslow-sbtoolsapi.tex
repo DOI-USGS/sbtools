@@ -144,17 +144,6 @@ Authentication is persisted by the package, allowing for a single sign-in
 and no tracking of usernames, passwords, or sessions during interactive or
 script-based use. 
 
-%Authentication in sbtools
-\begin{example}
-#to start an authenticated session
-> authenticate_sb("username@usgs.gov")
-> is_logged_in()
-[1] TRUE
-> session_logout()
-> is_logged_in()
-[1] FALSE
-\end{example}
-
 %Examples of authentication and other auth-related functions (check and such)
 
 
