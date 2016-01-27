@@ -124,32 +124,10 @@ plot(layer, add=TRUE)
 \end{itemize}
 
 \subsection{ScienceBase authenticated}
-ScienceBase has a large collection of open, reusable datasets and 
-useful metadata. In addition to the public data available, ScienceBase
-is also a platform for sharing and collaboration on private or in-progress 
-data accessible through authenticated sessions. \pkg{sbtools} supports 
-authentication to interact with access controlled items.
 
-Authentication in \pkg{sbtools} is handled through the persistence of 
-an authenticated session. By storing only the session, we do not need to 
-store the plaintext password, which could represent a security issue. This
-session state is persisted between function calls by the package. While  
-expiration of the session can be difficult to predict, \pkg{sbtools}
-makes a best effort to supply the user with meaningful error messages.
-
-The authentication function \code{authenticate_sb} can accept a username
-and password. Alternatively, to prevent plaintext passwords in R history, 
-the password can be omitted and will be requested by R interactively. 
-Authentication is persisted by the package, allowing for a single sign-in
-and no tracking of usernames, passwords, or sessions during interactive or
-script-based use. 
 
 %Examples of authentication and other auth-related functions (check and such)
-\begin{example}
 
-
-
-\end{example}
 
 \begin{itemize}
 	\item{How authentication changes SB}
