@@ -277,12 +277,45 @@ not exist or the item is secured and requires authentication to access.
 \end{example}
 
 
-\begin{itemize}
-	\item{Item creation}
-	\item{}
-\end{itemize}
-
 \subsection{SB Item identifiers}
+One advanced and useful feature ScienceBase has is the ability to assign any 
+number of custom item identifiers to items. The custom identifiers are made up 
+of three parts: Scheme, Type and Key. Combined, these create a unique identifier. 
+There are some standard Schemes used in ScienceBase. For example, DOIs (Digital 
+Object Identifier) are stored as item identifiers with the scheme 
+"https://www.sciencebase.gov/vocab/category/item/identifier" and type "DOI". 
+
+\pkg{sbtools} can edit and query custom item identifiers using two functions:
+\code{item\_update\_identifier} and \code{query\_item\_identifier}. 
+
+\begin{example}
+> ident_item = item_create(title='test data')
+> item_update_identifier(ident_item, scheme='proj1', type='data', key='dataset1')
+> ident_item = item_create(title='test publication')
+> item_update_identifier(ident_item, scheme='proj2', type='publication', key='pdf1')
+
+> query_item_identifier(scheme='proj2', type='publication', key='pdf1')
+
+\end{example}
+
+The three-part identifier can be especially useful as a way to organize and 
+access project data. All three parts can be quieried to access specific items 
+directly. But the hierarchical nature can be used to query groups of items as well. 
+For example, all items within the same project could be created with the same 
+scheme. More specifically, a project might have multiple types of items, giving
+users the ability to query items based on the project and category.
+
+\begin{example}
+#query all "project" items
+> query_item_identifier(scheme='proj2')
+
+
+#query just data items for a project
+> query_item_identifier(scheme='proj2', type='data')
+
+\end{example}
+
+
 \begin{itemize}
 	\item{Functionality of item identifiers}
 	\item{Example of identifier use}
