@@ -289,12 +289,16 @@ Object Identifier) are stored as item identifiers with the scheme
 \code{item\_update\_identifier} and \code{query\_item\_identifier}. 
 
 \begin{example}
+#create two items and assign custom identifiers
 > ident_item = item_create(title='test data')
-> item_update_identifier(ident_item, scheme='proj1', type='data', key='dataset1')
+> item_update_identifier(ident_item, scheme='proj2', type='data', key='dataset1')
 > ident_item = item_create(title='test publication')
 > item_update_identifier(ident_item, scheme='proj2', type='publication', key='pdf1')
 
+#query for created item
 > query_item_identifier(scheme='proj2', type='publication', key='pdf1')
+             title                       id
+1 test publication 56a9371ee4b012c193aa3d65
 
 \end{example}
 
@@ -306,12 +310,16 @@ scheme. More specifically, a project might have multiple types of items, giving
 users the ability to query items based on the project and category.
 
 \begin{example}
-#query all "project" items
+#query all items in 'proj2'
 > query_item_identifier(scheme='proj2')
-
+             title                       id
+1 test publication 56a9371ee4b012c193aa3d65
+2        test data 56a93777e4b012c193aa3d68
 
 #query just data items for a project
 > query_item_identifier(scheme='proj2', type='data')
+      title                       id
+1 test data 56a93777e4b012c193aa3d68
 
 \end{example}
 
