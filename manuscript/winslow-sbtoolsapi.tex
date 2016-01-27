@@ -156,8 +156,14 @@ script-based use.
 \end{example}
 
 Most functions in \pkg{sbtools} can be used both anonymously and when
-authenticated. For example, \code{item\_get} works in both modes, but
-private items are not accessible or visible unless authenticated. 
+authenticated. This includes all query and data retrieval functions. 
+When authenticated, these functions may return different results or fail
+depending on the specific task. For example, when trying to access 
+a private item using \code{item\_get}, you must be authenticated, otherwise
+it will throw and error ScienceBase does not differentiate between a missing
+item and an item you don't have permission to access. Search follows a similar
+pattern. When querying items with \code{query\_sb}, public items are always 
+visible while private items are not visible unless authenticated. 
 
 \begin{example}
 #Attempt to get a private item
@@ -192,15 +198,12 @@ private items are not accessible or visible unless authenticated.
 list()
 \end{example}
 
-
-\begin{itemize}
-	\item{How authentication changes SB}
-	\item{Authentication in sbtools}
-	\item{Authentication persistence and use throughout package}
-	\item{Examples of authentication and other auth-related functions (check and such)}
-\end{itemize}
+%Examples of authentication and other auth-related functions (check and such)
 
 \subsection{Data editing and upload API}
+For authenticated users, \pkg{sbtools} has functionality to support 
+the full data lifecycle. 
+
 This will be an extensive section
 \begin{itemize}
 	\item{Item creation}
