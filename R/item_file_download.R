@@ -70,7 +70,7 @@ item_file_download = function(sb_id, ..., names, destinations, dest_dir, session
 	flist = merge(flist, data.frame(fname=names, dest=destinations, stringsAsFactors=FALSE))
 
 	for(i in 1:nrow(flist)){
-		sbtools_GET(url=flist[i,]$url, ..., write_disk(flist[i,]$dest, overwrite = overwrite_file), session=session)
+		GET(url=flist[i,]$url, ..., write_disk(flist[i,]$dest, overwrite = overwrite_file), handle=session)
 	}
 
 	return(path.expand(flist$dest))
