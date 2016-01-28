@@ -10,7 +10,7 @@
 #' @keywords internal
 sbtools_POST <- function(url, body, ..., session){
 	
-	supported_types <- c('text/plain','application/json')
+	supported_types <- c('text/plain', 'application/json')
 	check_session(session)
 	
 	r = POST(url=url, ..., accept_json(), body=body, handle=session) 
@@ -77,7 +77,7 @@ sbtools_PUT <- function(url, body, ..., session) {
 #' @keywords internal
 sbtools_DELETE <- function(url, ..., session) {
 	check_session(session)
-	r = DELETE(url = url, ..., handle = session)
+	r = DELETE(url = url, body = body, accept_json(), handle = session)
 	handle_errors(r, url, "DELETE", NULL)
 	session_age_reset()
 	return(r)
