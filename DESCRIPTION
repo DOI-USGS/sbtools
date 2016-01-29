@@ -1,7 +1,7 @@
 Package: sbtools
 Title: USGS ScienceBase Tools
 Maintainer: Luke Winslow <lwinslow@usgs.gov>
-Version: 0.15.0
+Version: 0.15.1
 Authors@R: c(person("Luke", "Winslow", role = c("aut","cre"),
     email = "lwinslow@usgs.gov"),
     person("Scott", "Chamberlain", role = c("aut"),
@@ -21,7 +21,8 @@ Imports:
 Suggests:
     testthat, 
     gdalUtils,
-    rgdal
+    rgdal,
+    sp
 License: CC0
 URL: https://github.com/USGS-R/sbtools
 BugReports: https://github.com/USGS-R/sbtools/issues

@@ -1,4 +1,4 @@
-#' Get session info
+#' @title Get session info
 #' 
 #' @export
 #' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}
@@ -7,7 +7,7 @@
 #' @examples \dontrun{
 #' session_info()
 #' }
-session_info <- function(..., session = current_session()) {
+session_details <- function(..., session = current_session()) {
 	x <- GET(paste0(pkg.env$url_base, "jossoHelper/sessionInfo"), 
 					 handle = session, ...)
 	stop_for_status(x)
