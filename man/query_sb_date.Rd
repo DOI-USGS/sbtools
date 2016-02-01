@@ -31,7 +31,7 @@ are slow.}
 query_sb_date(Sys.time(), Sys.time())
 
 # find items with publications from the 1970's
-query_sb_date(as.POSIXct('1970-01-01'), as.POSIXct('1980-01-01'), dateType='Publication', limit=1000)
+query_sb_date(as.POSIXct('1970-01-01'), as.POSIXct('1980-01-01'), date_type='Publication', limit=1000)
 
 }
 

@@ -18,15 +18,15 @@
 #' query_sb_date(Sys.time(), Sys.time())
 #' 
 #' # find items with publications from the 1970's
-#' query_sb_date(as.POSIXct('1970-01-01'), as.POSIXct('1980-01-01'), dateType='Publication', limit=1000)
+#' query_sb_date(as.POSIXct('1970-01-01'), as.POSIXct('1980-01-01'), date_type='Publication', limit=1000)
 #' 
 #' }
 #' 
 #' @export
 query_sb_date = function(start=as.POSIXct('1970-01-01'), end=Sys.time(), date_type='lastUpdated', ..., limit=20, session=current_session()){
 	
-	if(!dateType %in% valid_date_types){
-		stop('dateType choice must be identical (including case) to listed options in documentation. See ?query_sb_date')
+	if(!date_type %in% valid_date_types){
+		stop('date_type choice must be identical (including case) to listed options in documentation. See ?query_sb_date')
 	}
 	
 	date_range = paste0('{"dateType":"', date_type, '","choice":"range","start":"', format(start, '%Y-%m-%d'),
