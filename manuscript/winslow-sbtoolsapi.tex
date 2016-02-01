@@ -117,6 +117,12 @@ plot(layer, add=TRUE)
 
 
 \subsection{Search API}
+To support advanced and powerful data discovery, all data 
+in ScienceBase is indexed and made available through a flexible
+search interface. All advanced search options can be experimented 
+with via the  \url[online advanced search interface]{https://www.sciencebase.gov/catalog/items/queryForm}.
+
+
 \begin{itemize}
 	\item{Go over general search API}
 	\item{Free text search}
@@ -127,11 +133,13 @@ plot(layer, add=TRUE)
 \end{itemize}
 
 \subsection{ScienceBase authentication}
-ScienceBase has a large collection of open, reusable datasets and 
-useful metadata. In addition to the public data available, ScienceBase
-is also a platform for sharing and collaboration on private or in-progress 
-data accessible through authenticated sessions. \pkg{sbtools} supports 
-authentication to interact with access controlled items.
+In addition to the large collection of open, reusable datasets and 
+useful metadata ScienceBase has to offer, it is
+also a platform for sharing and collaboration on private, in-progress 
+data available only through authenticated access. To enable 
+private data contribution and access, 
+\pkg{sbtools} has built-in support for persistent 
+authentication of R sessions. 
 
 Authentication in \pkg{sbtools} is handled through the persistence of 
 an authenticated session. By storing only the session, we do not need to 
