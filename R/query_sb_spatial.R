@@ -34,7 +34,7 @@ query_sb_spatial = function(bbox, bb_min, bb_max, bb_wkt, ..., limit=20, session
 	if(!missing(bbox)){
 		if(requireNamespace("sp")){
 			#project first into longlat projection so bounding box is in degrees
-			bb = spTransform(bbox, CRS("+proj=longlat +datum=WGS84"))@bbox
+			bb = sp::spTransform(bbox, sp::CRS("+proj=longlat +datum=WGS84"))@bbox
 			bb_wkt = make_wkt(bb)
 		}else{
 			stop('sp package required to use bbox parameter. Please: install.packages("sp")')
@@ -52,7 +52,7 @@ query_sb_spatial = function(bbox, bb_min, bb_max, bb_wkt, ..., limit=20, session
 		stop('Must supply either bbox sp object or bb_min and bb_max vectors')
 	}
   
-	query_sb(list(spatialQuery = bb_wkt), limt=limit)
+	query_sb(list(spatialQuery = bb_wkt), limit=limit)
 }
 
 make_wkt = function(bb){
