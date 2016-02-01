@@ -1,17 +1,20 @@
 
 \section{The \pkg{sbtools} package}
-\begin{itemize}
-	\item{Goal to allow programmatic access to core SB functionality}
-	\item{Harmonize the SB data structures with common R interfaces}
-	\item{Lightweight R package that can be quickly added to existing projects and shared broadly}
-\end{itemize}
 
+With \pkg{sbtools}, our goal was to allow complete
+access to the ScienceBase web service API in a flexible, lightweight, 
+R package. The package imports a minimal numbrer of external packages
+to support core functionality. More advanced data access (e.g., Geospatial 
+web services) are supported through suggested packages to keep the basic 
+install lightweight and simple on all platforms. Within R, \pkg{sbtools}
+is designed to keep most interactions simple and includes internal 
+handling of complex web service interactions (e.g., authentication) to 
+simplify use for end-users. 
 
-%code example
-% \begin{example}
-  % x <- 1:10
-  % result <- myFunction(x)
-% \end{example}
+Below, we describe briefly the core functions available in \pkg{sbtools} 
+and discuss the unique features of ScienceBase that \pkg{sbtooks} 
+exposes to R users. 
+
 
 \subsection{Data access API}
 The data access functionality of \pkg{sbtools} makes it easy to 
