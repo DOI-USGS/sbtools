@@ -119,18 +119,231 @@ plot(layer, add=TRUE)
 \subsection{Search API}
 To support advanced and powerful data discovery, all data 
 in ScienceBase is indexed and made available through a flexible
-search interface. All advanced search options can be experimented 
-with via the  \href{https://www.sciencebase.gov/catalog/items/queryForm}{online advanced search interface}.
+search interface. \pkg{sbtools} offers a several query
+functions offering different levels of search detail, from
+basic, text-only to advanced, low-level metadata specific search 
+functionality. 
 
 
-\begin{itemize}
-	\item{Go over general search API}
-	\item{Free text search}
-	\item{dateRange query}
-	\item{Spatial query}
-	\item{Hierarchical SB queries (sub-items)}
-	\item{Combination of above}
-\end{itemize}
+Convenient query wrappers are included to support the most common
+query types. These include queries based on free text, date-time range, 
+geospatial bounding box, Digial Object Identifier (DOI) and data types. 
+Below are introductory examples. For presentaiton, we use the \code{limit}
+parameter to limit all queries to the first 2 results. Further details 
+for each query type are available in the package documentation.
+
+ScienceBase items have a number of different metadata fields that contain
+date-time information. For example, items can have attached date-time 
+data which may include creation, modification, report, collection, or 
+publication date. To support the many different options, \code{query\_sb\_date()}
+includes the \code{date\_type} parameter. Different parameter options can then
+yield different results.
+
+\begin{example}
+#Query recently updated 
+> query_sb_date(Sys.time(), Sys.time(), date_type='lastUpdated', limit=2)
+[[1]]
+<ScienceBase Item> 
+  Title: US Topo
+  Creator/LastUpdatedBy:      / 
+  Provenance (Created / Updated):  2012-03-05T22:46:14Z / 2016-02-01T12:11:58Z
+  Children: TRUE
+  Item ID: 4f554236e4b018de15819c85
+  Parent ID: 4f552e93e4b018de15819c51
+  
+[[2]]
+<ScienceBase Item> 
+  Title: USGS US Topo 7.5-minute map for Boyer, IA 2013
+  Creator/LastUpdatedBy:      / 
+  Provenance (Created / Updated):  2014-05-01T08:13:22Z / 2016-02-01T10:21:18Z
+  Children: FALSE
+  Item ID: 53620222e4b0c409c627ec57
+  Parent ID: 5061bc99e4b0ce47085a8d03
+
+#query for data published in the 1970's
+> query_sb_date(as.POSIXct('1970-01-01'), as.POSIXct('1980-01-01'), date_type='Publication', limit=2)
+[[1]]
+<ScienceBase Item> 
+  Title: Common marsh plants of the United States and Canada
+  Creator/LastUpdatedBy:      / 
+  Provenance (Created / Updated):  2010-10-22T22:24:18Z / 2014-07-05T04:55:27Z
+  Children: FALSE
+  Item ID: 4f4e4b24e4b07f02db6ae651
+  Parent ID: 4f4e4771e4b07f02db47e1e4
+
+[[2]]
+<ScienceBase Item> 
+  Title: Structure and mineralization of Precambrian rocks in the Galena-Roubaix district, Black Hills, South Dakota
+  Creator/LastUpdatedBy:      / 
+  Provenance (Created / Updated):  2010-10-23T00:28:32Z / 2014-07-21T20:14:53Z
+  Children: FALSE
+  Item ID: 4f4e4b14e4b07f02db6a47a6
+  Parent ID: 4f4e4771e4b07f02db47e1e4
+  
+\end{example}
+
+Each item can be described by a data type tag. Because this field is free-text, it can take on a 
+number of different values. The function \code{sb\_datatypes()} returns the list of currently used 
+data type tags on ScienceBase. \code{query\_sb\_datatype} can be used to query for items described
+with a specific data type.
+
+\begin{example}
+#List first 50 available data types
+> sb_datatypes(limit = 50)
+ [1] "Application"                                 "ArcGIS Map Package"                "ArcGIS REST Map Service"                    
+ [4] "ArcGIS Service Definition"                   "ArcIMS Catalog"                    "ArcIMS Metadata"                            
+ [7] "BASIS+ Project"                              "BASIS+ Subtask"                    "BASIS+ Task"                                
+[10] "Book Citation"                               "Citation"                          "Clearinghouse"                              
+[13] "Collection"                                  "Conference Citation"               "Digital Map - Beta"                         
+[16] "Document"                                    "Downloadable"                      "Electronic Book Citation"                   
+[19] "GeoProcessing Service"                       "GeoTIFF"                           "Glass Plate Photonegative"                  
+[22] "High-Resolution Scanned Topo Maps"           "Journal Citation"                  "Live Data"                                  
+[25] "Low-Resolution Scanned Topo Maps PDF"        "Map Service"                       "National Map Digital Map - Beta"            
+[28] "NetCDF OPeNDAP Service"                      "News"                              "NGTOC Open File Report GeoPDF"              
+[31] "NSDI Cooperative Agreements Program Project" "Offline Data"                      "OGC WFS Layer"                              
+[34] "OGC WMS Layer"                               "OGC WMS Service"                   "Photonegative"                              
+[37] "Print"                                       "Raster"                            "Report"                                     
+[40] "Report Citation"                             "ScienceBase Citation"              "ScienceBase Information Article"            
+[43] "ScienceBase Project"                         "sdc"                               "Shapefile"                                  
+[46] "Static Map Image"                            "Thesis Citation"                   "US Topo"                                    
+
+#Query ScienceBase for US Topographic data
+> query_sb_datatype('US Topo')
+[[1]]
+<ScienceBase Item> 
+  Title: USGS Geoscience Data Catalog
+  Creator/LastUpdatedBy:      / 
+  Provenance (Created / Updated):  2014-05-22T19:06:52Z / 2015-02-05T18:41:43Z
+  Children: TRUE
+  Item ID: 537e4acce4b05ed6215c0a18
+  Parent ID: 527cf4ede4b0850ea05182ee
+
+[[2]]
+<ScienceBase Item> 
+  Title: TNC repeat photographs
+  Creator/LastUpdatedBy:      / 
+  Provenance (Created / Updated):  2014-10-16T22:11:20Z / 2015-04-01T22:25:37Z
+  Children: TRUE
+  Item ID: 54404288e4b0b0a643c73143
+  Parent ID: 54247f49e4b037b608f9edd1
+\end{example}
+
+
+On ScienceBase, the preferred way of storing an item's DOI is using the custom item
+identifier fields. \code{query\_sb\_doi()} can query those fields specifically for 
+a DOI. Here are examples of querying items by DOI on ScienceBase.
+\begin{example}
+#some item DOI's have 'doi:' appended to the front of them for some reason
+query_sb_doi('doi:10.5066/F7M043G7')
+[[1]]
+<ScienceBase Item> 
+  Title: 2013 Raw Ground Penetrating Radar Data on Alaska's Glaciers
+  Creator/LastUpdatedBy:      / 
+  Provenance (Created / Updated):  2015-06-15T16:55:03Z / 2015-12-15T20:39:06Z
+  Children: TRUE
+  Item ID: 557f0367e4b023124e8ef621
+  Parent ID: 5474ec49e4b04d7459a7eab2
+  
+#others do not
+query_sb_doi('10.1126/science.aab1345')
+[[1]]
+<ScienceBase Item> 
+  Title: High-rate injection is associated with the increase in U.S. mid-continent seismicity
+  Creator/LastUpdatedBy:      / 
+  Provenance (Created / Updated):  2015-06-23T19:52:11Z / 2015-07-06T21:08:26Z
+  Children: FALSE
+  Item ID: 5589b8ebe4b0b6d21dd63b5a
+  Parent ID: 511033e1e4b048b5cead8548
+\end{example}
+
+Data with a geospatial component to their data or metadata can be queried using a 
+Lat/Lon bounding box. \pkg{sbtools} provides the function \code{query\_sb\_spatial()}
+which can be used by directly supplying lat/long bounding box coordinates, or has
+helpful parameters that can use the bounding box from \code{sp} spatial objects. Because
+spatial functionality requires packages beyond those imported by \pkg{sbtools} by default,
+these functions will require the \pkg{sp} and \pkg{gdalUtils} packages be installed. 
+
+\begin{example}
+##specify the lat/long corners of the bounding box
+> query_sb_spatial(bb_min=c(-104.4, 37.5), bb_max=c(-95.1, 41.0))
+[[1]]
+<ScienceBase Item> 
+  Title: National Fish Habitat Partnership Data System
+  Creator/LastUpdatedBy:      / 
+  Provenance (Created / Updated):  2012-02-29T15:42:43Z / 2015-11-12T20:19:30Z
+  Children: TRUE
+  Item ID: 4f4e4773e4b07f02db47e241
+  Parent ID: 4f4e4760e4b07f02db47df9c
+
+[[2]]
+<ScienceBase Item> 
+  Title: Geo Data Portal Catalog
+  Creator/LastUpdatedBy:      / 
+  Provenance (Created / Updated):  2015-02-12T22:03:18Z / 2015-11-24T22:38:06Z
+  Children: TRUE
+  Item ID: 54dd2326e4b08de9379b2fb1
+  Parent ID: 4f4e4760e4b07f02db47df9c
+
+##You can also use the bounding box of an sp spatial data object 
+#grab an sp object from a pre-determined ScienceBase Item
+> layer = item_get_wfs('55e372b9e4b05561fa208212')
+
+#get items in that BB
+> query_sb_spatial(layer, limit=2)
+[[1]]
+<ScienceBase Item> 
+  Title: National Fish Habitat Partnership Data System
+  Creator/LastUpdatedBy:      / 
+  Provenance (Created / Updated):  2012-02-29T15:42:43Z / 2015-11-12T20:19:30Z
+  Children: TRUE
+  Item ID: 4f4e4773e4b07f02db47e241
+  Parent ID: 4f4e4760e4b07f02db47df9c
+
+[[2]]
+<ScienceBase Item> 
+  Title: USGS Denver Library Photographic Collection
+  Creator/LastUpdatedBy:      / 
+  Provenance (Created / Updated):  2013-05-21T16:28:19Z / 2016-01-04T15:44:20Z
+  Children: TRUE
+  Item ID: 519ba0a3e4b0e4e151ef5dd9
+  Parent ID: 4f4e4771e4b07f02db47e1da
+
+\end{example}
+
+Lastly, \pkg{sbtools} offers advanced access to all query capabilities through
+the \code{query\_items()} and \code{query\_sb()} functions. \code{query\_items()} allows
+the user to supply a list of query parameters (options described in the documentation), 
+submit that query to ScienceBase, and receive the raw HTTP response (as an \pkg{httr} 
+response object). \code{query\_sb()} provides a convenient wrapper that parses the output
+into a list of \code{sbitem} objects and also does proper result paging when the requested
+return length (limit) is over 1000 items. All advanced search options can be experimented 
+with via the  \href{https://www.sciencebase.gov/catalog/items/queryForm}
+{online advanced search interface}. 
+
+\begin{example}
+
+# query_sb can be used for combined search criteria
+> query_sb(list(q = "water", folderId = '504216b9e4b04b508bfd337d', broserCategory = 'Image'), limit=2)
+[[1]]
+<ScienceBase Item> 
+  Title: Encyclopedia of Water Science
+  Creator/LastUpdatedBy:      / 
+  Provenance (Created / Updated):  2013-04-18T15:06:38Z / 2013-04-18T15:06:38Z
+  Children: FALSE
+  Item ID: 51700bfee4b05024ef3cd4ef
+  Parent ID: 504216b9e4b04b508bfd337d
+
+[[2]]
+<ScienceBase Item> 
+  Title: Introduction to special section on Impacts of Land Use Change on Water Resources
+  Creator/LastUpdatedBy:      / 
+  Provenance (Created / Updated):  2013-04-18T15:07:35Z / 2013-04-18T15:07:35Z
+  Children: FALSE
+  Item ID: 51700c37e4b05024ef3cd4fd
+  Parent ID: 504216b9e4b04b508bfd337d
+
+\end{example}
+
 
 \subsection{ScienceBase authentication}
 In addition to the large collection of open, reusable datasets and 
