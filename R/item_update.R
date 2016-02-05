@@ -18,10 +18,7 @@
 item_update = function(sb_id, info, ..., session=current_session()){
 	
 	item <- as.sbitem(sb_id)
-	
-	if (!is.list(info)) {
-		stop('Info must be a list of name-value pairs that can be serialized into JSON')
-	}
+	is_info_list(info)
 	
 	r = sbtools_PUT(url = paste0(pkg.env$url_item, item$id), 
 									body = toJSON(info, auto_unbox = TRUE, null='null'),
