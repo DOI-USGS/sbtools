@@ -1,10 +1,16 @@
 \section{Introduction}
 
-As computing tools become more powerful, leveraging that power to
-create useful tools to open and accelerate science is an important issue
-of our time. One area of rapid development is the archiving, sharing,
-and integration of reserach data into reproducible workflows. For example,
-Figshare (ref), DataOne (ref), and Dataverse (ref) are all different data research data
+Cloud data storage platforms can be a powerful tool for research collaboration,
+distributed computing, and data publication. However, while browser-based graphical
+interfaces make these platforms accessible to a wide audience, there is also
+a strong need for scripted data handling so that researchers can rigorously
+document data provenance and create reproducible analyses.
+% As computing tools become more powerful, leveraging that power to
+% create useful tools to open and accelerate science is an important issue
+% of our time. One area of rapid development is the archiving, sharing,
+% and integration of research data into reproducible workflows.
+For example,
+Figshare (ref), DataOne (ref), and Dataverse (ref) are all data research data
 sharing platforms gaining use in different research fields. For each of these
 platforms, the community has released (\cite{rfigshare}, \cite{dvn}) or is
 developing (\cite{dataone}) R packages to streamline the storage and access
@@ -15,18 +21,24 @@ accessible research products. But data- and code-intensive collaborative project
 increasingly need collaborative solutions for data storage, sharing, and updating
 throughout the full lifecycle of the project. Furthermore, many of these data
 archive platforms focus on academic research projects and do not support some
-of the unique needs of federal reserach.
+of the unique needs of federal research.
+% what are those unique needs?
 
 To address future scientific data sharing and archival challenges, the USGS
-created ScienceBase (https://www.sciencebase.gov/catalog/). This platform is designed to support
+created ScienceBase (https://www.sciencebase.gov/catalog/). This platform is
+designed to support
 the full project data lifecycle and has seen rapid adoption with USGS
 researchers and collaborators. ScienceBase supports the storage and access
 of large files and datasets. It allows data to be stored with a mixture of
 public and controlled access and has been designed from the beginning with
-first-class RESTful web interfaces to support robust API access.
+first-class RESTful web interfaces to support robust API access. It also allows
+a seamless transition from project development to data publication, with
+a focus on public data access once data have been released.
 
 To expand the usefulness of the ScienceBase platform, we have designed and
-implemented an R interface to ScienceBase called \cite{sbtools}. Here we
-describe unique and useful features of ScienceBase, and how we have implemented
-R interfaces to make them accessible and useful from R.
-
+implemented an R interface to ScienceBase called \pkg{sbtools} (\cite{sbtools}).
+This interface provides scripted R access to ScienceBase to manage metadata and
+data files, to search the catalog of datasets, and to view and modify data in
+formats familiar to R users.
+Here we describe unique and useful features of ScienceBase, and how we have
+implemented the R interface to make them accessible and useful from R.

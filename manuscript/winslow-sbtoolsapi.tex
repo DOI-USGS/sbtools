@@ -2,11 +2,11 @@
 \section{The \pkg{sbtools} package}
 
 With \pkg{sbtools}, our goal was to allow complete
-access to the ScienceBase web service API in a flexible, lightweight,
+access to the ScienceBase web service API in a flexible, lightweight
 R package. The package imports a minimal number of external packages
-to support core functionality. More advanced data access (e.g., Geospatial
-web services) are supported through suggested packages to keep the basic
-install lightweight and simple on all platforms. Within R, \pkg{sbtools}
+to support core functionality. More advanced data access (e.g., geospatial
+web services) is supported through suggested packages to keep the basic
+installation quick on all platforms. Within R, \pkg{sbtools}
 is designed to keep most interactions simple and includes internal
 handling of complex web service interactions (e.g., authentication) to
 simplify use for end-users.
@@ -18,9 +18,10 @@ exposes to R users.
 
 \subsection{Data access API}
 The data access functionality of \pkg{sbtools} makes it easy to
-access any public item's data, attached files and metadata. All items
-in ScienceBase have a unique identifier that can be used to directly
-access specific items.
+access any public item. Every item in ScienceBase has a unique identifier
+that can be used for direct access to the item and its associated data and
+metadata. A lightweight representation of this information is created in R
+with the \code{item_get} function.
 
 \begin{example}
 > test_item = item_get("4f4e4b24e4b07f02db6aea14")
@@ -34,10 +35,12 @@ access specific items.
   Parent ID: 4f4e4771e4b07f02db47e1e4
 \end{example}
 
-For convenience, \pkg{sbtools} defines an \code{sbitem} object, which is
-returned by \pkg{sbtools} functions when referencing objects. The underlying
-data structure is a list. All available metadata for an item can be listed
-and accessed in the same way as a named list.
+This representation is defined by \pkg{sbtools} as an \code{sbitem} object,
+which contains many fields and can be further inspected in the same
+way as a named list.
+
+% do you need to call item_get(test_item)$citation, or can you just use
+% test_item$citation?
 
 \begin{example}
 > names(test_item)
@@ -55,11 +58,16 @@ and glaciological maps of Antarctica:  Fact SheetCoastal-change and
 glaciological maps of Antarctica."
 \end{example}
 
-On ScienceBase, all items are organized in a tree structure, with one
+On ScienceBase, the item tree hierarchy means that each item has one
 parent and potentially many children. \pkg{sbtools} allows the user to
-easily traverse the tree structure. For example, in some projects, the hierarchy has
-important meaning. For other projects, it may relates to the user or
+easily traverse the tree structure. In some projects, the hierarchy has
+important meaning. For other projects, it may relate to the user or
 organizational owner of the data.
+
+% we could consider adding functions to get the actual parent and child
+% items rather than just their IDs - e.g., item_get_parent() returns one sbitem
+% and item_get_children() returns a list of sbitems. Save the user from wrapping
+% all this in item_get() calls.
 
 \begin{example}
 #parent ID always available as item attribute
@@ -83,7 +91,7 @@ ScienceBase items may have data or metadata files attached to them.
 You can list and download attached files directly using \pkg{sbtools}.
 
 \begin{example}
-#returns files attached to item
+#returns names of files attached to item
 item_list_files(test_item)
 #returns local path to downloaded files
 item_file_download(test_item, dest_dir = tempdir())
@@ -92,11 +100,12 @@ item_file_download(test_item, dest_dir = tempdir())
 ScienceBase has special functionality when certain data types are
 stored. One example is spatial data. When spatial data are properly
 tagged and uploaded to ScienceBase, they can be accessed using OGC
+% define OGC and/or give link?
 web services. \pkg{sbtools} has included ability to access the Web
 Feature Service (WFS) available for certain items.
 
 \begin{example}
-#Source non-sbtools-required but useful mapping packages
+#Load non-sbtools-required but useful mapping packages
 library(maps)
 library(sp)
 #an item with an included OGC WFS service
@@ -114,34 +123,52 @@ plot(layer, add=TRUE)
    visualized on top of the outline for the state of Iowa}
    \label{figure:iowafig}
  \end{figure}
+% should figure out & say what the map means and include citation
 
 
 \subsection{Search API}
-To support advanced and powerful data discovery, all data
-in ScienceBase is indexed and made available through a flexible
+To support advanced and powerful data discovery, all datasets
+in ScienceBase are indexed and made available through a flexible
 search interface. \pkg{sbtools} offers several query
 functions with different levels of search detail, from
 basic, text-only to advanced, and low-level metadata specific search
 functionality.
+% i want more specifics in the previous sentence. what constitutes 'basic'?
+% what non-text features are available? when you search text, which text
+% are you searching? what's so low-level about searching the metadata? when
+% you search the metadata, are you searching stuff like timestamps or like
+% the paragraphs of metadata text that an author put in there?
 
+Query functions are included to support the most common query types. These
+include queries based on free text, project folder, date-time range, geospatial
+bounding box, Digital Object Identifier (DOI), and data types. To save space in
+the examples below, we use the \code{limit} parameter to limit all queries to
+the first two results. Further details for each query type are available in the
+package documentation.
 
-Convenient query wrappers are included to support the most common
-query types. These include queries based on free text, date-time range,
-geospatial bounding box, Digial Object Identifier (DOI) and data types.
-Below are introductory examples. For presentaiton, we use the \code{limit}
-parameter to limit all queries to the first 2 results. Further details
-for each query type are available in the package documentation.
+% need a free text query example
+The free text of a ScienceBase item includes the item's title, authors, ....
+This text can be searched with the \code{query_???} function.
 
-ScienceBase items have a number of different metadata fields that contain
-date-time information. For example, items can have attached date-time
-data which may include creation, modification, report, collection, or
-publication date. To support the many different options, \code{query\_sb\_date()}
-includes the \code{date\_type} parameter. Different parameter options can then
-yield different results.
+Items can also be queried according to their position in the hierarchical item
+tree.
 
 \begin{example}
-#Query recently updated
-> query_sb_date(Sys.time(), Sys.time(), date_type='lastUpdated', limit=2)
+#query items in a specific project folder
+> query_item_in_folder("map data", folder="proj2item")
+# need to find real example
+\end{example}
+
+Date-time information for ScienceBase items may include the date of
+data creation, modification, report, collection, and/or
+publication. \pkg{sbtools} users may search any of these
+date-time fields using the \code{date\_type} argument to the
+\code{query\_sb\_date()} function.
+
+\begin{example}
+#Query recently updated items
+> query_sb_date(Sys.time()-as.difftime(7, units="days"), Sys.time(),
++    date_type='lastUpdated', limit=2)
 [[1]]
 <ScienceBase Item>
   Title: US Topo
@@ -160,8 +187,9 @@ yield different results.
   Item ID: 53620222e4b0c409c627ec57
   Parent ID: 5061bc99e4b0ce47085a8d03
 
-#query for data published in the 1970's
-> query_sb_date(as.POSIXct('1970-01-01'), as.POSIXct('1980-01-01'), date_type='Publication', limit=2)
+#Query for data published in the 1970's
+> query_sb_date(as.POSIXct('1970-01-01'), as.POSIXct('1980-01-01'),
++   date_type='Publication', limit=2)
 [[1]]
 <ScienceBase Item>
   Title: Common marsh plants of the United States and Canada
@@ -182,10 +210,11 @@ yield different results.
 
 \end{example}
 
-Each item can be described by a data type tag. Because this field is free-text, it can take on a
-number of different values. The function \code{sb\_datatypes()} returns the list of currently used
-data type tags on ScienceBase. \code{query\_sb\_datatype} can be used to query for items described
-with a specific data type.
+Each item can be described by a data type tag. Because this field is free-text,
+it can take on a number of different values. The function \code{sb\_datatypes()}
+returns the list of currently used data type tags on ScienceBase.
+\code{query\_sb\_datatype} can be used to query for items described with a
+specific data type.
 
 \begin{example}
 #List first 50 available data types
@@ -207,7 +236,7 @@ with a specific data type.
 [43] "ScienceBase Project"                         "sdc"                               "Shapefile"
 [46] "Static Map Image"                            "Thesis Citation"                   "US Topo"
 
-#Query ScienceBase for US Topographic data
+#Query for US Topographic data
 > query_sb_datatype('US Topo')
 [[1]]
 <ScienceBase Item>
@@ -228,12 +257,13 @@ with a specific data type.
   Parent ID: 54247f49e4b037b608f9edd1
 \end{example}
 
-
+% it would be great if query_sb_doi could search for dois with or without a
+% preceding 'doi:' without the user ever having to include that 'doi:' text
 On ScienceBase, the preferred way of storing an item's DOI is using the custom item
 identifier fields. \code{query\_sb\_doi()} can query those fields specifically for
 a DOI. Here are examples of querying items by DOI on ScienceBase.
 \begin{example}
-#some item DOI's have 'doi:' appended to the front of them for some reason
+#some item DOIs have 'doi:' appended to the front of them for some reason
 query_sb_doi('doi:10.5066/F7M043G7')
 [[1]]
 <ScienceBase Item>
@@ -256,12 +286,13 @@ query_sb_doi('10.1126/science.aab1345')
   Parent ID: 511033e1e4b048b5cead8548
 \end{example}
 
-Data with a geospatial component to their data or metadata can be queried using a
-Lat/Lon bounding box. \pkg{sbtools} provides the function \code{query\_sb\_spatial()}
-which can be used by directly supplying lat/long bounding box coordinates, or has
-helpful parameters that can use the bounding box from \code{sp} spatial objects. Because
+Items with a geospatial component to their data or metadata can be queried using a
+Lat/Lon bounding box with the function \code{query\_sb\_spatial()}. The
+bounding box may be directly specified with coordinates or indirectly specified
+by supplying another spatial object whose bounding box should be used. Because
 spatial functionality requires packages beyond those imported by \pkg{sbtools} by default,
-these functions will require the \pkg{sp} and \pkg{gdalUtils} packages be installed.
+the \pkg{sp} and \pkg{gdalUtils} packages must be installed to use these functions.
+% do they need to be loaded, as well?
 
 \begin{example}
 ##specify the lat/long corners of the bounding box
@@ -288,7 +319,7 @@ these functions will require the \pkg{sp} and \pkg{gdalUtils} packages be instal
 #grab an sp object from a pre-determined ScienceBase Item
 > layer = item_get_wfs('55e372b9e4b05561fa208212')
 
-#get items in that BB
+#get items in that bounding box
 > query_sb_spatial(layer, limit=2)
 [[1]]
 <ScienceBase Item>
@@ -317,8 +348,11 @@ submit that query to ScienceBase, and receive the raw HTTP response (as an \pkg{
 response object). \code{query\_sb()} provides a convenient wrapper that parses the output
 into a list of \code{sbitem} objects and also does proper result paging when the requested
 return length (limit) is over 1000 items. All advanced search options can be experimented
-with via the  \href{https://www.sciencebase.gov/catalog/items/queryForm}
+with via the \href{https://www.sciencebase.gov/catalog/items/queryForm}
 {online advanced search interface}.
+
+% can we get away with keeping query_items to ourselves and just talking about
+% query_sb here? Seems very low level and useful to only a small subset of users.
 
 \begin{example}
 
@@ -344,6 +378,9 @@ with via the  \href{https://www.sciencebase.gov/catalog/items/queryForm}
 
 \end{example}
 
+% can you combine the date, spatial, etc. queries mentioned above? even if
+% it's just finding the intersection of several sets, an example could be useful.
+% or if query_sb can do this, even better.
 
 \subsection{ScienceBase authentication}
 In addition to the large collection of open, reusable datasets and
@@ -354,24 +391,19 @@ private data contribution and access,
 \pkg{sbtools} has built-in support for persistent
 authentication of R sessions.
 
-Authentication in \pkg{sbtools} is handled through the persistence of
-an authenticated session. By storing only the session, we do not need to
-store the plaintext password, which could represent a security issue. This
-session state is persisted between function calls by the package. While
-expiration of the session can be difficult to predict, \pkg{sbtools}
-makes a best effort to supply the user with meaningful error messages.
-
-The authentication function \code{authenticate\_sb()} can accept a username
-and password. Alternatively, to prevent plaintext passwords in R history,
-the password can be omitted and will be requested by R interactively.
-Authentication is persisted by the package, allowing for a single sign-in
-and no tracking of usernames, passwords, or sessions during interactive or
-script-based use.
+In \pkg{sbtools}, users can log into ScienceBase with their ScienceBase username
+and password using the function \code{authenticate\_sb()}. To prevent plain-text
+passwords from being saved in the R command history, the password can be typed
+into a pop-up window. \pkg{sbtools} only stores the authenticated session,
+thereby maintaining the confidentiality of the user's credentials. ScienceBase
+sessions remain active for roughly one hour and are renewed each time a request
+is made. \pkg{sbtools} makes a best effort to supply the user with meaningful
+error messages when a session may have expired.
 
 %Authentication in sbtools
 \begin{example}
 #to start an authenticated session
-> authenticate_sb('username@usgs.gov')
+> authenticate_sb('username@usgs.gov') #password entered into pop-up window
 > is_logged_in()
 [1] TRUE
 > session_logout()
@@ -380,17 +412,18 @@ script-based use.
 \end{example}
 
 Most functions in \pkg{sbtools} can be used both anonymously and when
-authenticated. This includes all query and data retrieval functions.
-When authenticated, these functions may return different results or fail
-depending on the specific task. For example, when trying to access
-a private item using \code{item\_get()}, you must be authenticated, otherwise
-it will throw and error ScienceBase does not differentiate between a missing
-item and an item you don't have permission to access. Search follows a similar
-pattern. When querying items with \code{query\_sb()}, public items are always
-visible while private items are not visible unless authenticated.
+authenticated. This includes all data retrieval and query functions. The
+behavior of these functions depends on the user's authentication status and
+access permissions. For example, when trying to access a private item using
+\code{item\_get()}, you must be authenticated or will receive an error that the
+item is missing. To maintain privacy, ScienceBase does not differentiate between
+a missing item and an item you don't have permission to access. Search is also
+dependent on authentication status. When querying items with \code{query\_sb()},
+public items are always visible while private items are invisible unless
+authenticated.
 
 \begin{example}
-#Attempt to get a private item
+#Attempt to get a private item without authentication
 > item_get('55de0027e4b0518e354dfcf0')
  Error: Item not found for ID=55de0027e4b0518e354dfcf0. Either the
  item does not exist or the item is secured and requires authentication to access.
@@ -406,8 +439,7 @@ visible while private items are not visible unless authenticated.
   Item ID: 55de0027e4b0518e354dfcf0
   Parent ID: 54257d8fe4b0e641df8b50af
 
-#search expands to include user's private items when authenticated
-#query while authenticated
+#Search results include user's private items when authenticated
 > query_sb(list(q='username@usgs.gov'))
  <ScienceBase Item>
   Title: Example Private Item
@@ -417,24 +449,26 @@ visible while private items are not visible unless authenticated.
   Item ID: 55de0027e4b0518e354dfcf0
   Parent ID: 54257d8fe4b0e641df8b50af
 
+#Search results hide private items when not authenticated
 > session_logout()
 > query_sb(list(q='username@usgs.gov'))
 list()
 \end{example}
 
 %Examples of authentication and other auth-related functions (check and such)
+% these are available above, aren't they?
 
 \subsection{Data editing and upload API}
-For authenticated users, \pkg{sbtools} has functionality to support
+For authenticated users, \pkg{sbtools} can support
 the full data lifecycle. This includes the creation, editing and removal
 of items. Because item editing and creation cannot be done anonymously,
 this functionality only works while authenticated.
 
-When we create new items, the only required inputs are "Parent Item" and "title". All
-items must have a non-empty title and a parent item. ScienceBase makes basic item creation
-easy as all users have a personal home folder (called "My Items" on ScienceBase) and by default,
-new items are created with that parent. The funciton \code{user\_id()} retrieves the
-unique identifier for the user's home folder.
+To create new items, the only required input to \code{item_create} is "title".
+The "Parent Item" may also be specified. All users have a personal home folder
+(called "My Items" on the ScienceBase website) that serves as the default Parent
+Item for new items. The unique identifier of a user's home folder can be
+retrieved with the function \code{user\_id()}.
 
 \begin{example}
 #create new item, by default under "My Items" parent
@@ -449,11 +483,11 @@ unique identifier for the user's home folder.
   Parent ID: 54257d8fe4b0e641df8b50af
 \end{example}
 
-Once an item is created, we can edit the metadata or attach data files to that
-item using \pkg{sbtools}.
+Once an item is created, an authenticated user can edit the metadata or attach
+data files to that item.
 
 \begin{example}
-#giving the item a new title
+#give the item a new title
 > edited_item = item_update(new_item, list(title='new updated item'))
 > edited_item
 <ScienceBase Item>
@@ -464,7 +498,7 @@ item using \pkg{sbtools}.
   Item ID: 56a91f0ce4b0b28f1184dda8
   Parent ID: 54257d8fe4b0e641df8b50af
 
-#appending files to item
+#append files to the item
 > item_list_files(new_item)
 data frame with 0 columns and 0 rows
 
@@ -472,29 +506,26 @@ data frame with 0 columns and 0 rows
 > item_list_files(edited_item)
       fname size     url
 1 README.md 1282     https://www.sciencebase.gov/[long URL truncated]
-
-
 \end{example}
 
-A full set of functions is also provided to modify and delete attached
-files and delete items.
+Functions are also provided to modify and delete attached files and to delete
+entire items.
 
 \begin{example}
-#files can be selectively replaced with files of the same name
+#list currently attached files
 > item_list_files(edited_item)
       fname size     url
 1 README.md 1282     https://www.sciencebase.gov/[long URL truncated]
 
-# all=FALSE replaces files one by one, otherwise all files are removed
-# before uploading the new files
+#selectively replace files. all=FALSE replaces files one by one;
+#otherwise all files are removed before uploading the new files
 > item_replace_files(new_item, 'README.md', all = FALSE)
 > item_list_files(edited_item)
       fname size     url
 1 README.md 608     https://www.sciencebase.gov/[long URL truncated]
 
-#our item is easily deleted as well (use with caution, there is no confirmation)
+#delete item. use with caution; there is no confirmation check
 > item_rm(edited_item)
-
 > item_get(edited_item)
 Error: Item not found for ID=56a91f0ce4b0b28f1184dda8. Either the item does
 not exist or the item is secured and requires authentication to access.
@@ -502,15 +533,16 @@ not exist or the item is secured and requires authentication to access.
 
 
 \subsection{SB Item identifiers}
-One advanced and useful feature ScienceBase has is the ability to assign any
+One advanced feature of ScienceBase is the ability to assign any
 number of custom item identifiers to items. The custom identifiers are made up
 of three parts: Scheme, Type and Key. Combined, these create a unique identifier.
 There are some standard Schemes used in ScienceBase. For example, DOIs (Digital
-Object Identifier) are stored as item identifiers with the scheme
-"https://www.sciencebase.gov/vocab/category/item/identifier" and type "DOI".
+Object Identifiers) are stored as item identifiers with the Scheme
+"https://www.sciencebase.gov/vocab/category/item/identifier" and Type "DOI".
 
-\pkg{sbtools} can edit and query custom item identifiers using two functions:
-\code{item\_update\_identifier} and \code{query\_item\_identifier}.
+\pkg{sbtools} can edit and query custom item identifiers using
+\code{item\_update\_identifier} and \code{query\_item\_identifier},
+respectively.
 
 \begin{example}
 #create two items and assign custom identifiers
@@ -523,15 +555,14 @@ Object Identifier) are stored as item identifiers with the scheme
 > query_item_identifier(scheme='proj2', type='publication', key='pdf1')
              title                       id
 1 test publication 56a9371ee4b012c193aa3d65
-
 \end{example}
+% is it possible to query for just one or two of these, e.g., just scheme & type?
 
-The three-part identifier can be especially useful as a way to organize and
-access project data. All three parts can be quieried to access specific items
-directly. But the hierarchical nature can be used to query groups of items as well.
-For example, all items within the same project could be created with the same
-scheme. More specifically, a project might have multiple types of items, giving
-users the ability to query items based on the project and category.
+The three-part identifier can be especially useful as a way to
+organize and access project data. For example, all items within the same project
+could be created with the same scheme and differing types or keys, allowing
+users to query items within the project using custom tags that are meaningful to
+that project.
 
 \begin{example}
 #query all items in 'proj2'
@@ -544,7 +575,4 @@ users the ability to query items based on the project and category.
 > query_item_identifier(scheme='proj2', type='data')
       title                       id
 1 test data 56a93777e4b012c193aa3d68
-
 \end{example}
-
-
