@@ -1,17 +1,19 @@
 \section{USGS ScienceBase}
 
-To facilitate and encourage data sharing and dissemination, 
-the U.S. Geological Survey has created ScienceBase, an online 
-collaborative scientific data platform (Figure \ref{fig:sbfig}). To support collaborative 
+To facilitate and encourage data sharing and dissemination,
+the U.S. Geological Survey has created ScienceBase, an online
+collaborative scientific data platform (Figure \ref{fig:sbfig}). To support collaborative
 data workflows, ScienceBase has four key elements. 1) Data and metadata
-cataloging and hosting with options for private, controlled access 
+cataloging and hosting with options for private, controlled access
 and fully public sharing of data and metadata. 2) Central search and
-data discovery including metadata search for linked, non-hosted data. 
-3) Full web-service support for all core functionality, including 
-standards-based access to specific data types (e.g., Geospatial 
-datasets). 4) Research community catalogs to 
-enable the organization of data along collaborative group and 
-organizational boundaries. 
+data discovery including metadata search for linked, non-hosted data.
+% I don't understand the importance of linked, non-hosted data. Provide some
+% motivation here?
+3) Full web-service support for all core functionality, including
+standards-based access to specific data types (e.g., geospatial
+datasets). 4) Research community catalogs to
+enable the organization of data along collaborative group and
+organizational boundaries.
 
  \begin{figure}[htbp]
    \centering
@@ -20,21 +22,22 @@ organizational boundaries.
    \label{figure:sbfig}
  \end{figure}
 
-ScienceBase functionality revolves around the organization of data 
-items in a hierarchical structure. These items are flexible representations
-of a single dataset with metadata attached. ScienceBase can be used to
-store the raw data with attached metadata, or be only the metadata 
-repository with links to external data repositories. These data items
-are organized into a tree hierarchy (much like the organization of files
-on a hard drive). This makes the organization of data by collaborative 
-group, project, and/or individual data owner simple. 
+ScienceBase users store data in 'items', where each item is a flexible
+representation of a dataset and its metadata. The dataset component of an
+item can be one or more data files in any format or simply a lightweight
+link to an external data repository.
+% again wanting an argument/example for the importance of this linked data idea
+Items are organized into a tree hierarchy (much like the structure of files and
+folders on a hard drive). This allows data to be intuitively organized by the
+institution, collaborative group, and/or individual to whom
+the data belongs. At the same time, items can also be assigned identifying tags
+for rapid search and data discovery across the full ScienceBase catalog.
 
-Search and access of ScienceBase data items can be accomplished through
-a variety of useful interfaces. For manual search and data editing, 
-the ScienceBase website offers full functional interfaces. Automated
-access is supported by robust REST-ful web services that support all 
-functionality offered by the human interfaces. 
+Search and management of ScienceBase data items can be accomplished through
+both graphical and scripted interfaces. Manual search, data upload/download, and
+metadata editing are possible through the ScienceBase website.
+Automated access to all of these functions is supported by robust RESTful web
+services and a documented API.
 
-The ScienceBase code and infrastructure setup is available upon 
+The ScienceBase code and infrastructure setup is available upon
 request from the ScienceBase team <sciencebase@usgs.gov>.
-
