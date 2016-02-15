@@ -8,5 +8,5 @@
 #' is_logged_in()
 #' }
 is_logged_in <- function(..., session = current_session()) {
-	session_details(..., session = session)$isLoggedIn
+	!is.null(session) && session_details(..., session = session)$isLoggedIn
 }
