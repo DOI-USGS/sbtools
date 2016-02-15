@@ -21,7 +21,7 @@ Imports:
 Suggests:
     testthat, 
     gdalUtils,
-    rgdal,
+    rgdal, 
     sp
 License: CC0
 URL: https://github.com/USGS-R/sbtools
