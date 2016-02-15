@@ -21,7 +21,7 @@ The data access functionality of \pkg{sbtools} makes it easy to
 access any public item. Every item in ScienceBase has a unique identifier
 that can be used for direct access to the item and its associated data and
 metadata. A lightweight representation of this information is created in R
-with the \code{item_get} function.
+with the \code{item\_get} function.
 
 \begin{example}
 > test_item = item_get("4f4e4b24e4b07f02db6aea14")
@@ -148,7 +148,7 @@ package documentation.
 
 % need a free text query example
 The free text of a ScienceBase item includes the item's title, authors, ....
-This text can be searched with the \code{query_???} function.
+This text can be searched with the \code{query\_???} function.
 
 Items can also be queried according to their position in the hierarchical item
 tree.
@@ -464,10 +464,10 @@ the full data lifecycle. This includes the creation, editing and removal
 of items. Because item editing and creation cannot be done anonymously,
 this functionality only works while authenticated.
 
-To create new items, the only required input to \code{item_create} is "title".
+To create new items, the only required input to \code{item\_create} is "title".
 The "Parent Item" may also be specified. All users have a personal home folder
 (called "My Items" on the ScienceBase website) that serves as the default Parent
-Item for new items. The unique identifier of a user's home folder can be
+Item for new items. The unique identifier of a user`s home folder can be
 retrieved with the function \code{user\_id()}.
 
 \begin{example}
