@@ -42,7 +42,7 @@ pluck <- function(x, name, type) {
 }
 
 check_session <- function(x) {
-	if (!is_logged_in(x))
+	if (!session_authorized(x))
 		stop('session is not authorized. See ?authenticate_sb', call. = FALSE)	
 }
 
