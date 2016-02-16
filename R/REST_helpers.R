@@ -85,7 +85,7 @@ sbtools_DELETE <- function(url, ..., session) {
 
 # HEAD fxn
 sbtools_HEAD <- function(url, ..., session) {
-	check_session(session)
+	session_val(session)
 	r <- HEAD(url = url, ..., handle = session)
 	log <- if (r$status_code == 200) TRUE else FALSE
 	session_age_reset()

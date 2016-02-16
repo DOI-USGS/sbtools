@@ -26,10 +26,10 @@ and we only want to make a quick HEAD request.
 \examples{
 \dontrun{
 # identifier exists
-identifier_exists(id = "4f4e4b24e4b07f02db6aea14")
+identifier_exists(sb_id = "4f4e4b24e4b07f02db6aea14")
 
 # identifier does not exist
-identifier_exists(id = "aaaaaaakkkkkkkbbbbbb")
+identifier_exists(sb_id = "aaaaaaakkkkkkkbbbbbb")
 }
 }
 

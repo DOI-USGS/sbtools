@@ -8,10 +8,10 @@
 #' @return Logical, \code{TRUE} or \code{FALSE}
 #' @examples \dontrun{
 #' # identifier exists
-#' identifier_exists(id = "4f4e4b24e4b07f02db6aea14")
+#' identifier_exists(sb_id = "4f4e4b24e4b07f02db6aea14")
 #' 
 #' # identifier does not exist
-#' identifier_exists(id = "aaaaaaakkkkkkkbbbbbb")
+#' identifier_exists(sb_id = "aaaaaaakkkkkkkbbbbbb")
 #' }
 identifier_exists <- function(sb_id, ..., session = current_session()) {
 	sb_id = as.sbitem(sb_id)
