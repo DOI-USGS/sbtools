@@ -127,28 +127,25 @@ plot(layer, add=TRUE)
 To support advanced and powerful data discovery, all datasets
 in ScienceBase are indexed and made available through a flexible
 search interface. \pkg{sbtools} offers several query
-functions with different levels of search detail, from
-basic, text-only to advanced, and low-level metadata specific search
+functions with different levels of search specificity, from
+cross-metadata simple text search to low-level, metadata specific search
 functionality.
-% i want more specifics in the previous sentence. what constitutes 'basic'?
-% what non-text features are available? when you search text, which text
-% are you searching? what's so low-level about searching the metadata? when
-% you search the metadata, are you searching stuff like timestamps or like
-% the paragraphs of metadata text that an author put in there?
 
-Query functions are included to support the most common query types. These
-include queries based on free text, project folder, date-time range, geospatial
-bounding box, Digital Object Identifier (DOI), and data types. To save space in
+In \pkg{sbtools}, query functions are included to support the most common query types. 
+Included functions are available to search based on free-text, project folder, 
+date-time range, geospatial
+bounding box, Digital Object Identifier (DOI), and data type. To save space in
 the examples below, we use the \code{limit} parameter to limit all queries to
 the first two results. Further details for each query type are available in the
 package documentation.
 
 
-The free text of a ScienceBase item is a simple and general search that 
-includes the all of an item's text-based metadata fields. For example, free-text 
+The ScienceBase free-text search is a simple to use and generic as it 
+searches across all of an item's text-based metadata fields. Free-text 
 search can find specific text strings in almost all metadata fields, including 
 but not limited to filenames, summary fields, citation, contacts, and authors. 
-Spatial metadata is not searched in this way. Using \pkg{sbtools} a free-text 
+Spatial reference metadata is an example of a field not searched through the 
+free-text search. Using \pkg{sbtools}, a free-text 
 search can be run with the \code{query\_sb\_text} function.
 
 \begin{example}
