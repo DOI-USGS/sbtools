@@ -39,9 +39,6 @@ This representation is defined by \pkg{sbtools} as an \code{sbitem} object,
 which contains many fields and can be further inspected in the same
 way as a named list.
 
-% do you need to call item_get(test_item)$citation, or can you just use
-% test_item$citation?
-
 \begin{example}
 > names(test_item)
  [1] "link"              "relatedItems"      "id"
@@ -52,7 +49,7 @@ way as a named list.
 [16] "facets"            "files"             "distributionLinks"
 [19] "previewImage"
 
-> item_get(test_item)$citation
+> test_item$citation
 [1] "Geological Survey (U.S.), 1999-08-05, Coastal-change
 and glaciological maps of Antarctica:  Fact SheetCoastal-change and
 glaciological maps of Antarctica."
@@ -99,8 +96,8 @@ item_file_download(test_item, dest_dir = tempdir())
 
 ScienceBase has special functionality when certain data types are
 stored. One example is spatial data. When spatial data are properly
-tagged and uploaded to ScienceBase, they can be accessed using OGC
-% define OGC and/or give link?
+tagged and uploaded to ScienceBase, they can be accessed using 
+Open Geospatial Consortium (\href{http://www.opengeospatial.org/}{OGC}) 
 web services. \pkg{sbtools} has included ability to access the Web
 Feature Service (WFS) available for certain items.
 
@@ -146,9 +143,25 @@ the examples below, we use the \code{limit} parameter to limit all queries to
 the first two results. Further details for each query type are available in the
 package documentation.
 
-% need a free text query example
-The free text of a ScienceBase item includes the item's title, authors, ....
-This text can be searched with the \code{query\_???} function.
+
+The free text of a ScienceBase item is a simple and general search that 
+includes the all of an item's text-based metadata fields. For example, free-text 
+search can find specific text strings in almost all metadata fields, including 
+but not limited to filenames, summary fields, citation, contacts, and authors. 
+Spatial metadata is not searched in this way. Using \pkg{sbtools} a free-text 
+search can be run with the \code{query\_sb\_text} function.
+
+\begin{example}
+> query_sb_text('Antarctica', limit=1)
+[[1]]
+<ScienceBase Item> 
+  Title: Antarctica. Erratic near camp 13. December 12, 1977.
+  Creator/LastUpdatedBy:      / 
+  Provenance (Created / Updated):  2013-07-09T15:38:45Z / 2016-03-02T23:55:43Z
+  Children: FALSE
+  Item ID: 51dc2e85e4b0f81004b79cf0
+  Parent ID: 519ba0a3e4b0e4e151ef5dd9
+\end{example}
 
 Items can also be queried according to their position in the hierarchical item
 tree.
@@ -201,7 +214,8 @@ date-time fields using the \code{date\_type} argument to the
 
 [[2]]
 <ScienceBase Item>
-  Title: Structure and mineralization of Precambrian rocks in the Galena-Roubaix district, Black Hills, South Dakota
+  Title: Structure and mineralization of Precambrian rocks in the Galena-
+         Roubaix district, Black Hills, South Dakota
   Creator/LastUpdatedBy:      /
   Provenance (Created / Updated):  2010-10-23T00:28:32Z / 2014-07-21T20:14:53Z
   Children: FALSE
@@ -219,22 +233,17 @@ specific data type.
 \begin{example}
 #List first 50 available data types
 > sb_datatypes(limit = 50)
- [1] "Application"                                 "ArcGIS Map Package"                "ArcGIS REST Map Service"
- [4] "ArcGIS Service Definition"                   "ArcIMS Catalog"                    "ArcIMS Metadata"
- [7] "BASIS+ Project"                              "BASIS+ Subtask"                    "BASIS+ Task"
-[10] "Book Citation"                               "Citation"                          "Clearinghouse"
-[13] "Collection"                                  "Conference Citation"               "Digital Map - Beta"
-[16] "Document"                                    "Downloadable"                      "Electronic Book Citation"
-[19] "GeoProcessing Service"                       "GeoTIFF"                           "Glass Plate Photonegative"
-[22] "High-Resolution Scanned Topo Maps"           "Journal Citation"                  "Live Data"
-[25] "Low-Resolution Scanned Topo Maps PDF"        "Map Service"                       "National Map Digital Map - Beta"
-[28] "NetCDF OPeNDAP Service"                      "News"                              "NGTOC Open File Report GeoPDF"
-[31] "NSDI Cooperative Agreements Program Project" "Offline Data"                      "OGC WFS Layer"
-[34] "OGC WMS Layer"                               "OGC WMS Service"                   "Photonegative"
-[37] "Print"                                       "Raster"                            "Report"
-[40] "Report Citation"                             "ScienceBase Citation"              "ScienceBase Information Article"
-[43] "ScienceBase Project"                         "sdc"                               "Shapefile"
-[46] "Static Map Image"                            "Thesis Citation"                   "US Topo"
+ [1] "Application"               "ArcGIS Map Package"       
+ [3] "ArcGIS REST Map Service"   "ArcGIS Service Definition"
+ [5] "ArcIMS Catalog"            "ArcIMS Metadata"          
+ [7] "BASIS+ Project"            "BASIS+ Subtask"           
+ [9] "BASIS+ Task"               "Book Citation"            
+[11] "Citation"                  "Clearinghouse"            
+[13] "Collection"                "Conference Citation"      
+[15] "Digital Map - Beta"        "Document"                 
+[17] "Downloadable"              "Electronic Book Citation" 
+[19] "GeoProcessing Service"     "GeoTIFF"  
+
 
 #Query for US Topographic data
 > query_sb_datatype('US Topo')
@@ -263,7 +272,7 @@ On ScienceBase, the preferred way of storing an item's DOI is using the custom i
 identifier fields. \code{query\_sb\_doi()} can query those fields specifically for
 a DOI. Here are examples of querying items by DOI on ScienceBase.
 \begin{example}
-#some item DOIs have 'doi:' appended to the front of them for some reason
+#some item DOIs have 'doi:' appended to the front of them
 query_sb_doi('doi:10.5066/F7M043G7')
 [[1]]
 <ScienceBase Item>
@@ -342,17 +351,14 @@ the \pkg{sp} and \pkg{gdalUtils} packages must be installed to use these functio
 \end{example}
 
 Lastly, \pkg{sbtools} offers advanced access to all query capabilities through
-the \code{query\_items()} and \code{query\_sb()} functions. \code{query\_items()} allows
-the user to supply a list of query parameters (options described in the documentation),
-submit that query to ScienceBase, and receive the raw HTTP response (as an \pkg{httr}
-response object). \code{query\_sb()} provides a convenient wrapper that parses the output
-into a list of \code{sbitem} objects and also does proper result paging when the requested
+the \code{query\_sb()} function. \code{query\_sb()} provides a convenient wrapper that 
+allows the user to supply a list of query parameters (options described in the documentation),
+submits that query to ScienceBase and parses the output
+into a list of \code{sbitem} objects. When necessary, \code{query\_sb()} 
+also does proper result paging when the requested
 return length (limit) is over 1000 items. All advanced search options can be experimented
 with via the \href{https://www.sciencebase.gov/catalog/items/queryForm}
 {online advanced search interface}.
-
-% can we get away with keeping query_items to ourselves and just talking about
-% query_sb here? Seems very low level and useful to only a small subset of users.
 
 \begin{example}
 
@@ -383,6 +389,7 @@ with via the \href{https://www.sciencebase.gov/catalog/items/queryForm}
 % or if query_sb can do this, even better.
 
 \subsection{ScienceBase authentication}
+
 In addition to the large collection of open, reusable datasets and
 useful metadata ScienceBase has to offer, it is
 also a platform for sharing and collaboration on private, in-progress
@@ -455,8 +462,33 @@ authenticated.
 list()
 \end{example}
 
-%Examples of authentication and other auth-related functions (check and such)
-% these are available above, aren't they?
+The authentication status can be quickly checked and updated 
+with a few helper functions.
+
+\begin{example}
+#See if user is authenticated to SB
+> is_logged_in()
+[1] TRUE
+
+#Get details of authenticated session 
+> session_details()
+$fullDisplayName
+[1] "User McUseface [username@usgs.gov]"
+$isLoggedIn
+[1] TRUE
+$displayName
+[1] "User McUseface"
+$email
+[1] "username@usgs.gov"
+$username
+[1] "username@usgs.gov"
+
+#Renew a session to prevent expiration after 1 hour
+> session_renew()
+
+
+\end{example}
+
 
 \subsection{Data editing and upload API}
 For authenticated users, \pkg{sbtools} can support

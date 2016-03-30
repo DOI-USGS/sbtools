@@ -6,10 +6,8 @@ collaborative scientific data platform (Figure \ref{figure:sbfig}). To support c
 data workflows, ScienceBase has four key elements. 1) Data and metadata
 cataloging and hosting with options for private, controlled access
 and fully public sharing of data and metadata. 2) Central search and
-data discovery including metadata search for linked, non-hosted data.
-% I don't understand the importance of linked, non-hosted data. Provide some
-% motivation here?
-3) Full web-service support for all core functionality, including
+data discovery for both data hosted on ScienceBase and externally hosted 
+data. 3) Full web-service support for all core functionality, including
 standards-based access to specific data types (e.g., geospatial
 datasets). 4) Research community catalogs to
 enable the organization of data along collaborative group and
@@ -24,10 +22,11 @@ organizational boundaries.
 
 ScienceBase users store data in 'items', where each item is a flexible
 representation of a dataset and its metadata. The dataset component of an
-item can be one or more data files in any format or simply a lightweight
-link to an external data repository.
-% again wanting an argument/example for the importance of this linked data idea
-Items are organized into a tree hierarchy (much like the structure of files and
+item can be one or more data files in any format or simply an item with descriptive
+metadata linking a dataset hosted on an external repository. This supports
+indexing of legacy datasets that are hosted in well known locations (for example, 
+the USGS National Hydrography Dataset). Items are organized into a tree hierarchy 
+(much like the structure of files and
 folders on a hard drive). This allows data to be intuitively organized by the
 institution, collaborative group, and/or individual to whom
 the data belongs. At the same time, items can also be assigned identifying tags
