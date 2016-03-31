@@ -26,10 +26,9 @@ Queries for ScienceBase items with a specific DOI identifier.
 In ScienceBase, these are stored as additional unique identifiers.
 }
 \examples{
-#some item DOI's have 'doi:' appended to the front of them for some reason
-query_sb_doi('doi:10.5066/F7M043G7')
+#Two example DOI-specific queries
+query_sb_doi('10.5066/F7M043G7')
 
-#others do not
 query_sb_doi('10.1126/science.aab1345')
 
 }

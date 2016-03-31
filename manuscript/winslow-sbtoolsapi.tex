@@ -89,9 +89,14 @@ You can list and download attached files directly using \pkg{sbtools}.
 
 \begin{example}
 #returns names of files attached to item
-item_list_files(test_item)
+> item_list_files(test_item)
+                              fname size  url
+  1 metadata6644450227216673613.xml 1742  https://www.sciencebase.gov/[truncated]
+
 #returns local path to downloaded files
-item_file_download(test_item, dest_dir = tempdir())
+> item_file_download(test_item, dest_dir = tempdir())
+[1] "\\path\\to\\file\\RtmpgBV2fn/metadata6644450227216673613.xml"
+
 \end{example}
 
 ScienceBase has special functionality when certain data types are
@@ -116,11 +121,12 @@ plot(layer, add=TRUE)
  \begin{figure}[htbp]
    \centering
    \includegraphics{mapfig}
-   \caption{An example spatial dataset from ScienceBase,
-   visualized on top of the outline for the state of Iowa}
+   \caption{An example spatial dataset from ScienceBase. 
+   Shows high priority regions in Iowa containing shallow
+   lakes and marshes to create management emphasis areas 
+   for migratory water fowl habitat.}
    \label{figure:iowafig}
  \end{figure}
-% should figure out & say what the map means and include citation
 
 
 \subsection{Search API}
@@ -263,14 +269,14 @@ specific data type.
   Parent ID: 54247f49e4b037b608f9edd1
 \end{example}
 
-% it would be great if query_sb_doi could search for dois with or without a
-% preceding 'doi:' without the user ever having to include that 'doi:' text
+
 On ScienceBase, the preferred way of storing an item's DOI is using the custom item
 identifier fields. \code{query\_sb\_doi()} can query those fields specifically for
 a DOI. Here are examples of querying items by DOI on ScienceBase.
+
 \begin{example}
-#some item DOIs have 'doi:' appended to the front of them
-query_sb_doi('doi:10.5066/F7M043G7')
+#Two example DOI-specific queries
+query_sb_doi('10.5066/F7M043G7')
 [[1]]
 <ScienceBase Item>
   Title: 2013 Raw Ground Penetrating Radar Data on Alaska's Glaciers
@@ -280,7 +286,6 @@ query_sb_doi('doi:10.5066/F7M043G7')
   Item ID: 557f0367e4b023124e8ef621
   Parent ID: 5474ec49e4b04d7459a7eab2
 
-#others do not
 query_sb_doi('10.1126/science.aab1345')
 [[1]]
 <ScienceBase Item>
@@ -298,7 +303,6 @@ bounding box may be directly specified with coordinates or indirectly specified
 by supplying another spatial object whose bounding box should be used. Because
 spatial functionality requires packages beyond those imported by \pkg{sbtools} by default,
 the \pkg{sp} and \pkg{gdalUtils} packages must be installed to use these functions.
-% do they need to be loaded, as well?
 
 \begin{example}
 ##specify the lat/long corners of the bounding box
@@ -403,7 +407,7 @@ thereby maintaining the confidentiality of the user's credentials. ScienceBase
 sessions remain active for roughly one hour and are renewed each time a request
 is made. \pkg{sbtools} makes a best effort to supply the user with meaningful
 error messages when a session may have expired.
-
+\rule{\textwidth}{1pt}
 %Authentication in sbtools
 \begin{example}
 #to start an authenticated session
@@ -585,7 +589,6 @@ respectively.
              title                       id
 1 test publication 56a9371ee4b012c193aa3d65
 \end{example}
-% is it possible to query for just one or two of these, e.g., just scheme & type?
 
 The three-part identifier can be especially useful as a way to
 organize and access project data. For example, all items within the same project
