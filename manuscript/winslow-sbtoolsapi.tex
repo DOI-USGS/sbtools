@@ -179,13 +179,31 @@ search can be run with the \code{query\_sb\_text} function.
 \noindent\rule{\textwidth}{0.4pt}
 
 Items can also be queried according to their position in the hierarchical item
-tree.
+tree. For example, the Climate Science Centers all have sections on ScienceBase
+where funded project information is stored. Below is an example of looking for 
+lake related items under the NE Climate Science Center area. 
 
 \noindent\rule{\textwidth}{0.4pt}
 \begin{example}
-#query items in a specific project folder
-> query_item_in_folder("map data", folder="proj2item")
-# need to find real example
+#Look for items referencing "Lake Superior" under the NE Climate Science Center projects
+> query_item_in_folder("Lake Superior", folder="4f8c648de4b0546c0c397b43", limit=2)
+[[1]]	
+<ScienceBase Item> 
+  Title: The Role of Lake-Dotted Landscapes in Regional Climate Change [...]
+  Creator/LastUpdatedBy:      / 
+  Provenance (Created / Updated):  2013-12-31T17:46:16Z / 2013-12-31T17:46:16Z
+  Children: FALSE	
+  Item ID: 52c302e8e4b040b25da9d35a
+  Parent ID: 51db0ebce4b010c7f6a814bf
+
+[[2]]
+<ScienceBase Item> 
+  Title: The influence of land use and [...] in Lake Superior tributaries
+  Creator/LastUpdatedBy:      / 
+  Provenance (Created / Updated):  2013-12-31T17:45:51Z / 2013-12-31T17:45:51Z
+  Children: FALSE
+  Item ID: 52c302cfe4b040b25da9ce3c
+  Parent ID: 51db0ebce4b010c7f6a814bf
 \end{example}
 \noindent\rule{\textwidth}{0.4pt}
 
