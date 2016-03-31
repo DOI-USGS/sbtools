@@ -41,6 +41,7 @@ This representation is defined by \pkg{sbtools} as an \code{sbitem} object,
 which contains many fields and can be further inspected in the same
 way as a named list.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 > names(test_item)
  [1] "link"              "relatedItems"      "id"
@@ -56,6 +57,7 @@ way as a named list.
 and glaciological maps of Antarctica:  Fact SheetCoastal-change and
 glaciological maps of Antarctica."
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 On ScienceBase, the item tree hierarchy means that each item has one
 parent and potentially many children. \pkg{sbtools} allows the user to
@@ -68,6 +70,7 @@ organizational owner of the data.
 % and item_get_children() returns a list of sbitems. Save the user from wrapping
 % all this in item_get() calls.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #parent ID always available as item attribute
 > parent = item_get(test_item$parentId)
@@ -85,10 +88,12 @@ organizational owner of the data.
 [3] "55b361b3e4b09a3b01b5daad" "53516ef9e4b05569d8059f34"
 [5] "4f4e4ab2e4b07f02db66f5e3" "5351704ee4b05569d805a2e4"
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 ScienceBase items may have data or metadata files attached to them.
 You can list and download attached files directly using \pkg{sbtools}.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #returns names of files attached to item
 > item_list_files(test_item)
@@ -100,6 +105,7 @@ You can list and download attached files directly using \pkg{sbtools}.
 [1] "\\path\\to\\file\\RtmpgBV2fn/metadata6644450227216673613.xml"
 
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 ScienceBase has special functionality when certain data types are
 stored. One example is spatial data. When spatial data are properly
@@ -108,6 +114,7 @@ Open Geospatial Consortium (\href{http://www.opengeospatial.org/}{OGC})
 web services. \pkg{sbtools} has included ability to access the Web
 Feature Service (WFS) available for certain items.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #Load non-sbtools-required but useful mapping packages
 library(maps)
@@ -117,6 +124,7 @@ layer = item_get_wfs('55e372b9e4b05561fa208212')
 map('state', regions='iowa')
 plot(layer, add=TRUE)
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 %this figure code is demo\figure_map_code.R
 % feel free to improve
@@ -156,6 +164,7 @@ Spatial reference metadata is an example of a field not searched through the
 free-text search. Using \pkg{sbtools}, a free-text 
 search can be run with the \code{query\_sb\_text} function.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 > query_sb_text('Antarctica', limit=1)
 [[1]]
@@ -167,15 +176,18 @@ search can be run with the \code{query\_sb\_text} function.
   Item ID: 51dc2e85e4b0f81004b79cf0
   Parent ID: 519ba0a3e4b0e4e151ef5dd9
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 Items can also be queried according to their position in the hierarchical item
 tree.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #query items in a specific project folder
 > query_item_in_folder("map data", folder="proj2item")
 # need to find real example
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 Date-time information for ScienceBase items may include the date of
 data creation, modification, report, collection, and/or
@@ -183,6 +195,7 @@ publication. \pkg{sbtools} users may search any of these
 date-time fields using the \code{date\_type} argument to the
 \code{query\_sb\_date()} function.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #Query recently updated items
 > query_sb_date(Sys.time()-as.difftime(7, units="days"), Sys.time(),
@@ -228,6 +241,7 @@ date-time fields using the \code{date\_type} argument to the
   Parent ID: 4f4e4771e4b07f02db47e1e4
 
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 Each item can be described by a data type tag. Because this field is free-text,
 it can take on a number of different values. The function \code{sb\_datatypes()}
@@ -235,6 +249,7 @@ returns the list of currently used data type tags on ScienceBase.
 \code{query\_sb\_datatype} can be used to query for items described with a
 specific data type.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #List first 50 available data types
 > sb_datatypes(limit = 50)
@@ -270,12 +285,13 @@ specific data type.
   Item ID: 54404288e4b0b0a643c73143
   Parent ID: 54247f49e4b037b608f9edd1
 \end{example}
-
+\noindent\rule{\textwidth}{0.4pt}
 
 On ScienceBase, the preferred way of storing an item's DOI is using the custom item
 identifier fields. \code{query\_sb\_doi()} can query those fields specifically for
 a DOI. Here are examples of querying items by DOI on ScienceBase.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #Two example DOI-specific queries
 query_sb_doi('10.5066/F7M043G7')
@@ -298,6 +314,7 @@ query_sb_doi('10.1126/science.aab1345')
   Item ID: 5589b8ebe4b0b6d21dd63b5a
   Parent ID: 511033e1e4b048b5cead8548
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 Items with a geospatial component to their data or metadata can be queried using a
 Lat/Lon bounding box with the function \code{query\_sb\_spatial()}. The
@@ -306,6 +323,7 @@ by supplying another spatial object whose bounding box should be used. Because
 spatial functionality requires packages beyond those imported by \pkg{sbtools} by default,
 the \pkg{sp} and \pkg{gdalUtils} packages must be installed to use these functions.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 ##specify the lat/long corners of the bounding box
 > query_sb_spatial(bb_min=c(-104.4, 37.5), bb_max=c(-95.1, 41.0))
@@ -352,6 +370,7 @@ the \pkg{sp} and \pkg{gdalUtils} packages must be installed to use these functio
   Parent ID: 4f4e4771e4b07f02db47e1da
 
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 Lastly, \pkg{sbtools} offers advanced access to all query capabilities through
 the \code{query\_sb()} function. \code{query\_sb()} provides a convenient wrapper that 
@@ -363,6 +382,7 @@ return length (limit) is over 1000 items. All advanced search options can be exp
 with via the \href{https://www.sciencebase.gov/catalog/items/queryForm}
 {online advanced search interface}.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 
 # query_sb can be used for combined search criteria
@@ -386,6 +406,7 @@ with via the \href{https://www.sciencebase.gov/catalog/items/queryForm}
   Parent ID: 504216b9e4b04b508bfd337d
 
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 % can you combine the date, spatial, etc. queries mentioned above? even if
 % it's just finding the intersection of several sets, an example could be useful.
@@ -410,7 +431,7 @@ sessions remain active for roughly one hour and are renewed each time a request
 is made. \pkg{sbtools} makes a best effort to supply the user with meaningful
 error messages when a session may have expired.
 
-\rule{\textwidth}{0.4pt}
+\noindent\rule{\textwidth}{0.4pt}
 %Authentication in sbtools
 \begin{example}
 #to start an authenticated session
@@ -421,7 +442,7 @@ error messages when a session may have expired.
 > is_logged_in()
 [1] FALSE
 \end{example}
-\rule{\textwidth}{0.4pt}
+\noindent\rule{\textwidth}{0.4pt}
 
 Most functions in \pkg{sbtools} can be used both anonymously and when
 authenticated. This includes all data retrieval and query functions. The
@@ -434,7 +455,7 @@ dependent on authentication status. When querying items with \code{query\_sb()},
 public items are always visible while private items are invisible unless
 authenticated.
 
-\rule{\textwidth}{0.4pt}
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #Attempt to get a private item without authentication
 > item_get('55de0027e4b0518e354dfcf0')
@@ -467,11 +488,12 @@ authenticated.
 > query_sb(list(q='username@usgs.gov'))
 list()
 \end{example}
-\rule{\textwidth}{0.4pt}
+\noindent\rule{\textwidth}{0.4pt}
 
 The authentication status can be quickly checked and updated 
 with a few helper functions.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #See if user is authenticated to SB
 > is_logged_in()
@@ -493,9 +515,8 @@ $username
 #Renew a session to prevent expiration after 1 hour
 > session_renew()
 
-
 \end{example}
-
+\noindent\rule{\textwidth}{0.4pt}
 
 \subsection{Data editing and upload API}
 For authenticated users, \pkg{sbtools} can support
@@ -509,6 +530,7 @@ The "Parent Item" may also be specified. All users have a personal home folder
 Item for new items. The unique identifier of a user`s home folder can be
 retrieved with the function \code{user\_id()}.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #create new item, by default under "My Items" parent
 > new_item = item_create(title='new test item')
@@ -521,10 +543,12 @@ retrieved with the function \code{user\_id()}.
   Item ID: 56a91f0ce4b0b28f1184dda8
   Parent ID: 54257d8fe4b0e641df8b50af
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 Once an item is created, an authenticated user can edit the metadata or attach
 data files to that item.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #give the item a new title
 > edited_item = item_update(new_item, list(title='new updated item'))
@@ -546,10 +570,12 @@ data frame with 0 columns and 0 rows
       fname size     url
 1 README.md 1282     https://www.sciencebase.gov/[long URL truncated]
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 Functions are also provided to modify and delete attached files and to delete
 entire items.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #list currently attached files
 > item_list_files(edited_item)
@@ -569,7 +595,7 @@ entire items.
 Error: Item not found for ID=56a91f0ce4b0b28f1184dda8. Either the item does
 not exist or the item is secured and requires authentication to access.
 \end{example}
-
+\noindent\rule{\textwidth}{0.4pt}
 
 \subsection{SB Item identifiers}
 One advanced feature of ScienceBase is the ability to assign any
@@ -583,6 +609,7 @@ Object Identifiers) are stored as item identifiers with the Scheme
 \code{item\_update\_identifier} and \code{query\_item\_identifier},
 respectively.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #create two items and assign custom identifiers
 > ident_item = item_create(title='test data')
@@ -595,6 +622,7 @@ respectively.
              title                       id
 1 test publication 56a9371ee4b012c193aa3d65
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 The three-part identifier can be especially useful as a way to
 organize and access project data. For example, all items within the same project
@@ -602,6 +630,7 @@ could be created with the same scheme and differing types or keys, allowing
 users to query items within the project using custom tags that are meaningful to
 that project.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #query all items in 'proj2'
 > query_item_identifier(scheme='proj2')
@@ -614,3 +643,4 @@ that project.
       title                       id
 1 test data 56a93777e4b012c193aa3d68
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
