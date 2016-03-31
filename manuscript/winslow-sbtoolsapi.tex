@@ -23,6 +23,7 @@ that can be used for direct access to the item and its associated data and
 metadata. A lightweight representation of this information is created in R
 with the \code{item\_get} function.
 
+\rule{\textwidth}{0.4pt}
 \begin{example}
 > test_item = item_get("4f4e4b24e4b07f02db6aea14")
 > test_item
@@ -34,6 +35,7 @@ with the \code{item\_get} function.
   Item ID: 4f4e4b24e4b07f02db6aea14
   Parent ID: 4f4e4771e4b07f02db47e1e4
 \end{example}
+\rule{\textwidth}{0.4pt}
 
 This representation is defined by \pkg{sbtools} as an \code{sbitem} object,
 which contains many fields and can be further inspected in the same
@@ -407,7 +409,8 @@ thereby maintaining the confidentiality of the user's credentials. ScienceBase
 sessions remain active for roughly one hour and are renewed each time a request
 is made. \pkg{sbtools} makes a best effort to supply the user with meaningful
 error messages when a session may have expired.
-\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.4pt}}
+
+\rule{\textwidth}{0.4pt}
 %Authentication in sbtools
 \begin{example}
 #to start an authenticated session
@@ -418,6 +421,7 @@ error messages when a session may have expired.
 > is_logged_in()
 [1] FALSE
 \end{example}
+\rule{\textwidth}{0.4pt}
 
 Most functions in \pkg{sbtools} can be used both anonymously and when
 authenticated. This includes all data retrieval and query functions. The
@@ -430,6 +434,7 @@ dependent on authentication status. When querying items with \code{query\_sb()},
 public items are always visible while private items are invisible unless
 authenticated.
 
+\rule{\textwidth}{0.4pt}
 \begin{example}
 #Attempt to get a private item without authentication
 > item_get('55de0027e4b0518e354dfcf0')
@@ -462,6 +467,7 @@ authenticated.
 > query_sb(list(q='username@usgs.gov'))
 list()
 \end{example}
+\rule{\textwidth}{0.4pt}
 
 The authentication status can be quickly checked and updated 
 with a few helper functions.
