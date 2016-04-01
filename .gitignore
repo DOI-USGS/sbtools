@@ -3,3 +3,7 @@
 .RData
 .DS_Store
 .Renviron
+manuscript/RJwrapper.log
+manuscript/RJwrapper.aux
+manuscript/RJwrapper.out
+manuscript/RJwrapper.pdf

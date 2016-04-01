@@ -19,6 +19,9 @@ items only}
 
 \item{limit}{Max number of matching items to return}
 }
+\value{
+A list of matching items as sbitem objects.
+}
 \description{
 Search for text in the title, abstract, etc. within an SB folder and any
 subfolders.

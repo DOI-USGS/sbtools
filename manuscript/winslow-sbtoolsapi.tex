@@ -21,8 +21,9 @@ The data access functionality of \pkg{sbtools} makes it easy to
 access any public item. Every item in ScienceBase has a unique identifier
 that can be used for direct access to the item and its associated data and
 metadata. A lightweight representation of this information is created in R
-with the \code{item_get} function.
+with the \code{item\_get} function.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 > test_item = item_get("4f4e4b24e4b07f02db6aea14")
 > test_item
@@ -34,14 +35,13 @@ with the \code{item_get} function.
   Item ID: 4f4e4b24e4b07f02db6aea14
   Parent ID: 4f4e4771e4b07f02db47e1e4
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 This representation is defined by \pkg{sbtools} as an \code{sbitem} object,
 which contains many fields and can be further inspected in the same
 way as a named list.
 
-% do you need to call item_get(test_item)$citation, or can you just use
-% test_item$citation?
-
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 > names(test_item)
  [1] "link"              "relatedItems"      "id"
@@ -52,11 +52,12 @@ way as a named list.
 [16] "facets"            "files"             "distributionLinks"
 [19] "previewImage"
 
-> item_get(test_item)$citation
+> test_item$citation
 [1] "Geological Survey (U.S.), 1999-08-05, Coastal-change
 and glaciological maps of Antarctica:  Fact SheetCoastal-change and
 glaciological maps of Antarctica."
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 On ScienceBase, the item tree hierarchy means that each item has one
 parent and potentially many children. \pkg{sbtools} allows the user to
@@ -69,6 +70,7 @@ organizational owner of the data.
 % and item_get_children() returns a list of sbitems. Save the user from wrapping
 % all this in item_get() calls.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #parent ID always available as item attribute
 > parent = item_get(test_item$parentId)
@@ -86,24 +88,33 @@ organizational owner of the data.
 [3] "55b361b3e4b09a3b01b5daad" "53516ef9e4b05569d8059f34"
 [5] "4f4e4ab2e4b07f02db66f5e3" "5351704ee4b05569d805a2e4"
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 ScienceBase items may have data or metadata files attached to them.
 You can list and download attached files directly using \pkg{sbtools}.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #returns names of files attached to item
-item_list_files(test_item)
+> item_list_files(test_item)
+                              fname size  url
+  1 metadata6644450227216673613.xml 1742  https://www.sciencebase.gov/[truncated]
+
 #returns local path to downloaded files
-item_file_download(test_item, dest_dir = tempdir())
+> item_file_download(test_item, dest_dir = tempdir())
+[1] "\\path\\to\\file\\RtmpgBV2fn/metadata6644450227216673613.xml"
+
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 ScienceBase has special functionality when certain data types are
 stored. One example is spatial data. When spatial data are properly
-tagged and uploaded to ScienceBase, they can be accessed using OGC
-% define OGC and/or give link?
+tagged and uploaded to ScienceBase, they can be accessed using 
+Open Geospatial Consortium (\href{http://www.opengeospatial.org/}{OGC}) 
 web services. \pkg{sbtools} has included ability to access the Web
 Feature Service (WFS) available for certain items.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #Load non-sbtools-required but useful mapping packages
 library(maps)
@@ -113,51 +124,88 @@ layer = item_get_wfs('55e372b9e4b05561fa208212')
 map('state', regions='iowa')
 plot(layer, add=TRUE)
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 %this figure code is demo\figure_map_code.R
 % feel free to improve
  \begin{figure}[htbp]
    \centering
    \includegraphics{mapfig}
-   \caption{An example spatial dataset from ScienceBase,
-   visualized on top of the outline for the state of Iowa}
+   \caption{An example spatial dataset from ScienceBase. 
+   Shows high priority regions in Iowa containing shallow
+   lakes and marshes to create management emphasis areas 
+   for migratory water fowl habitat.}
    \label{figure:iowafig}
  \end{figure}
-% should figure out & say what the map means and include citation
 
 
 \subsection{Search API}
 To support advanced and powerful data discovery, all datasets
 in ScienceBase are indexed and made available through a flexible
 search interface. \pkg{sbtools} offers several query
-functions with different levels of search detail, from
-basic, text-only to advanced, and low-level metadata specific search
+functions with different levels of search specificity, from
+cross-metadata simple text search to low-level, metadata specific search
 functionality.
-% i want more specifics in the previous sentence. what constitutes 'basic'?
-% what non-text features are available? when you search text, which text
-% are you searching? what's so low-level about searching the metadata? when
-% you search the metadata, are you searching stuff like timestamps or like
-% the paragraphs of metadata text that an author put in there?
 
-Query functions are included to support the most common query types. These
-include queries based on free text, project folder, date-time range, geospatial
-bounding box, Digital Object Identifier (DOI), and data types. To save space in
+In \pkg{sbtools}, query functions are included to support the most common query types. 
+Included functions are available to search based on free-text, project folder, 
+date-time range, geospatial
+bounding box, Digital Object Identifier (DOI), and data type. To save space in
 the examples below, we use the \code{limit} parameter to limit all queries to
 the first two results. Further details for each query type are available in the
 package documentation.
 
-% need a free text query example
-The free text of a ScienceBase item includes the item's title, authors, ....
-This text can be searched with the \code{query_???} function.
+
+The ScienceBase free-text search is a simple to use and generic as it 
+searches across all of an item's text-based metadata fields. Free-text 
+search can find specific text strings in almost all metadata fields, including 
+but not limited to filenames, summary fields, citation, contacts, and authors. 
+Spatial reference metadata is an example of a field not searched through the 
+free-text search. Using \pkg{sbtools}, a free-text 
+search can be run with the \code{query\_sb\_text} function.
+
+\noindent\rule{\textwidth}{0.4pt}
+\begin{example}
+> query_sb_text('Antarctica', limit=1)
+[[1]]
+<ScienceBase Item> 
+  Title: Antarctica. Erratic near camp 13. December 12, 1977.
+  Creator/LastUpdatedBy:      / 
+  Provenance (Created / Updated):  2013-07-09T15:38:45Z / 2016-03-02T23:55:43Z
+  Children: FALSE
+  Item ID: 51dc2e85e4b0f81004b79cf0
+  Parent ID: 519ba0a3e4b0e4e151ef5dd9
+\end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 Items can also be queried according to their position in the hierarchical item
-tree.
+tree. For example, the Climate Science Centers all have sections on ScienceBase
+where funded project information is stored. Below is an example of looking for 
+lake related items under the NE Climate Science Center area. 
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
-#query items in a specific project folder
-> query_item_in_folder("map data", folder="proj2item")
-# need to find real example
+#Look for items referencing "Lake Superior" under the NE Climate Science Center projects
+> query_item_in_folder("Lake Superior", folder="4f8c648de4b0546c0c397b43", limit=2)
+[[1]]	
+<ScienceBase Item> 
+  Title: The Role of Lake-Dotted Landscapes in Regional Climate Change [...]
+  Creator/LastUpdatedBy:      / 
+  Provenance (Created / Updated):  2013-12-31T17:46:16Z / 2013-12-31T17:46:16Z
+  Children: FALSE	
+  Item ID: 52c302e8e4b040b25da9d35a
+  Parent ID: 51db0ebce4b010c7f6a814bf
+
+[[2]]
+<ScienceBase Item> 
+  Title: The influence of land use and [...] in Lake Superior tributaries
+  Creator/LastUpdatedBy:      / 
+  Provenance (Created / Updated):  2013-12-31T17:45:51Z / 2013-12-31T17:45:51Z
+  Children: FALSE
+  Item ID: 52c302cfe4b040b25da9ce3c
+  Parent ID: 51db0ebce4b010c7f6a814bf
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 Date-time information for ScienceBase items may include the date of
 data creation, modification, report, collection, and/or
@@ -165,6 +213,7 @@ publication. \pkg{sbtools} users may search any of these
 date-time fields using the \code{date\_type} argument to the
 \code{query\_sb\_date()} function.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #Query recently updated items
 > query_sb_date(Sys.time()-as.difftime(7, units="days"), Sys.time(),
@@ -201,7 +250,8 @@ date-time fields using the \code{date\_type} argument to the
 
 [[2]]
 <ScienceBase Item>
-  Title: Structure and mineralization of Precambrian rocks in the Galena-Roubaix district, Black Hills, South Dakota
+  Title: Structure and mineralization of Precambrian rocks in the Galena-
+         Roubaix district, Black Hills, South Dakota
   Creator/LastUpdatedBy:      /
   Provenance (Created / Updated):  2010-10-23T00:28:32Z / 2014-07-21T20:14:53Z
   Children: FALSE
@@ -209,6 +259,7 @@ date-time fields using the \code{date\_type} argument to the
   Parent ID: 4f4e4771e4b07f02db47e1e4
 
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 Each item can be described by a data type tag. Because this field is free-text,
 it can take on a number of different values. The function \code{sb\_datatypes()}
@@ -216,25 +267,21 @@ returns the list of currently used data type tags on ScienceBase.
 \code{query\_sb\_datatype} can be used to query for items described with a
 specific data type.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #List first 50 available data types
 > sb_datatypes(limit = 50)
- [1] "Application"                                 "ArcGIS Map Package"                "ArcGIS REST Map Service"
- [4] "ArcGIS Service Definition"                   "ArcIMS Catalog"                    "ArcIMS Metadata"
- [7] "BASIS+ Project"                              "BASIS+ Subtask"                    "BASIS+ Task"
-[10] "Book Citation"                               "Citation"                          "Clearinghouse"
-[13] "Collection"                                  "Conference Citation"               "Digital Map - Beta"
-[16] "Document"                                    "Downloadable"                      "Electronic Book Citation"
-[19] "GeoProcessing Service"                       "GeoTIFF"                           "Glass Plate Photonegative"
-[22] "High-Resolution Scanned Topo Maps"           "Journal Citation"                  "Live Data"
-[25] "Low-Resolution Scanned Topo Maps PDF"        "Map Service"                       "National Map Digital Map - Beta"
-[28] "NetCDF OPeNDAP Service"                      "News"                              "NGTOC Open File Report GeoPDF"
-[31] "NSDI Cooperative Agreements Program Project" "Offline Data"                      "OGC WFS Layer"
-[34] "OGC WMS Layer"                               "OGC WMS Service"                   "Photonegative"
-[37] "Print"                                       "Raster"                            "Report"
-[40] "Report Citation"                             "ScienceBase Citation"              "ScienceBase Information Article"
-[43] "ScienceBase Project"                         "sdc"                               "Shapefile"
-[46] "Static Map Image"                            "Thesis Citation"                   "US Topo"
+ [1] "Application"               "ArcGIS Map Package"       
+ [3] "ArcGIS REST Map Service"   "ArcGIS Service Definition"
+ [5] "ArcIMS Catalog"            "ArcIMS Metadata"          
+ [7] "BASIS+ Project"            "BASIS+ Subtask"           
+ [9] "BASIS+ Task"               "Book Citation"            
+[11] "Citation"                  "Clearinghouse"            
+[13] "Collection"                "Conference Citation"      
+[15] "Digital Map - Beta"        "Document"                 
+[17] "Downloadable"              "Electronic Book Citation" 
+[19] "GeoProcessing Service"     "GeoTIFF"  
+
 
 #Query for US Topographic data
 > query_sb_datatype('US Topo')
@@ -256,15 +303,16 @@ specific data type.
   Item ID: 54404288e4b0b0a643c73143
   Parent ID: 54247f49e4b037b608f9edd1
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
-% it would be great if query_sb_doi could search for dois with or without a
-% preceding 'doi:' without the user ever having to include that 'doi:' text
 On ScienceBase, the preferred way of storing an item's DOI is using the custom item
 identifier fields. \code{query\_sb\_doi()} can query those fields specifically for
 a DOI. Here are examples of querying items by DOI on ScienceBase.
+
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
-#some item DOIs have 'doi:' appended to the front of them for some reason
-query_sb_doi('doi:10.5066/F7M043G7')
+#Two example DOI-specific queries
+query_sb_doi('10.5066/F7M043G7')
 [[1]]
 <ScienceBase Item>
   Title: 2013 Raw Ground Penetrating Radar Data on Alaska's Glaciers
@@ -274,7 +322,6 @@ query_sb_doi('doi:10.5066/F7M043G7')
   Item ID: 557f0367e4b023124e8ef621
   Parent ID: 5474ec49e4b04d7459a7eab2
 
-#others do not
 query_sb_doi('10.1126/science.aab1345')
 [[1]]
 <ScienceBase Item>
@@ -285,6 +332,7 @@ query_sb_doi('10.1126/science.aab1345')
   Item ID: 5589b8ebe4b0b6d21dd63b5a
   Parent ID: 511033e1e4b048b5cead8548
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 Items with a geospatial component to their data or metadata can be queried using a
 Lat/Lon bounding box with the function \code{query\_sb\_spatial()}. The
@@ -292,8 +340,8 @@ bounding box may be directly specified with coordinates or indirectly specified
 by supplying another spatial object whose bounding box should be used. Because
 spatial functionality requires packages beyond those imported by \pkg{sbtools} by default,
 the \pkg{sp} and \pkg{gdalUtils} packages must be installed to use these functions.
-% do they need to be loaded, as well?
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 ##specify the lat/long corners of the bounding box
 > query_sb_spatial(bb_min=c(-104.4, 37.5), bb_max=c(-95.1, 41.0))
@@ -340,20 +388,19 @@ the \pkg{sp} and \pkg{gdalUtils} packages must be installed to use these functio
   Parent ID: 4f4e4771e4b07f02db47e1da
 
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 Lastly, \pkg{sbtools} offers advanced access to all query capabilities through
-the \code{query\_items()} and \code{query\_sb()} functions. \code{query\_items()} allows
-the user to supply a list of query parameters (options described in the documentation),
-submit that query to ScienceBase, and receive the raw HTTP response (as an \pkg{httr}
-response object). \code{query\_sb()} provides a convenient wrapper that parses the output
-into a list of \code{sbitem} objects and also does proper result paging when the requested
+the \code{query\_sb()} function. \code{query\_sb()} provides a convenient wrapper that 
+allows the user to supply a list of query parameters (options described in the documentation),
+submits that query to ScienceBase and parses the output
+into a list of \code{sbitem} objects. When necessary, \code{query\_sb()} 
+also does proper result paging when the requested
 return length (limit) is over 1000 items. All advanced search options can be experimented
 with via the \href{https://www.sciencebase.gov/catalog/items/queryForm}
 {online advanced search interface}.
 
-% can we get away with keeping query_items to ourselves and just talking about
-% query_sb here? Seems very low level and useful to only a small subset of users.
-
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 
 # query_sb can be used for combined search criteria
@@ -377,12 +424,14 @@ with via the \href{https://www.sciencebase.gov/catalog/items/queryForm}
   Parent ID: 504216b9e4b04b508bfd337d
 
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 % can you combine the date, spatial, etc. queries mentioned above? even if
 % it's just finding the intersection of several sets, an example could be useful.
 % or if query_sb can do this, even better.
 
 \subsection{ScienceBase authentication}
+
 In addition to the large collection of open, reusable datasets and
 useful metadata ScienceBase has to offer, it is
 also a platform for sharing and collaboration on private, in-progress
@@ -400,6 +449,7 @@ sessions remain active for roughly one hour and are renewed each time a request
 is made. \pkg{sbtools} makes a best effort to supply the user with meaningful
 error messages when a session may have expired.
 
+\noindent\rule{\textwidth}{0.4pt}
 %Authentication in sbtools
 \begin{example}
 #to start an authenticated session
@@ -410,6 +460,7 @@ error messages when a session may have expired.
 > is_logged_in()
 [1] FALSE
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 Most functions in \pkg{sbtools} can be used both anonymously and when
 authenticated. This includes all data retrieval and query functions. The
@@ -422,6 +473,7 @@ dependent on authentication status. When querying items with \code{query\_sb()},
 public items are always visible while private items are invisible unless
 authenticated.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #Attempt to get a private item without authentication
 > item_get('55de0027e4b0518e354dfcf0')
@@ -454,9 +506,35 @@ authenticated.
 > query_sb(list(q='username@usgs.gov'))
 list()
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
-%Examples of authentication and other auth-related functions (check and such)
-% these are available above, aren't they?
+The authentication status can be quickly checked and updated 
+with a few helper functions.
+
+\noindent\rule{\textwidth}{0.4pt}
+\begin{example}
+#See if user is authenticated to SB
+> is_logged_in()
+[1] TRUE
+
+#Get details of authenticated session 
+> session_details()
+$fullDisplayName
+[1] "User McUseface [username@usgs.gov]"
+$isLoggedIn
+[1] TRUE
+$displayName
+[1] "User McUseface"
+$email
+[1] "username@usgs.gov"
+$username
+[1] "username@usgs.gov"
+
+#Renew a session to prevent expiration after 1 hour
+> session_renew()
+
+\end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 \subsection{Data editing and upload API}
 For authenticated users, \pkg{sbtools} can support
@@ -464,12 +542,13 @@ the full data lifecycle. This includes the creation, editing and removal
 of items. Because item editing and creation cannot be done anonymously,
 this functionality only works while authenticated.
 
-To create new items, the only required input to \code{item_create} is "title".
+To create new items, the only required input to \code{item\_create} is "title".
 The "Parent Item" may also be specified. All users have a personal home folder
 (called "My Items" on the ScienceBase website) that serves as the default Parent
-Item for new items. The unique identifier of a user's home folder can be
+Item for new items. The unique identifier of a user`s home folder can be
 retrieved with the function \code{user\_id()}.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #create new item, by default under "My Items" parent
 > new_item = item_create(title='new test item')
@@ -482,10 +561,12 @@ retrieved with the function \code{user\_id()}.
   Item ID: 56a91f0ce4b0b28f1184dda8
   Parent ID: 54257d8fe4b0e641df8b50af
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 Once an item is created, an authenticated user can edit the metadata or attach
 data files to that item.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #give the item a new title
 > edited_item = item_update(new_item, list(title='new updated item'))
@@ -507,10 +588,12 @@ data frame with 0 columns and 0 rows
       fname size     url
 1 README.md 1282     https://www.sciencebase.gov/[long URL truncated]
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
 
 Functions are also provided to modify and delete attached files and to delete
 entire items.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #list currently attached files
 > item_list_files(edited_item)
@@ -530,7 +613,7 @@ entire items.
 Error: Item not found for ID=56a91f0ce4b0b28f1184dda8. Either the item does
 not exist or the item is secured and requires authentication to access.
 \end{example}
-
+\noindent\rule{\textwidth}{0.4pt}
 
 \subsection{SB Item identifiers}
 One advanced feature of ScienceBase is the ability to assign any
@@ -544,6 +627,7 @@ Object Identifiers) are stored as item identifiers with the Scheme
 \code{item\_update\_identifier} and \code{query\_item\_identifier},
 respectively.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #create two items and assign custom identifiers
 > ident_item = item_create(title='test data')
@@ -556,7 +640,7 @@ respectively.
              title                       id
 1 test publication 56a9371ee4b012c193aa3d65
 \end{example}
-% is it possible to query for just one or two of these, e.g., just scheme & type?
+\noindent\rule{\textwidth}{0.4pt}
 
 The three-part identifier can be especially useful as a way to
 organize and access project data. For example, all items within the same project
@@ -564,6 +648,7 @@ could be created with the same scheme and differing types or keys, allowing
 users to query items within the project using custom tags that are meaningful to
 that project.
 
+\noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #query all items in 'proj2'
 > query_item_identifier(scheme='proj2')
@@ -576,3 +661,4 @@ that project.
       title                       id
 1 test data 56a93777e4b012c193aa3d68
 \end{example}
+\noindent\rule{\textwidth}{0.4pt}
