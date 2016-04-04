@@ -3,17 +3,17 @@
 Cloud data storage platforms can be a powerful tool for research collaboration,
 distributed computing, and data publication. However, while browser-based graphical
 interfaces make these platforms accessible to a wide audience, there is also
-a strong need for scripted data handling so that researchers can rigorously
-document data provenance and create reproducible analyses. For example,
+a need for scripted data access and manipulation so that researchers can capture 
+data provenance and create reproducible analyses. For example,
 Figshare \cidep{figshare}, DataOne \cidep{dataone}, and Dataverse \cidep{dataverse} 
 are all research data
-sharing platforms gaining use in different research fields. For each of these
+sharing platforms that are gaining use in different research fields. For each of these
 platforms, the community has released \citep{rfigshare, dvn} or is
 developing \citep{dataone} R packages to streamline the storage and access
 to archived data. 
 
 These existing projects primarily focus on creating more useful, open, and
-accessible the end products of research. But data- and code-intensive collaborative projects
+accessible end products of research. But data- and code-intensive collaborative projects
 increasingly need collaborative solutions for data storage, sharing, and updating
 not just at the end of the project, but throughout the full project lifecycle. 
 Github is increasingly used to collaborate around data products \citep{GandrudGithub}, 
@@ -25,20 +25,17 @@ of the unique needs of federal research. For example, many government institutio
 require an archived copy of released data to be stored and available through federally
 operated websites. Third party storage providers are insufficient.
 
-To address future scientific data sharing and archival challenges, the USGS
-created ScienceBase (\url{https://www.sciencebase.gov/}). This platform is
-designed to support
-the full project data lifecycle and has seen rapid adoption with USGS
-researchers and collaborators. ScienceBase supports the storage and access
-of large files and datasets. It allows data to be stored with a user-configurable 
-mixture of
-public and controlled access and has been designed from the beginning with
+To address future scientific data sharing and archival challenges, the U.S. 
+Geological Survey (USGS) created ScienceBase (\url{https://www.sciencebase.gov/}). 
+This platform is designed to support the full project data lifecycle and has seen 
+rapid adoption with USGS researchers and collaborators. ScienceBase supports the 
+storage and access of large files and datasets. It allows data to be stored 
+with a user-configurable mixture of 
+public and authenticated access and has been designed from the beginning with
 first-class RESTful web interfaces to support robust API access. Items on ScienceBase 
 can have hierarchical relationships, facilitating the organization of complex or related
-data. It also allows
-a seamless transition from project development to data publication, with
-a focus on complete metadata description, search and public data access once 
-data have been released.
+data. It also supports a seamless transition from project development to data publication, 
+focusing on searchable, accessible, well described datasets for public use and citation.
 
 To expand the usefulness of the ScienceBase platform directly to R workflows, 
 we have designed and
@@ -46,5 +43,5 @@ implemented an R interface to ScienceBase called \pkg{sbtools}.
 This interface provides scripted R access to ScienceBase to manage metadata and
 data files, to search the catalog of datasets, and to view and modify data in
 formats familiar to R users.
-Here we describe unique and useful features of ScienceBase, and how we have
+Here we describe several features of ScienceBase, and how we have
 implemented the R interface to make them accessible and useful from R.
