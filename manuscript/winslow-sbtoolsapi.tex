@@ -6,10 +6,9 @@ access to the ScienceBase web service API in a flexible, lightweight
 R package. The package imports a minimal number of external packages
 to support core functionality. More advanced data access (e.g., geospatial
 web services) is supported through suggested packages to keep the basic
-installation quick on all platforms. Within R, \pkg{sbtools}
-is designed to keep most interactions simple and includes internal
-handling of complex web service interactions (e.g., authentication) to
-simplify use for end-users.
+installation requirements minimal for all platforms. Within R, \pkg{sbtools}
+is designed to keep end-user interactions simple despite the underlying 
+complexity of many of the web service calls (e.g., authentication).
 
 Below, we describe briefly the core functions available in \pkg{sbtools}
 and discuss the unique features of ScienceBase that \pkg{sbtools}
@@ -59,11 +58,11 @@ glaciological maps of Antarctica."
 \end{example}
 \noindent\rule{\textwidth}{0.4pt}
 
-On ScienceBase, the item tree hierarchy means that each item has one
-parent and potentially many children. \pkg{sbtools} allows the user to
-easily traverse the tree structure. In some projects, the hierarchy has
-important meaning. For other projects, it may relate to the user or
-organizational owner of the data.
+On ScienceBase, the hierarchical item tree dictates relationships between items; 
+each item has one parent and potentially many children. \pkg{sbtools} allows the user to
+easily traverse this tree structure. Because ScienceBase allows users to define their internal 
+organization, this heirarchy can take on different meanings for different projects, including 
+conveying data provenance or spatial grouping.
 
 % we could consider adding functions to get the actual parent and child
 % items rather than just their IDs - e.g., item_get_parent() returns one sbitem
@@ -107,11 +106,11 @@ You can list and download attached files directly using \pkg{sbtools}.
 \noindent\rule{\textwidth}{0.4pt}
 
 ScienceBase has special functionality when certain data types are
-stored. One example is spatial data. When spatial data are properly
-tagged and uploaded to ScienceBase, they can be accessed using 
+stored. One example is spatial data. When spatial data uploaded to ScienceBase 
+and appropriate metadata is included, they can be accessed using 
 Open Geospatial Consortium (\href{http://www.opengeospatial.org/}{OGC}) 
-web services. \pkg{sbtools} has included ability to access the Web
-Feature Service (WFS) available for certain items.
+web services. \pkg{sbtools} has includes functionality to access Web
+Feature Service (WFS) when available.
 
 \noindent\rule{\textwidth}{0.4pt}
 \begin{example}
@@ -151,11 +150,11 @@ Included functions are available to search based on free-text, project folder,
 date-time range, geospatial
 bounding box, Digital Object Identifier (DOI), and data type. To save space in
 the examples below, we use the \code{limit} parameter to limit all queries to
-the first two results. Further details for each query type are available in the
+the first one or two results. Further details for each query type are available in the
 package documentation.
 
 
-The ScienceBase free-text search is a simple to use and generic as it 
+The ScienceBase free-text search is simple to use and generic as it 
 searches across all of an item's text-based metadata fields. Free-text 
 search can find specific text strings in almost all metadata fields, including 
 but not limited to filenames, summary fields, citation, contacts, and authors. 
@@ -178,9 +177,9 @@ search can be run with the \code{query\_sb\_text} function.
 \noindent\rule{\textwidth}{0.4pt}
 
 Items can also be queried according to their position in the hierarchical item
-tree. For example, the Climate Science Centers all have sections on ScienceBase
-where funded project information is stored. Below is an example of looking for 
-lake related items under the NE Climate Science Center area. 
+tree. For example, projects funded by USGS Climate Science Centers have sections on ScienceBase
+where project information is stored. Below is an example of looking for 
+lake related items under the Northeast Climate Science Center community. 
 
 \noindent\rule{\textwidth}{0.4pt}
 \begin{example}
@@ -282,7 +281,7 @@ specific data type.
 
 
 #Query for US Topographic data
-> query_sb_datatype('US Topo')
+> query_sb_datatype('US Topo', limit=2)
 [[1]]
 <ScienceBase Item>
   Title: USGS Geoscience Data Catalog
@@ -305,7 +304,7 @@ specific data type.
 
 On ScienceBase, the preferred way of storing an item's DOI is using the custom item
 identifier fields. \code{query\_sb\_doi()} can query those fields specifically for
-a DOI. Here are examples of querying items by DOI on ScienceBase.
+a DOI. Here are examples of querying items by DOI on ScienceBase:
 
 \noindent\rule{\textwidth}{0.4pt}
 \begin{example}
@@ -342,7 +341,7 @@ the \pkg{sp} and \pkg{gdalUtils} packages must be installed to use these functio
 \noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 ##specify the lat/long corners of the bounding box
-> query_sb_spatial(bb_min=c(-104.4, 37.5), bb_max=c(-95.1, 41.0))
+> query_sb_spatial(bb_min=c(-104.4, 37.5), bb_max=c(-95.1, 41.0), limit=2)
 [[1]]
 <ScienceBase Item>
   Title: National Fish Habitat Partnership Data System
