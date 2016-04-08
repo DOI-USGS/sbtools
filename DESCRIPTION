@@ -1,7 +1,7 @@
 Package: sbtools
 Title: USGS ScienceBase Tools
 Maintainer: Luke Winslow <lwinslow@usgs.gov>
-Version: 0.16.0
+Version: 0.17.0
 Authors@R: c(person("Luke", "Winslow", role = c("aut","cre"),
     email = "lwinslow@usgs.gov"),
     person("Scott", "Chamberlain", role = c("aut"),
