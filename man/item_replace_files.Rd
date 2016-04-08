@@ -4,7 +4,7 @@
 \alias{item_replace_files}
 \title{Replace files associated with an item}
 \usage{
-item_replace_files(sb_id, files, ..., all = TRUE,
+item_replace_files(sb_id, files, ..., all = FALSE,
   session = current_session())
 }
 \arguments{
@@ -18,7 +18,7 @@ item_replace_files(sb_id, files, ..., all = TRUE,
 \item{all}{A boolean indicating if all attached files should be removed before
 uploading new files. FALSE if only files with matching names should be replaced. 
 If you wish to upload files with duplicate names, see \code{\link{item_append_files}}.
-Defaults to TRUE.}
+Defaults to FALSE.}
 
 \item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
 last authenticated session}
