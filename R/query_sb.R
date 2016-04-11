@@ -94,6 +94,14 @@ query_sb = function(query_list, ..., limit=20, session = current_session()){
 	#force JSON format
 	query_list['format'] = 'json'
 	
+	#ensure we're querying for the bare minimum set of fields
+	if('fields' %in% names(query_list)){
+		query_list[['fields']] = paste0(query_list[['fields']], ',id,title,parentId,dateCreated,lastUpdated,createdBy,lastUpdatedBy,files')
+	}else{
+		query_list[['fields']] = 'id,title,parentId,dateCreated,lastUpdated,createdBy,lastUpdatedBy,files'
+	}
+	
+	
 	#we will need to set max based on limit
 	if(limit > 1000){
 		query_list['max'] = 1000
