@@ -1,4 +1,4 @@
-# Version 0.16.0 (2016-04-11)
+# Version 0.17.0 (2016-04-11)
 
 * On `item_replace_files()` changed default on `all` flag to FALSE
 so it doesn't delete files by default.
