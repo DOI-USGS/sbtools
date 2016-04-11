@@ -9,9 +9,6 @@
 #' @param session (optional) SB Session to use, not provided queries public 
 #'   items only
 #' @param limit Max number of matching items to return
-#' @param pagesize Number of items to retrieve in each call to SB. If limit >
-#'   pagesize and the number of available items > pagesize, multiple calls to SB
-#'   will be made and compiled into a single output here.
 #' @return The SB item id for the matching item. NULL if no matching item found.
 #' @import jsonlite
 #' @import httr
@@ -37,46 +34,16 @@
 #' }
 #' 
 #' @export
-query_item_identifier = function(scheme, ..., type=NULL, key=NULL, session=current_session(), limit=20, pagesize=500){
+query_item_identifier = function(scheme, type=NULL, key=NULL, ..., session=current_session(), limit=20){
 	
 	# prepare query
 	filter_all = list('scheme'=scheme, 'type'=type, 'key'=key)
 	filter_items = Filter(Negate(is.null), filter_all)
 	filter = paste0('itemIdentifier=', toJSON(filter_items, auto_unbox=TRUE))
-	query = list('filter'=filter, 'max'=min(limit, pagesize), 'format'='json')
+	query = list('filter'=filter)
 	
-	# run query, multiple times if needed to get up to the limit
-	page <- 1
-	item_count <- 0
-	response <- list(total=1) # get at least one run through the while loop
-	out <- list()
-	while(item_count < min(limit, response$total)) {
-		
-		# run query
-		if(page == 1) {
-			r <- sbtools_GET(url = pkg.env$url_items, ..., query=query, session=session)
-		} else {
-			r <- sbtools_GET(url = response$nextlink$url, ..., session=session)
-		}
-		
-		response = content(r, 'parsed')
-		
-		#check if no items matched
-		if(length(response$items) == 0){
-			return(data.frame())
-		}
+	return(query_sb(query_list=query, ..., limit=limit, session=session))
 	
-		# if we have items, populate data.frame and return
-		out[[page]] <- data.frame(
-			title = sapply(response$items, function(item) item$title),
-			id = sapply(response$items, function(item) item$id),
-			stringsAsFactors=FALSE)
-		
-		item_count <- item_count + nrow(out[[page]])
-		page <- page + 1
-	}
-	
-	do.call(rbind, out)
 }
 
 # Get an item by its title

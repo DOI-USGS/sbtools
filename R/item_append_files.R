@@ -16,7 +16,11 @@
 #' }
 #' @export
 item_append_files = function(sb_id, files, ..., session=current_session()){
-
+	
+	if(length(files) > 50){
+		warning('Trying to attach a large number of files to a SB item. SB imposes file limits which may cause this to fail')
+	}
+	
 	item <- as.sbitem(sb_id)
 	r = sbtools_POST(url = paste0(pkg.env$url_upload,'?id=', item$id), ...,
 									 body = multi_file_body(files), 

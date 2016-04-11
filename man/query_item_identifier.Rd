@@ -4,26 +4,22 @@
 \alias{query_item_identifier}
 \title{Query SB for items based on custom identifier}
 \usage{
-query_item_identifier(scheme, ..., type = NULL, key = NULL,
-  session = current_session(), limit = 20, pagesize = 500)
+query_item_identifier(scheme, type = NULL, key = NULL, ...,
+  session = current_session(), limit = 20)
 }
 \arguments{
 \item{scheme}{The identifier scheme}
-
-\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}}
 
 \item{type}{(optional) The identifier type}
 
 \item{key}{(optional) The identifier key}
 
+\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}}
+
 \item{session}{(optional) SB Session to use, not provided queries public 
 items only}
 
 \item{limit}{Max number of matching items to return}
-
-\item{pagesize}{Number of items to retrieve in each call to SB. If limit >
-pagesize and the number of available items > pagesize, multiple calls to SB
-will be made and compiled into a single output here.}
 }
 \value{
 The SB item id for the matching item. NULL if no matching item found.
