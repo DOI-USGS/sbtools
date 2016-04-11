@@ -12,6 +12,11 @@
 #'   \code{\link{item_append_files}}
 #' @export
 item_replace_files <- function(sb_id, files, ..., all=FALSE, session=current_session()){
+	
+	if(length(files) > 50){
+		warning('Trying to attach a large number of files to a SB item. SB imposes file limits which may cause this to fail')
+	}
+	
 	if(all){
 		item_rm_files(sb_id, ..., session=session)
 	}else{

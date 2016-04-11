@@ -15,6 +15,10 @@
 #' }
 item_upload_create = function(parent_id, files, ..., session=current_session()){
 	
+	if(length(files) > 50){
+		warning('Trying to attach a large number of files to a SB item. SB imposes file limits which may cause this to fail')
+	}
+	
 	item <- as.sbitem(parent_id)
 	r = sbtools_POST(url = paste0(pkg.env$url_upload_create, item$id, '?title=title'), 
 									 ...,
