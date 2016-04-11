@@ -1,7 +1,12 @@
-# Version 0.17.1 (2016-04-10)
+# Version 0.18.0 (2016-04-10)
 
 * Improved version of `query_sb()` now requests useful metadata so
 `sbitem` list has key metadata
+
+* `query_item_identifier()` now returns an `sbitem` list instead of a 
+data.frame. Also, `*_item_identifier()` funcitons now have unified 
+parameter order
+
 
 # Version 0.17.0 (2016-04-10)
 

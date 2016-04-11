@@ -22,14 +22,14 @@ item_update_identifier = function(sb_id, scheme, type, key, ..., session=current
 	sb_id = as.sbitem(sb_id)
 	
 	#first, query for that identifier
-	existing_id = query_item_identifier(scheme=scheme, ..., type=type, key=key, session=session)
+	existing_id = query_item_identifier(scheme=scheme, type=type, key=key, ..., session=session)
 	
 	#if it exists, but has a different ID, we are trying to set a duplicate
-	if(!is.null(existing_id$id) && existing_id$id != sb_id$id) {
+	if(length(existing_id) > 0 && existing_id[[1]]$id != sb_id$id) {
 		stop('Item with that identifier already exists')
 		
 		#if it exists and is the same item, then we don't need to change it
-	} else if(!is.null(existing_id$id) && existing_id$id == sb_id$id) {
+	} else if(length(existing_id) > 0 && existing_id[[1]]$id == sb_id$id) {
 		return(TRUE)
 	}
 	

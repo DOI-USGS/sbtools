@@ -21,8 +21,8 @@ item_exists = function(scheme, type, key, ..., session=current_session()){
 		stop('Session state is invalid, please re-authenticate')
 	}
 
-	items <- query_item_identifier(scheme=scheme, ..., type=type, key=key, session=session)
-	if (nrow(items) > 0){
+	items <- query_item_identifier(scheme=scheme, type=type, key=key, ..., session=session)
+	if (length(items) > 0){
 		return(TRUE)
 	} else {
 		return(FALSE)
