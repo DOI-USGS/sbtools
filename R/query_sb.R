@@ -117,6 +117,10 @@ query_sb = function(query_list, ..., limit=20, session = current_session()){
 	out = lapply(content(result)$items, as.sbitem)
 	
 	# we may need to page to get all the results
+	if(is.null(res_obj)) {
+	  warning('empty https response. returning NULL')
+	  return(NULL)
+	}
 	if(limit > 1000 && res_obj$total > 1000){
 		offset = 1000
 		while(offset < limit){
