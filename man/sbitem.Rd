@@ -2,11 +2,14 @@
 % Please edit documentation in R/sb_item.R
 \name{sbitem}
 \alias{as.sbitem}
+\alias{as.sbitem.default}
 \alias{is.sbitem}
 \alias{sbitem}
 \title{ScienceBase item class}
 \usage{
 as.sbitem(x, ...)
+
+\method{as.sbitem}{default}(x, ...)
 
 is.sbitem(x)
 }
