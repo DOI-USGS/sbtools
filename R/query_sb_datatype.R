@@ -14,12 +14,13 @@
 #' Queries ScienceBase for items with matching datatype.
 #' 
 #' @examples 
+#' \dontrun{
 #' #query for items with WFS Layer data
 #' query_sb_datatype('OGC WFS Layer')
 #' 
 #' #query for US Topo maps
 #' query_sb_datatype('US Topo')
-#' 
+#' }
 #' 
 #' @export
 query_sb_datatype = function(datatype, ..., limit=20, session=current_session()){
