@@ -15,16 +15,16 @@
 #' 
 #' @examples 
 #' #query for items with WFS Layer data
-#' query_sb_datatype('OGC WFS Layer')
+#' query_sb_datatype('Static Map Image')
 #' 
 #' #query for US Topo maps
-#' query_sb_datatype('US Topo')
+#' query_sb_datatype('Map Service')
 #' 
 #' 
 #' @export
 query_sb_datatype = function(datatype, ..., limit=20, session=current_session()){
 	
-	res = query_sb(list(filter=paste0('browseCategory:',datatype)), ..., session=session, limit=limit)
+	res = query_sb(list(filter=paste0('browseType=', datatype)), ..., session=session, limit=limit)
 	
 	return(res)
 }

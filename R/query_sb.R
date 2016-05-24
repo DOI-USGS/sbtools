@@ -64,7 +64,7 @@
 #' query_sb(list(browseCategory = "Image"))
 #' 
 #' # Filter by browse type
-#' query_sb(list(browseType = "Collection"))
+#' query_sb(list(browseType = "Map Service"))
 #' 
 #' # Filter by WKT geometry string
 #' wkt1 <- "POLYGON((-104.4 41.0,-95.1 41.0,-95.1 37.5,-104.4 37.5,-104.4 41.0))"
