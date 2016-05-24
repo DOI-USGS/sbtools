@@ -16,7 +16,7 @@
 #' @examples 
 #' \dontrun{
 #' #query for items with WFS Layer data
-#' query_sb_datatype('OGC WFS Layer')
+#' query_sb_datatype('Image')
 #' 
 #' #query for US Topo maps
 #' query_sb_datatype('US Topo')
@@ -25,7 +25,7 @@
 #' @export
 query_sb_datatype = function(datatype, ..., limit=20, session=current_session()){
 	
-	res = query_sb(list(filter=paste0('browseCategory:',datatype)), ..., session=session, limit=limit)
+	res = query_sb(list('browseCategory' = datatype), ..., session=session, limit=limit)
 	
 	return(res)
 }

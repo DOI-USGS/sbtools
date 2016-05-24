@@ -26,12 +26,13 @@ means no matches were found.
 Queries ScienceBase for items with matching datatype.
 }
 \examples{
+\dontrun{
 #query for items with WFS Layer data
-query_sb_datatype('OGC WFS Layer')
+query_sb_datatype('Image')
 
 #query for US Topo maps
 query_sb_datatype('US Topo')
-
+}
 
 }
 
