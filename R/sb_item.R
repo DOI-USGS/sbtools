@@ -29,6 +29,10 @@
 as.sbitem <- function(x, ...) UseMethod("as.sbitem")
 
 #' @export
+#' @rdname sbitem
+as.sbitem.default <- function(x, ...) stop("No 'as.sbitem' method for class ", class(x), call. = FALSE)
+
+#' @export
 as.sbitem.character <- function(x, ...) get_item(x, ...)
 
 #' @export
