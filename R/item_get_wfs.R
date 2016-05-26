@@ -22,32 +22,37 @@
 #' @export
 item_get_wfs = function(sb_id, ..., session){
 	
-	if(!requireNamespace("gdalUtils") || !requireNamespace("rgdal")){
-		stop('gdalUtils and rgdal packages not installed. 
-					Both are required to interact with WFS services. 
-				 	Please run: install.packages(c(\'rgdal\',\'gdalUtils\'))')
+	if(!requireNamespace("httr") || !requireNamespace("rgdal") || !requireNamespace("xml2")){
+		stop('
+httr, xml2, and rgdal packages not installed. 
+Both are required to interact with WFS services. 
+Please run: install.packages(c(\'xml2\',\'httr\', \'rgdal\'))')
 	}
 	
 	wfs_url = item_get_wfs_url(sb_id)
 	
-	layer_info = gdalUtils::ogrinfo(paste0('WFS:', wfs_url))
+	caps = read_xml(wfs_url)
 	
-	#from this layer info, we need to extract layer name
-	layer_raw = str_match_all(layer_info, '[[:digit:]]+: (sb:[[:alpha:]_]+) \\([Polygon|Multi Polygon|Points|Point]+\\)')
+	layer_names = xml_text(xml_find_all(caps, '//d1:FeatureType/d1:Name', xml_ns(caps)))
 	
-	layer_names = sapply(layer_raw, function(x)x[2])
-	
-	#drop the bounding box and footprint layers, which we don't want
 	layer_names = layer_names[!is.na(layer_names) & !layer_names %in% c('sb:boundingBox', 'sb:footprint')]
+	
 	if(length(layer_names) > 1){
 		stop('SB Item WFS has > 1 layer. item_download_sp currently cannot handle more than one layer')
 	}
 	
 	fname = tempfile(fileext = '.shp')
 	
-	gdalUtils::ogr2ogr(wfs_url, fname, layer_names)
+	wfs_request = sub('request=GetCapabilities', 'request=GetFeature', wfs_url, ignore.case = TRUE)
+	wfs_request = paste0(wfs_request, '&outputformat=shape-zip&format_options=filename:shapedl.zip&typename=', layer_names)
+	fname = tempfile(fileext = '.zip')
+	dirname = file.path(tempdir(), basename(tempfile()))
 	
-	layer_sp <- rgdal::readOGR(fname, substr(basename(fname), 1, nchar(basename(fname))-4), stringsAsFactors=FALSE)
+	GET(wfs_request, write_disk(fname))
+	
+	unzip(fname, exdir = dirname)
+	
+	layer_sp = readOGR(dirname, strsplit(layer_names, ':')[[1]][2])
 	return(layer_sp)
 	
 }
