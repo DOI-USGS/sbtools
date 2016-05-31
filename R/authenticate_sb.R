@@ -49,15 +49,19 @@ authenticate_sb = function(username, password){
 	invisible(h)
 }
 
-
+#' Read in a password from the user
+#' 
+#' Uses the RStudio pop-up password window if available
+#' 
+#' @importFrom utils globalVariables
+#' @keywords internal
 readPassword <- function(prompt) {
 	# found this cool function in rstudio
-	.rs.askForPassword <- '.global_def'
-	if (exists(".rs.askForPassword")) {
+	if (exists(".rs.askForPassword", mode = "function")) {
 		pass <- .rs.askForPassword(prompt)
 	} else {
 		pass <- readline(prompt)
-
 	}
 	return (pass)
 }
+globalVariables('.rs.askForPassword')
