@@ -31,9 +31,9 @@ Please run: install.packages(c(\'xml2\',\'httr\', \'rgdal\'))')
 	
 	wfs_url = item_get_wfs_url(sb_id)
 	
-	caps = read_xml(wfs_url)
+	caps = xml2::read_xml(wfs_url)
 	
-	layer_names = xml_text(xml_find_all(caps, '//d1:FeatureType/d1:Name', xml_ns(caps)))
+	layer_names = xml2::xml_text(xml2::xml_find_all(caps, '//d1:FeatureType/d1:Name', xml2::xml_ns(caps)))
 	
 	layer_names = layer_names[!is.na(layer_names) & !layer_names %in% c('sb:boundingBox', 'sb:footprint')]
 	
@@ -48,11 +48,11 @@ Please run: install.packages(c(\'xml2\',\'httr\', \'rgdal\'))')
 	fname = tempfile(fileext = '.zip')
 	dirname = file.path(tempdir(), basename(tempfile()))
 	
-	GET(wfs_request, write_disk(fname))
+	httr::GET(wfs_request, httr::write_disk(fname))
 	
 	unzip(fname, exdir = dirname)
 	
-	layer_sp = readOGR(dirname, strsplit(layer_names, ':')[[1]][2])
+	layer_sp = rgdal::readOGR(dirname, strsplit(layer_names, ':')[[1]][2])
 	return(layer_sp)
 	
 }
