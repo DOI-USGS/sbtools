@@ -1,3 +1,10 @@
+# Version 0.18.5 (2016-06-01)
+
+* Fixed issue with `query_sb_datatype`
+
+* New and improved `item_get_wfs`. Better performance and 
+no longer requires hard-to-install external dependencies.
+
 # Version 0.18.0 (2016-04-10)
 
 * Improved version of `query_sb()` now requests useful metadata so
@@ -17,4 +24,3 @@ so it doesn't delete files by default.
 rename files attached to items directly. 
 
 
-	
