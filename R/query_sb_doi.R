@@ -29,7 +29,7 @@ query_sb_doi = function(doi, ..., limit=20, session=current_session()){
 	res2 = query_item_identifier(scheme='https://www.sciencebase.gov/vocab/category/item/identifier', 
 															 type='DOI', key=paste0('doi:', doi), ..., session=session, limit=limit)
 	
-	res_ids = c(res$id, res2$id)
+	res_ids = c(res, res2)
 	
 	return(res_ids)
 }
