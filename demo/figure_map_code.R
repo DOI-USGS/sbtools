@@ -7,7 +7,7 @@ library(sp)
 #an item with an included OGC WFS service
 layer = item_get_wfs('55e372b9e4b05561fa208212')
 
-#png('manuscript/mapfig.png', res=300, width=2000, height=1600)
+#png('manuscript/mapfig.png', res=300, width=1700, height=1400)
 par(mar=c(5,5,1,1), oma=c(0,2,0,0))
 map('state', regions='iowa', ylab='Lat', xlab='Lon')
 
