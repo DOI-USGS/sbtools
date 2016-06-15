@@ -29,7 +29,7 @@ In ScienceBase, these are stored as additional unique identifiers.
 #Two example DOI-specific queries
 query_sb_doi('10.5066/F7M043G7')
 
-query_sb_doi('10.1126/science.aab1345')
+query_sb_doi('10.5066/F7Z60M35')
 
 }
 

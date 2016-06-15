@@ -321,15 +321,15 @@ query_sb_doi('10.5066/F7M043G7')
   Item ID: 557f0367e4b023124e8ef621
   Parent ID: 5474ec49e4b04d7459a7eab2
 
-query_sb_doi('10.1126/science.aab1345')
+query_sb_doi('10.5066/F7Z60M35')
 [[1]]
-<ScienceBase Item>
-  Title: High-rate injection is associated with the increase in U.S. mid-continent seismicity
-  Creator/LastUpdatedBy:      /
-  Provenance (Created / Updated):  2015-06-23T19:52:11Z / 2015-07-06T21:08:26Z
+<ScienceBase Item> 
+  Title: Raw Ground Penetrating Radar Data, Eureka Glacier, Alaska; 2013
+  Creator/LastUpdatedBy:      / 
+  Provenance (Created / Updated):  2015-06-25T22:10:38Z / 2016-02-18T21:20:42Z
   Children: FALSE
-  Item ID: 5589b8ebe4b0b6d21dd63b5a
-  Parent ID: 511033e1e4b048b5cead8548
+  Item ID: 558c7c5ee4b0b6d21dd654ca
+  Parent ID: 557f0367e4b023124e8ef621
 \end{example}
 \noindent\rule{\textwidth}{0.4pt}
 
@@ -402,7 +402,7 @@ with via the \href{https://www.sciencebase.gov/catalog/items/queryForm}
 \begin{example}
 
 # query_sb can be used for combined search criteria
-> query_sb(list(q = "water", folderId = '504216b9e4b04b508bfd337d', broserCategory = 'Image'), limit=2)
+> query_sb(list(q = "water", folderId = '504216b9e4b04b508bfd337d', browserCategory = 'Image'), limit=2)
 [[1]]
 <ScienceBase Item>
   Title: Encyclopedia of Water Science
@@ -453,7 +453,9 @@ map.axes()
    \includegraphics{faultlinefig}
    \caption{An example of querying and discovering multiple
    spatial datasets on ScienceBase. In this case, faultlines 
-   across the U.S.}
+   across the U.S. The variability in data formats (some lines, some polygons)
+   is intentionally included to show both data variability, and quick discovery 
+   of different data types across various regions.}
    \label{figure:faultlinefig}
  \end{figure}
 
