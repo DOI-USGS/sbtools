@@ -13,5 +13,3 @@ map('state', regions='iowa')
 plot(spTransform(layer, CRS("+proj=longlat +datum=WGS84")), add=TRUE)
 map.axes()
 dev.off()
-
-

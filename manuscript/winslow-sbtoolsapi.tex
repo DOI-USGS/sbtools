@@ -119,8 +119,8 @@ library(maps)
 library(sp)
 #an item with an included OGC WFS service
 layer = item_get_wfs('55e372b9e4b05561fa208212')
-map('state', regions='iowa')
-plot(layer, add=TRUE)
+map('state', regions = 'iowa')
+plot(layer, add = TRUE)
 \end{example}
 \noindent\rule{\textwidth}{0.4pt}
 
@@ -177,8 +177,10 @@ search can be run with the \code{query\_sb\_text} function.
 \noindent\rule{\textwidth}{0.4pt}
 
 Items can also be queried according to their position in the hierarchical item
-tree. For example, projects funded by USGS Climate Science Centers have sections on ScienceBase
-where project information is stored. Below is an example of looking for 
+tree. For example, projects funded by USGS Climate Science Centers each have sections on ScienceBase
+where project information is stored. Using the web interface (and some user knowledge), we first found the
+ScienceBase ID of the Northeast Climate Science Center community folder. Then, \pkg{sbtools} can be used 
+to look for specific items in that commuinty. Below is an example of looking for 
 lake related items under the Northeast Climate Science Center community. 
 
 \noindent\rule{\textwidth}{0.4pt}
@@ -236,7 +238,7 @@ date-time fields using the \code{date\_type} argument to the
 
 #Query for data published in the 1970's
 > query_sb_date(as.POSIXct('1970-01-01'), as.POSIXct('1980-01-01'),
-+   date_type='Publication', limit=2)
++   date_type = 'Publication', limit = 2)
 [[1]]
 <ScienceBase Item>
   Title: Common marsh plants of the United States and Canada
@@ -281,7 +283,7 @@ specific data type.
 
 
 #Query for USGS Reports
-> query_sb_datatype('Report', limit=2)
+> query_sb_datatype('Report', limit = 2)
 [[1]]
 <ScienceBase Item> 
   Title: Final Memo for Structured decision-making to facilitate multi-stakeholder coastal conservation and restoration under climate change uncertainties: case study on barrier islands of the northern Gulf of Mexico
@@ -341,7 +343,7 @@ the \pkg{sp} and \pkg{gdalUtils} packages must be installed to use these functio
 \noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 ##specify the lat/long corners of the bounding box
-> query_sb_spatial(bb_min=c(-104.4, 37.5), bb_max=c(-95.1, 41.0), limit=2)
+> query_sb_spatial(bb_min = c(-104.4, 37.5), bb_max = c(-95.1, 41.0), limit = 2)
 [[1]]
 <ScienceBase Item>
   Title: National Fish Habitat Partnership Data System
@@ -365,7 +367,7 @@ the \pkg{sp} and \pkg{gdalUtils} packages must be installed to use these functio
 > layer = item_get_wfs('55e372b9e4b05561fa208212')
 
 #get items in that bounding box
-> query_sb_spatial(layer, limit=2)
+> query_sb_spatial(layer, limit = 2)
 [[1]]
 <ScienceBase Item>
   Title: National Fish Habitat Partnership Data System
@@ -421,9 +423,39 @@ with via the \href{https://www.sciencebase.gov/catalog/items/queryForm}
 \end{example}
 \noindent\rule{\textwidth}{0.4pt}
 
-% can you combine the date, spatial, etc. queries mentioned above? even if
-% it's just finding the intersection of several sets, an example could be useful.
-% or if query_sb can do this, even better.
+Combining both the query functionality and direct spatial data access through WFS web services, 
+below is an example of exploring multiple available datasets on ScienceBase. In this example, 
+we query for lakes with the word "faults" in their description which also expose data 
+through an OGC WFS web service. 
+
+\noindent\rule{\textwidth}{0.4pt}
+\begin{example}
+#Source non-sbtools-required but useful mapping packages
+library(sp)
+library(maps)
+
+faults = query_sb(list(q = "faults", browseType = "OGC WFS Layer"), limit = 20)
+
+map('usa')
+for(i in 1:length(faults)){
+    layer = item_get_wfs(faults[[i]]$id)
+    layer = spTransform(layer, CRS('+proj=longlat +datum=WGS84'))
+    plot(layer, add=TRUE, col='red')
+}
+map.axes()
+
+\end{example}
+\noindent\rule{\textwidth}{0.4pt}
+
+%this figure code is demo\figure_fault_code.R
+ \begin{figure}[htbp]
+   \centering
+   \includegraphics{faultlinefig}
+   \caption{An example of querying and discovering multiple
+   spatial datasets on ScienceBase. In this case, faultlines 
+   across the U.S.}
+   \label{figure:faultlinefig}
+ \end{figure}
 
 \subsection{ScienceBase authentication}
 
@@ -487,7 +519,7 @@ authenticated.
   Parent ID: 54257d8fe4b0e641df8b50af
 
 #Search results include user's private items when authenticated
-> query_sb(list(q='username@usgs.gov'))
+> query_sb(list(q = 'username@usgs.gov'))
  <ScienceBase Item>
   Title: Example Private Item
   Creator/LastUpdatedBy:     username@usgs.gov / username@usgs.gov
@@ -498,7 +530,7 @@ authenticated.
 
 #Search results hide private items when not authenticated
 > session_logout()
-> query_sb(list(q='username@usgs.gov'))
+> query_sb(list(q = 'username@usgs.gov'))
 list()
 \end{example}
 \noindent\rule{\textwidth}{0.4pt}
@@ -537,15 +569,16 @@ of items. Because item editing and creation cannot be done anonymously,
 this functionality only works while authenticated.
 
 To create new items, the only required input to \code{item\_create} is "title".
-The "Parent Item" may also be specified. All users have a personal home folder
-(called "My Items" on the ScienceBase website) that serves as the default Parent
-Item for new items. The unique identifier of a user`s home folder can be
+The "Parent Item" may also be specified. New items, by default, inhert the privacy 
+settings of their parent item. All users have a personal home folder
+(called "My Items" on the ScienceBase website) that serves as the default parent
+item for new items. The unique identifier of a user`s home folder can be
 retrieved with the function \code{user\_id()}.
 
 \noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #create new item, by default under "My Items" parent
-> new_item = item_create(title='new test item')
+> new_item = item_create(title = 'new test item')
 > new_item
 <ScienceBase Item>
   Title: new test item
@@ -563,7 +596,7 @@ data files to that item.
 \noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #give the item a new title
-> edited_item = item_update(new_item, list(title='new updated item'))
+> edited_item = item_update(new_item, list(title = 'new updated item'))
 > edited_item
 <ScienceBase Item>
   Title: new updated item
@@ -594,7 +627,7 @@ entire items.
       fname size     url
 1 README.md 1282     https://www.sciencebase.gov/[long URL truncated]
 
-#selectively replace files. all=FALSE replaces files one by one;
+#selectively replace files. all = FALSE replaces files one by one;
 #otherwise all files are removed before uploading the new files
 > item_replace_files(new_item, 'README.md', all = FALSE)
 > item_list_files(edited_item)
@@ -614,7 +647,7 @@ One advanced feature of ScienceBase is the ability to assign any
 number of custom item identifiers to items. The custom identifiers are made up
 of three parts: Scheme, Type and Key. Combined, these create a unique identifier.
 There are some standard Schemes used in ScienceBase. For example, DOIs (Digital
-Object Identifiers) are stored as item identifiers with the Scheme
+Object Identifiers) are stored as item identifiers with the Scheme \\
 "https://www.sciencebase.gov/vocab/category/item/identifier" and Type "DOI".
 
 \pkg{sbtools} can edit and query custom item identifiers using
@@ -624,13 +657,13 @@ respectively.
 \noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #create two items and assign custom identifiers
-> ident_item = item_create(title='test data')
-> item_update_identifier(ident_item, scheme='proj2', type='data', key='dataset1')
-> ident_item = item_create(title='test publication')
-> item_update_identifier(ident_item, scheme='proj2', type='publication', key='pdf1')
+> ident_item = item_create(title = 'test data')
+> item_update_identifier(ident_item, scheme = 'proj2', type = 'data', key = 'dataset1')
+> ident_item = item_create(title = 'test publication')
+> item_update_identifier(ident_item, scheme = 'proj2', type = 'publication', key = 'pdf1')
 
 #query for created item
-> query_item_identifier(scheme='proj2', type='publication', key='pdf1')
+> query_item_identifier(scheme = 'proj2', type = 'publication', key = 'pdf1')
              title                       id
 1 test publication 56a9371ee4b012c193aa3d65
 \end{example}
@@ -645,13 +678,13 @@ that project.
 \noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #query all items in 'proj2'
-> query_item_identifier(scheme='proj2')
+> query_item_identifier(scheme = 'proj2')
              title                       id
 1 test publication 56a9371ee4b012c193aa3d65
 2        test data 56a93777e4b012c193aa3d68
 
 #query just data items for a project
-> query_item_identifier(scheme='proj2', type='data')
+> query_item_identifier(scheme = 'proj2', type = 'data')
       title                       id
 1 test data 56a93777e4b012c193aa3d68
 \end{example}
