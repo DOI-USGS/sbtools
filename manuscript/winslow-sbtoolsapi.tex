@@ -476,8 +476,9 @@ authentication of R sessions.
 
 In \pkg{sbtools}, users can log into ScienceBase with their ScienceBase username
 and password using the function \code{authenticate\_sb()}. To prevent plain-text
-passwords from being saved in the R command history, the password can be typed
-into a pop-up window. \pkg{sbtools} only stores the authenticated session,
+passwords from being saved in the R command history, when using RStudio, 
+the password can be typed into a pop-up window. The core R environment displays a 
+terminal input interface for the password. \pkg{sbtools} only stores the authenticated session,
 thereby maintaining the confidentiality of the user's credentials. ScienceBase
 sessions remain active for roughly one hour and are renewed each time a request
 is made. \pkg{sbtools} makes a best effort to supply the user with meaningful
