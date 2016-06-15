@@ -7,7 +7,8 @@ library(maps)
 
 faults = query_sb(list(q="faults", browseType = "OGC WFS Layer"), limit=20)
 
-png('manuscript/faultlinefig.png', res=300, width=1200, height=1200)
+#png('faultlinefig.png', res=300, width=2000, height=1600)
+par(mar=c(5,5,1,1), oma=c(0,2,0,0))
 map('usa')
 for(i in 1:length(faults)){
 	#just to finish fig if there's an HTTP error
@@ -18,4 +19,6 @@ for(i in 1:length(faults)){
 	}, error=function(e){})
 }
 map.axes()
-dev.off()
+mtext('lon', 1, line=2.2, mex=2)
+mtext('lat', 2, line=2.2, mex=2)
+#dev.off()

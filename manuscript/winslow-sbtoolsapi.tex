@@ -110,7 +110,9 @@ One example is spatial data. When spatial data uploaded to ScienceBase
 and appropriate metadata is included, they can be accessed using 
 Open Geospatial Consortium (\href{http://www.opengeospatial.org/}{OGC}) 
 web services. \pkg{sbtools} has includes functionality to access Web
-Feature Service (WFS) when available.
+Feature Service (WFS) when available. Note: Some formatting details of code
+omitted from code below for simplicity. See demo('', package='') for full
+example.
 
 \noindent\rule{\textwidth}{0.4pt}
 \begin{example}
@@ -181,7 +183,7 @@ tree. For example, projects funded by USGS Climate Science Centers each have sec
 where project information is stored. Using the web interface (and some user knowledge), we first found the
 ScienceBase ID of the Northeast Climate Science Center community folder. Then, \pkg{sbtools} can be used 
 to look for specific items in that commuinty. Below is an example of looking for 
-lake related items under the Northeast Climate Science Center community. 
+items containing any reference to "Lake Superior" under the Northeast Climate Science Center community. 
 
 \noindent\rule{\textwidth}{0.4pt}
 \begin{example}
@@ -304,9 +306,10 @@ specific data type.
 \end{example}
 \noindent\rule{\textwidth}{0.4pt}
 
-On ScienceBase, the preferred way of storing an item's DOI is using the custom item
-identifier fields. \code{query\_sb\_doi()} can query those fields specifically for
-a DOI. Here are examples of querying items by DOI on ScienceBase:
+On ScienceBase, the preferred way of storing an item's DOI is using 
+the identifier field, and specifying the type as DOI.
+\code{query\_sb\_doi()} can query those fields specifically for
+a DOI when properly described. Here are examples of querying items by DOI on ScienceBase:
 
 \noindent\rule{\textwidth}{0.4pt}
 \begin{example}
