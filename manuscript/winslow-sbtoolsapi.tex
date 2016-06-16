@@ -209,17 +209,16 @@ items containing any reference to "Lake Superior" under the Northeast Climate Sc
 \end{example}
 \noindent\rule{\textwidth}{0.4pt}
 
-Date-time information for ScienceBase items may include the date of
-data creation, modification, report, collection, and/or
-publication. \pkg{sbtools} users may search any of these
-date-time fields using the \code{date\_type} argument to the
-\code{query\_sb\_date()} function.
+There are a large number of query types that can be performed. A few examples include
+date-time range, (\code{query\_sb\_date()}), data type 
+(\code{sb\_datatypes()} and \code{query\_sb\_datatype}), and Digial Object Identifier (DOI; \code{query\_sb\_doi()}). 
+
 
 \noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #Query recently updated items
 > query_sb_date(Sys.time()-as.difftime(7, units="days"), Sys.time(),
-+    date_type='lastUpdated', limit=2)
++    date_type='lastUpdated', limit=1)
 [[1]]
 <ScienceBase Item>
   Title: US Topo
@@ -229,63 +228,9 @@ date-time fields using the \code{date\_type} argument to the
   Item ID: 4f554236e4b018de15819c85
   Parent ID: 4f552e93e4b018de15819c51
 
-[[2]]
-<ScienceBase Item>
-  Title: USGS US Topo 7.5-minute map for Boyer, IA 2013
-  Creator/LastUpdatedBy:      /
-  Provenance (Created / Updated):  2014-05-01T08:13:22Z / 2016-02-01T10:21:18Z
-  Children: FALSE
-  Item ID: 53620222e4b0c409c627ec57
-  Parent ID: 5061bc99e4b0ce47085a8d03
-
-#Query for data published in the 1970's
-> query_sb_date(as.POSIXct('1970-01-01'), as.POSIXct('1980-01-01'),
-+   date_type = 'Publication', limit = 2)
-[[1]]
-<ScienceBase Item>
-  Title: Common marsh plants of the United States and Canada
-  Creator/LastUpdatedBy:      /
-  Provenance (Created / Updated):  2010-10-22T22:24:18Z / 2014-07-05T04:55:27Z
-  Children: FALSE
-  Item ID: 4f4e4b24e4b07f02db6ae651
-  Parent ID: 4f4e4771e4b07f02db47e1e4
-
-[[2]]
-<ScienceBase Item>
-  Title: Structure and mineralization of Precambrian rocks in the Galena-
-         Roubaix district, Black Hills, South Dakota
-  Creator/LastUpdatedBy:      /
-  Provenance (Created / Updated):  2010-10-23T00:28:32Z / 2014-07-21T20:14:53Z
-  Children: FALSE
-  Item ID: 4f4e4b14e4b07f02db6a47a6
-  Parent ID: 4f4e4771e4b07f02db47e1e4
-\end{example}
-\noindent\rule{\textwidth}{0.4pt}
-
-Each item can be described by a data type tag. Because this field is free-text,
-it can take on a number of different values. The function \code{sb\_datatypes()}
-returns the list of currently used data type tags on ScienceBase.
-\code{query\_sb\_datatype} can be used to query for items described with a
-specific data type.
-
-\noindent\rule{\textwidth}{0.4pt}
-\begin{example}
-#List first 50 available data types
-> sb_datatypes(limit = 50)
- [1] "Application"               "ArcGIS Map Package"       
- [3] "ArcGIS REST Map Service"   "ArcGIS Service Definition"
- [5] "ArcIMS Catalog"            "ArcIMS Metadata"          
- [7] "BASIS+ Project"            "BASIS+ Subtask"           
- [9] "BASIS+ Task"               "Book Citation"            
-[11] "Citation"                  "Clearinghouse"            
-[13] "Collection"                "Conference Citation"      
-[15] "Digital Map - Beta"        "Document"                 
-[17] "Downloadable"              "Electronic Book Citation" 
-[19] "GeoProcessing Service"     "GeoTIFF"  
-
 
 #Query for USGS Reports
-> query_sb_datatype('Report', limit = 2)
+> query_sb_datatype('Report', limit = 1)
 [[1]]
 <ScienceBase Item> 
   Title: Final Memo for Structured decision-making to facilitate multi-stakeholder coastal conservation and restoration under climate change uncertainties: case study on barrier islands of the northern Gulf of Mexico
@@ -294,27 +239,9 @@ specific data type.
   Children: 
   Item ID: 565e07b3e4b071e7ea5435d0
   Parent ID: 5224e64fe4b0e4746d62af85
-
-[[2]]
-<ScienceBase Item> 
-  Title: Correlation & Climate Sensitivity of Human Health and Environmental Indicators in the Salish Sea - Final Report
-  Creator/LastUpdatedBy:      / 
-  Provenance (Created / Updated):   / 
-  Children: 
-  Item ID: 557a1504e4b0c350d7b9a7e5
-  Parent ID: 527c2bdae4b0050d7e26b7c5
-\end{example}
-\noindent\rule{\textwidth}{0.4pt}
-
-On ScienceBase, the preferred way of storing an item's DOI is using 
-the identifier field, and specifying the type as DOI.
-\code{query\_sb\_doi()} can query those fields specifically for
-a DOI when properly described. Here are examples of querying items by DOI on ScienceBase:
-
-\noindent\rule{\textwidth}{0.4pt}
-\begin{example}
-#Two example DOI-specific queries
-query_sb_doi('10.5066/F7M043G7')
+  
+#Query for DOI
+> query_sb_doi('10.5066/F7M043G7')
 [[1]]
 <ScienceBase Item>
   Title: 2013 Raw Ground Penetrating Radar Data on Alaska's Glaciers
@@ -323,18 +250,9 @@ query_sb_doi('10.5066/F7M043G7')
   Children: TRUE
   Item ID: 557f0367e4b023124e8ef621
   Parent ID: 5474ec49e4b04d7459a7eab2
-
-query_sb_doi('10.5066/F7Z60M35')
-[[1]]
-<ScienceBase Item> 
-  Title: Raw Ground Penetrating Radar Data, Eureka Glacier, Alaska; 2013
-  Creator/LastUpdatedBy:      / 
-  Provenance (Created / Updated):  2015-06-25T22:10:38Z / 2016-02-18T21:20:42Z
-  Children: FALSE
-  Item ID: 558c7c5ee4b0b6d21dd654ca
-  Parent ID: 557f0367e4b023124e8ef621
 \end{example}
 \noindent\rule{\textwidth}{0.4pt}
+
 
 Items with a geospatial component to their data or metadata can be queried using a
 Lat/Lon bounding box with the function \code{query\_sb\_spatial()}. The
