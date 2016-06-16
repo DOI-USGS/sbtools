@@ -264,8 +264,9 @@ the \pkg{sp} and \pkg{gdalUtils} packages must be installed to use these functio
 
 \noindent\rule{\textwidth}{0.4pt}
 \begin{example}
-##specify the lat/long corners of the bounding box
-> query_sb_spatial(bb_min = c(-104.4, 37.5), bb_max = c(-95.1, 41.0), limit = 2)
+#specify the latitude and longitude points to define the bounding box range. 
+# This is simply bottom left and top right points
+> query_sb_spatial(long=c(-104.4, -95.1), lat=c(37.5, 41.0), limit=1)
 [[1]]
 <ScienceBase Item>
   Title: National Fish Habitat Partnership Data System
@@ -273,15 +274,6 @@ the \pkg{sp} and \pkg{gdalUtils} packages must be installed to use these functio
   Provenance (Created / Updated):  2012-02-29T15:42:43Z / 2015-11-12T20:19:30Z
   Children: TRUE
   Item ID: 4f4e4773e4b07f02db47e241
-  Parent ID: 4f4e4760e4b07f02db47df9c
-
-[[2]]
-<ScienceBase Item>
-  Title: Geo Data Portal Catalog
-  Creator/LastUpdatedBy:      /
-  Provenance (Created / Updated):  2015-02-12T22:03:18Z / 2015-11-24T22:38:06Z
-  Children: TRUE
-  Item ID: 54dd2326e4b08de9379b2fb1
   Parent ID: 4f4e4760e4b07f02db47df9c
 
 ##You can also use the bounding box of an sp spatial data object
@@ -289,17 +281,9 @@ the \pkg{sp} and \pkg{gdalUtils} packages must be installed to use these functio
 > layer = item_get_wfs('55e372b9e4b05561fa208212')
 
 #get items in that bounding box
-> query_sb_spatial(layer, limit = 2)
-[[1]]
-<ScienceBase Item>
-  Title: National Fish Habitat Partnership Data System
-  Creator/LastUpdatedBy:      /
-  Provenance (Created / Updated):  2012-02-29T15:42:43Z / 2015-11-12T20:19:30Z
-  Children: TRUE
-  Item ID: 4f4e4773e4b07f02db47e241
-  Parent ID: 4f4e4760e4b07f02db47df9c
+> query_sb_spatial(layer, limit = 1)
 
-[[2]]
+[[1]]
 <ScienceBase Item>
   Title: USGS Denver Library Photographic Collection
   Creator/LastUpdatedBy:      /
@@ -324,7 +308,7 @@ with via the \href{https://www.sciencebase.gov/catalog/items/queryForm}
 \begin{example}
 
 # query_sb can be used for combined search criteria
-> query_sb(list(q = "water", folderId = '504216b9e4b04b508bfd337d', browserCategory = 'Image'), limit=2)
+> query_sb(list(q = "water", folderId = '504216b9e4b04b508bfd337d', browserCategory = 'Image'), limit=1)
 [[1]]
 <ScienceBase Item>
   Title: Encyclopedia of Water Science
@@ -334,20 +318,12 @@ with via the \href{https://www.sciencebase.gov/catalog/items/queryForm}
   Item ID: 51700bfee4b05024ef3cd4ef
   Parent ID: 504216b9e4b04b508bfd337d
 
-[[2]]
-<ScienceBase Item>
-  Title: Introduction to special section on Impacts of Land Use Change on Water Resources
-  Creator/LastUpdatedBy:      /
-  Provenance (Created / Updated):  2013-04-18T15:07:35Z / 2013-04-18T15:07:35Z
-  Children: FALSE
-  Item ID: 51700c37e4b05024ef3cd4fd
-  Parent ID: 504216b9e4b04b508bfd337d
 \end{example}
 \noindent\rule{\textwidth}{0.4pt}
 
 Combining both the query functionality and direct spatial data access through WFS web services, 
 we can quickly discover and explore available datasets on ScienceBase. For example, if we wanted to 
-discover what faultline spatial data are availalbe on ScienceBase, we can combine \pkg{sbtools}
+discover what faultline spatial data are available on ScienceBase, we can combine \pkg{sbtools}
 query and data access functionality. In the below example, 
 we query for items with the word "faults" in their description which also expose data 
 through an OGC WFS web service. We plot all datasets together to general geographic locations
