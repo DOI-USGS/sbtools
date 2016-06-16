@@ -110,7 +110,9 @@ One example is spatial data. When spatial data uploaded to ScienceBase
 and appropriate metadata is included, they can be accessed using 
 Open Geospatial Consortium (\href{http://www.opengeospatial.org/}{OGC}) 
 web services. \pkg{sbtools} has includes functionality to access Web
-Feature Service (WFS) when available. Note: Some formatting details of code
+Feature Service (WFS) when available. Once retrieved, spatial data is stored 
+as \pkg{sp} spatial objects, which are easily manipulated and visualized (Figure \ref{figure:iowafig}). 
+Note: Some formatting details of code
 omitted from code below for simplicity. See \code{demo('figure\_map\_code', package='sbtools')} 
 for full example.
 
@@ -349,7 +351,7 @@ discover what faultline spatial data are availalbe on ScienceBase, we can combin
 query and data access functionality. In the below example, 
 we query for items with the word "faults" in their description which also expose data 
 through an OGC WFS web service. We plot all datasets together to general geographic locations
-and data type/completeness. We see datasets covering much of the western United States and off the west coast. 
+and data type/completeness (Figure \ref{figure:faultlinefig}). We see datasets covering much of the western United States and off the west coast. 
 Small datasets are scattered around the gulf coast and other areas of the U.S., but none expose the 
 raw faultline data so more discovery may be required. 
 
