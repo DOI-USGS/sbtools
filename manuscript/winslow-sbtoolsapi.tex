@@ -209,10 +209,9 @@ items containing any reference to "Lake Superior" under the Northeast Climate Sc
 \end{example}
 \noindent\rule{\textwidth}{0.4pt}
 
-There are a large number of query types that can be performed. A few examples include
-date-time range, (\code{query\_sb\_date()}), data type 
+There are a several more useful query types that can be performed simply with \pkg{sbtools}. 
+A few examples include date-time range, (\code{query\_sb\_date()}), data type 
 (\code{sb\_datatypes()} and \code{query\_sb\_datatype}), and Digial Object Identifier (DOI; \code{query\_sb\_doi()}). 
-
 
 \noindent\rule{\textwidth}{0.4pt}
 \begin{example}
@@ -345,9 +344,16 @@ with via the \href{https://www.sciencebase.gov/catalog/items/queryForm}
 \noindent\rule{\textwidth}{0.4pt}
 
 Combining both the query functionality and direct spatial data access through WFS web services, 
-below is an example of exploring multiple available datasets on ScienceBase. In this example, 
-we query for lakes with the word "faults" in their description which also expose data 
-through an OGC WFS web service. Note: Some formatting details of code
+we can quickly discover and explore available datasets on ScienceBase. For example, if we wanted to 
+discover what faultline spatial data are availalbe on ScienceBase, we can combine \pkg{sbtools}
+query and data access functionality. In the below example, 
+we query for items with the word "faults" in their description which also expose data 
+through an OGC WFS web service. We plot all datasets together to general geographic locations
+and data type/completeness. We see datasets covering much of the western United States and off the west coast. 
+Small datasets are scattered around the gulf coast and other areas of the U.S., but none expose the 
+raw faultline data so more discovery may be required. 
+
+Note: Some formatting details of code
 omitted from code below for simplicity. See \code{demo('figure\_fault\_code', package='sbtools')} 
 for full example.
 
