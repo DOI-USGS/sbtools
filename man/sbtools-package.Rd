@@ -13,11 +13,24 @@ data management platform.
 Functions are inluded for searching for data, retrieving, creating, and 
 updating datasets.
 }
+\details{
+Functionality in this package allows all users to query ScienceBase for 
+data using a variety of metadata types (\code{\link{query_sb_text}}, 
+\code{\link{query_sb_doi}}, \code{\link{query_sb_spatial}}). Items and associated
+information can be requested by \code{\link{item_get}} including item parents 
+\code{\link{item_get_parent}} and children \code{\link{item_list_children}}.
+Data and attached files can be accessed for all available items through provided
+functionality (e.g., \code{\link{item_get_wfs}} and \code{\link{item_file_download}}).
+}
 \section{Authentication}{
 
 
 See the function \code{\link{authenticate_sb}} to authenticate. You'll be 
 required to pass in your ScienceBase username and password.
+
+Authenticated users can create, update, and remove items (\code{\link{item_list_children}}, 
+\code{\link{item_list_children}}, \code{\link{item_create}}, \code{\link{item_update}}, 
+\code{\link{item_rm}}).
 }
 
 \section{Feedback}{
