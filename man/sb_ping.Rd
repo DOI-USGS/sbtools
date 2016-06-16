@@ -10,7 +10,8 @@ sb_ping(...)
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}}
 }
 \value{
-list, with \code{"OK"} if ScienceBase is up
+Boolean (TRUE) indicating if a connection to ScienceBase can be established 
+and if it is responding as expected. FALSE otherwise.
 }
 \description{
 Ping ScienceBase to see if it's available
