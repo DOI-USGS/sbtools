@@ -10,7 +10,7 @@
 #' web services based on the Open Geospatial Consortium, Web Feature Service (WFS)
 #' standardized interface. This requires the following libraries not by default
 #' installed with sbtools: \code{rgdal}, \code{httr}, and \code{xml2}. 
-#' You can install them simply by running \code{install.packages(c("xml2", "httr", "rgdal")))}
+#' You can install them simply by running \code{install.packages(c("xml2", "httr", "rgdal"))}
 #' 
 #' @examples 
 #' \dontrun{
