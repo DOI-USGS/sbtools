@@ -1,7 +1,7 @@
 #' @title Get an item's parent ID
 #'
 #' @template manipulate_item
-#' @return The parent ID of an item.
+#' @return An item object representing the parent of the supplied item.
 #' @export
 #' @examples \dontrun{
 #' item_get_parent("4f4e4b24e4b07f02db6aea14")
@@ -10,5 +10,6 @@
 #' }
 item_get_parent = function(sb_id, ..., session = current_session()) {
 	res <- as.sbitem(sb_id, ...)
-	res$parentId
+	
+	return(as.sbitem(res$parentId))
 }

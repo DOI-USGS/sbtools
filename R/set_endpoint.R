@@ -26,6 +26,7 @@
 set_endpoint = function(endpoint="production"){
 	
 	endpoint = tolower(endpoint)
+	match.arg(endpoint, c('production', 'prod', 'development', 'dev'))
 	
 	if(endpoint=="production" || endpoint=="prod"){
 		pkg.env$url_base = "https://www.sciencebase.gov/catalog/"
@@ -34,8 +35,6 @@ set_endpoint = function(endpoint="production"){
 	}else if(endpoint=="development" || endpoint=="dev"){
 		pkg.env$url_base = "https://beta.sciencebase.gov/catalog/"
 		pkg.env$domain   = "https://beta.sciencebase.gov/"
-	}else{
-		stop('Unsupported endpoint option')
 	}
 	
 	pkg.env$url_items = paste0(pkg.env$url_base, "items/")
