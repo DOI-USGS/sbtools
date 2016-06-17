@@ -1,4 +1,4 @@
-# Version 0.19.2 (2016-06-17)
+# Version 0.19.3 (2016-06-17)
 
 * Bunch of changes from reviews
 
@@ -12,6 +12,8 @@ just uses lat/long arrays and determines box from those
 * `sb_ping` returns boolean TRUE/FALSE for success/fail
 
 * `set_endpoint` no longer includes verbose message and properly uses `match.arg`
+
+* `item_list_children` now returns list of `sbitem` to be uniform with rest of `sbtools`
 
 * Lots of documentation updates and new demos
 

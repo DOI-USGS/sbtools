@@ -47,20 +47,7 @@ item_list_children = function(sb_id, fields=c('id', 'title'), raw=FALSE, ..., se
 	if(length(items) < 1){
 		return(data.frame())
 	}
-
-	#Create data.frame and populate empty columns
-	out = data.frame(id = rep(NA, length(items)))
-	for(i in 1:length(fields)){
-		out[,fields[i]] = NA
-	}
 	
-	for(i in 1:length(items)){
-		for(j in 1:length(fields)){
-			out[i,fields[j]] = if(fields[j] %in% names(items[[i]])) items[[i]][fields[j]] else NA
-		}
-		#out$title[i] = if("title" %in% names(items[[i]])) items[[i]]$title else NA
-	  #out$id[i] = items[[i]]$id
-	}
-
+	out = lapply(items, as.sbitem)
 	return(out)
 }
