@@ -1,3 +1,22 @@
+# Version 0.19.3 (2016-06-17)
+
+* Bunch of changes from reviews
+
+* `item_get_parent` now returns `sbitem`, not just ID
+
+* fixed probablem with `query_sb_doi`
+
+* `query_sb_spatial` no longer has awkard bounding box specification, 
+just uses lat/long arrays and determines box from those
+
+* `sb_ping` returns boolean TRUE/FALSE for success/fail
+
+* `set_endpoint` no longer includes verbose message and properly uses `match.arg`
+
+* `item_list_children` now returns list of `sbitem` to be uniform with rest of `sbtools`
+
+* Lots of documentation updates and new demos
+
 # Version 0.18.5 (2016-06-01)
 
 * Fixed issue with `query_sb_datatype`

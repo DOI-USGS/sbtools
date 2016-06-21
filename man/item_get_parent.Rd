@@ -16,7 +16,7 @@ item_get_parent(sb_id, ..., session = current_session())
 last authenticated session}
 }
 \value{
-The parent ID of an item.
+An item object representing the parent of the supplied item.
 }
 \examples{
 \dontrun{

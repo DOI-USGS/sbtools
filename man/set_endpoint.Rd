@@ -4,7 +4,7 @@
 \alias{set_endpoint}
 \title{Set SB endpoint}
 \usage{
-set_endpoint(endpoint = "production")
+set_endpoint(endpoint = c("production", "development"))
 }
 \arguments{
 \item{endpoint}{Indicate which SB endpoint 

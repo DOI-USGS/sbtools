@@ -2,11 +2,22 @@
 #' 
 #' @export
 #' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}
-#' @return list, with \code{"OK"} if ScienceBase is up
+#' @return Boolean (TRUE) indicating if a connection to ScienceBase can be established 
+#' and if it is responding as expected. FALSE otherwise. 
 #' @examples \dontrun{
 #' sb_ping()
 #' }
 sb_ping <- function(...) {
-	x <- GET(paste0(pkg.env$url_item, 'ping'), ...)
-	jsonlite::fromJSON(content(x, "text"))
+
+	tryCatch({
+		x <- GET(paste0(pkg.env$url_item, 'ping'), ...)
+		res = jsonlite::fromJSON(content(x, "text"))
+		if(is(res, 'list') & !is.null(res$result) & res$result == 'OK'){
+			return(TRUE)
+		}
+	}, error=function(e){
+		return(FALSE)
+	})
+	
+	return(FALSE)
 }

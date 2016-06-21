@@ -23,23 +23,18 @@
 #'}
 #'
 #'@export
-set_endpoint = function(endpoint="production"){
+set_endpoint = function(endpoint=c("production", "development")){
 	
-	endpoint = tolower(endpoint)
+	endpoint = match.arg(endpoint)
 	
-	if(endpoint=="production" || endpoint=="prod"){
-		message('Setting endpoint to www.sciencebase.gov');
-		pkg.env$url_base = "https://www.sciencebase.gov/catalog/"
+	if(endpoint=="production"){
 		pkg.env$domain = "https://www.sciencebase.gov/"
 		
-	}else if(endpoint=="development" || endpoint=="dev"){
-		message('Setting endpoint to beta.sciencebase.gov');
-		pkg.env$url_base = "https://beta.sciencebase.gov/catalog/"
+	}else if(endpoint=="development"){
 		pkg.env$domain   = "https://beta.sciencebase.gov/"
-	}else{
-		stop('Unsupported endpoint option')
 	}
 	
+	pkg.env$url_base = paste0(pkg.env$domain, "catalog/")
 	pkg.env$url_items = paste0(pkg.env$url_base, "items/")
 	pkg.env$url_item = paste0(pkg.env$url_base, "item/")
 	pkg.env$url_upsert = paste0(pkg.env$url_base, "item/upsert")

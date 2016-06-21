@@ -4,27 +4,27 @@
 \alias{query_sb_spatial}
 \title{Query SB based on spatial extent}
 \usage{
-query_sb_spatial(bbox, bb_min, bb_max, bb_wkt, ..., limit = 20,
+query_sb_spatial(bbox, long, lat, bb_wkt, ..., limit = 20,
   session = current_session())
 }
 \arguments{
 \item{bbox}{An object of class \code{\link{sp}}. The bounding box of the object is used for the query.}
 
-\item{bb_min}{Alternate to bbox param. A vector length 2 defining the c(long, lat) of lower left corner of the bounding box.}
+\item{long}{A vector of longitude values that will define the boundaries of a bounding box. Min and Max of supplied longitudes are used. (alternate option to bbox).}
 
-\item{bb_max}{Alternate to bbox param. A vector length 2 defining the c(long, lat) of upper right corner of the bounding box.}
+\item{lat}{A vector of latitude values that will define the boundaries of a bounding box. Min and Max of supplied latitude are used. (alternate option to bbox).}
 
 \item{bb_wkt}{A character string using the Well Known Text (WKT) standard for defining spatial data. Must be a POLYGON WKT object.}
 }
 \description{
 Queries ScienceBase based on a spatial bounding box. Accepts either an object of class \code{\link{sp}} 
-(uses the spatial object's bounding box) or two long/lat coordinates defining the lower left and upper 
-right corners.
+(uses the spatial object's bounding box) or long/lat coordinates defining the bounding box limits.
 }
 \examples{
 \dontrun{
-#specify the corners of the bounding box
-query_sb_spatial(bb_min=c(-104.4, 37.5), bb_max=c(-95.1, 41.0))
+#specify the latitude and longitude points to define the bounding box range. 
+# This is simply bottom left and top right points
+query_sb_spatial(long=c(-104.4, -95.1), lat=c(37.5, 41.0))
 
 #use a pre-formatted WKT polygon to grab data
 query_sb_spatial(bb_wkt="POLYGON((-104.4 41.0,-95.1 41.0,-95.1 37.5,-104.4 37.5,-104.4 41.0))")

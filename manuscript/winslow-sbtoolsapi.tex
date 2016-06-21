@@ -110,7 +110,11 @@ One example is spatial data. When spatial data uploaded to ScienceBase
 and appropriate metadata is included, they can be accessed using 
 Open Geospatial Consortium (\href{http://www.opengeospatial.org/}{OGC}) 
 web services. \pkg{sbtools} has includes functionality to access Web
-Feature Service (WFS) when available.
+Feature Service (WFS) when available. Once retrieved, spatial data is stored 
+as \pkg{sp} spatial objects, which are easily manipulated and visualized (Figure \ref{figure:iowafig}). 
+Note: Some formatting details of code
+omitted from code below for simplicity. See \code{demo('figure\_map\_code', package='sbtools')} 
+for full example.
 
 \noindent\rule{\textwidth}{0.4pt}
 \begin{example}
@@ -119,8 +123,8 @@ library(maps)
 library(sp)
 #an item with an included OGC WFS service
 layer = item_get_wfs('55e372b9e4b05561fa208212')
-map('state', regions='iowa')
-plot(layer, add=TRUE)
+map('state', regions = 'iowa')
+plot(layer, add = TRUE)
 \end{example}
 \noindent\rule{\textwidth}{0.4pt}
 
@@ -177,9 +181,11 @@ search can be run with the \code{query\_sb\_text} function.
 \noindent\rule{\textwidth}{0.4pt}
 
 Items can also be queried according to their position in the hierarchical item
-tree. For example, projects funded by USGS Climate Science Centers have sections on ScienceBase
-where project information is stored. Below is an example of looking for 
-lake related items under the Northeast Climate Science Center community. 
+tree. For example, projects funded by USGS Climate Science Centers each have sections on ScienceBase
+where project information is stored. Using the web interface (and some user knowledge), we first found the
+ScienceBase ID of the Northeast Climate Science Center community folder. Then, \pkg{sbtools} can be used 
+to look for specific items in that commuinty. Below is an example of looking for 
+items containing any reference to "Lake Superior" under the Northeast Climate Science Center community. 
 
 \noindent\rule{\textwidth}{0.4pt}
 \begin{example}
@@ -205,17 +211,15 @@ lake related items under the Northeast Climate Science Center community.
 \end{example}
 \noindent\rule{\textwidth}{0.4pt}
 
-Date-time information for ScienceBase items may include the date of
-data creation, modification, report, collection, and/or
-publication. \pkg{sbtools} users may search any of these
-date-time fields using the \code{date\_type} argument to the
-\code{query\_sb\_date()} function.
+There are a several more useful query types that can be performed simply with \pkg{sbtools}. 
+A few examples include date-time range, (\code{query\_sb\_date()}), data type 
+(\code{sb\_datatypes()} and \code{query\_sb\_datatype}), and Digial Object Identifier (DOI; \code{query\_sb\_doi()}). 
 
 \noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #Query recently updated items
 > query_sb_date(Sys.time()-as.difftime(7, units="days"), Sys.time(),
-+    date_type='lastUpdated', limit=2)
++    date_type='lastUpdated', limit=1)
 [[1]]
 <ScienceBase Item>
   Title: US Topo
@@ -225,91 +229,20 @@ date-time fields using the \code{date\_type} argument to the
   Item ID: 4f554236e4b018de15819c85
   Parent ID: 4f552e93e4b018de15819c51
 
-[[2]]
-<ScienceBase Item>
-  Title: USGS US Topo 7.5-minute map for Boyer, IA 2013
-  Creator/LastUpdatedBy:      /
-  Provenance (Created / Updated):  2014-05-01T08:13:22Z / 2016-02-01T10:21:18Z
-  Children: FALSE
-  Item ID: 53620222e4b0c409c627ec57
-  Parent ID: 5061bc99e4b0ce47085a8d03
 
-#Query for data published in the 1970's
-> query_sb_date(as.POSIXct('1970-01-01'), as.POSIXct('1980-01-01'),
-+   date_type='Publication', limit=2)
+#Query for USGS Reports
+> query_sb_datatype('Report', limit = 1)
 [[1]]
-<ScienceBase Item>
-  Title: Common marsh plants of the United States and Canada
-  Creator/LastUpdatedBy:      /
-  Provenance (Created / Updated):  2010-10-22T22:24:18Z / 2014-07-05T04:55:27Z
-  Children: FALSE
-  Item ID: 4f4e4b24e4b07f02db6ae651
-  Parent ID: 4f4e4771e4b07f02db47e1e4
-
-[[2]]
-<ScienceBase Item>
-  Title: Structure and mineralization of Precambrian rocks in the Galena-
-         Roubaix district, Black Hills, South Dakota
-  Creator/LastUpdatedBy:      /
-  Provenance (Created / Updated):  2010-10-23T00:28:32Z / 2014-07-21T20:14:53Z
-  Children: FALSE
-  Item ID: 4f4e4b14e4b07f02db6a47a6
-  Parent ID: 4f4e4771e4b07f02db47e1e4
-\end{example}
-\noindent\rule{\textwidth}{0.4pt}
-
-Each item can be described by a data type tag. Because this field is free-text,
-it can take on a number of different values. The function \code{sb\_datatypes()}
-returns the list of currently used data type tags on ScienceBase.
-\code{query\_sb\_datatype} can be used to query for items described with a
-specific data type.
-
-\noindent\rule{\textwidth}{0.4pt}
-\begin{example}
-#List first 50 available data types
-> sb_datatypes(limit = 50)
- [1] "Application"               "ArcGIS Map Package"       
- [3] "ArcGIS REST Map Service"   "ArcGIS Service Definition"
- [5] "ArcIMS Catalog"            "ArcIMS Metadata"          
- [7] "BASIS+ Project"            "BASIS+ Subtask"           
- [9] "BASIS+ Task"               "Book Citation"            
-[11] "Citation"                  "Clearinghouse"            
-[13] "Collection"                "Conference Citation"      
-[15] "Digital Map - Beta"        "Document"                 
-[17] "Downloadable"              "Electronic Book Citation" 
-[19] "GeoProcessing Service"     "GeoTIFF"  
-
-
-#Query for US Topographic data
-> query_sb_datatype('US Topo', limit=2)
-[[1]]
-<ScienceBase Item>
-  Title: USGS Geoscience Data Catalog
-  Creator/LastUpdatedBy:      /
-  Provenance (Created / Updated):  2014-05-22T19:06:52Z / 2015-02-05T18:41:43Z
-  Children: TRUE
-  Item ID: 537e4acce4b05ed6215c0a18
-  Parent ID: 527cf4ede4b0850ea05182ee
-
-[[2]]
-<ScienceBase Item>
-  Title: TNC repeat photographs
-  Creator/LastUpdatedBy:      /
-  Provenance (Created / Updated):  2014-10-16T22:11:20Z / 2015-04-01T22:25:37Z
-  Children: TRUE
-  Item ID: 54404288e4b0b0a643c73143
-  Parent ID: 54247f49e4b037b608f9edd1
-\end{example}
-\noindent\rule{\textwidth}{0.4pt}
-
-On ScienceBase, the preferred way of storing an item's DOI is using the custom item
-identifier fields. \code{query\_sb\_doi()} can query those fields specifically for
-a DOI. Here are examples of querying items by DOI on ScienceBase:
-
-\noindent\rule{\textwidth}{0.4pt}
-\begin{example}
-#Two example DOI-specific queries
-query_sb_doi('10.5066/F7M043G7')
+<ScienceBase Item> 
+  Title: Final Memo for Structured decision-making to facilitate multi-stakeholder coastal conservation and restoration under climate change uncertainties: case study on barrier islands of the northern Gulf of Mexico
+  Creator/LastUpdatedBy:      / 
+  Provenance (Created / Updated):   / 
+  Children: 
+  Item ID: 565e07b3e4b071e7ea5435d0
+  Parent ID: 5224e64fe4b0e4746d62af85
+  
+#Query for DOI
+> query_sb_doi('10.5066/F7M043G7')
 [[1]]
 <ScienceBase Item>
   Title: 2013 Raw Ground Penetrating Radar Data on Alaska's Glaciers
@@ -318,18 +251,9 @@ query_sb_doi('10.5066/F7M043G7')
   Children: TRUE
   Item ID: 557f0367e4b023124e8ef621
   Parent ID: 5474ec49e4b04d7459a7eab2
-
-query_sb_doi('10.1126/science.aab1345')
-[[1]]
-<ScienceBase Item>
-  Title: High-rate injection is associated with the increase in U.S. mid-continent seismicity
-  Creator/LastUpdatedBy:      /
-  Provenance (Created / Updated):  2015-06-23T19:52:11Z / 2015-07-06T21:08:26Z
-  Children: FALSE
-  Item ID: 5589b8ebe4b0b6d21dd63b5a
-  Parent ID: 511033e1e4b048b5cead8548
 \end{example}
 \noindent\rule{\textwidth}{0.4pt}
+
 
 Items with a geospatial component to their data or metadata can be queried using a
 Lat/Lon bounding box with the function \code{query\_sb\_spatial()}. The
@@ -340,8 +264,9 @@ the \pkg{sp} and \pkg{gdalUtils} packages must be installed to use these functio
 
 \noindent\rule{\textwidth}{0.4pt}
 \begin{example}
-##specify the lat/long corners of the bounding box
-> query_sb_spatial(bb_min=c(-104.4, 37.5), bb_max=c(-95.1, 41.0), limit=2)
+#specify the latitude and longitude points to define the bounding box range. 
+# This is simply bottom left and top right points
+> query_sb_spatial(long=c(-104.4, -95.1), lat=c(37.5, 41.0), limit=1)
 [[1]]
 <ScienceBase Item>
   Title: National Fish Habitat Partnership Data System
@@ -349,15 +274,6 @@ the \pkg{sp} and \pkg{gdalUtils} packages must be installed to use these functio
   Provenance (Created / Updated):  2012-02-29T15:42:43Z / 2015-11-12T20:19:30Z
   Children: TRUE
   Item ID: 4f4e4773e4b07f02db47e241
-  Parent ID: 4f4e4760e4b07f02db47df9c
-
-[[2]]
-<ScienceBase Item>
-  Title: Geo Data Portal Catalog
-  Creator/LastUpdatedBy:      /
-  Provenance (Created / Updated):  2015-02-12T22:03:18Z / 2015-11-24T22:38:06Z
-  Children: TRUE
-  Item ID: 54dd2326e4b08de9379b2fb1
   Parent ID: 4f4e4760e4b07f02db47df9c
 
 ##You can also use the bounding box of an sp spatial data object
@@ -365,17 +281,9 @@ the \pkg{sp} and \pkg{gdalUtils} packages must be installed to use these functio
 > layer = item_get_wfs('55e372b9e4b05561fa208212')
 
 #get items in that bounding box
-> query_sb_spatial(layer, limit=2)
-[[1]]
-<ScienceBase Item>
-  Title: National Fish Habitat Partnership Data System
-  Creator/LastUpdatedBy:      /
-  Provenance (Created / Updated):  2012-02-29T15:42:43Z / 2015-11-12T20:19:30Z
-  Children: TRUE
-  Item ID: 4f4e4773e4b07f02db47e241
-  Parent ID: 4f4e4760e4b07f02db47df9c
+> query_sb_spatial(layer, limit = 1)
 
-[[2]]
+[[1]]
 <ScienceBase Item>
   Title: USGS Denver Library Photographic Collection
   Creator/LastUpdatedBy:      /
@@ -400,7 +308,7 @@ with via the \href{https://www.sciencebase.gov/catalog/items/queryForm}
 \begin{example}
 
 # query_sb can be used for combined search criteria
-> query_sb(list(q = "water", folderId = '504216b9e4b04b508bfd337d', broserCategory = 'Image'), limit=2)
+> query_sb(list(q = "water", folderId = '504216b9e4b04b508bfd337d', browserCategory = 'Image'), limit=1)
 [[1]]
 <ScienceBase Item>
   Title: Encyclopedia of Water Science
@@ -410,20 +318,53 @@ with via the \href{https://www.sciencebase.gov/catalog/items/queryForm}
   Item ID: 51700bfee4b05024ef3cd4ef
   Parent ID: 504216b9e4b04b508bfd337d
 
-[[2]]
-<ScienceBase Item>
-  Title: Introduction to special section on Impacts of Land Use Change on Water Resources
-  Creator/LastUpdatedBy:      /
-  Provenance (Created / Updated):  2013-04-18T15:07:35Z / 2013-04-18T15:07:35Z
-  Children: FALSE
-  Item ID: 51700c37e4b05024ef3cd4fd
-  Parent ID: 504216b9e4b04b508bfd337d
 \end{example}
 \noindent\rule{\textwidth}{0.4pt}
 
-% can you combine the date, spatial, etc. queries mentioned above? even if
-% it's just finding the intersection of several sets, an example could be useful.
-% or if query_sb can do this, even better.
+Combining both the query functionality and direct spatial data access through WFS web services, 
+we can quickly discover and explore available datasets on ScienceBase. For example, if we wanted to 
+discover what faultline spatial data are available on ScienceBase, we can combine \pkg{sbtools}
+query and data access functionality. In the below example, 
+we query for items with the word "faults" in their description which also expose data 
+through an OGC WFS web service. We plot all datasets together to general geographic locations
+and data type/completeness (Figure \ref{figure:faultlinefig}). We see datasets covering much of the western United States and off the west coast. 
+Small datasets are scattered around the gulf coast and other areas of the U.S., but none expose the 
+raw faultline data so more discovery may be required. 
+
+Note: Some formatting details of code
+omitted from code below for simplicity. See \code{demo('figure\_fault\_code', package='sbtools')} 
+for full example.
+
+\noindent\rule{\textwidth}{0.4pt}
+\begin{example}
+#Source non-sbtools-required but useful mapping packages
+library(sp)
+library(maps)
+
+faults = query_sb(list(q = "faults", browseType = "OGC WFS Layer"), limit = 20)
+
+map('usa')
+for(i in 1:length(faults)){
+    layer = item_get_wfs(faults[[i]]$id)
+    layer = spTransform(layer, CRS('+proj=longlat +datum=WGS84'))
+    plot(layer, add=TRUE, col='red')
+}
+map.axes()
+
+\end{example}
+\noindent\rule{\textwidth}{0.4pt}
+
+%this figure code is demo\figure_fault_code.R
+ \begin{figure}[htbp]
+   \centering
+   \includegraphics{faultlinefig}
+   \caption{An example of querying and discovering multiple
+   spatial datasets on ScienceBase. In this case, faultlines 
+   across the U.S. The variability in data formats (some lines, some polygons)
+   is intentionally included to show both data variability, and quick discovery 
+   of different data types across various regions.}
+   \label{figure:faultlinefig}
+ \end{figure}
 
 \subsection{ScienceBase authentication}
 
@@ -437,8 +378,9 @@ authentication of R sessions.
 
 In \pkg{sbtools}, users can log into ScienceBase with their ScienceBase username
 and password using the function \code{authenticate\_sb()}. To prevent plain-text
-passwords from being saved in the R command history, the password can be typed
-into a pop-up window. \pkg{sbtools} only stores the authenticated session,
+passwords from being saved in the R command history, when using RStudio, 
+the password can be typed into a pop-up window. The core R environment displays a 
+terminal input interface for the password. \pkg{sbtools} only stores the authenticated session,
 thereby maintaining the confidentiality of the user's credentials. ScienceBase
 sessions remain active for roughly one hour and are renewed each time a request
 is made. \pkg{sbtools} makes a best effort to supply the user with meaningful
@@ -487,7 +429,7 @@ authenticated.
   Parent ID: 54257d8fe4b0e641df8b50af
 
 #Search results include user's private items when authenticated
-> query_sb(list(q='username@usgs.gov'))
+> query_sb(list(q = 'username@usgs.gov'))
  <ScienceBase Item>
   Title: Example Private Item
   Creator/LastUpdatedBy:     username@usgs.gov / username@usgs.gov
@@ -498,7 +440,7 @@ authenticated.
 
 #Search results hide private items when not authenticated
 > session_logout()
-> query_sb(list(q='username@usgs.gov'))
+> query_sb(list(q = 'username@usgs.gov'))
 list()
 \end{example}
 \noindent\rule{\textwidth}{0.4pt}
@@ -537,15 +479,16 @@ of items. Because item editing and creation cannot be done anonymously,
 this functionality only works while authenticated.
 
 To create new items, the only required input to \code{item\_create} is "title".
-The "Parent Item" may also be specified. All users have a personal home folder
-(called "My Items" on the ScienceBase website) that serves as the default Parent
-Item for new items. The unique identifier of a user`s home folder can be
+The "Parent Item" may also be specified. New items, by default, inherit the privacy 
+settings of their parent item. All users have a personal home folder
+(called "My Items" on the ScienceBase website) that serves as the default parent
+item for new items. The unique identifier of a user`s home folder can be
 retrieved with the function \code{user\_id()}.
 
 \noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #create new item, by default under "My Items" parent
-> new_item = item_create(title='new test item')
+> new_item = item_create(title = 'new test item')
 > new_item
 <ScienceBase Item>
   Title: new test item
@@ -563,7 +506,7 @@ data files to that item.
 \noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #give the item a new title
-> edited_item = item_update(new_item, list(title='new updated item'))
+> edited_item = item_update(new_item, list(title = 'new updated item'))
 > edited_item
 <ScienceBase Item>
   Title: new updated item
@@ -594,7 +537,7 @@ entire items.
       fname size     url
 1 README.md 1282     https://www.sciencebase.gov/[long URL truncated]
 
-#selectively replace files. all=FALSE replaces files one by one;
+#selectively replace files. all = FALSE replaces files one by one;
 #otherwise all files are removed before uploading the new files
 > item_replace_files(new_item, 'README.md', all = FALSE)
 > item_list_files(edited_item)
@@ -614,7 +557,7 @@ One advanced feature of ScienceBase is the ability to assign any
 number of custom item identifiers to items. The custom identifiers are made up
 of three parts: Scheme, Type and Key. Combined, these create a unique identifier.
 There are some standard Schemes used in ScienceBase. For example, DOIs (Digital
-Object Identifiers) are stored as item identifiers with the Scheme
+Object Identifiers) are stored as item identifiers with the Scheme \\
 "https://www.sciencebase.gov/vocab/category/item/identifier" and Type "DOI".
 
 \pkg{sbtools} can edit and query custom item identifiers using
@@ -624,13 +567,13 @@ respectively.
 \noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #create two items and assign custom identifiers
-> ident_item = item_create(title='test data')
-> item_update_identifier(ident_item, scheme='proj2', type='data', key='dataset1')
-> ident_item = item_create(title='test publication')
-> item_update_identifier(ident_item, scheme='proj2', type='publication', key='pdf1')
+> ident_item = item_create(title = 'test data')
+> item_update_identifier(ident_item, scheme = 'proj2', type = 'data', key = 'dataset1')
+> ident_item = item_create(title = 'test publication')
+> item_update_identifier(ident_item, scheme = 'proj2', type = 'publication', key = 'pdf1')
 
 #query for created item
-> query_item_identifier(scheme='proj2', type='publication', key='pdf1')
+> query_item_identifier(scheme = 'proj2', type = 'publication', key = 'pdf1')
              title                       id
 1 test publication 56a9371ee4b012c193aa3d65
 \end{example}
@@ -645,13 +588,13 @@ that project.
 \noindent\rule{\textwidth}{0.4pt}
 \begin{example}
 #query all items in 'proj2'
-> query_item_identifier(scheme='proj2')
+> query_item_identifier(scheme = 'proj2')
              title                       id
 1 test publication 56a9371ee4b012c193aa3d65
 2        test data 56a93777e4b012c193aa3d68
 
 #query just data items for a project
-> query_item_identifier(scheme='proj2', type='data')
+> query_item_identifier(scheme = 'proj2', type = 'data')
       title                       id
 1 test data 56a93777e4b012c193aa3d68
 \end{example}
