@@ -7,6 +7,9 @@
 item_upload_create(parent_id, files, ..., session = current_session())
 }
 \arguments{
+\item{parent_id}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 
+parent item (folder)}
+
 \item{files}{A string vector of paths to files to be uploaded}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
@@ -14,8 +17,6 @@ item_upload_create(parent_id, files, ..., session = current_session())
 
 \item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
 last authenticated session}
-
-\item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
 }
 \value{
 An object of class \code{sbitem}

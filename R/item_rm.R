@@ -4,7 +4,12 @@
 #' @param recursive logical, FALSE by default. CAUTION: setting recursive=TRUE
 #'   means that not only will this item be deleted, but so will all its child
 #'   items and their child items and so on.
-#'   
+#' 
+#' @description 
+#' Remove an item from ScienceBase. This is not reversible and will delete 
+#' an item and its attached files. (advanced) Recursive is to be used with care
+#' and could result in unexpected file deletion.
+#' 
 #' @return \pkg{httr} \code{\link[httr]{response}} object
 #'   
 #' @import httr

@@ -13,9 +13,9 @@ are slow.}
 
 \item{session}{Session object from \code{\link{authenticate_sb}}}
 }
-\details{
+\description{
 Queries ScienceBase for the list of all available datatypes. This can be
-coupled with \code{\link{sb_query_datatype}} to query based on the type of data
+coupled with \code{\link{query_sb_datatype}} to query based on the type of data
 }
 \examples{
 #return all datatypes (limit 50 by default)

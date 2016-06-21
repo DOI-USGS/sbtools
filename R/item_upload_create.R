@@ -2,7 +2,7 @@
 #' 
 #' Create a new item with files attached, all in one call to SB
 #' 
-#' @template manipulate_item
+#' @template item_with_parent
 #'
 #' @param files A string vector of paths to files to be uploaded
 #' @export

@@ -10,7 +10,7 @@
 #' A list of \code{\link{sbitem}} objects. List of length 0 
 #' means no matches were found.
 #' 
-#' @details 
+#' @description 
 #' Queries ScienceBase for items with matching datatype.
 #' 
 #' @examples 
@@ -34,9 +34,9 @@ query_sb_datatype = function(datatype, ..., limit=20, session=current_session())
 #' 
 #' @inheritParams query_sb
 #' 
-#' @details 
+#' @description 
 #' Queries ScienceBase for the list of all available datatypes. This can be
-#' coupled with \code{\link{sb_query_datatype}} to query based on the type of data
+#' coupled with \code{\link{query_sb_datatype}} to query based on the type of data
 #' 
 #' 
 #' @examples 

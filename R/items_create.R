@@ -7,10 +7,19 @@
 #' @param title Two or more titles for the new SB items
 #' @param info (optional) list of metadata info for the new items. for each 
 #' item include a named list of variables
+#' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
+#' \code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}
+#' @param session Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
+#' last authenticated session
 #' @return One or more objects of class \code{sbitem} in a list
 #' @details The length of the \code{title} and \code{info} values must be the same
 #' length - however, the \code{parent_id} can be of length 1 or equal to the length 
 #' of each of \code{title} and \code{info} parameters
+#' 
+#' @description 
+#' A method to create multiple ScienceBase items with a single call and a single HTTP service
+#' request. Can be useful for improving performance of creating a large number of items at once.
+#' 
 #' @examples \dontrun{
 #' # helper function to make a random name
 #' aname <- function() paste0(sample(letters, size = 5, replace = TRUE), collapse = "")

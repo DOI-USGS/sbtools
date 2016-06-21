@@ -18,7 +18,7 @@ last authenticated session}
 \value{
 \code{TRUE} to indicate success
 }
-\details{
+\description{
 BEWARE: This completely removes ALL CHILD ITEMS AND THEIR CHILDREN
   as well as the item itself.
 }

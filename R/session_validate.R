@@ -13,6 +13,8 @@
 #' not verify the credentials are valid or that you have permission to access
 #' the SB item, so it does not guarantee a successful request.
 #' 
+#' @importFrom methods new
+#' 
 #' @examples
 #' \dontrun{
 #' session = authenticate_sb('user@@usgs.gov')

@@ -14,6 +14,9 @@ session_details(..., session = current_session())
 \value{
 list, if not logged in states that, but if logged in, user details
 }
+\description{
+Get the details associated with current ScienceBase user session.
+}
 \examples{
 \dontrun{
 session_info()

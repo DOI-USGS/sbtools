@@ -1,7 +1,7 @@
 Package: sbtools
 Title: USGS ScienceBase Tools
 Maintainer: Luke Winslow <lwinslow@usgs.gov>
-Version: 0.19.3
+Version: 1.0.0
 Authors@R: c(person("Luke", "Winslow", role = c("aut","cre"),
     email = "lwinslow@usgs.gov"),
     person("Scott", "Chamberlain", role = c("aut"),
@@ -10,18 +10,18 @@ Authors@R: c(person("Luke", "Winslow", role = c("aut","cre"),
     email = "aappling@usgs.gov"),
     person("Jordan", "Read", role = c("aut"),
     email = "jread@usgs.gov"))
-Description: Tools for interacting with USGS ScienceBase (https://
+Description: Tools for interacting with U.S. Geological Survey ScienceBase (https://
     www.sciencebase.gov) interfaces. ScienceBase is a data cataloging and
     collaborative data management platform. Functions included for querying
     ScienceBase, and creating and fetching datasets.
 Imports:
     jsonlite,
     httr (>= 1.0.0), 
-    stringr
+    stringr, 
+    methods
 Suggests:
     testthat, 
     xml2,
-    httr,
     rgdal, 
     sp
 License: CC0

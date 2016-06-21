@@ -8,13 +8,16 @@
 #' @import httr
 #' @import jsonlite
 #'
-#' @export
+#' @description 
+#' Updates metadata associated with a ScienceBase item based on 
+#' supplied list of new or updated metadata elements.
 #' 
 #' @examples \dontrun{
 #' res <- item_create(user_id(), "item-to-update") 
 #' out <- item_update(res, list(title = "item-updated"))
 #' out$title
 #' }
+#' @export
 item_update = function(sb_id, info, ..., session=current_session()){
 	
 	item <- as.sbitem(sb_id)

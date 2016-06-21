@@ -20,6 +20,10 @@ last authenticated session}
 \value{
 One or more objects of class \code{sbitem} in a list
 }
+\description{
+A method to update multiple ScienceBase items with a single call and a single HTTP service
+request. Can be useful for improving performance of updating a large number of items at once.
+}
 \details{
 If length of \code{sb_id} > 1, then length of \code{info} input must be the same
 }

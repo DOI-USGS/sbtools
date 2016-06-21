@@ -7,6 +7,11 @@
 #' A data.frame with columns fname, size, and url. 
 #' If item has no attached files, returns a zero row data.frame.
 #'
+#' @description 
+#' Lists all files attached to a SB item. Files can be downloaded from ScienceBase
+#' using \code{\link{item_file_download}}. (advanced) Recursive options lists all 
+#' files attached to an item and all children items.
+#'
 #' @export
 #' @examples \dontrun{
 #' item_list_files("4f4e4b24e4b07f02db6aea14")

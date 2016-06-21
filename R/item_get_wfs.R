@@ -3,6 +3,7 @@
 #' @template manipulate_item
 #' 
 #' @import stringr
+#' @importFrom utils unzip
 #' 
 #' @description 
 #' This function attempts to download the spatial layer data attached to the
@@ -70,7 +71,7 @@ item_get_wfs_url = function(sb_id){
 
 match_url_distro = function(item, title_to_match){
 	
-	#'check that it has a WFS service, throw error if missing
+	#check that it has a WFS service, throw error if missing
 	if('distributionLinks' %in% names(item)){
 		if(!any(sapply(item[['distributionLinks']], function(x) x$title) == title_to_match)){
 			stop('Item ', item$id, ' has no ', title_to_match, ' available')

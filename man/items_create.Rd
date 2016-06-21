@@ -14,11 +14,21 @@ If length 1, then we recycle it for every item.}
 
 \item{title}{Two or more titles for the new SB items}
 
+\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
+
 \item{info}{(optional) list of metadata info for the new items. for each 
 item include a named list of variables}
+
+\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
+last authenticated session}
 }
 \value{
 One or more objects of class \code{sbitem} in a list
+}
+\description{
+A method to create multiple ScienceBase items with a single call and a single HTTP service
+request. Can be useful for improving performance of creating a large number of items at once.
 }
 \details{
 The length of the \code{title} and \code{info} values must be the same
