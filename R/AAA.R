@@ -5,10 +5,6 @@ pkg.env$session = NULL
 pkg.env$username = ""
 
 
-.onAttach <- function(libname, pkgname) {
-	packageStartupMessage(
-		"\nThis information is preliminary or provisional and \nis subject to revision. It is being provided to meet \nthe need for timely best science. The information \nhas not received final approval by the U.S. Geological \nSurvey (USGS) and is provided on the condition that \nneither the USGS nor the U.S. Government shall be held \nliable for any damages resulting from the authorized \nor unauthorized use of the information.")
-}
 .onLoad = function(libname, pkgname){
 	set_endpoint()
 }
