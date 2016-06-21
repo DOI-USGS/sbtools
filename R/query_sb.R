@@ -12,7 +12,10 @@
 #' @return 
 #' A list of \code{\link{sbitem}} objects
 #' 
-#' @details The following is a list of query parameters you can use 
+#' @description 
+#' Generic SB query function to construct advanced queries.
+#' 
+#' The following is a list of query parameters you can use 
 #' in the \code{query_list} parameter.
 #' 
 #' \itemize{

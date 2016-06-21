@@ -18,6 +18,11 @@ last authenticated session}
 \value{
 An object of class \code{sbitem}
 }
+\description{
+Retrieves an item and its metadata from ScienceBase based on its
+unique ID. Errors if the requested item ID does not exist or
+access is restricted due to permissions.
+}
 \examples{
 \dontrun{
 # Get an item

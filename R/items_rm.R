@@ -8,6 +8,7 @@
 #'   means that not only will this item be deleted, but so will all its child
 #'   items and their child items and so on.
 #' @return \pkg{httr} \code{\link[httr]{response}} object
+#' @importFrom stats setNames
 #' @examples \dontrun{
 #' # helper function to make a random name
 #' aname <- function() paste0(sample(letters, size = 5, replace = TRUE), collapse = "")

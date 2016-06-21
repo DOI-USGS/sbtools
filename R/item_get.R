@@ -3,6 +3,13 @@
 #' @export
 #' @template manipulate_item
 #' @return An object of class \code{sbitem}
+#' 
+#' @description
+#' Retrieves an item and its metadata from ScienceBase based on its
+#' unique ID. Errors if the requested item ID does not exist or
+#' access is restricted due to permissions. 
+#' 
+#' 
 #' @examples \dontrun{
 #' # Get an item
 #' item_get("4f4e4b24e4b07f02db6aea14")

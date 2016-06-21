@@ -8,16 +8,24 @@ query_sb_spatial(bbox, long, lat, bb_wkt, ..., limit = 20,
   session = current_session())
 }
 \arguments{
-\item{bbox}{An object of class \code{\link{sp}}. The bounding box of the object is used for the query.}
+\item{bbox}{An sp spatial data object. The bounding box of the object is used for the query.}
 
 \item{long}{A vector of longitude values that will define the boundaries of a bounding box. Min and Max of supplied longitudes are used. (alternate option to bbox).}
 
 \item{lat}{A vector of latitude values that will define the boundaries of a bounding box. Min and Max of supplied latitude are used. (alternate option to bbox).}
 
 \item{bb_wkt}{A character string using the Well Known Text (WKT) standard for defining spatial data. Must be a POLYGON WKT object.}
+
+\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}}
+
+\item{limit}{Maximum number of returned items. Will do paging to retrieve
+results when limit is over 1000. Use with caution, queries 10k results
+are slow.}
+
+\item{session}{Session object from \code{\link{authenticate_sb}}}
 }
 \description{
-Queries ScienceBase based on a spatial bounding box. Accepts either an object of class \code{\link{sp}} 
+Queries ScienceBase based on a spatial bounding box. Accepts either an sp spatial data object
 (uses the spatial object's bounding box) or long/lat coordinates defining the bounding box limits.
 }
 \examples{

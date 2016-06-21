@@ -21,7 +21,7 @@ are slow.}
 A list of \code{\link{sbitem}} objects. List of length 0 
 means no matches were found.
 }
-\details{
+\description{
 Queries for ScienceBase items that have matching text in the title or 
 description
 }

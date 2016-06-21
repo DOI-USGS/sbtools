@@ -5,6 +5,10 @@
 #' @param info (optional) list of metadata info for the new item
 #' @return An object of class \code{sbitem}
 #'
+#' @description 
+#' Create a new item on ScienceBase with the requested parent and item title. 
+#' Info can be provided to populate metadata at the time of creation. 
+#'
 #' @export
 #' @examples \dontrun{
 #' # Create an item - by default we use your user ID

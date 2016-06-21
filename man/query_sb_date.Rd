@@ -25,13 +25,17 @@ are slow.}
 
 \item{session}{Session object from \code{\link{authenticate_sb}}}
 }
+\description{
+Queries ScienceBase for items with timestamps within a certain date/time range.
+}
 \examples{
 \dontrun{
 # find items updated today
 query_sb_date(Sys.time(), Sys.time())
 
 # find items with publications from the 1970's
-query_sb_date(as.POSIXct('1970-01-01'), as.POSIXct('1980-01-01'), date_type='Publication', limit=1000)
+query_sb_date(as.POSIXct('1970-01-01'), as.POSIXct('1980-01-01'), 
+  date_type='Publication', limit=1000)
 
 }
 

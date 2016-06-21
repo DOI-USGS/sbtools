@@ -1,20 +1,24 @@
-#'@title Add custom identifier to an existing item
+#' @title Add custom identifier to an existing item
 #'  
 #' @template manipulate_item
-#'@param scheme The identifier scheme
-#'@param type The identifier type
-#'@param key The identifier key
+#' @param scheme The identifier scheme
+#' @param type The identifier type
+#' @param key The identifier key
 #'  
-#'@author Luke Winslow
+#' @description 
+#' Adds or updates an item's alternative identifier. This can add 
+#' additional identifiers or update those already in place. See
+#' \code{\link{query_item_identifier}} for finding items based on alternative
+#' identifier.
 #'  
-#'@examples
+#' @examples
 #'
-#'\dontrun{
+#' \dontrun{
 #'
-#'session = authenticate_sb("user@@usgs.gov")
-#'item_update_identifier("5485fd99e4b02acb4f0c7e81", "scheme", "type", "key", session=session)
+#' session = authenticate_sb("user@@usgs.gov")
+#' item_update_identifier("5485fd99e4b02acb4f0c7e81", "scheme", "type", "key", session=session)
 #'
-#'}
+#' }
 #'
 #'@export
 item_update_identifier = function(sb_id, scheme, type, key, ..., session=current_session()) {

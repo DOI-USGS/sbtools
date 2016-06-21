@@ -7,6 +7,11 @@
 #' @param ... Additional parameters are passed on to \code{\link[httr]{PUT}}
 #' @param session Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
 #' last authenticated session
+#' 
+#' @description 
+#' A method to update multiple ScienceBase items with a single call and a single HTTP service
+#' request. Can be useful for improving performance of updating a large number of items at once.
+#' 
 #' @return One or more objects of class \code{sbitem} in a list
 #' @details If length of \code{sb_id} > 1, then length of \code{info} input must be the same
 #' @examples \dontrun{

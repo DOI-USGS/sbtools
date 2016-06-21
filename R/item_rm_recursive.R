@@ -3,8 +3,9 @@
 #' @keywords internal
 #' @template manipulate_item
 #' @return \code{TRUE} to indicate success
-#' @details BEWARE: This completely removes ALL CHILD ITEMS AND THEIR CHILDREN
+#' @description BEWARE: This completely removes ALL CHILD ITEMS AND THEIR CHILDREN
 #'   as well as the item itself.
+#'   
 #' @examples \dontrun{
 #' # Create an item with nested structure
 #' authenticate_sb()

@@ -18,6 +18,10 @@ last authenticated session}
 \value{
 An item object representing the parent of the supplied item.
 }
+\description{
+Retrieves the parent of a supplied item based on the ScienceBase
+item tree hierarchy.
+}
 \examples{
 \dontrun{
 item_get_parent("4f4e4b24e4b07f02db6aea14")

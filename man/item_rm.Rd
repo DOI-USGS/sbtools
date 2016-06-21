@@ -22,6 +22,11 @@ last authenticated session}
 \value{
 \pkg{httr} \code{\link[httr]{response}} object
 }
+\description{
+Remove an item from ScienceBase. This is not reversible and will delete 
+an item and its attached files. (advanced) Recursive is to be used with care
+and could result in unexpected file deletion.
+}
 \examples{
 \dontrun{
 res <- item_create(user_id(), "item-to-delete")

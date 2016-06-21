@@ -1,13 +1,13 @@
 #' @title Query SB based on spatial extent
 #' 
-#' 
-#' @param bbox An object of class \code{\link{sp}}. The bounding box of the object is used for the query.
+#' @inheritParams query_sb
+#' @param bbox An sp spatial data object. The bounding box of the object is used for the query.
 #' @param long A vector of longitude values that will define the boundaries of a bounding box. Min and Max of supplied longitudes are used. (alternate option to bbox).
 #' @param lat A vector of latitude values that will define the boundaries of a bounding box. Min and Max of supplied latitude are used. (alternate option to bbox).
 #' @param bb_wkt A character string using the Well Known Text (WKT) standard for defining spatial data. Must be a POLYGON WKT object. 
 #' 
 #' @description 
-#' Queries ScienceBase based on a spatial bounding box. Accepts either an object of class \code{\link{sp}} 
+#' Queries ScienceBase based on a spatial bounding box. Accepts either an sp spatial data object
 #' (uses the spatial object's bounding box) or long/lat coordinates defining the bounding box limits. 
 #' 
 #' 

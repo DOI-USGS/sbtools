@@ -18,10 +18,11 @@ last authenticated session}
 \value{
 Logical, \code{TRUE} or \code{FALSE}
 }
-\details{
-This function does not accept a sbitem class object because 
-we'd run \code{\link{as.sbitem}} on it, which would make a GET request,
-and we only want to make a quick HEAD request.
+\description{
+This function quickly checks to see if an identifier exists. 
+It does a quick head request to skip the overhead of item metadta retrieval.
+This will also return \code{FALSE} if the identifier exists but is associated
+with an item that is unavailable due to permission restrictions.
 }
 \examples{
 \dontrun{

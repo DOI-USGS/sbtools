@@ -21,6 +21,12 @@ last authenticated session}
 \value{
 A \code{\link[httr]{response}} object
 }
+\description{
+Create a special kind of item on ScienceBase that is intended to be 
+a "folder" that contains one or more child items. This is similar to 
+a standard item (\code{\link{item_create}}) but defaults to showing 
+child-items on the ScienceBase web interface.
+}
 \examples{
 \dontrun{
 folder_create(name="foobar345")

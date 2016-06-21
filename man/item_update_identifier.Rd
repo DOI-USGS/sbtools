@@ -22,6 +22,12 @@ item_update_identifier(sb_id, scheme, type, key, ...,
 \item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
 last authenticated session}
 }
+\description{
+Adds or updates an item's alternative identifier. This can add 
+additional identifiers or update those already in place. See
+\code{\link{query_item_identifier}} for finding items based on alternative
+identifier.
+}
 \examples{
 
 \dontrun{
@@ -31,8 +37,5 @@ item_update_identifier("5485fd99e4b02acb4f0c7e81", "scheme", "type", "key", sess
 
 }
 
-}
-\author{
-Luke Winslow
 }
 

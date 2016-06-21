@@ -20,7 +20,9 @@ are slow.}
 \value{
 A list of \code{\link{sbitem}} objects
 }
-\details{
+\description{
+Generic SB query function to construct advanced queries.
+
 The following is a list of query parameters you can use 
 in the \code{query_list} parameter.
 
