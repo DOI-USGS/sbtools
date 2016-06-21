@@ -21,7 +21,6 @@ Imports:
 Suggests:
     testthat, 
     xml2,
-    httr,
     rgdal, 
     sp
 License: CC0
