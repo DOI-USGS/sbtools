@@ -1,7 +1,7 @@
 
 \section{The \pkg{sbtools} package}
 
-With \pkg{sbtools}, our goal was to allow complete
+In creating \pkg{sbtools}, our goal was to allow complete
 access to the ScienceBase web service API in a flexible, lightweight
 R package. The package imports a minimal number of external packages
 to support core functionality. More advanced data access (e.g., geospatial
@@ -12,7 +12,7 @@ complexity of many of the web service calls (e.g., authentication).
 
 Below, we describe briefly the core functions available in \pkg{sbtools}
 and discuss the unique features of ScienceBase that \pkg{sbtools}
-exposes to R users.
+provides R users.
 
 
 \subsection{Data access API}
@@ -106,15 +106,16 @@ You can list and download attached files directly using \pkg{sbtools}.
 \noindent\rule{\textwidth}{0.4pt}
 
 ScienceBase has special functionality for certain data types.
-One example is spatial data. When spatial data uploaded to ScienceBase 
+One example is spatial data. When spatial data are uploaded to ScienceBase 
 and appropriate metadata is included, they can be accessed using 
 Open Geospatial Consortium (\href{http://www.opengeospatial.org/}{OGC}) 
-web services. \pkg{sbtools} has includes functionality to access Web
-Feature Service (WFS) when available. Once retrieved, spatial data is stored 
+web services. \pkg{sbtools} includes functionality to access Web
+Feature Service (WFS) when available. Once retrieved, spatial data are stored 
 as \pkg{sp} spatial objects, which are easily manipulated and visualized (Figure \ref{figure:iowafig}). 
-Note: Some formatting details of code
-omitted from code below for simplicity. See \code{demo('figure\_map\_code', package='sbtools')} 
-for full example.
+Note: Some figure formatting details 
+omitted from code below for simplicity. See \\
+\code{demo('figure\_map\_code', package='sbtools')} 
+for the full example.
 
 \noindent\rule{\textwidth}{0.4pt}
 \begin{example}
@@ -183,7 +184,7 @@ search can be run with the \code{query\_sb\_text} function.
 Items can also be queried according to their position in the hierarchical item
 tree. For example, projects funded by USGS Climate Science Centers each have sections on ScienceBase
 where project information is stored. Using the web interface (and some user knowledge), we first found the
-ScienceBase ID of the Northeast Climate Science Center community folder. Then, \pkg{sbtools} can be used 
+ScienceBase ID of the Northeast Climate Science Center community folder. Then, \pkg{sbtools} was used 
 to look for specific items in that commuinty. Below is an example of looking for 
 items containing any reference to "Lake Superior" under the Northeast Climate Science Center community. 
 
@@ -234,7 +235,9 @@ A few examples include date-time range, (\code{query\_sb\_date()}), data type
 > query_sb_datatype('Report', limit = 1)
 [[1]]
 <ScienceBase Item> 
-  Title: Final Memo for Structured decision-making to facilitate multi-stakeholder coastal conservation and restoration under climate change uncertainties: case study on barrier islands of the northern Gulf of Mexico
+  Title: Final Memo for Structured decision-making to facilitate multi-stakeholder \\
+  coastal conservation and restoration under climate change uncertainties: case study \\
+  on barrier islands of the northern Gulf of Mexico
   Creator/LastUpdatedBy:      / 
   Provenance (Created / Updated):   / 
   Children: 
@@ -403,9 +406,9 @@ Most functions in \pkg{sbtools} can be used both anonymously and when
 authenticated. This includes all data retrieval and query functions. The
 behavior of these functions depends on the user's authentication status and
 access permissions. For example, when trying to access a private item using
-\code{item\_get()}, you must be authenticated or will receive an error that the
+\code{item\_get()}, you must be authenticated or you will receive an error that the
 item is missing. To maintain privacy, ScienceBase does not differentiate between
-a missing item and an item you don't have permission to access. Search is also
+a missing item and an item you lack permission to access. Search is also
 dependent on authentication status. When querying items with \code{query\_sb()},
 public items are always visible while private items are invisible unless
 authenticated.
@@ -561,7 +564,8 @@ Object Identifiers) are stored as item identifiers with the Scheme \\
 "https://www.sciencebase.gov/vocab/category/item/identifier" and Type "DOI".
 
 \pkg{sbtools} can edit and query custom item identifiers using
-\code{item\_update\_identifier} and \code{query\_item\_identifier},
+\code{item\_update\_identifier} and \\
+\code{query\_item\_identifier},
 respectively.
 
 \noindent\rule{\textwidth}{0.4pt}
