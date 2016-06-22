@@ -4,11 +4,11 @@
 In creating \pkg{sbtools}, our goal was to allow complete
 access to the ScienceBase web service API in a flexible, lightweight
 R package. The package imports a minimal number of external packages
-to support core functionality. More advanced data access (e.g.\ , geospatial
+to support core functionality. More advanced data access (e.g.\ geospatial
 web services) is supported through suggested packages to keep the basic
 installation requirements minimal for all platforms. Within R, \pkg{sbtools}
 is designed to keep end-user interactions simple despite the underlying 
-complexity of many of the web service calls (e.g.\ , authentication).
+complexity of many of the web service calls (e.g.\ authentication).
 
 Below, we describe briefly the core functions available in \pkg{sbtools}
 and discuss the unique features of ScienceBase that \pkg{sbtools}
@@ -65,7 +65,7 @@ organization, this heirarchy can take on different meanings for different projec
 conveying data provenance or spatial grouping.
 
 % we could consider adding functions to get the actual parent and child
-% items rather than just their IDs - e.g.\ , item_get_parent() returns one sbitem
+% items rather than just their IDs - e.g.\ item_get_parent() returns one sbitem
 % and item_get_children() returns a list of sbitems. Save the user from wrapping
 % all this in item_get() calls.
 
