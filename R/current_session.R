@@ -1,15 +1,17 @@
-#'@title Return current cached session
-#'
-#'@description 
-#'Returns the currently cached SB session. If there
-#'is no authenticated session, returns NULL. Emits a
-#'warning if the session has expired. 
-#'
-#'@author Luke Winslow
-#'
-#'@examples
-#'
-#'session = current_session()
+#' @title Return current cached session
+#' 
+#' @description 
+#' Returns the currently cached SB session. If there
+#' is no authenticated session, returns NULL. Emits a
+#' warning if the session has expired. 
+#' 
+#' 
+#' 
+#' @examples
+#' 
+#' session = current_session()
+#' #null unless currently authenticated
+#' session
 #'
 #'@export
 current_session = function(){

@@ -17,8 +17,8 @@ and if it is responding as expected. FALSE otherwise.
 Ping ScienceBase to see if it's available
 }
 \examples{
-\dontrun{
+#TRUE if all is well and SB can be contacted
 sb_ping()
-}
+
 }
 
