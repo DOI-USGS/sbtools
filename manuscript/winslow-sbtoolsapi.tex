@@ -4,11 +4,11 @@
 In creating \pkg{sbtools}, our goal was to allow complete
 access to the ScienceBase web service API in a flexible, lightweight
 R package. The package imports a minimal number of external packages
-to support core functionality. More advanced data access (e.g., geospatial
+to support core functionality. More advanced data access (e.g.\ geospatial
 web services) is supported through suggested packages to keep the basic
 installation requirements minimal for all platforms. Within R, \pkg{sbtools}
 is designed to keep end-user interactions simple despite the underlying 
-complexity of many of the web service calls (e.g., authentication).
+complexity of many of the web service calls (e.g.\ authentication).
 
 Below, we describe briefly the core functions available in \pkg{sbtools}
 and discuss the unique features of ScienceBase that \pkg{sbtools}
@@ -36,7 +36,7 @@ with the \code{item\_get} function.
 \end{example}
 \noindent\rule{\textwidth}{0.4pt}
 
-This representation is defined by \pkg{sbtools} as an \code{sbitem} object,
+This representation is defined by \pkg{sbtools} as an \code{\enquote{sbitem}} object,
 which contains many fields and can be further inspected in the same
 way as a named list.
 
@@ -65,7 +65,7 @@ organization, this heirarchy can take on different meanings for different projec
 conveying data provenance or spatial grouping.
 
 % we could consider adding functions to get the actual parent and child
-% items rather than just their IDs - e.g., item_get_parent() returns one sbitem
+% items rather than just their IDs - e.g.\ item_get_parent() returns one sbitem
 % and item_get_children() returns a list of sbitems. Save the user from wrapping
 % all this in item_get() calls.
 
@@ -301,7 +301,7 @@ Lastly, \pkg{sbtools} offers advanced access to all query capabilities through
 the \code{query\_sb()} function. \code{query\_sb()} provides a convenient wrapper that 
 allows the user to supply a list of query parameters (options described in the documentation),
 submits that query to ScienceBase and parses the output
-into a list of \code{sbitem} objects. When necessary, \code{query\_sb()} 
+into a list of \code{\enquote{sbitem}} objects. When necessary, \code{query\_sb()} 
 also does proper result paging when the requested
 return length (limit) is over 1000 items. All advanced search options can be experimented
 with via the \href{https://www.sciencebase.gov/catalog/items/queryForm}
@@ -557,7 +557,7 @@ not exist or the item is secured and requires authentication to access.
 \end{example}
 \noindent\rule{\textwidth}{0.4pt}
 
-\subsection{SB Item identifiers}
+\subsection{SB item identifiers}
 One advanced feature of ScienceBase is the ability to assign any
 number of custom item identifiers to items. The custom identifiers are made up
 of three parts: Scheme, Type and Key. Combined, these create a unique identifier.

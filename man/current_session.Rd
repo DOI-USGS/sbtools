@@ -14,9 +14,8 @@ warning if the session has expired.
 \examples{
 
 session = current_session()
+#null unless currently authenticated
+session
 
-}
-\author{
-Luke Winslow
 }
 
