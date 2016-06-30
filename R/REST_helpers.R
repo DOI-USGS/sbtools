@@ -77,7 +77,7 @@ sbtools_PUT <- function(url, body, ..., session) {
 #' @keywords internal
 sbtools_DELETE <- function(url, ..., session) {
 	check_session(session)
-	r = DELETE(url = url, body = body, accept_json(), handle = session)
+	r = DELETE(url = url, ..., accept_json(), handle = session)
 	handle_errors(r, url, "DELETE", NULL)
 	session_age_reset()
 	return(r)
