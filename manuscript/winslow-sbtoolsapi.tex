@@ -113,7 +113,7 @@ web services. \pkg{sbtools} includes functionality to access Web
 Feature Service (WFS) when available. Once retrieved, spatial data are stored 
 as \pkg{sp} spatial objects, which are easily manipulated and visualized (Figure \ref{figure:iowafig}). 
 Note: Some figure formatting details 
-omitted from code below for simplicity. See \\
+omitted from code below for simplicity. See 
 \code{demo('figure\_map\_code', package='sbtools')} 
 for the full example.
 
@@ -235,8 +235,8 @@ A few examples include date-time range, (\code{query\_sb\_date()}), data type
 > query_sb_datatype('Report', limit = 1)
 [[1]]
 <ScienceBase Item> 
-  Title: Final Memo for Structured decision-making to facilitate multi-stakeholder \\
-  coastal conservation and restoration under climate change uncertainties: case study \\
+  Title: Final Memo for Structured decision-making to facilitate multi-stakeholder 
+  coastal conservation and restoration under climate change uncertainties: case study 
   on barrier islands of the northern Gulf of Mexico
   Creator/LastUpdatedBy:      / 
   Provenance (Created / Updated):   / 
@@ -263,7 +263,7 @@ Lat/Lon bounding box with the function \code{query\_sb\_spatial()}. The
 bounding box may be directly specified with coordinates or indirectly specified
 by supplying another spatial object whose bounding box should be used. Because
 spatial functionality requires packages beyond those imported by \pkg{sbtools} by default,
-the \pkg{sp} and \pkg{gdalUtils} packages must be installed to use these functions.
+the \pkg{xml2}, \pkg{sp} and \pkg{rgdal} packages must be installed to use these functions.
 
 \noindent\rule{\textwidth}{0.4pt}
 \begin{example}
