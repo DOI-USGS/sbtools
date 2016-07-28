@@ -1,7 +1,6 @@
 ScienceBase R Tools
 ===
 [![Build Status](https://travis-ci.org/USGS-R/sbtools.svg?branch=master)](https://travis-ci.org/USGS-R/sbtools) [![codecov.io](https://codecov.io/github/USGS-R/sbtools/coverage.svg?branch=master)](https://codecov.io/github/USGS-R/sbtools?branch=master)
-[![PDF Status](https://www.sharelatex.com/github/repos/USGS-R/sbtools/builds/latest/badge.svg)](https://www.sharelatex.com/github/repos/USGS-R/sbtools/builds/latest/output.pdf)
 Tools for interfacing R with ScienceBase data services.
 
 ##Disclaimer

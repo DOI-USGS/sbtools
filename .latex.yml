@@ -1,3 +1,0 @@
-# In .latex.yml
-compiler: pdflatex
-root_file: manuscript/RJwrapper.tex
