@@ -16,6 +16,7 @@ Description: Tools for interacting with U.S. Geological Survey ScienceBase
     ScienceBase, and creating and fetching datasets.
 Imports:
     jsonlite,
+    curl,
     httr (>= 1.0.0), 
     stringr, 
     methods
