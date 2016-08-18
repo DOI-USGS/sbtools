@@ -29,14 +29,12 @@ item_rm_recursive = function(id, ..., session = current_session()) {
 	# along with their containing items automatically
 	kids <- item_list_children(id, fields=c('id', 'hasChildren'), raw=FALSE, session=session)
 
-	if(nrow(kids) > 0) {
+	if(length(kids) > 0) {
 		# recursive case: has children. delete the children first
 		
-		# delete the children with children recursively. eventually delete the 
-		# children without children all at once; for now we'll just separate them into
-		# a second lapply loop
-		lapply(kids[kids$hasChildren, 'id'], item_rm_recursive, ..., session=session)
-		lapply(kids[!kids$hasChildren, 'id'], item_rm, ..., recursive=FALSE, session=session)
+		# delete the children with children recursively.
+		lapply(kids, function(itm, ...){if(itm$hasChildren){item_rm_recursive(itm, ...)}else{item_rm(itm, ...)} }, ..., session=session)
+		
 		
 		# maybe FIXME - there's a lag time between the requests above to delete things
 		# and when it actually happens - sleep 2 seconds before moving up one level in

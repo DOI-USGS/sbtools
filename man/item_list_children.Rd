@@ -19,14 +19,10 @@ is available online in \href{https://my.usgs.gov/confluence/display/sciencebase/
 \item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
 last authenticated session}
 
-\item{limit}{Max children returned}
-
-\item{raw}{Boolean flag indicating if the raw parsed JSON result (as a list) should be returned. If FALSE (default), 
-the items are coerced into a data.frame when possible. No guarantees are made when a field with mmultiple
-values (like files, tags, contacts, etc) is requested and coerced into a data.frame.}
+\item{limit}{Max children returned.}
 }
 \value{
-\code{data.frame} with a row for each child item
+List of \code{sbitem} for each child item.
 }
 \description{
 Returns a list of child IDs for a ScienceBase item

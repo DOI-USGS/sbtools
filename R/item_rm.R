@@ -27,7 +27,7 @@ item_rm = function(sb_id, ..., recursive=FALSE, session=current_session()){
 	item <- as.sbitem(sb_id)
 	children = item_list_children(item$id, ..., limit = 2, session = session)
 	
-	if (nrow(children) > 0) {
+	if (length(children) > 0) {
 		stop('Item has children. To remove children, grandchildren, etc. set recursive=TRUE.', 
 				 call. = FALSE)
 	}
