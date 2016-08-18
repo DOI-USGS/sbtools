@@ -58,7 +58,7 @@ items_create <- function(parent_id = user_id(), title, ..., info = NULL,
 	}
 	
 	item <- as.sbitem(parent_id)
-	item <- if (length(list(item)) < 2) rep(item$id, 2) else item$id
+	item <- if (length(list(item)) == 1) rep(item$id, length(title)) else item$id
 	body <- unname(
 		Map(function(x, y) {
 			list('parentId' = x, 'title' = y)
