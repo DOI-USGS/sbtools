@@ -1,3 +1,20 @@
+# Version 1.1.3 (2016-08-18)
+
+* Fix items_create to properly handle cases creating one item
+
+* Add sbtools to user agent string
+
+* Alter `item_list_children` to use `query_sb` so item return limit can be > 1000. 
+`raw` option removed to support this functionality.
+
+# Version 1.0.3 (2016-06-30)
+
+* Fix item_rm bug
+
+# Version 1.0.2 (2016-06-22)
+
+* Cleanup for CRAN release
+
 # Version 0.19.3 (2016-06-17)
 
 * Bunch of changes from reviews
