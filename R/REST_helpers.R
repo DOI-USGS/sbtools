@@ -13,7 +13,7 @@ sbtools_POST <- function(url, body, ..., session){
 	supported_types <- c('text/plain', 'application/json')
 	check_session(session)
 	
-	r = POST(url=url, ..., accept_json(), body=body, handle=session) 
+	r = POST(url=url, ..., httrUserAgent(), accept_json(), body=body, handle=session) 
 	handle_errors(r, url, "POST", supported_types)	
 	# if (!strsplit(headers(r)[['content-type']], '[;]')[[1]][1] %in% supported_types)
 	# 	stop('POST failed to ',url,'. check authorization and/or content')
@@ -36,7 +36,7 @@ sbtools_POST <- function(url, body, ..., session){
 #' @keywords internal
 sbtools_GET <- function(url, ..., session) {
 	supported_types <- c('text/plain','text/csv','text/tab-separated-values','application/json','application/x-gzip', 'application/pdf')
-	r = GET(url = url, ..., handle = session)
+	r = GET(url = url, ..., httrUserAgent(), handle = session)
 	handle_errors(r, url, "GET", supported_types)
 	session_age_reset()
 	return(r)
@@ -57,7 +57,7 @@ sbtools_GET <- function(url, ..., session) {
 #' @keywords internal
 sbtools_PUT <- function(url, body, ..., session) {
 	check_session(session)
-	r = PUT(url = url, ..., body = body, handle = session)
+	r = PUT(url = url, ..., httrUserAgent(), body = body, handle = session)
 	handle_errors(r, url, "PUT", NULL)
 	session_age_reset()
 	return(r)
@@ -77,7 +77,7 @@ sbtools_PUT <- function(url, body, ..., session) {
 #' @keywords internal
 sbtools_DELETE <- function(url, ..., session) {
 	check_session(session)
-	r = DELETE(url = url, ..., accept_json(), handle = session)
+	r = DELETE(url = url, ..., httrUserAgent(), accept_json(), handle = session)
 	handle_errors(r, url, "DELETE", NULL)
 	session_age_reset()
 	return(r)
@@ -86,7 +86,7 @@ sbtools_DELETE <- function(url, ..., session) {
 # HEAD fxn
 sbtools_HEAD <- function(url, ..., session) {
 	session_val(session)
-	r <- HEAD(url = url, ..., handle = session)
+	r <- HEAD(url = url, ..., httrUserAgent(), handle = session)
 	log <- if (r$status_code == 200) TRUE else FALSE
 	session_age_reset()
 	return(log)
@@ -103,4 +103,17 @@ handle_errors <- function(x, url, method, types) {
 	if ('errors' %in% names(content(x))) {
 		stop(content(x)$errors$message, call. = FALSE)
 	}
+}
+
+#' @importFrom curl curl_version
+#' @importFrom utils packageVersion
+#' @import httr
+httrUserAgent <- function() {
+	versions <- c(
+		libcurl = curl::curl_version()$version,
+		`r-curl` = as.character(utils::packageVersion("curl")),
+		httr = as.character(utils::packageVersion("httr")),
+		sbtools = as.character(utils::packageVersion("sbtools"))
+	)
+	user_agent(paste0(names(versions), "/", versions, collapse = " "))
 }
