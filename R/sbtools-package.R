@@ -2,10 +2,11 @@
 #' 
 #' @description This package provides a rich interface to USGS's ScienceBase 
 #' \url{https://www.sciencebase.gov/} - a data cataloging and collaborative 
-#' data management platform. 
+#' data management platform. For further information, see the sbtools manuscript
+#'  \href{https://journal.r-project.org/archive/2016-1/winslow-chamberlain-appling-etal.pdf}{here}.
 #' 
 #' Functions are inluded for searching for data, retrieving, creating, and 
-#' updating datasets.
+#' updating datasets. 
 #' 
 #' 
 #' @details 
