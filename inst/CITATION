@@ -1,0 +1,14 @@
+citHeader("To cite the sbtools package in publications use:")
+citEntry(entry = "Article", 
+				 author = personList(
+				 	as.person("Luke A Winslow"), 
+				 	as.person("Scott Chamberlain"), 
+				 	as.person("Alison P Appling"), 
+				 	as.person("Jordan S Read")), 
+				 title = "sbtools: A Package Connecting R to Cloud-based Data for Collaborative Online Research", 
+				 journal = "The R Journal", 
+				 year = "2016", 
+				 volume = "8",
+				 Issue = "1",
+				 url = "https://journal.r-project.org/archive/2016-1/winslow-chamberlain-appling-etal.pdf", 
+				 textVersion = paste("Winslow, LA, S Chamberlain, AP Appling, and JS Read. 2016. sbtools: A package connecting R to cloud-based data for collaborative online research. The R Journal 8:387-398."))
