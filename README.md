@@ -6,7 +6,7 @@ Tools for interfacing R with ScienceBase data services.
 
 
 ##Package Installation
-To install the dataRetrieval package, you must be using R 3.0 or greater and run the following command:
+To install the `sbtools` package, you must be using R 3.0 or greater and run the following command:
 
 ```R
 install.packages("sbtools")
