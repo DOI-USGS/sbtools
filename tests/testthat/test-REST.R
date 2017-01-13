@@ -3,7 +3,7 @@ context("sbtools_POST")
 test_that("generic post fails w/o auth", {
 	# auth fails locally:
 	expect_error(item_append_files("54e265a4e4b08de9379b4dfb", '/foo/bar/baz.zip'),'Item not found for')
-	session <- httr::handle("http://google.com")
+	session <- httr::handle("https://google.com")
 	attributes(session) <- c(attributes(session), list(birthdate=Sys.time()))
 	
 	# auth passes locally, but POST fails due to files not existing:
@@ -22,7 +22,7 @@ non_item <-     '4f4e4a62e4b0a92fa7e9cf36' # made-up ID
 
 test_that("generic get w/ and w/o auth", {
 
-	session <- httr::handle("http://google.com")
+	session <- httr::handle("https://google.com")
 	attributes(session) <- c(attributes(session), list(birthdate=Sys.time()))
 
 	# public access to public items, with or without login
