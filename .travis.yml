@@ -8,14 +8,14 @@ dist: trusty
 before_install:
   - sudo apt-get update
   - sudo apt-get install -y gdal-bin libgdal-dev libgdal1-dev netcdf-bin libproj-dev
-  - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
+  - curl -OL https://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
   - chmod 755 ./travis-tool.sh
   - ./travis-tool.sh bootstrap
   - ./travis-tool.sh install_deps
   
 env:
  global:
-   - R_LIBS="http://cran.rstudio.com"
+   - R_LIBS="https://cran.rstudio.com"
    - R_BUILD_ARGS="--no-build-vignettes --no-manual"
    - R_CHECK_ARGS="--no-build-vignettes --no-manual --as-cran"
    - BOOTSTRAP_LATEX=""
