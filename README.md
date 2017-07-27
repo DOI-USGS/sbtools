@@ -3,6 +3,11 @@ ScienceBase R Tools
 
 Tools for interfacing R with ScienceBase data services.
 
+## Package Description
+
+This package provides a rich interface to USGS's [ScienceBase](https://www.sciencebase.gov/), a data cataloging and collaborative data management platform. For further information, see the [sbtools manuscript in The R Journal](https://journal.r-project.org/archive/2016-1/winslow-chamberlain-appling-etal.pdf). See `citation('sbtools')` for how to cite the package.
+
+## Package Status
 
 [![status](https://img.shields.io/badge/USGS-Support-yellow.svg)](https://owi.usgs.gov/R/packages.html#support)
 
@@ -13,10 +18,11 @@ This package is considered a 'support' package. For more information, see:
 |----------|------------|
 | [![travis](https://travis-ci.org/USGS-R/sbtools.svg?branch=master)](https://travis-ci.org/USGS-R/sbtools)|[![codecov.io](https://codecov.io/github/USGS-R/sbtools/coverage.svg?branch=master)](https://codecov.io/github/USGS-R/sbtools?branch=master)|
 
-## Package Description
+### Current CRAN information
 
-This package provides a rich interface to USGS's [ScienceBase](https://www.sciencebase.gov/), a data cataloging and collaborative data management platform. For further information, see the [sbtools manuscript in The R Journal](https://journal.r-project.org/archive/2016-1/winslow-chamberlain-appling-etal.pdf). See `citation('sbtools')` for how to cite the package.
-
+|Version|Monthly Downloads|Total Downloads|
+|----------|------------|------------|
+|[![CRAN version](https://www.r-pkg.org/badges/version/sbtools)](https://cran.r-project.org/package=sbtools)|[![](https://cranlogs.r-pkg.org/badges/sbtools)](https://cran.r-project.org/package=sbtools)|[![](https://cranlogs.r-pkg.org/badges/grand-total/sbtools)](https://cran.r-project.org/package=sbtools)|
 
 ## Package Installation
 To install the `sbtools` package, you must be using R 3.0 or greater and run the following command:
@@ -48,11 +54,7 @@ Follow `@USGS_R` on Twitter for updates on USGS R packages:
 
 [![Twitter Follow](https://img.shields.io/twitter/follow/USGS_R.svg?style=social&label=Follow%20USGS_R)](https://twitter.com/USGS_R)
 
-### Current CRAN information
 
-|Version|Monthly Downloads|Total Downloads|
-|----------|------------|------------|
-|[![CRAN version](https://www.r-pkg.org/badges/version/sbtools)](https://cran.r-project.org/package=sbtools)|[![](https://cranlogs.r-pkg.org/badges/sbtools)](https://cran.r-project.org/package=sbtools)|[![](https://cranlogs.r-pkg.org/badges/grand-total/sbtools)](https://cran.r-project.org/package=sbtools)|
 
 
 ## Examples
