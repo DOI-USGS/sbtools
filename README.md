@@ -1,8 +1,16 @@
 ScienceBase R Tools
 ===
 
-[![Build Status](https://travis-ci.org/USGS-R/sbtools.svg?branch=master)](https://travis-ci.org/USGS-R/sbtools) [![codecov.io](https://codecov.io/github/USGS-R/sbtools/coverage.svg?branch=master)](https://codecov.io/github/USGS-R/sbtools?branch=master)
 Tools for interfacing R with ScienceBase data services.
+
+[![status](https://img.shields.io/badge/USGS-Support-yellow.svg)](https://owi.usgs.gov/R/packages.html#support)
+
+This package is considered a 'support' package. For more information, see:
+[https://owi.usgs.gov/R/packages.html#support](https://owi.usgs.gov/R/packages.html#support)
+
+|Linux|Test Coverage|
+|----------|------------|
+| [![travis](https://travis-ci.org/USGS-R/sbtools.svg?branch=master)](https://travis-ci.org/USGS-R/sbtools)|[![codecov.io](https://codecov.io/github/USGS-R/sbtools/coverage.svg?branch=master)](https://codecov.io/github/USGS-R/sbtools?branch=master)|
 
 
 ##Package Installation
@@ -29,6 +37,10 @@ install_github("USGS-R/sbtools")
 Please consider reporting bugs and asking questions on the Issues page:
 
 [https://github.com/USGS-R/sbtools/issues](https://github.com/USGS-R/sbtools/issues)
+
+Follow `@USGS_R` on Twitter for updates on USGS R packages:
+
+[![Twitter Follow](https://img.shields.io/twitter/follow/USGS_R.svg?style=social&label=Follow%20USGS_R)](https://twitter.com/USGS_R)
 
 ### Current CRAN information:
 
