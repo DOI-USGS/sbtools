@@ -13,12 +13,12 @@ This package is considered a 'support' package. For more information, see:
 |----------|------------|
 | [![travis](https://travis-ci.org/USGS-R/sbtools.svg?branch=master)](https://travis-ci.org/USGS-R/sbtools)|[![codecov.io](https://codecov.io/github/USGS-R/sbtools/coverage.svg?branch=master)](https://codecov.io/github/USGS-R/sbtools?branch=master)|
 
-##Package Description
+## Package Description
 
 This package provides a rich interface to USGS's [ScienceBase](https://www.sciencebase.gov/), a data cataloging and collaborative data management platform. For further information, see the [sbtools manuscript in The R Journal](https://journal.r-project.org/archive/2016-1/winslow-chamberlain-appling-etal.pdf). See `citation('sbtools')` for how to cite the package.
 
 
-##Package Installation
+## Package Installation
 To install the `sbtools` package, you must be using R 3.0 or greater and run the following command:
 
 ```r
@@ -37,28 +37,25 @@ library(devtools)
 install_github("USGS-R/sbtools")
 ```
 
-##Reporting bugs
+## Reporting bugs
 
 Please consider reporting bugs and asking questions on the Issues page:
 
 [https://github.com/USGS-R/sbtools/issues](https://github.com/USGS-R/sbtools/issues)
 
-<<<<<<< HEAD
+
 Follow `@USGS_R` on Twitter for updates on USGS R packages:
 
 [![Twitter Follow](https://img.shields.io/twitter/follow/USGS_R.svg?style=social&label=Follow%20USGS_R)](https://twitter.com/USGS_R)
 
-### Current CRAN information:
-=======
 ### Current CRAN information
->>>>>>> bf9e8317d3d4cc3f7ee94d4e8f398aa6c4a96213
 
 |Version|Monthly Downloads|Total Downloads|
 |----------|------------|------------|
 |[![CRAN version](https://www.r-pkg.org/badges/version/sbtools)](https://cran.r-project.org/package=sbtools)|[![](https://cranlogs.r-pkg.org/badges/sbtools)](https://cran.r-project.org/package=sbtools)|[![](https://cranlogs.r-pkg.org/badges/grand-total/sbtools)](https://cran.r-project.org/package=sbtools)|
 
 
-##Examples
+## Examples
 
 ```r
 library(sbtools)
@@ -108,7 +105,7 @@ item_list_files(new_item)$fname
 ```
 
 
-##Disclaimer
+## Disclaimer
 This software is in the public domain because it contains materials that originally came from the U.S. Geological Survey, an agency of the United States Department of Interior. For more information, see the [official USGS copyright policy](https://www.usgs.gov/visual-id/credit_usgs.html#copyright/ "official USGS copyright policy")
 
 Although this software program has been used by the U.S. Geological Survey (USGS), no warranty, expressed or implied, is made by the USGS or the U.S. Government as to the accuracy and functioning of the program and related program material nor shall the fact of distribution constitute any such warranty, and no responsibility is assumed by the USGS in connection therewith.
