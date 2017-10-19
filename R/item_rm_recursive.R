@@ -27,7 +27,7 @@ item_rm_recursive = function(id, ..., session = current_session()) {
 	
 	# get list of children. no need to identify or delete files; these are deleted
 	# along with their containing items automatically
-	kids <- item_list_children(id, fields=c('id', 'hasChildren'), raw=FALSE, session=session)
+	kids <- item_list_children(id, fields=c('id', 'hasChildren'), raw=FALSE, session=session, limit=1000)
 
 	if(length(kids) > 0) {
 		# recursive case: has children. delete the children first

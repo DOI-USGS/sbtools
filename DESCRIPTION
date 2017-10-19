@@ -1,7 +1,7 @@
 Package: sbtools
 Title: USGS ScienceBase Tools
 Maintainer: Tim Kern <kernt@usgs.gov>
-Version: 1.1.6
+Version: 1.1.7
 Authors@R: c(person("Tim", "Kern", role=c("cre"),
     email = "kernt@usgs.gov"),
     person("Luke", "Winslow", role = c("aut"),
