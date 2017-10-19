@@ -16,4 +16,3 @@ This connects to SB, authenticates and gets a session token for communicating
 with SB. If you do not supply a username or password, you will be prompted to
 enter them.
 }
-

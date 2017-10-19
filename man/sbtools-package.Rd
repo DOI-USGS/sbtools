@@ -2,8 +2,8 @@
 % Please edit documentation in R/sbtools-package.R
 \docType{package}
 \name{sbtools-package}
-\alias{sbtools}
 \alias{sbtools-package}
+\alias{sbtools}
 \title{R interface to ScienceBase}
 \description{
 This package provides a rich interface to USGS's ScienceBase 
@@ -39,5 +39,5 @@ Authenticated users can create, update, and remove items (\code{\link{item_list_
 
 Report any feedback or bugs at \url{https://github.com/USGS-R/sbtools/issues}
 }
-\keyword{package}
 
+\keyword{package}

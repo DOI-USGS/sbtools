@@ -19,7 +19,7 @@
 #' # then delete the whole folder
 #' sbtools:::item_rm_recursive(folder)
 #' }
-item_rm_recursive = function(id, ..., session = current_session()) {
+item_rm_recursive = function(id, ..., limit, session = current_session()) {
 	
 	id <- as.sbitem(id)$id
 	# check args
@@ -27,7 +27,7 @@ item_rm_recursive = function(id, ..., session = current_session()) {
 	
 	# get list of children. no need to identify or delete files; these are deleted
 	# along with their containing items automatically
-	kids <- item_list_children(id, fields=c('id', 'hasChildren'), raw=FALSE, session=session)
+	kids <- item_list_children(id, fields=c('id', 'hasChildren'), raw=FALSE, session=session, limit=limit)
 
 	if(length(kids) > 0) {
 		# recursive case: has children. delete the children first

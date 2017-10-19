@@ -4,6 +4,8 @@
 #' @param recursive logical, FALSE by default. CAUTION: setting recursive=TRUE
 #'   means that not only will this item be deleted, but so will all its child
 #'   items and their child items and so on.
+#' @param limit The maximum number of child items to remove when called with
+#'   recursive=TRUE. 
 #' 
 #' @description 
 #' Remove an item from ScienceBase. This is not reversible and will delete 
@@ -20,9 +22,9 @@
 #' res <- item_create(user_id(), "item-to-delete")
 #' item_rm(res)
 #' }
-item_rm = function(sb_id, ..., recursive=FALSE, session=current_session()){
+item_rm = function(sb_id, ..., limit=1000, recursive=FALSE, session=current_session()){
 	
-	if (isTRUE(recursive)) return(item_rm_recursive(sb_id, ..., session = session))
+	if (isTRUE(recursive)) return(item_rm_recursive(sb_id, ..., limit=limit, session = session))
 	
 	item <- as.sbitem(sb_id)
 	children = item_list_children(item$id, ..., limit = 2, session = session)

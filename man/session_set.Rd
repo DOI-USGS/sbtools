@@ -13,4 +13,3 @@ session_set(session = NULL)
 Set the session to a user-specified value
 }
 \keyword{internal}
-

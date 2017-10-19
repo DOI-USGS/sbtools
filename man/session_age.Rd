@@ -29,4 +29,3 @@ sbtools::session_age()
 }
 }
 \keyword{internal}
-

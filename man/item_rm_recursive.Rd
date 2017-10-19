@@ -4,7 +4,7 @@
 \alias{item_rm_recursive}
 \title{Remove an item completely by recursively removing its child items}
 \usage{
-item_rm_recursive(id, ..., session = current_session())
+item_rm_recursive(id, ..., limit, session = current_session())
 }
 \arguments{
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
@@ -38,4 +38,3 @@ sbtools:::item_rm_recursive(folder)
 }
 }
 \keyword{internal}
-

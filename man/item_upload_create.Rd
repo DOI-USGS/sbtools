@@ -32,4 +32,3 @@ file <- system.file("examples", "books.json", package = "sbtools")
 item_upload_create(user_id(), file)
 }
 }
-

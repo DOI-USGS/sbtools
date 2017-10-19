@@ -38,4 +38,3 @@ session_renew('newpass')
 session_renew(username='olduser@usgs.gov', 'newpass')
 }
 }
-

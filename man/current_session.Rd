@@ -18,4 +18,3 @@ session = current_session()
 session
 
 }
-

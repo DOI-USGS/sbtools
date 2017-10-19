@@ -95,4 +95,3 @@ query_sb(list(dateRange =
 \seealso{
 \code{\link{query_items}}
 }
-

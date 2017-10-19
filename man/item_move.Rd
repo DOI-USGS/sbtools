@@ -41,4 +41,3 @@ Move item from one folder to another
 identical(res2$parentId, fold2$id)
 }
 }
-

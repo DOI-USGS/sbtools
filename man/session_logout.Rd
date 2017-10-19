@@ -22,4 +22,3 @@ Logout of a ScienceBase session
 session_logout()
 }
 }
-

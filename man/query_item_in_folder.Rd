@@ -26,4 +26,3 @@ A list of matching items as sbitem objects.
 Search for text in the title, abstract, etc. within an SB folder and any
 subfolders.
 }
-

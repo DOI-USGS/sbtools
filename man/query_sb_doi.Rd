@@ -32,4 +32,3 @@ query_sb_doi('10.5066/F7M043G7')
 query_sb_doi('10.5066/F7Z60M35')
 
 }
-

@@ -13,4 +13,3 @@ set_expiration(expiration_age = as.difftime("00:59:00"))
 Called on package build
 }
 \keyword{internal}
-

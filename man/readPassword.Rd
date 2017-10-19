@@ -10,4 +10,3 @@ readPassword(prompt)
 Uses the RStudio pop-up password window if available
 }
 \keyword{internal}
-

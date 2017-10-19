@@ -37,4 +37,3 @@ out <- items_update(res, info = list( list(title = aname()), list(title = aname(
 vapply(out, "[[", "", "title")
 }
 }
-

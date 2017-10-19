@@ -64,4 +64,3 @@ items_create(title = c(aname(), aname()),
 items_create(x, title = c(aname(), aname()))
 }
 }
-

@@ -22,4 +22,3 @@ Check whether you're logged into a ScienceBase session
 is_logged_in()
 }
 }
-

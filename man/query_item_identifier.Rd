@@ -48,4 +48,3 @@ item_rm(ex2_item)
 }
 
 }
-

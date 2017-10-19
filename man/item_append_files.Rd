@@ -30,4 +30,3 @@ cat("foo bar", file = "foobar.txt")
 item_append_files(res$id, "foobar.txt")
 }
 }
-

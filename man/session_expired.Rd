@@ -19,4 +19,3 @@ last authenticated session}
 Check the expiration using session_age
 }
 \keyword{internal}
-
