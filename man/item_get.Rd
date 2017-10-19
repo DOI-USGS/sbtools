@@ -35,4 +35,3 @@ ids <- vapply(httr::content(res)$items, "[[", "", "id")
 lapply(ids[1:3], item_get)
 }
 }
-

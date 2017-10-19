@@ -13,4 +13,3 @@ session_age_reset(session)
 internal function for refreshing session age to 0 using Sys.time()
 }
 \keyword{internal}
-

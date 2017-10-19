@@ -33,4 +33,3 @@ identifier_exists(sb_id = "4f4e4b24e4b07f02db6aea14")
 identifier_exists(sb_id = "aaaaaaakkkkkkkbbbbbb")
 
 }
-

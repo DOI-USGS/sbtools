@@ -22,4 +22,3 @@ Required for creating items
 user_id()
 }
 }
-

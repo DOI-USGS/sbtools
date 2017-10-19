@@ -48,4 +48,3 @@ query_sb_spatial(layer)
 }
 
 }
-

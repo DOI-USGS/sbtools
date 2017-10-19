@@ -21,4 +21,3 @@ generic POSTs for sbtools package
 package wrapped for generic POSTs that test sessions internally and wrap some errors
 }
 \keyword{internal}
-

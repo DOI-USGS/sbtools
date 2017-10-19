@@ -19,4 +19,3 @@ package wrapped for generic GETs that test sessions internally and wrap some
 errors
 }
 \keyword{internal}
-

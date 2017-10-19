@@ -40,4 +40,3 @@ query_sb_date(as.POSIXct('1970-01-01'), as.POSIXct('1980-01-01'),
 }
 
 }
-

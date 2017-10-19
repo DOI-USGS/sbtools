@@ -140,4 +140,3 @@ content(query_items(list(s = "Search", q = "", lq = '"sage OR grouse"')))
 \seealso{
 \code{\link{query_item_identifier}}, \code{\link{query_item_in_folder}}
 }
-

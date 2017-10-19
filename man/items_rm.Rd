@@ -36,4 +36,3 @@ items_rm(res)
 }
 }
 \keyword{internal}
-

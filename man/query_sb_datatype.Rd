@@ -34,4 +34,3 @@ query_sb_datatype('Map Service')
 
 
 }
-

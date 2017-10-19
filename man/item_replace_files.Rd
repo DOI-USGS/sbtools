@@ -29,4 +29,3 @@ replaces existing files associated with an item with a new one.
   append an existing collection of files. If that is desired, use
   \code{\link{item_append_files}}
 }
-

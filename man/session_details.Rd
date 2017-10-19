@@ -22,4 +22,3 @@ Get the details associated with current ScienceBase user session.
 session_info()
 }
 }
-

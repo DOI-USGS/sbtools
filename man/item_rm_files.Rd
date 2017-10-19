@@ -36,4 +36,3 @@ res2 <- item_rm_files(res)
 res2$files
 }
 }
-

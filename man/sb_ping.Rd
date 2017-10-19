@@ -21,4 +21,3 @@ Ping ScienceBase to see if it's available
 sb_ping()
 
 }
-

@@ -30,4 +30,4 @@ Suggests:
 License: CC0
 URL: https://github.com/USGS-R/sbtools
 BugReports: https://github.com/USGS-R/sbtools/issues
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

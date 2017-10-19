@@ -4,13 +4,17 @@
 \alias{item_rm}
 \title{Remove item from SB}
 \usage{
-item_rm(sb_id, ..., recursive = FALSE, session = current_session())
+item_rm(sb_id, ..., limit = 1000, recursive = FALSE,
+  session = current_session())
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
 \code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
+
+\item{limit}{The maximum number of child items to remove when called with
+recursive=TRUE.}
 
 \item{recursive}{logical, FALSE by default. CAUTION: setting recursive=TRUE
 means that not only will this item be deleted, but so will all its child
@@ -33,4 +37,3 @@ res <- item_create(user_id(), "item-to-delete")
 item_rm(res)
 }
 }
-
