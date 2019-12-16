@@ -1,42 +1,43 @@
-## .travis.yml file for use with metacran/r-builder
-## See https://github.com/metacran/r-builder for details.
+language: r
 
-language: c
+cache:
+  - packages
+  - ccache
+
 sudo: required
 dist: trusty
+latex: false
 
-before_install:
-  - sudo apt-get update
-  - sudo apt-get install -y gdal-bin libgdal-dev libgdal1-dev netcdf-bin libproj-dev
-  - curl -OL https://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
-  - chmod 755 ./travis-tool.sh
-  - ./travis-tool.sh bootstrap
-  - ./travis-tool.sh install_deps
-  
+r:
+  - release
+
+addons:
+  apt:
+    sources:
+      - sourceline: 'ppa:ubuntugis/ubuntugis-unstable'
+    packages:
+      - libudunits2-dev
+      - libproj-dev
+      - libgeos-dev
+      - libgdal-dev
+
+r_build_args: "--no-build-vignettes --no-manual"
+r_check_args: "--no-build-vignettes --no-manual --as-cran"
+
+warnings_are_errors: false
+
 env:
- global:
-   - R_LIBS="https://cran.rstudio.com"
-   - R_BUILD_ARGS="--no-build-vignettes --no-manual"
-   - R_CHECK_ARGS="--no-build-vignettes --no-manual --as-cran"
-   - BOOTSTRAP_LATEX=""
-   - NOT_CRAN="true"
+   global:
+     - _R_CHECK_FORCE_SUGGESTS_=false
+     - R_CODECOV=true
 
-install:
-  - ./travis-tool.sh install_deps
-  - ./travis-tool.sh r_install covr
+r_github_packages:
+  - jimhester/covr
 
-script:
-  - ./travis-tool.sh run_tests
-
-after_failure:
-  - ./travis-tool.sh dump_logs
+after_success:
+  - if [[ "${R_CODECOV}" ]]; then R -e 'covr::coveralls()'; fi
 
 notifications:
   email:
     on_success: change
     on_failure: change
-
-
-after_success:
-  - ./travis-tool.sh run_script -e 'library(covr);codecov()'
-  

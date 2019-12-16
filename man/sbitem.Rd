@@ -24,7 +24,7 @@ the method for character class inputs}
 ScienceBase item class
 }
 \examples{
-\dontrun{
+\donttest{
 # Single item from item_get()
 item_get("4f4e4b24e4b07f02db6aea14")
 
