@@ -4,7 +4,8 @@
 \alias{query_sb_datatype}
 \title{Query SB for specific data type}
 \usage{
-query_sb_datatype(datatype, ..., limit = 20, session = current_session())
+query_sb_datatype(datatype, ..., limit = 20,
+  session = current_session())
 }
 \arguments{
 \item{datatype}{Character string indicating datatype. See \code{\link{sb_datatypes}} for full
