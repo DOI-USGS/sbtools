@@ -25,7 +25,7 @@ Imports:
 Suggests:
     testthat, 
     xml2,
-    rgdal, 
+    sf,
     sp
 License: CC0
 URL: https://github.com/USGS-R/sbtools

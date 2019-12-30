@@ -4,7 +4,7 @@
 \alias{item_get_wfs}
 \title{Download and load from SB WFS service}
 \usage{
-item_get_wfs(sb_id, ..., session)
+item_get_wfs(sb_id, as_sf = FALSE, ..., session)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
@@ -21,15 +21,15 @@ requested SB item. SB exposes discrete spatial objects (points, polygons) as
 web services based on the Open Geospatial Consortium, 
 \href{https://www.opengeospatial.org/standards/wfs}{Web Feature Service (WFS)}
 standardized interface. This requires the following libraries not by default
-installed with sbtools: \code{rgdal}, \code{httr}, and \code{xml2}. 
-You can install them simply by running \code{install.packages(c("xml2", "httr", "rgdal"))}
+installed with sbtools: \code{sf}, \code{httr}, and \code{xml2}. 
+You can install them simply by running \code{install.packages(c("xml2", "httr", "sf"))}
 }
 \examples{
-\dontrun{
-library(sp)
-layer = item_get_wfs('55e372b9e4b05561fa208212')
+\donttest{
 
-plot(layer)
+layer = item_get_wfs('5b4e25a6e4b06a6dd17e4879', as_sf = TRUE)
+
+plot(sf::st_geometry(layer), pch = ".")
 
 }
 
