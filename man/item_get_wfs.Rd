@@ -9,6 +9,8 @@ item_get_wfs(sb_id, as_sf = FALSE, ..., session)
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
 
+\item{as_sf}{boolean, return data in sf format}
+
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
 \code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
 
