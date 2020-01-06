@@ -1,6 +1,7 @@
 #' @title Download and load from SB WFS service
 #' 
 #' @template manipulate_item
+#' @param as_sf boolean, return data in sf format
 #' 
 #' @import stringr
 #' @importFrom utils unzip

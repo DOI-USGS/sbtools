@@ -4,6 +4,7 @@
 context("test sb functionality requiring authentication")
 
 test_that("authenticate_sb login results in valid session", {
+	skip_on_cran()
 	
 	if(is.na(Sys.getenv("sb_user", unset=NA))){
 		skip("Authenticated tests skipped due to lack of login info")
@@ -18,6 +19,7 @@ test_that("authenticate_sb login results in valid session", {
 })
 
 test_that("item creation, identifiers, and file upload works", {
+	skip_on_cran()
 	
 	if(is.na(Sys.getenv("sb_user", unset=NA))){
 		skip("Authenticated tests skipped due to lack of login info")
@@ -59,6 +61,7 @@ test_that("item creation, identifiers, and file upload works", {
 
 
 test_that("Test that surgical item rm", {
+	skip_on_cran()
 	
 	if(is.na(Sys.getenv("sb_user", unset=NA))){
 		skip("Authenticated tests skipped due to lack of login info")
