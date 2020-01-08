@@ -21,16 +21,8 @@
 #' query_sb_spatial(bb_wkt="POLYGON((-104.4 41.0,-95.1 41.0,-95.1 37.5,-104.4 37.5,-104.4 41.0))", 
 #' 	                limit=3)
 #' 
-#' \donttest{
-#' ###Use the bounding box of an sp object 
-#' #grab an sp object from a pre-determined ScienceBase Item
-#' layer = item_get_wfs('5b4e25a6e4b06a6dd17e4879')
-#' 
-#' #get items in that BB
-#' query_sb_spatial(layer)
-#' }
-#' 
 #' @export
+#' 
 query_sb_spatial = function(bbox, long, lat, bb_wkt, ..., limit=20, session=current_session()){
 	
 	if(!missing(bbox)){

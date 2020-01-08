@@ -2,7 +2,7 @@
 % Please edit documentation in R/item_get_wfs.R
 \name{item_get_wfs}
 \alias{item_get_wfs}
-\title{Download and load from SB WFS service}
+\title{Download and load from SB WFS service (Deprecated)}
 \usage{
 item_get_wfs(sb_id, as_sf = FALSE, ..., session)
 }
@@ -25,14 +25,4 @@ web services based on the Open Geospatial Consortium,
 standardized interface. This requires the following libraries not by default
 installed with sbtools: \code{sf}, \code{httr}, and \code{xml2}. 
 You can install them simply by running \code{install.packages(c("xml2", "httr", "sf"))}
-}
-\examples{
-\donttest{
-
-layer = item_get_wfs('5b4e25a6e4b06a6dd17e4879', as_sf = TRUE)
-
-plot(sf::st_geometry(layer), pch = ".")
-
-}
-
 }
