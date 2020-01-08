@@ -1,4 +1,4 @@
-#' @title Download and load from SB WFS service
+#' @title Download and load from SB WFS service (Deprecated)
 #' 
 #' @template manipulate_item
 #' @param as_sf boolean, return data in sf format
@@ -15,17 +15,11 @@
 #' installed with sbtools: \code{sf}, \code{httr}, and \code{xml2}. 
 #' You can install them simply by running \code{install.packages(c("xml2", "httr", "sf"))}
 #' 
-#' @examples 
-#' \donttest{
-#' 
-#' layer = item_get_wfs('5b4e25a6e4b06a6dd17e4879', as_sf = TRUE)
-#' 
-#' plot(sf::st_geometry(layer), pch = ".")
-#' 
-#' }
-#' 
 #' @export
+#' 
 item_get_wfs = function(sb_id, as_sf = FALSE, ..., session){
+	
+	warning("item_get_wfs is going to be removed in a future version of sbtools")
 	
 	if(!requireNamespace("httr") || !requireNamespace("sf") || !requireNamespace("xml2")){
 		stop('

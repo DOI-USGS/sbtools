@@ -1,3 +1,10 @@
+# Version 1.1.9 (2020-01-07)
+
+* Fixed travis build and addressed CRAN test failures.
+* Deprecated item_get_wfs -- will be removed in a future version.
+* Changed maintainer to dblodgett@usgs.gov
+* See repository for other updates.
+
 # Version 1.1.3 (2016-08-18)
 
 * Fix items_create to properly handle cases creating one item
