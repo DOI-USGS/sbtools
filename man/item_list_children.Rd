@@ -4,8 +4,13 @@
 \alias{item_list_children}
 \title{Return IDs for all child items}
 \usage{
-item_list_children(sb_id, fields = c("id", "title"), ...,
-  session = current_session(), limit = 20)
+item_list_children(
+  sb_id,
+  fields = c("id", "title"),
+  ...,
+  session = current_session(),
+  limit = 20
+)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
@@ -30,8 +35,10 @@ Returns a list of child IDs for a ScienceBase item
 \examples{
 \dontrun{
 item_list_children(user_id())
+}
 
-as.sbitem('5060b03ae4b00fc20c4f3c8b') \%>\% item_list_children
-item_get('5060b03ae4b00fc20c4f3c8b') \%>\% item_list_children
+\donttest{
+item_list_children(as.sbitem('5060b03ae4b00fc20c4f3c8b'))
+item_list_children(item_get('5060b03ae4b00fc20c4f3c8b'))
 }
 }

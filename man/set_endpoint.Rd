@@ -16,15 +16,15 @@ or development (beta) SB server. URLS are stored internally to the package
 }
 \examples{
 
-\dontrun{
+\donttest{
 set_endpoint('prod')
 
 # getting item from production SB servers
-item_get('54b94448e4b0ed73b67550ea')
+item_get('5060b03ae4b00fc20c4f3c8b')
 
 set_endpoint('dev')
 # getting item from beta SB servers
-item_get('54b94448e4b0ed73b67550ea')
+item_get('521e4686e4b051c878dc35d0')
 
 }
 

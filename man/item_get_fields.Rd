@@ -4,8 +4,7 @@
 \alias{item_get_fields}
 \title{Retrieve specific fields from an SB item}
 \usage{
-item_get_fields(sb_id, fields, ..., drop = TRUE,
-  session = current_session())
+item_get_fields(sb_id, fields, ..., drop = TRUE, session = current_session())
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
@@ -28,11 +27,11 @@ List serialization of chosen metadata for an SB item
 Retrieve specific fields from an SB item
 }
 \examples{
+\donttest{
 # Get certain fields from an item
 item_get_fields("4f4e4b24e4b07f02db6aea14", c('title', 'citation', 'contacts'))
 
-\dontrun{
-# If only 1 field selection, do or don't drop list format
+#' # If only 1 field selection, do or don't drop list format
 item_get_fields("4f4e4b24e4b07f02db6aea14", 'title')
 item_get_fields("4f4e4b24e4b07f02db6aea14", 'title', drop = FALSE)
 }

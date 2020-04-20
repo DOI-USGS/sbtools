@@ -13,9 +13,11 @@
 #'
 #' @examples \dontrun{
 #' item_list_children(user_id())
-#'
-#' as.sbitem('5060b03ae4b00fc20c4f3c8b') %>% item_list_children
-#' item_get('5060b03ae4b00fc20c4f3c8b') %>% item_list_children
+#' }
+#' 
+#' \donttest{
+#' item_list_children(as.sbitem('5060b03ae4b00fc20c4f3c8b'))
+#' item_list_children(item_get('5060b03ae4b00fc20c4f3c8b'))
 #' }
 #' @export
 item_list_children = function(sb_id, fields=c('id', 'title'), ..., session=current_session(), limit=20){

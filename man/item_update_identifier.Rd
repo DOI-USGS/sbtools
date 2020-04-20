@@ -4,8 +4,14 @@
 \alias{item_update_identifier}
 \title{Add custom identifier to an existing item}
 \usage{
-item_update_identifier(sb_id, scheme, type, key, ...,
-  session = current_session())
+item_update_identifier(
+  sb_id,
+  scheme,
+  type,
+  key,
+  ...,
+  session = current_session()
+)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}

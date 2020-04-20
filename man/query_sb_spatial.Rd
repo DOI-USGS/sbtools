@@ -4,8 +4,15 @@
 \alias{query_sb_spatial}
 \title{Query SB based on spatial extent}
 \usage{
-query_sb_spatial(bbox, long, lat, bb_wkt, ..., limit = 20,
-  session = current_session())
+query_sb_spatial(
+  bbox,
+  long,
+  lat,
+  bb_wkt,
+  ...,
+  limit = 20,
+  session = current_session()
+)
 }
 \arguments{
 \item{bbox}{An sp spatial data object. The bounding box of the object is used for the query.}

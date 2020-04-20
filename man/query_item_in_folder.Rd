@@ -4,8 +4,13 @@
 \alias{query_item_in_folder}
 \title{Search within an SB folder}
 \usage{
-query_item_in_folder(text, folder, ..., session = current_session(),
-  limit = 20)
+query_item_in_folder(
+  text,
+  folder,
+  ...,
+  session = current_session(),
+  limit = 20
+)
 }
 \arguments{
 \item{text}{text in the title, abstract, etc. of the desired item}
