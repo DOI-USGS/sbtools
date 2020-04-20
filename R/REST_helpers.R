@@ -36,7 +36,12 @@ sbtools_POST <- function(url, body, ..., session){
 #' @keywords internal
 sbtools_GET <- function(url, ..., session) {
 	supported_types <- c('text/plain','text/csv','text/tab-separated-values','application/json','application/x-gzip', 'application/pdf')
-	r = GET(url = url, ..., httrUserAgent(), handle = session)
+	tryCatch({
+		r = GET(url = url, ..., httrUserAgent(), handle = session)
+	}, error = function(e) stop(paste("Error when calling ScienceBase,", 
+																		"internet or server down? Original", 
+																		"error was:\n", e))
+	)
 	handle_errors(r, url, "GET", supported_types)
 	session_age_reset()
 	return(r)

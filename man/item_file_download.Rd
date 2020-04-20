@@ -4,8 +4,15 @@
 \alias{item_file_download}
 \title{Download files attached to item}
 \usage{
-item_file_download(sb_id, ..., names, destinations, dest_dir,
-  session = current_session(), overwrite_file = FALSE)
+item_file_download(
+  sb_id,
+  ...,
+  names,
+  destinations,
+  dest_dir,
+  session = current_session(),
+  overwrite_file = FALSE
+)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}

@@ -4,8 +4,13 @@
 \alias{items_create}
 \title{Create many new SB items}
 \usage{
-items_create(parent_id = user_id(), title, ..., info = NULL,
-  session = current_session())
+items_create(
+  parent_id = user_id(),
+  title,
+  ...,
+  info = NULL,
+  session = current_session()
+)
 }
 \arguments{
 \item{parent_id}{An \code{\link{sbitem}} object or character ScienceBase ID 

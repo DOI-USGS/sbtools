@@ -4,9 +4,14 @@
 \alias{query_sb_date}
 \title{Query SB for items within a date range}
 \usage{
-query_sb_date(start = as.POSIXct("1970-01-01"), end = Sys.time(),
-  date_type = "lastUpdated", ..., limit = 20,
-  session = current_session())
+query_sb_date(
+  start = as.POSIXct("1970-01-01"),
+  end = Sys.time(),
+  date_type = "lastUpdated",
+  ...,
+  limit = 20,
+  session = current_session()
+)
 }
 \arguments{
 \item{start}{Start date as \code{\link{POSIXct}} object. Defaults to 1970-01-01}

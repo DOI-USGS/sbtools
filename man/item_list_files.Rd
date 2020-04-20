@@ -4,8 +4,7 @@
 \alias{item_list_files}
 \title{Get list of files attached to SB item}
 \usage{
-item_list_files(sb_id, recursive = FALSE, ...,
-  session = current_session())
+item_list_files(sb_id, recursive = FALSE, ..., session = current_session())
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
@@ -28,9 +27,10 @@ using \code{\link{item_file_download}}. (advanced) Recursive options lists all
 files attached to an item and all children items.
 }
 \examples{
-\dontrun{
+\donttest{
 item_list_files("4f4e4b24e4b07f02db6aea14")
-
+}
+\dontrun{
 # list files recursively
 ## create item
 id <- item_create(user_id(), title="some title")
