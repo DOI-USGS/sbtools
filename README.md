@@ -31,16 +31,10 @@ To install the `sbtools` package, you must be using R 3.0 or greater and run the
 install.packages("sbtools")
 ```
 
-To get inter-CRAN release updates, use the command:
-```r
-install.packages("sbtools",repos="https://owi.usgs.gov/R")
-```
-
 To get cutting-edge changes, install from GitHub using the `devtools` packages:
 
 ```r
-library(devtools)
-install_github("USGS-R/sbtools")
+remotes::install_github("USGS-R/sbtools")
 ```
 
 ## Reporting bugs
