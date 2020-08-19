@@ -31,7 +31,11 @@ item_get("4f4e4b24e4b07f02db6aea14")
 # Search for item IDs, then pass to item_get
 library("httr")
 res <- query_items(list(s = "Search", q = "water", format = "json"))
-ids <- vapply(httr::content(res)$items, "[[", "", "id")
-lapply(ids[1:3], item_get)
+
+if(res$status != 404) {
+  ids <- vapply(httr::content(res)$items, "[[", "", "id")
+  lapply(ids[1:3], item_get)
+}
+
 }
 }

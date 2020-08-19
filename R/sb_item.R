@@ -13,9 +13,10 @@
 #' # Get many w/ e.g., an lapply() call
 #' library("httr")
 #' res <- query_items(list(s = "Search", q = "water", format = "json"))
-#' ids <- vapply(httr::content(res)$items, "[[", "", "id")
-#' (out <- lapply(ids[1:3], item_get))
-#' 
+#' if(res$status != 404) {
+#'   ids <- vapply(httr::content(res)$items, "[[", "", "id")
+#'   (out <- lapply(ids[1:3], item_get))
+#' }
 #' # create item class from only an item ID
 #' as.sbitem("4f4e4b24e4b07f02db6aea14")
 #' 
@@ -31,6 +32,9 @@ as.sbitem <- function(x, ...) UseMethod("as.sbitem")
 #' @export
 #' @rdname sbitem
 as.sbitem.default <- function(x, ...) stop("No 'as.sbitem' method for class ", class(x), call. = FALSE)
+
+#' @export
+as.sbitem.NULL <- function(x, ...) NULL
 
 #' @export
 as.sbitem.character <- function(x, ...) get_item(x, ...)
@@ -74,5 +78,10 @@ pluck <- function(x, name, type) {
 get_item <- function(id, ..., session=current_session()) {
 	res <- sbtools_GET(url = paste0(pkg.env$url_item, id), ..., 
 									 query = list(type = 'json'), session = session)
+	
+	if(is(res, "list")) {
+		if(res$status == 404) return(NULL)
+	}
+	
 	return(as.sbitem(content(res)))
 }

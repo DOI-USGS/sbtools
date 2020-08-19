@@ -16,5 +16,7 @@
 item_get_parent = function(sb_id, ..., session = current_session()) {
 	res <- as.sbitem(sb_id, ...)
 	
+	if(is.null(res)) return(NULL)
+	
 	return(as.sbitem(res$parentId))
 }

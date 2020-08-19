@@ -1,6 +1,8 @@
 context("authentication")
 
 test_that("session validation works appropriately", {
+	skip_on_cran()
+	
   expect_false(session_validate(5))
 	#expect_null(current_session())
 	session <- httr::handle("https://google.com")

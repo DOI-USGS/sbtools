@@ -51,6 +51,10 @@ sb_datatypes = function(limit=50, session=current_session()){
 	
 	r = sbtools_GET(paste0(pkg.env$domain, 'vocab/categories/browseTypes'), query=query, session=session)
 	
+	if(is(r, "list") && r$status == 404) {
+		return(NULL)
+	}
+	
 	result = content(r, type='application/json')
 	
 	return(sapply(result$list, function(x)x$name))
