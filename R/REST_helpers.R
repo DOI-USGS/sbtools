@@ -36,12 +36,16 @@ sbtools_POST <- function(url, body, ..., session){
 #' @keywords internal
 sbtools_GET <- function(url, ..., session) {
 	supported_types <- c('text/plain','text/csv','text/tab-separated-values','application/json','application/x-gzip', 'application/pdf')
-	tryCatch({
-		r = GET(url = url, ..., httrUserAgent(), handle = session)
-	}, error = function(e) stop(paste("Error when calling ScienceBase,", 
+	r <- tryCatch({
+		GET(url = url, ..., httrUserAgent(), handle = session)
+	}, error = function(e) {
+		if(grepl("Item not found", e)) stop(e)
+		
+		warning(paste("Error when calling ScienceBase,", 
 																		"internet or server down? Original", 
 																		"error was:\n", e))
-	)
+																 return(list(status = 404))
+	})
 	handle_errors(r, url, "GET", supported_types)
 	session_age_reset()
 	return(r)
@@ -91,7 +95,12 @@ sbtools_DELETE <- function(url, ..., session) {
 # HEAD fxn
 sbtools_HEAD <- function(url, ..., session) {
 	session_val(session)
-	r <- HEAD(url = url, ..., httrUserAgent(), handle = session)
+	r <- tryCatch(HEAD(url = url, ..., httrUserAgent(), handle = session),
+					 error = function(e) {
+							warning(paste("Something went wrong with request: \n",
+														e))
+					 		return(list(status_code = 400))
+					 })
 	log <- if (r$status_code == 200) TRUE else FALSE
 	session_age_reset()
 	return(log)
@@ -99,6 +108,11 @@ sbtools_HEAD <- function(url, ..., session) {
 
 # helpers -------------
 handle_errors <- function(x, url, method, types) {
+	if(is(x, "list")) {
+		if(x$status == 404) warning("Could not access sciencebase")
+		return(NULL)
+	}
+	
 	if (!is.null(types)) {
 		if (!strsplit(headers(x)[['content-type']], '[;]')[[1]][1] %in% types) {
 			stop(method, ' failed to ', url, '. check authorization and/or content', call. = FALSE)

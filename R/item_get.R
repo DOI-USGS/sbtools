@@ -18,8 +18,12 @@
 #' # Search for item IDs, then pass to item_get
 #' library("httr")
 #' res <- query_items(list(s = "Search", q = "water", format = "json"))
-#' ids <- vapply(httr::content(res)$items, "[[", "", "id")
-#' lapply(ids[1:3], item_get)
+#' 
+#' if(res$status != 404) {
+#'   ids <- vapply(httr::content(res)$items, "[[", "", "id")
+#'   lapply(ids[1:3], item_get)
+#' }
+#' 
 #' }
 item_get <- function(sb_id, ..., session=current_session()) {
 	get_item(as.sbitem(sb_id)$id, ..., session = session)

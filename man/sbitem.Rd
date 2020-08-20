@@ -31,9 +31,10 @@ item_get("4f4e4b24e4b07f02db6aea14")
 # Get many w/ e.g., an lapply() call
 library("httr")
 res <- query_items(list(s = "Search", q = "water", format = "json"))
-ids <- vapply(httr::content(res)$items, "[[", "", "id")
-(out <- lapply(ids[1:3], item_get))
-
+if(res$status != 404) {
+  ids <- vapply(httr::content(res)$items, "[[", "", "id")
+  (out <- lapply(ids[1:3], item_get))
+}
 # create item class from only an item ID
 as.sbitem("4f4e4b24e4b07f02db6aea14")
 

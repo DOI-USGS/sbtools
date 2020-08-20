@@ -20,6 +20,9 @@ item_get_fields = function(sb_id, fields, ..., drop=TRUE, session=current_sessio
 	sb_id = as.sbitem(sb_id)
 	query <- list('fields'=paste0(fields, collapse=","), 'type'='json')
 	r <- sbtools_GET(url=paste0(pkg.env$url_item, sb_id$id), ..., query = query, session=session)
+	if(is(r, "list") && r$status == 404) {
+		return(NULL)
+	}
 	out <- content(r)
 	return(if(length(fields)==1 && drop) out[[fields]] else out[fields])
 }

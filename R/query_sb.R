@@ -114,6 +114,10 @@ query_sb = function(query_list, ..., limit=20, session = current_session()){
 	
 	result = query_items(query_list, ..., session=session)
 	
+	if(is(result, "list") && result$status == 404) {
+		return(NULL)
+	}
+	
 	#parse the result and turn it into a list of sbitems
 	res_obj = httr::content(result, type='application/json')
 	
