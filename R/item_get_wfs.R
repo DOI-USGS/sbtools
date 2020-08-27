@@ -10,7 +10,7 @@
 #' This function attempts to download the spatial layer data attached to the
 #' requested SB item. SB exposes discrete spatial objects (points, polygons) as 
 #' web services based on the Open Geospatial Consortium, 
-#' \href{https://www.opengeospatial.org/standards/wfs}{Web Feature Service (WFS)}
+#' \href{https://www.ogc.org/standards/wfs}{Web Feature Service (WFS)}
 #' standardized interface. This requires the following libraries not by default
 #' installed with sbtools: \code{sf}, \code{httr}, and \code{xml2}. 
 #' You can install them simply by running \code{install.packages(c("xml2", "httr", "sf"))}
