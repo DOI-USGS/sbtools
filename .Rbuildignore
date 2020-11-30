@@ -10,3 +10,4 @@ DISCLAIMER.md
 LICENSE
 code.json
 .gitlab-ci.yml
+.Renviron
