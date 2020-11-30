@@ -26,6 +26,7 @@ means no matches were found.
 Queries ScienceBase for items with matching datatype.
 }
 \examples{
+
 #query for items with WFS Layer data
 query_sb_datatype('Static Map Image')
 

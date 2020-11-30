@@ -16,7 +16,7 @@ This package is considered a 'support' package. For more information, see:
 
 |Linux|Test Coverage|
 |----------|------------|
-| [![travis](https://travis-ci.org/USGS-R/sbtools.svg?branch=master)](https://travis-ci.org/USGS-R/sbtools)|[![codecov.io](https://codecov.io/github/USGS-R/sbtools/coverage.svg?branch=master)](https://codecov.io/github/USGS-R/sbtools?branch=master)|
+| ![R-CMD-check](https://github.com/usgs-r/sbtools/workflows/R-CMD-check/badge.svg) |[![codecov.io](https://codecov.io/github/USGS-R/sbtools/coverage.svg?branch=master)](https://codecov.io/github/USGS-R/sbtools?branch=master)|
 
 ### Current CRAN information
 
@@ -111,5 +111,5 @@ This software has been approved for release by the U.S. Geological Survey (USGS)
 
 From: https://www2.usgs.gov/fsp/fsp_disclaimers.asp#5
 
-This software is in the public domain because it contains materials that originally came from the U.S. Geological Survey, an agency of the United States Department of Interior. For more information, see the [official USGS copyright policy](https://www.usgs.gov/visual-id/credit_usgs.html#copyright/ "official USGS copyright policy")
+This software is in the public domain because it contains materials that originally came from the U.S. Geological Survey, an agency of the United States Department of Interior. For more information, see the [official USGS copyright policy](https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits "official USGS copyright policy")
 
