@@ -7,3 +7,6 @@ man-roxygen
 manuscript
 DISCLAIMER.md
 .github
+LICENSE
+code.json
+.gitlab-ci.yml
