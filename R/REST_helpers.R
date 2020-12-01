@@ -34,12 +34,14 @@ sbtools_POST <- function(url, body, ..., session){
 #' @import httr
 #' @export
 #' @keywords internal
-sbtools_GET <- function(url, ..., session) {
+sbtools_GET <- function(url, ..., session = NULL) {
 	supported_types <- c('text/plain','text/csv','text/tab-separated-values','application/json','application/x-gzip', 'application/pdf')
 	r <- tryCatch({
 		GET(url = url, ..., httrUserAgent(), handle = session)
 	}, error = function(e) {
 		if(grepl("Item not found", e)) stop(e)
+		
+		if(!is.null(session) && !inherits(session, "curl_handle")) stop("Session is not valid.")
 		
 		warning(paste("Error when calling ScienceBase,", 
 																		"internet or server down? Original", 
