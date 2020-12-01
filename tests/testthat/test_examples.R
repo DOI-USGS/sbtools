@@ -109,6 +109,17 @@ test_that("basic examples work", {
 	
 	expect_equal(length(qs2), 3)
 	
+	conus <- data.frame(
+		lat = c(49.078148, 47.575022, 32.914614, 25.000481),
+		long = c(-124.722111, -67.996898, -118.270335, -80.125804))
+	
+	qs3 <- query_sb_spatial(
+		bbox = sp::SpatialPoints(
+			conus, proj4string = sp::CRS("+proj=longlat +datum=NAD27")), 
+		limit = 3)
+	
+	expect_equal(length(qs3), 3)
+	
 	expect_equal(length(query_sb_text('Lees Ferry')), 20)
 	
 	expect_equal(length(item_list_children(item_get('5060b03ae4b00fc20c4f3c8b'))), 20)
@@ -122,5 +133,15 @@ test_that("basic examples work", {
 	expect_equal(length(res), 1010)
 	
 	expect_error(user_id())
+	
+	expect_error(as.sbitem(matrix(1,2,3)), "No 'as.sbitem' method for class  matrix, array")
+	
+	expect_equal(as.sbitem(NULL), NULL)
+	
+	expect_false(is.sbitem(NULL))
+	
+	d <- session_details()
+	
+	expect_true(is.list(d))
 })
 	

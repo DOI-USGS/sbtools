@@ -31,7 +31,9 @@ as.sbitem <- function(x, ...) UseMethod("as.sbitem")
 
 #' @export
 #' @rdname sbitem
-as.sbitem.default <- function(x, ...) stop("No 'as.sbitem' method for class ", class(x), call. = FALSE)
+as.sbitem.default <- function(x, ...) stop(paste("No 'as.sbitem' method for class ", 
+																								 paste(class(x), collapse = ", ")), 
+																					 call. = FALSE)
 
 #' @export
 as.sbitem.NULL <- function(x, ...) NULL
@@ -65,23 +67,4 @@ is.sbitem <- function(x) {
 
 sb_item <- function(x) {
 	structure(x, class = "sbitem")
-}
-
-pluck <- function(x, name, type) {
-	if (missing(type)) {
-		lapply(x, "[[", name)
-	} else {
-		vapply(x, "[[", name, FUN.VALUE = type)
-	}
-}
-
-get_item <- function(id, ..., session=current_session()) {
-	res <- sbtools_GET(url = paste0(pkg.env$url_item, id), ..., 
-									 query = list(type = 'json'), session = session)
-	
-	if(is(res, "list")) {
-		if(res$status == 404) return(NULL)
-	}
-	
-	return(as.sbitem(content(res)))
 }

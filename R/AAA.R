@@ -28,15 +28,6 @@ default_timeout <- function(){
 
 set_expiration()
 
-# helper fxn to pull out items by name, using either lapply or vapply
-pluck <- function(x, name, type) {
-	if (missing(type)) {
-		lapply(x, "[[", name)
-	} else {
-		vapply(x, "[[", name, FUN.VALUE = type)
-	}
-}
-
 check_session <- function(x) {
 	if (!session_authorized(x))
 		stop('session is not authorized. See ?authenticate_sb', call. = FALSE)	
