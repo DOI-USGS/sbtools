@@ -41,27 +41,29 @@ item_list_files = function(sb_id, recursive = FALSE, ..., session=current_sessio
 	session_val(session)
 	
 	id <- as.sbitem(sb_id)
-	item = item_get(id, session = session)
+	item <- item_get(id, session = session)
 	
 	if (recursive) {
 		if (item$hasChildren) {
-			kids <- item$hasChildren
-			out <- list()
-			i <- 0
-			while (kids) {
+			
+			children <- list(item)
+			
+			i <- 1
+			
+			while (i <= length(children)) {
+
+				next_children <- item_list_children(children[[i]], session = session)
+
+				children <- c(children, next_children)
+				
 				i <- i + 1
-				if (!is(item, "list")) item <- list(item)
-				item <- lapply(item, function(w) {
-					if (is(w, "data.frame")) w$id else w
-				})
-				if (!is(item[[1]], "sbitem")) item <- unlist(item, FALSE)
-				item <- lapply(item, item_list_children, session = session)
-				children <- lapply(item, function(z) lapply(z$id, as.sbitem))
-				out[[i]] <- children
-				kids <- any(comp(sapply(unlist(children, FALSE), "[[", "hasChildren")))
+				
+				message(paste("Checked child item", i - 1, "found", length(next_children), "more children."))
+				
 			}
-			out <- unlist(lapply(out, function(x) if (is(x, "list")) unlist(x, FALSE) else x), FALSE)
-			files <- unlist(comp(sapply(out, "[[", "files")), recursive = FALSE)
+			
+			files <- unlist(lapply(children, function(x) x$files), recursive = FALSE)
+			
 		} else {
 			files <- list()
 			message("no child items found")
