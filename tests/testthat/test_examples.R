@@ -49,6 +49,22 @@ test_that("basic examples work", {
 	expect_error(item_file_download(item, dest_dir = tempdir(), overwrite_file = FALSE),
 							 "Path exists and overwrite is FALSE")
 
+	f <- item_file_download(item, names = file_name, 
+													destinations = file.path(tempdir(), file_name), 
+													overwrite_file = TRUE)
+	
+	expect_equal(basename(f), file_name)
+	
+	expect_error(item_file_download(item, names = c("test", file_name), 
+													destinations = file.path(tempdir(), file_name), 
+													overwrite_file = TRUE),
+							 "Length of names and destinations must be identical")
+	
+	expect_error(item_file_download(item, 
+																	destinations = file.path(tempdir(), file_name), 
+																	overwrite_file = TRUE),
+							 "Must have either names & destinations, or dest_dir for all files")
+	
 	set_endpoint('dev')
 	
 	expect_equal(sbtools:::pkg.env$domain, "https://beta.sciencebase.gov/")
@@ -99,5 +115,12 @@ test_that("basic examples work", {
 	
 	expect_equal(length(item_list_children(item_get('5060b03ae4b00fc20c4f3c8b'), limit = 5)), 5)
 	
+	expect_error(query_sb("test"), "query_list must be a list of query parameters")
+	
+	res <- query_sb(list(parentId = "5474ec49e4b04d7459a7eab2"), limit = 1010)
+	
+	expect_equal(length(res), 1010)
+	
+	expect_error(user_id())
 })
 	
