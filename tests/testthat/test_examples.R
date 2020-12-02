@@ -115,9 +115,9 @@ test_that("basic examples work", {
 	
 	bbox <- sf::as_Spatial(sf::st_as_sf(conus, coords = c("long", "lat"), crs = 4326))
 	
-	qs3 <- query_sb_spatial(
+	expect_message(qs3 <- query_sb_spatial(
 		bbox = bbox, 
-		limit = 3)
+		limit = 3), "bbox must be from an sp object in WGS84 Lon/Lat")
 	
 	expect_equal(length(qs3), 3)
 	
