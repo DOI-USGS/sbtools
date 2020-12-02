@@ -113,9 +113,10 @@ test_that("basic examples work", {
 		lat = c(49.078148, 47.575022, 32.914614, 25.000481),
 		long = c(-124.722111, -67.996898, -118.270335, -80.125804))
 	
+	bbox <- sf::as_Spatial(sf::st_as_sf(conus, coords = c("long", "lat"), crs = 4326))
+	
 	qs3 <- query_sb_spatial(
-		bbox = sp::SpatialPoints(
-			conus, proj4string = sp::CRS("+proj=longlat +datum=NAD27")), 
+		bbox = bbox, 
 		limit = 3)
 	
 	expect_equal(length(qs3), 3)
