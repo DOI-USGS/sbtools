@@ -26,13 +26,8 @@
 query_sb_spatial = function(bbox, long, lat, bb_wkt, ..., limit=20, session=current_session()){
 	
 	if(!missing(bbox)){
-		if(requireNamespace("sp")){
-			#project first into longlat projection so bounding box is in degrees
-			bb = sp::spTransform(bbox, sp::CRS("+proj=longlat +datum=WGS84"))@bbox
-			bb_wkt = make_wkt(bb)
-		}else{
-			stop('sp package required to use bbox parameter. Please: install.packages("sp")')
-		}
+		message("bbox must be from an sp object in WGS84 Lon/Lat")
+		bb_wkt = make_wkt(bbox@bbox)
 	}else if(!missing(long) & !missing(lat)){
 		bb = matrix(nrow=2, ncol=2)
 		bb[1,1] = min(long)

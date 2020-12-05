@@ -26,8 +26,8 @@ Queries for ScienceBase items that have matching text in the title or
 description
 }
 \examples{
-#query for the package maintainer's name
-query_sb_text('Luke Winslow')
+#query for a person's name
+query_sb_text('Luna Leopold')
 
 #query for one of the old river gaging stations
 query_sb_text('Lees Ferry')

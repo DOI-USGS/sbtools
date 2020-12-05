@@ -28,3 +28,14 @@
 item_get <- function(sb_id, ..., session=current_session()) {
 	get_item(as.sbitem(sb_id)$id, ..., session = session)
 }
+
+get_item <- function(id, ..., session=current_session()) {
+	res <- sbtools_GET(url = paste0(pkg.env$url_item, id), ..., 
+										 query = list(type = 'json'), session = session)
+	
+	if(is(res, "list")) {
+		if(res$status == 404) return(NULL)
+	}
+	
+	return(as.sbitem(content(res)))
+}

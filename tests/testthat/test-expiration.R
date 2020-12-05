@@ -31,4 +31,6 @@ test_that("session age works on internal session",{
 	expect_true(suppressWarnings(session_expired()))
 	suppressWarnings(session_age_reset())
 	expect_false(suppressWarnings(session_expired()))
+	
+	sbtools:::session_set(NULL)
 })

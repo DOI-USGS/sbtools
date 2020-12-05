@@ -4,7 +4,7 @@
 \alias{sbtools_GET}
 \title{generic GETs for sbtools package}
 \usage{
-sbtools_GET(url, ..., session)
+sbtools_GET(url, ..., session = NULL)
 }
 \arguments{
 \item{url}{a base url for the GET}
