@@ -7,7 +7,7 @@ man-roxygen
 manuscript
 DISCLAIMER.md
 .github
-LICENSE
+LICENSE.md
 code.json
 .gitlab-ci.yml
 .Renviron
