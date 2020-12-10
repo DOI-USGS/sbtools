@@ -11,14 +11,14 @@
       "licenses": [
         {
           "name": "Public Domain, CC0-1.0",
-          "URL": "https://code.usgs.gov/water/sbtools/blob/v1.1.12/LICENSE.md"
+          "URL": "https://code.usgs.gov/water/sbtools/blob/master/LICENSE.md"
         }
         ]
     },
 
     "homepageURL": "https://code.usgs.gov/water/sbtools/",
-    "downloadURL": "https://code.usgs.gov/water/sbtools/-/archive/v1.1.12/ncdfgeom-v1.1.12.zip",
-    "disclaimerURL": "https://code.usgs.gov/water/sbtools/blob/v1.1.12/DISCLAIMER.md",
+    "downloadURL": "https://code.usgs.gov/water/sbtools/-/archive/master/ncdfgeom-master.zip",
+    "disclaimerURL": "https://code.usgs.gov/water/sbtools/blob/master/DISCLAIMER.md",
     "repositoryURL": "https://code.usgs.gov/water/sbtools.git",
     "vcs": "git",
 
