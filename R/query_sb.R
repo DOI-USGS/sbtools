@@ -112,7 +112,13 @@ query_sb = function(query_list, ..., limit=20, session = current_session()){
 		query_list['max'] = limit
 	}
 	
+	tryCatch({
 	result = query_items(query_list, ..., session=session)
+	}, error = function(e) {
+		result <- list(status = 404)
+		warning(paste("unhandled error with sciencebase request. \n", 
+						"Error was: \n", e))
+	})
 	
 	if(is(result, "list") && result$status == 404) {
 		return(NULL)
