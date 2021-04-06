@@ -8,7 +8,7 @@ item_append_files(
   sb_id,
   files,
   ...,
-  scrape_files = FALSE,
+  scrape_files = TRUE,
   session = current_session()
 )
 }

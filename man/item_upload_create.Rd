@@ -8,7 +8,7 @@ item_upload_create(
   parent_id,
   files,
   ...,
-  scrape_files = FALSE,
+  scrape_files = TRUE,
   session = current_session()
 )
 }
