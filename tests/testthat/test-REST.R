@@ -39,6 +39,8 @@ test_that("generic get w/ and w/o auth", {
 })
 
 test_that("REST_helpers tests", {
+	skip_on_cran()
+	
 	item <- sbtools_GET("https://www.sciencebase.gov/catalog/item/5c4f4a04e4b0708288f78e07")
 
 	expect_error(sbtools_GET("https://www.sciencebase.gov/catalog/item/a04e4b0708288f78e07"), 
