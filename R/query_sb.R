@@ -86,6 +86,8 @@
 #' @export
 query_sb = function(query_list, ..., limit=20, session = current_session()){
 	
+	tryCatch({
+		
 	if(!is(query_list, 'list')){
 		stop('query_list must be a list of query parameters')
 	}
@@ -151,6 +153,13 @@ query_sb = function(query_list, ..., limit=20, session = current_session()){
 	if(length(out) > limit){
 		out = out[1:limit]
 	}
+	},
+	error = function(e) {
+		warning(paste("Something unexpected went wrong with a web request \n",
+									"Original error was:\n", e))
+		return(NULL)
+	})
+	
 	return(out)
 }
 
