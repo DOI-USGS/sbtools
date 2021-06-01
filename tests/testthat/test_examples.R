@@ -127,7 +127,7 @@ test_that("basic examples work", {
 	
 	expect_equal(length(item_list_children(item_get('5060b03ae4b00fc20c4f3c8b'), limit = 5)), 5)
 	
-	expect_error(query_sb("test"), "query_list must be a list of query parameters")
+	expect_warning(query_sb("test"))
 	
 	res <- query_sb(list(parentId = "5474ec49e4b04d7459a7eab2"), limit = 1010)
 	

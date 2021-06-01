@@ -13,7 +13,8 @@ sbtools_POST <- function(url, body, ..., session){
 	supported_types <- c('text/plain', 'application/json')
 	check_session(session)
 	
-	r = POST(url=url, ..., httrUserAgent(), accept_json(), body=body, handle=session) 
+	r = POST(url=url, ..., httrUserAgent(), accept_json(), body=body, handle=session, 
+					 timeout = httr::timeout(default_timeout())) 
 	handle_errors(r, url, "POST", supported_types)	
 	# if (!strsplit(headers(r)[['content-type']], '[;]')[[1]][1] %in% supported_types)
 	# 	stop('POST failed to ',url,'. check authorization and/or content')
@@ -37,9 +38,12 @@ sbtools_POST <- function(url, body, ..., session){
 sbtools_GET <- function(url, ..., session = NULL) {
 	supported_types <- c('text/plain','text/csv','text/tab-separated-values','application/json','application/x-gzip', 'application/pdf')
 	r <- tryCatch({
-		GET(url = url, ..., httrUserAgent(), handle = session)
+		GET(url = url, ..., httrUserAgent(), handle = session, timeout = httr::timeout(default_timeout()))
 	}, error = function(e) {
-		if(grepl("Item not found", e)) stop(e)
+		if(grepl("Item not found", e))  {
+			warning(e)
+			return(list(status = 404))
+		}
 		
 		if(!is.null(session) && !inherits(session, "curl_handle")) stop("Session is not valid.")
 		
@@ -68,7 +72,7 @@ sbtools_GET <- function(url, ..., session = NULL) {
 #' @keywords internal
 sbtools_PUT <- function(url, body, ..., session) {
 	check_session(session)
-	r = PUT(url = url, ..., httrUserAgent(), body = body, handle = session)
+	r = PUT(url = url, ..., httrUserAgent(), body = body, handle = session, timeout = httr::timeout(default_timeout()))
 	handle_errors(r, url, "PUT", NULL)
 	session_age_reset()
 	return(r)
@@ -88,7 +92,8 @@ sbtools_PUT <- function(url, body, ..., session) {
 #' @keywords internal
 sbtools_DELETE <- function(url, ..., session) {
 	check_session(session)
-	r = DELETE(url = url, ..., httrUserAgent(), accept_json(), handle = session)
+	r = DELETE(url = url, ..., httrUserAgent(), accept_json(), 
+						 handle = session, timeout = httr::timeout(default_timeout()))
 	handle_errors(r, url, "DELETE", NULL)
 	session_age_reset()
 	return(r)
@@ -97,7 +102,8 @@ sbtools_DELETE <- function(url, ..., session) {
 # HEAD fxn
 sbtools_HEAD <- function(url, ..., session) {
 	session_val(session)
-	r <- tryCatch(HEAD(url = url, ..., httrUserAgent(), handle = session),
+	r <- tryCatch(HEAD(url = url, ..., httrUserAgent(), handle = session,
+										 timeout = httr::timeout(default_timeout())),
 					 error = function(e) {
 							warning(paste("Something went wrong with request: \n",
 														e))

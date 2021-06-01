@@ -14,7 +14,8 @@
 #' @export
 session_details <- function(..., session = current_session()) {
 	x <- GET(paste0(pkg.env$url_base, "jossoHelper/sessionInfo"), 
-					 handle = session, ...)
+					 handle = session, timeout = httr::timeout(default_timeout()),
+					 ...)
 	stop_for_status(x)
 	jsonlite::fromJSON(content(x, "text"))
 }

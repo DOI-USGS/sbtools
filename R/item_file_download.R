@@ -70,7 +70,9 @@ item_file_download = function(sb_id, ..., names, destinations, dest_dir, session
 	flist = merge(flist, data.frame(fname=names, dest=destinations, stringsAsFactors=FALSE))
 
 	for(i in 1:nrow(flist)){
-		GET(url=flist[i,]$url, ..., write_disk(flist[i,]$dest, overwrite = overwrite_file), handle=session)
+		GET(url=flist[i,]$url, ..., 
+				write_disk(flist[i,]$dest, overwrite = overwrite_file), 
+				handle=session, timeout = httr::timeout(default_timeout()))
 	}
 
 	return(path.expand(flist$dest))

@@ -11,7 +11,9 @@
 sb_ping <- function(...) {
 
 	tryCatch({
-		x <- GET(paste0(pkg.env$url_item, 'ping'), ...)
+		x <- GET(paste0(pkg.env$url_item, 'ping'), 
+						 timeout = httr::timeout(default_timeout()),
+						 ...)
 		res = jsonlite::fromJSON(content(x, "text"))
 		if(is(res, 'list') & !is.null(res$result) & res$result == 'OK'){
 			return(TRUE)

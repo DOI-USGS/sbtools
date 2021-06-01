@@ -35,8 +35,9 @@ authenticate_sb = function(username, password){
 	h = handle(pkg.env$url_base)
 	
 	## authenticate
-	resp = GET(pkg.env$url_base, accept_json(), authenticate(username, password, type='basic'),
-						 handle=h)
+	resp = GET(pkg.env$url_base, accept_json(), 
+						 authenticate(username, password, type='basic'),
+						 handle=h, timeout = httr::timeout(default_timeout()))
 	
 	if(!any(resp$cookies$name %in% 'JSESSIONID')){
 		stop('Unable to authenticate to SB. Check username and password')
