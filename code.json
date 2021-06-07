@@ -3,6 +3,49 @@
     "name": "sbtools",
     "organization": "U.S. Geological Survey",
     "description": "USGS ScienceBase Tools",
+    "version": "1.1.16",
+    "status": "Production",
+
+    "permissions": {
+      "usageType": "openSource",
+      "licenses": [
+        {
+          "name": "Public Domain, CC0-1.0",
+          "URL": "https://code.usgs.gov/water/sbtools/blob/v1.1.15/LICENSE.md"
+        }
+        ]
+    },
+
+    "homepageURL": "https://code.usgs.gov/water/sbtools",
+    "downloadURL": "https://code.usgs.gov/water/sbtools/-/archive/master/sbtools-master.zip",
+    "disclaimerURL": "https://code.usgs.gov/water/sbtools/-/blob/master/DISCLAIMER.md",
+    "repositoryURL": "https://code.usgs.gov/water/sbtools.git",
+    "vcs": "git",
+
+    "laborHours": 1000,
+
+    "tags": [
+      "USGS",
+      "sciencebase"
+      ],
+
+    "languages": [
+      "R"
+      ],
+
+    "contact": {
+      "name": "David Blodgett",
+      "email": "dblodgett@usgs.gov"
+    },
+
+    "date": {
+      "metadataLastUpdated": "2020-06-07"
+    }
+  }, 
+  {
+    "name": "sbtools",
+    "organization": "U.S. Geological Survey",
+    "description": "USGS ScienceBase Tools",
     "version": "1.1.15",
     "status": "Production",
 
@@ -41,7 +84,8 @@
     "date": {
       "metadataLastUpdated": "2020-06-07"
     }
-  }, {
+  }, 
+  {
     "name": "sbtools",
     "organization": "U.S. Geological Survey",
     "description": "USGS ScienceBase Tools",
@@ -84,4 +128,4 @@
       "metadataLastUpdated": "2020-12-10"
     }
   }
-  ]
+]
