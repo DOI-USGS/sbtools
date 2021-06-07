@@ -11,14 +11,14 @@
       "licenses": [
         {
           "name": "Public Domain, CC0-1.0",
-          "URL": "https://code.usgs.gov/water/sbtools/blob/master/LICENSE.md"
+          "URL": "https://code.usgs.gov/water/sbtools/blob/v1.1.15/LICENSE.md"
         }
         ]
     },
 
     "homepageURL": "https://code.usgs.gov/water/sbtools",
-    "downloadURL": "https://code.usgs.gov/water/sbtools/-/archive/master/sbtools-master.zip",
-    "disclaimerURL": "https://code.usgs.gov/water/sbtools/-/blob/master/DISCLAIMER.md",
+    "downloadURL": "https://code.usgs.gov/water/sbtools/-/archive/v1.1.15/sbtools-v1.1.15.zip",
+    "disclaimerURL": "https://code.usgs.gov/water/sbtools/-/blob/v1.1.15/DISCLAIMER.md",
     "repositoryURL": "https://code.usgs.gov/water/sbtools.git",
     "vcs": "git",
 
@@ -39,7 +39,7 @@
     },
 
     "date": {
-      "metadataLastUpdated": "2020-12-10"
+      "metadataLastUpdated": "2020-06-07"
     }
   }, {
     "name": "sbtools",
@@ -53,7 +53,7 @@
       "licenses": [
         {
           "name": "Public Domain, CC0-1.0",
-          "URL": "https://code.usgs.gov/water/sbtools/blob/master/LICENSE.md"
+          "URL": "https://code.usgs.gov/water/sbtools/blob/v1.1.14/LICENSE.md"
         }
         ]
     },
