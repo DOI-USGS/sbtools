@@ -5,6 +5,8 @@
 #' @template item_with_parent
 #'
 #' @param files A string vector of paths to files to be uploaded
+#' @param scrape_files logical should the files be scraped for metadata? 
+#' If TRUE, sciencebase will attempt to create extensions based on the files.
 #' @export
 #' @return An object of class \code{sbitem}
 #' @examples \dontrun{
@@ -13,14 +15,21 @@
 #' file <- system.file("examples", "books.json", package = "sbtools")
 #' item_upload_create(user_id(), file)
 #' }
-item_upload_create = function(parent_id, files, ..., session=current_session()){
+item_upload_create = function(parent_id, files, ..., scrape_files = TRUE, session=current_session()){
 	
 	if(length(files) > 50){
 		warning('Trying to attach a large number of files to a SB item. SB imposes file limits which may cause this to fail')
 	}
 	
 	item <- as.sbitem(parent_id)
-	r = sbtools_POST(url = paste0(pkg.env$url_upload_create, item$id, '?title=title'), 
+	
+	params <- '?title=title'
+	
+	if(!scrape_files) {
+		params <- paste0(params, '&scrapeFile=false')
+	}
+	
+	r = sbtools_POST(url = paste0(pkg.env$url_upload_create, item$id, params), 
 									 ...,
 									 body = multi_file_body(files), 
 									 session = session)
@@ -31,7 +40,9 @@ item_upload_create = function(parent_id, files, ..., session=current_session()){
 		stop('Not authenticated or lack of permission to parent object\nAunthenticate with the authenticate_sb function.')
 	}
 	
-	return(as.sbitem(content(r)))
+	item <- as.sbitem(content(r))
+	
+	return(check_upload(item, files))
 }
 
 #' 
@@ -39,7 +50,7 @@ item_upload_create = function(parent_id, files, ..., session=current_session()){
 #' @description Adds a file to an item
 #'
 #' @template manipulate_item
-#' @param files A file path to upload.
+#' @inheritParams item_upload_create
 #'
 #' @return An object of class \code{sbitem}
 #'
@@ -52,19 +63,40 @@ item_upload_create = function(parent_id, files, ..., session=current_session()){
 #' item_append_files(res$id, "foobar.txt")
 #' }
 #' @export
-item_append_files = function(sb_id, files, ..., session=current_session()){
+item_append_files = function(sb_id, files, ..., scrape_files = TRUE, session=current_session()){
 	
 	if(length(files) > 50){
 		warning('Trying to attach a large number of files to a SB item. SB imposes file limits which may cause this to fail')
 	}
 	
 	item <- as.sbitem(sb_id)
-	r = sbtools_POST(url = paste0(pkg.env$url_upload,'?id=', item$id), ...,
+	
+	params <- paste0("?id=", item$id)
+	
+	if(!scrape_files) {
+		params <- paste0(params, "&scrapeFile=false")
+	}
+	
+	r = sbtools_POST(url = paste0(pkg.env$url_upload, params), ...,
 									 body = multi_file_body(files), 
 									 session = session)
   
-  return(as.sbitem(content(r)))
+	item <- as.sbitem(content(r))
 	
+	return(check_upload(item, files))
+	
+}
+
+check_upload <- function(item, files) {
+	
+	if(!all(basename(files) %in% sapply(item$files, function(x) x$name))) {
+		warning("Not all files ended up in the item files. \n",
+		"This indicates that a sciencebase extension was created with the file. \n",
+		"set 'scrape_files' to FALSE to avoid this behavior. \n",
+		"NOTE: 'scrape_files' will default to FALSE in a future version of sbtools.")
+	}
+	
+	item
 }
 
 multi_file_body <- function(files){

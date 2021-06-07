@@ -86,6 +86,8 @@
 #' @export
 query_sb = function(query_list, ..., limit=20, session = current_session()){
 	
+	tryCatch({
+		
 	if(!is(query_list, 'list')){
 		stop('query_list must be a list of query parameters')
 	}
@@ -113,11 +115,11 @@ query_sb = function(query_list, ..., limit=20, session = current_session()){
 	}
 	
 	tryCatch({
-	result = query_items(query_list, ..., session=session)
+		result <- query_items(query_list, ..., session=session)
 	}, error = function(e) {
 		result <- list(status = 404)
 		warning(paste("unhandled error with sciencebase request. \n", 
-						"Error was: \n", e))
+									"Error was: \n", e))
 	})
 	
 	if(is(result, "list") && result$status == 404) {
@@ -151,6 +153,18 @@ query_sb = function(query_list, ..., limit=20, session = current_session()){
 	if(length(out) > limit){
 		out = out[1:limit]
 	}
-	return(out)
+	},
+	error = function(e) {
+		warning(paste("Something unexpected went wrong with a web request \n",
+									"Original error was:\n", e))
+		return(NULL)
+	})
+	
+	if(exists("out")) {
+		return(out)
+	} else {
+		NULL
+	}
+	
 }
 

@@ -1,3 +1,12 @@
+# Version 1.1.15 (2020-06-07)
+
+* Added `scrape_files` parameter to `item_upload_files()` and `item_append_files()`
+* Fixed CRAN check issues with ScienceBase availability. 10 second timeout was added for all web service calls.
+
+# Version 1.1.14 (2020-03-01)
+
+Version 1.1.10 to 1.1.14 are all minor changes for CRAN.
+
 # Version 1.1.9 (2020-01-07)
 
 * Fixed travis build and addressed CRAN test failures.
