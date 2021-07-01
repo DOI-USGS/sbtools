@@ -54,7 +54,7 @@ test_that("item creation, identifiers, and file upload works", {
 	#remove the test item when done
 	item_rm(item)
 	
-	expect_error(item_get(item), 'Item not found*.')
+	expect_message(item_get(item), 'Item not found*.')
 	
 	expect_silent(session_logout())
 })

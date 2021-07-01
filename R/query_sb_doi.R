@@ -12,12 +12,12 @@
 #' Queries for ScienceBase items with a specific DOI identifier. 
 #' In ScienceBase, these are stored as additional unique identifiers.
 #' 
-#' @examples 
+#' @examples \donttest{
 #' #Two example DOI-specific queries
 #' query_sb_doi('10.5066/F7M043G7')
 #' 
 #' query_sb_doi('10.5066/F7Z60M35')
-#' 
+#' }
 #' @export
 query_sb_doi = function(doi, ..., limit=20, session=current_session()){
 	

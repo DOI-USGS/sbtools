@@ -47,8 +47,7 @@
 #'  boxes and representational points. This is a alphanumeric string.
 #' }
 #' 
-#' @examples 
-#' \dontrun{
+#' @examples \dontrun{
 #' query_sb(list(q = "water"))
 #' 
 #' # Search by project status

@@ -12,9 +12,10 @@ is no authenticated session, returns NULL. Emits a
 warning if the session has expired.
 }
 \examples{
+\donttest{
 
 session = current_session()
 #null unless currently authenticated
 session
-
+}
 }

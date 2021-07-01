@@ -4,16 +4,16 @@ test_that("generic post fails w/o auth", {
 	skip_on_cran()
 	
 	# auth fails locally:
-	expect_error(item_append_files("54e265a4e4b08de9379b4dfb", '/foo/bar/baz.zip'),'Item not found for')
+	expect_message(item_append_files("54e265a4e4b08de9379b4dfb", '/foo/bar/baz.zip'),'Item not found for')
 	session <- httr::handle("https://google.com")
 	attributes(session) <- c(attributes(session), list(birthdate=Sys.time()))
 	
 	# auth passes locally, but POST fails due to files not existing:
-	expect_error(item_append_files("54e265a4e4b08de9379b4dfb", '/foo/bar/baz.zip', session=session), 'Item not found for')
+	expect_message(item_append_files("54e265a4e4b08de9379b4dfb", '/foo/bar/baz.zip', session=session), 'Item not found for')
 	
 	# auth passes, and file is there, but auth fails on sciencebase.gov
 	files <- system.file('extdata',"This_works_new_extension.zip", package='sbtools')
-	expect_error(item_append_files("54e265a4e4b08de9379b4dfb", files, session=session), 
+	expect_message(item_append_files("54e265a4e4b08de9379b4dfb", files, session=session), 
 							 'Item not found for')
 })
 
@@ -33,8 +33,8 @@ test_that("generic get w/ and w/o auth", {
 	expect_is(item_get(public_item, session = session), 'sbitem')
 	
 	# 'not found' error for missing items, with or without login
-	expect_error(item_get(non_item, session = NULL), 'Item not found')
-	expect_error(item_get(non_item, session = session), 'Item not found')
+	expect_message(item_get(non_item, session = NULL), 'Item not found')
+	expect_message(item_get(non_item, session = session), 'Item not found')
 	
 })
 
@@ -43,7 +43,7 @@ test_that("REST_helpers tests", {
 	
 	item <- sbtools_GET("https://www.sciencebase.gov/catalog/item/5c4f4a04e4b0708288f78e07")
 
-	expect_error(sbtools_GET("https://www.sciencebase.gov/catalog/item/a04e4b0708288f78e07"), 
+	expect_message(sbtools_GET("https://www.sciencebase.gov/catalog/item/a04e4b0708288f78e07"), 
 							 "Invalid Item ID")
 	
 	expect_error(sbtools_GET("https://www.sciencebase.gov/catalog/item/a04e4b0708288f78e07", session = list(session = "borked")),
@@ -62,5 +62,5 @@ test_that("REST_helpers tests", {
 
 	expect_equal(delete_test$status_code, 405)
 	
-	expect_error(post_test <- sbtools_POST("https://www.sciencebase.gov/catalog/item/5c4f4a04e4b0708288f78e07", "test", session = session))
+	expect_message(post_test <- sbtools_POST("https://www.sciencebase.gov/catalog/item/5c4f4a04e4b0708288f78e07", "test", session = session))
 })

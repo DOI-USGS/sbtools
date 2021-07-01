@@ -27,10 +27,9 @@ using \code{\link{item_file_download}}. (advanced) Recursive options lists all
 files attached to an item and all children items.
 }
 \examples{
-\donttest{
-item_list_files("4f4e4b24e4b07f02db6aea14")
-}
 \dontrun{
+
+item_list_files("4f4e4b24e4b07f02db6aea14")
 # list files recursively
 ## create item
 id <- item_create(user_id(), title="some title")

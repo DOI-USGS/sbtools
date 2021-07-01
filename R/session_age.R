@@ -5,8 +5,7 @@
 #' 
 #' @template manipulate_item
 #' @return difftime object
-#' @examples 
-#' \dontrun{
+#' @examples \dontrun{
 #' authenticate_sb('bbadger@@usgs.gov')
 #' sbtools::session_age()
 #' }

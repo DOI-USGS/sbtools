@@ -7,12 +7,12 @@
 #' 
 #' 
 #' 
-#' @examples
+#' @examples \donttest{
 #' 
 #' session = current_session()
 #' #null unless currently authenticated
 #' session
-#'
+#' }
 #'@export
 current_session = function(){
 	if(session_expired(pkg.env$session)){

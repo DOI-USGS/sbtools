@@ -7,8 +7,7 @@
 #' @param names List of names of files to rename
 #' @param new_names List of new file names to use
 #' 
-#' @examples 
-#' \dontrun{
+#' @examples \dontrun{
 #' 
 #' names = c('file1.txt', 'file2.txt')
 #' new_names = c('newname1.txt', 'newname2.txt')
