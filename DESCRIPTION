@@ -1,7 +1,7 @@
 Package: sbtools
 Title: USGS ScienceBase Tools
 Maintainer: David Blodgett <dblodgett@usgs.gov>
-Version: 1.1.16
+Version: 1.1.17
 Authors@R: c(person("David", "Blodgett", role=c("cre"),
     email = "dblodgett@usgs.gov"),
     person("Luke", "Winslow", role = c("aut"),
@@ -30,5 +30,5 @@ Suggests:
 License: CC0
 URL: https://github.com/USGS-R/sbtools
 BugReports: https://github.com/USGS-R/sbtools/issues
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Encoding: UTF-8

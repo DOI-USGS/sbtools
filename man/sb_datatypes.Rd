@@ -18,7 +18,7 @@ Queries ScienceBase for the list of all available datatypes. This can be
 coupled with \code{\link{query_sb_datatype}} to query based on the type of data
 }
 \examples{
-\donttest{
+\dontrun{
 #return all datatypes (limit 50 by default)
 sb_datatypes()
 }

@@ -116,6 +116,7 @@ sbtools_HEAD <- function(url, ..., session) {
 
 # helpers -------------
 handle_errors <- function(x, url, method, types) {
+	tryCatch({
 	if(is(x, "list")) {
 		if(x$status == 404) warning("Could not access sciencebase")
 		return(NULL)
@@ -140,7 +141,12 @@ handle_errors <- function(x, url, method, types) {
 	}
 	
 	return(x)
-	
+	}, error = function(e) {
+		
+		message(paste("Error when calling sciencebase,", e))
+		return(NULL)
+		
+	})
 }
 
 #' @importFrom curl curl_version

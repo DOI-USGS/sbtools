@@ -39,7 +39,7 @@ query_sb_datatype = function(datatype, ..., limit=20, session=current_session())
 #' coupled with \code{\link{query_sb_datatype}} to query based on the type of data
 #' 
 #' 
-#' @examples \donttest{
+#' @examples \dontrun{
 #' #return all datatypes (limit 50 by default)
 #' sb_datatypes()
 #' }
