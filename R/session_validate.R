@@ -15,8 +15,7 @@
 #' 
 #' @importFrom methods new
 #' 
-#' @examples
-#' \dontrun{
+#' @examples \dontrun{
 #' session = authenticate_sb('user@@usgs.gov')
 #' 
 #' #return true as underlying RCurl session is valid

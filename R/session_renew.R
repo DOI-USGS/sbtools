@@ -13,8 +13,7 @@
 #'   
 #' @return Returns the session object.
 #'   
-#' @examples
-#' \dontrun{
+#' @examples \dontrun{
 #' # an empty call is sufficient if the session is current, 
 #' # but will break if haven't been logged in before
 #' session_renew()

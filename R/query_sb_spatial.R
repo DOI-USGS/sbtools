@@ -11,8 +11,7 @@
 #' (uses the spatial object's bounding box) or long/lat coordinates defining the bounding box limits. 
 #' 
 #' 
-#' @examples
-#' 
+#' @examples \donttest{
 #' #specify the latitude and longitude points to define the bounding box range. 
 #' # This is simply bottom left and top right points
 #' query_sb_spatial(long=c(-104.4, -95.1), lat=c(37.5, 41.0), limit=3)
@@ -20,7 +19,7 @@
 #' #use a pre-formatted WKT polygon to grab data
 #' query_sb_spatial(bb_wkt="POLYGON((-104.4 41.0,-95.1 41.0,-95.1 37.5,-104.4 37.5,-104.4 41.0))", 
 #' 	                limit=3)
-#' 
+#' }
 #' @export
 #' 
 query_sb_spatial = function(bbox, long, lat, bb_wkt, ..., limit=20, session=current_session()){

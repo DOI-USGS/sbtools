@@ -15,7 +15,7 @@ sbtools_POST <- function(url, body, ..., session){
 	
 	r = POST(url=url, ..., httrUserAgent(), accept_json(), body=body, handle=session, 
 					 timeout = httr::timeout(default_timeout())) 
-	handle_errors(r, url, "POST", supported_types)	
+	r <- handle_errors(r, url, "POST", supported_types)	
 	# if (!strsplit(headers(r)[['content-type']], '[;]')[[1]][1] %in% supported_types)
 	# 	stop('POST failed to ',url,'. check authorization and/or content')
 	
@@ -52,7 +52,7 @@ sbtools_GET <- function(url, ..., session = NULL) {
 																		"error was:\n", e))
 																 return(list(status = 404))
 	})
-	handle_errors(r, url, "GET", supported_types)
+	r <- handle_errors(r, url, "GET", supported_types)
 	session_age_reset()
 	return(r)
 }
@@ -72,8 +72,8 @@ sbtools_GET <- function(url, ..., session = NULL) {
 #' @keywords internal
 sbtools_PUT <- function(url, body, ..., session) {
 	check_session(session)
-	r = PUT(url = url, ..., httrUserAgent(), body = body, handle = session, timeout = httr::timeout(default_timeout()))
-	handle_errors(r, url, "PUT", NULL)
+	r <- PUT(url = url, ..., httrUserAgent(), body = body, handle = session, timeout = httr::timeout(default_timeout()))
+	r <- handle_errors(r, url, "PUT", NULL)
 	session_age_reset()
 	return(r)
 }
@@ -94,7 +94,7 @@ sbtools_DELETE <- function(url, ..., session) {
 	check_session(session)
 	r = DELETE(url = url, ..., httrUserAgent(), accept_json(), 
 						 handle = session, timeout = httr::timeout(default_timeout()))
-	handle_errors(r, url, "DELETE", NULL)
+	r <- handle_errors(r, url, "DELETE", NULL)
 	session_age_reset()
 	return(r)
 }
@@ -116,6 +116,7 @@ sbtools_HEAD <- function(url, ..., session) {
 
 # helpers -------------
 handle_errors <- function(x, url, method, types) {
+	tryCatch({
 	if(is(x, "list")) {
 		if(x$status == 404) warning("Could not access sciencebase")
 		return(NULL)
@@ -123,13 +124,29 @@ handle_errors <- function(x, url, method, types) {
 	
 	if (!is.null(types)) {
 		if (!strsplit(headers(x)[['content-type']], '[;]')[[1]][1] %in% types) {
-			stop(method, ' failed to ', url, '. check authorization and/or content', call. = FALSE)
+			message(method, ' failed to ', url, '. check authorization and/or content', call. = FALSE)
+			return(NULL)
 		}
 	}
 	
 	if ('errors' %in% names(content(x))) {
-		stop(content(x)$errors$message, call. = FALSE)
+		
+		if(length(errors <- content(x)$errors) == 1) {
+			message(errors$message, call. = FALSE)
+		} else {
+			message(paste(sapply(errors, function (x) x$message), collapse = "\n"), call. = FALSE)
+		}
+		
+		return(NULL)
 	}
+	
+	return(x)
+	}, error = function(e) {
+		
+		message(paste("Error when calling sciencebase,", e))
+		return(NULL)
+		
+	})
 }
 
 #' @importFrom curl curl_version

@@ -13,8 +13,7 @@
 #' @import jsonlite
 #' @import httr
 #' 
-#' @examples 
-#' \dontrun{
+#' @examples \dontrun{
 #' authenticate_sb()
 #' 
 #' ex_item = item_create(title='identifier example')

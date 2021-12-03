@@ -15,7 +15,6 @@ Sets the internal URLS used to either the production
 or development (beta) SB server. URLS are stored internally to the package
 }
 \examples{
-
 \donttest{
 set_endpoint('prod')
 

@@ -8,9 +8,7 @@
 #'
 #'@author Luke Winslow
 #'
-#'@examples
-#'
-#'\donttest{
+#'@examples \donttest{
 #'set_endpoint('prod')
 #'
 #'# getting item from production SB servers

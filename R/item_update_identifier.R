@@ -11,9 +11,7 @@
 #' \code{\link{query_item_identifier}} for finding items based on alternative
 #' identifier.
 #'  
-#' @examples
-#'
-#' \dontrun{
+#' @examples \dontrun{
 #'
 #' session = authenticate_sb("user@@usgs.gov")
 #' item_update_identifier("5485fd99e4b02acb4f0c7e81", "scheme", "type", "key", session=session)

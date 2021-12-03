@@ -15,8 +15,7 @@
 #' @description 
 #' Queries ScienceBase for items with timestamps within a certain date/time range.
 #' 
-#' @examples
-#' \dontrun{
+#' @examples \dontrun{
 #' # find items updated today
 #' query_sb_date(Sys.time(), Sys.time())
 #' 

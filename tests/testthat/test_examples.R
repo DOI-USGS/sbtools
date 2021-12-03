@@ -91,16 +91,6 @@ test_that("basic examples work", {
 
 	expect_equal(names(fields), get_f)
 	
-	expect_warning(
-	wfs_data <- item_get_wfs("58c988bce4b0849ce97b4845"),
-	"item_get_wfs is going to be removed in a future version of sbtools")
-	
-	expect_equal(as.character(class(wfs_data)), "SpatialPointsDataFrame")
-	
-	suppressWarnings(wfs_data <- item_get_wfs("58c988bce4b0849ce97b4845", as_sf = TRUE))
-	
-	expect_equal(as.character(class(wfs_data))[1], "sf")
-	
 	qs <- query_sb_spatial(long=c(-104.4, -95.1), lat=c(37.5, 41.0), limit=3)
 	
 	expect_equal(length(qs), 3)
