@@ -40,9 +40,6 @@ item_file_download = function(sb_id, ..., names, destinations,
 
 	#We have two states, missing names and destinations, which means we need a dest_dir
 	if(missing(names) && missing(destinations)){
-		if(missing(dest_dir)){
-			stop('Must have either names & destinations, or dest_dir for all files')
-		}
 
 		#populate names and destinations from files that are on SB
 		flist = item_list_files(sb_id, ..., session=session)
