@@ -18,7 +18,7 @@ item_list_files(sb_id, recursive = FALSE, ..., session = current_session())
 last authenticated session}
 }
 \value{
-A data.frame with columns fname, size, and url. 
+A data.frame with columns fname, size, url, and facet. 
 If item has no attached files, returns a zero row data.frame.
 }
 \description{
@@ -29,7 +29,12 @@ files attached to an item and all children items.
 \examples{
 \dontrun{
 
+#regular files
 item_list_files("4f4e4b24e4b07f02db6aea14")
+
+# files in facets
+item_list_files("5f6a285d82ce38aaa244912e")
+
 # list files recursively
 ## create item
 id <- item_create(user_id(), title="some title")

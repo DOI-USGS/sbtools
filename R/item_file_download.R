@@ -29,7 +29,9 @@
 #' 		destinations=file.path(tempdir(), 'fname.txt'))
 #' }
 #' @export
-item_file_download = function(sb_id, ..., names, destinations, dest_dir, session=current_session(), overwrite_file = FALSE){
+item_file_download = function(sb_id, ..., names, destinations, 
+															dest_dir = getwd(), session=current_session(), 
+															overwrite_file = FALSE){
 	
 	sb_id = as.sbitem(sb_id)
 	if(!session_validate(session)){

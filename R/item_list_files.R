@@ -4,7 +4,7 @@
 #' @param recursive (logical) List files recursively. Default: \code{FALSE}
 #'
 #' @return 
-#' A data.frame with columns fname, size, and url. 
+#' A data.frame with columns fname, size, url, and facet. 
 #' If item has no attached files, returns a zero row data.frame.
 #'
 #' @description 
@@ -15,7 +15,12 @@
 #' @export
 #' @examples \dontrun{
 #' 
+#' #regular files
 #' item_list_files("4f4e4b24e4b07f02db6aea14")
+#' 
+#' # files in facets
+#' item_list_files("5f6a285d82ce38aaa244912e")
+#' 
 #' # list files recursively
 #' ## create item
 #' id <- item_create(user_id(), title="some title")
@@ -70,17 +75,44 @@ item_list_files = function(sb_id, recursive = FALSE, ..., session=current_sessio
 		files <- item$files
 	}
 	
-	out <- data.frame(stringsAsFactors = FALSE)
+	files <- c(files, get_facet_files(item))
+	
+	lf <- length(files)
+	
+	out <- data.frame(fname = rep("", lf),
+										size = rep(NA_integer_, lf),
+										url = rep("", lf),
+										facet = rep("", lf))
 	
 	if (length(files) == 0) {
 		return(out)
 	}
 	
-	for (i in 1:length(files)) {
+	for (i in 1:lf) {
 		out[i,'fname'] = files[[i]]$name
 		out[i,'size'] = files[[i]]$size
 		out[i,'url'] = files[[i]]$url
+		if(!is.null(f <- files[[i]]$facet_name))
+			out[i, "facet"] = f
 	}
 	
 	return(out)
 }
+
+get_facet_files <- function(item) {
+	
+	unlist(lapply(item$facets, function(x) {
+		
+		lapply(x$files, 
+					 function(y, n) {
+					 	
+					 	list(name = y$name,
+					 			 size = y$size,
+					 			 url = y$downloadUri,
+					 			 facet_name = x$name)
+					 	
+					 }, n = x$name)
+		
+	}), recursive = FALSE)
+}
+
