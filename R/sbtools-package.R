@@ -16,7 +16,7 @@
 #' information can be requested by \code{\link{item_get}} including item parents 
 #' \code{\link{item_get_parent}} and children \code{\link{item_list_children}}.
 #' Data and attached files can be accessed for all available items through provided
-#' functionality (e.g., \code{\link{item_get_wfs}} and \code{\link{item_file_download}}). 
+#' functionality (e.g., \code{\link{item_file_download}}). 
 #' 
 #' @section Authentication:
 #' 

@@ -20,7 +20,6 @@ Imports:
     jsonlite,
     curl,
     httr (>= 1.0.0),
-    stringr,
     methods
 Suggests:
     testthat,

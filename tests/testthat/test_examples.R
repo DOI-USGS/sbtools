@@ -32,7 +32,9 @@ test_that("basic examples work", {
 	
 	expect_equal(length(w), 3)
 	
-	q <- query_sb_date(Sys.time(), Sys.time(), limit = 1)
+	q <- query_sb_date(start = as.POSIXct("2020-01-01"), 
+										 end = as.POSIXct("2021-01-01"), 
+										 limit = 1)
 		
 	expect_equal(length(q), 1)
 	
