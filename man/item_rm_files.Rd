@@ -9,7 +9,8 @@ item_rm_files(sb_id, files, ..., session = current_session())
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
 
-\item{files}{A character vector of file names to remove. If not supplied, defaults to removing all attached files.}
+\item{files}{A character vector of file names to remove. 
+If not supplied, defaults to removing all attached files.}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
 \code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
@@ -22,6 +23,10 @@ An updated object of class \code{sbitem}
 }
 \description{
 Removes existing files associated with an item.
+
+NOTE: This function will not alter facets which can also
+contain facets. To manipulate facets, the facet element of
+a scienbase item must be altere an uptated with \code{\link{item_update}}.
 
 This function is the key way to remove files attached to SB items.
 }

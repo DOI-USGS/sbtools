@@ -1,8 +1,15 @@
 #' @title Remove files associated with an item
 #' 
 #' @template manipulate_item
-#' @param files A character vector of file names to remove. If not supplied, defaults to removing all attached files.
+#' @param files A character vector of file names to remove. 
+#' If not supplied, defaults to removing all attached files.
+#' 
 #' @description Removes existing files associated with an item.
+#' 
+#' NOTE: This function will not alter facets which can also
+#' contain facets. To manipulate facets, the facet element of
+#' a scienbase item must be altere an uptated with \code{\link{item_update}}.
+#' 
 #' @return An updated object of class \code{sbitem}
 #' @description 
 #' This function is the key way to remove files attached to SB items. 

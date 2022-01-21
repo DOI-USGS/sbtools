@@ -7,6 +7,10 @@
 #' @param files A string vector of paths to files to be uploaded
 #' @param scrape_files logical should the files be scraped for metadata? 
 #' If TRUE, sciencebase will attempt to create extensions based on the files.
+#' 
+#' For example, for shapefiles, this will result in a shapefile extension 
+#' to be returned as a facet of the sciencebase item.
+#' 
 #' @export
 #' @return An object of class \code{sbitem}
 #' @examples \dontrun{

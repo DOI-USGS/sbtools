@@ -21,7 +21,10 @@ item_append_files(
 \code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
 
 \item{scrape_files}{logical should the files be scraped for metadata? 
-If TRUE, sciencebase will attempt to create extensions based on the files.}
+If TRUE, sciencebase will attempt to create extensions based on the files.
+
+For example, for shapefiles, this will result in a shapefile extension 
+to be returned as a facet of the sciencebase item.}
 
 \item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
 last authenticated session}

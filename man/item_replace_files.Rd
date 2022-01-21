@@ -27,4 +27,8 @@ replaces existing files associated with an item with a new one.
   (Currently does not support multi-file uploads.) This function will not
   append an existing collection of files. If that is desired, use
   \code{\link{item_append_files}}
+  
+NOTE: This function will not replace files stored in facets. Until and if 
+facet support is added, direct alteration of the science base item object 
+is required to manipulate facets.
 }
