@@ -26,7 +26,7 @@ Removes existing files associated with an item.
 
 NOTE: This function will not alter facets which can also
 contain facets. To manipulate facets, the facet element of
-a scienbase item must be altere an uptated with \code{\link{item_update}}.
+a sciencebase item must be altered and updated with \code{\link{item_update}}.
 
 This function is the key way to remove files attached to SB items.
 }
