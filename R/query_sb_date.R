@@ -33,7 +33,7 @@ query_sb_date = function(start=as.POSIXct('1970-01-01'), end=Sys.time(), date_ty
 	}
 	
 	date_range = paste0('{"dateType":"', date_type, '","choice":"range","start":"', format(start, '%Y-%m-%d'),
-											'","end":"', format(start, '%Y-%m-%d'), '"}')
+											'","end":"', format(end, '%Y-%m-%d'), '"}')
 	
 	query_sb(list(dateRange = date_range), ..., limit=limit, session=session)
 	

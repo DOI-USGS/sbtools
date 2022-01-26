@@ -9,7 +9,7 @@ item_file_download(
   ...,
   names,
   destinations,
-  dest_dir,
+  dest_dir = getwd(),
   session = current_session(),
   overwrite_file = FALSE
 )

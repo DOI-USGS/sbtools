@@ -1,4 +1,17 @@
-# Version 1.1.15 (2020-06-07)
+# Version 1.1.18 (2022-01-25)
+
+- Added ability to pull jossoSessionId from `session_details()`, This is useful for pulling files directly from sciencebase via R functions that do not use the sbtools session for authentication. See `session_details()` description for more.
+- Removed deprecated `item_get_wfs()` function.
+- Renamed `master` branch to `main`. 
+- Added `facets` to locations that sciencebase files can be found. See `item_list_files()` description for more info. Note that the response from
+`item_list_files()` has changed. A "facet" attribute which lists the name
+of the facet the file came from is included. 
+
+# Version 1.1.16/1.1.17 (2021-07-01)
+
+Versions 1.1.16 and 1.1.17 were minor changes for CRAN.
+
+# Version 1.1.15 (2021-06-07)
 
 * Added `scrape_files` parameter to `item_upload_files()` and `item_append_files()`
 * Fixed CRAN check issues with ScienceBase availability. 10 second timeout was added for all web service calls.

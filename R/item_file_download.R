@@ -29,7 +29,9 @@
 #' 		destinations=file.path(tempdir(), 'fname.txt'))
 #' }
 #' @export
-item_file_download = function(sb_id, ..., names, destinations, dest_dir, session=current_session(), overwrite_file = FALSE){
+item_file_download = function(sb_id, ..., names, destinations, 
+															dest_dir = getwd(), session=current_session(), 
+															overwrite_file = FALSE){
 	
 	sb_id = as.sbitem(sb_id)
 	if(!session_validate(session)){
@@ -38,9 +40,6 @@ item_file_download = function(sb_id, ..., names, destinations, dest_dir, session
 
 	#We have two states, missing names and destinations, which means we need a dest_dir
 	if(missing(names) && missing(destinations)){
-		if(missing(dest_dir)){
-			stop('Must have either names & destinations, or dest_dir for all files')
-		}
 
 		#populate names and destinations from files that are on SB
 		flist = item_list_files(sb_id, ..., session=session)
