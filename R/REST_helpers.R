@@ -92,6 +92,11 @@ sbtools_PUT <- function(url, body, ..., session) {
 #' @keywords internal
 sbtools_DELETE <- function(url, ..., session) {
 	check_session(session)
+	
+	if(grepl(user_id(), url)) {
+		stop("Deleting a user id is not supported.") #notest
+	}
+	
 	r = DELETE(url = url, ..., httrUserAgent(), accept_json(), 
 						 handle = session, timeout = httr::timeout(default_timeout()))
 	r <- handle_errors(r, url, "DELETE", NULL)
