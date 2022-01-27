@@ -123,7 +123,12 @@ sbtools_HEAD <- function(url, ..., session) {
 handle_errors <- function(x, url, method, types) {
 	tryCatch({
 	if(is(x, "list")) {
-		if(x$status == 404) warning("Could not access sciencebase")
+		if(x$status_code == 404) warning("Could not access sciencebase")
+		return(NULL)
+	}
+		
+	if(x$status_code == 403) {
+		warning("Sciencebase returned '403 Forbidden'")
 		return(NULL)
 	}
 	

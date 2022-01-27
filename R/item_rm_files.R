@@ -46,6 +46,10 @@ item_rm_files <- function(sb_id, files,..., session=current_session()){
 		#files_to_keep = lapply(files_to_keep, function(x){x[c('name', 'title', 'contentType')]})
 	}
 	
-	as.sbitem(item_update(item$id, info = list(files = files_to_keep), ..., session = session))
+	if(length(files_to_keep)) {
+		as.sbitem(item_update(item$id, info = list(files = files_to_keep), ..., session = session))
+	} else {
+		item
+	}	
 	
 }
