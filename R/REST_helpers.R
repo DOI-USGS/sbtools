@@ -93,7 +93,10 @@ sbtools_PUT <- function(url, body, ..., session) {
 sbtools_DELETE <- function(url, ..., session) {
 	check_session(session)
 	
-	if(grepl(user_id(), url)) {
+	uid <- tryCatch(user_id(session = session), 
+									error = function(e) "0")
+	
+	if(uid != 0 && grepl(uid, url)) {
 		stop("Deleting a user id is not supported.") #notest
 	}
 	
@@ -123,7 +126,7 @@ sbtools_HEAD <- function(url, ..., session) {
 handle_errors <- function(x, url, method, types) {
 	tryCatch({
 	if(is(x, "list")) {
-		if(x$status_code == 404) warning("Could not access sciencebase")
+		if(x$status == 404) warning("Could not access sciencebase")
 		return(NULL)
 	}
 		

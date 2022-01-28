@@ -45,11 +45,11 @@ item_rm_files <- function(sb_id, files,..., session=current_session()){
 		files_to_keep = item$files[!fnames %in% basename(files)]
 		#files_to_keep = lapply(files_to_keep, function(x){x[c('name', 'title', 'contentType')]})
 	}
+
+	if(length(files_to_keep) == 0 && is.list(files_to_keep)) {
+		return(item)
+	}
 	
-	if(length(files_to_keep)) {
-		as.sbitem(item_update(item$id, info = list(files = files_to_keep), ..., session = session))
-	} else {
-		item
-	}	
-	
+	as.sbitem(item_update(item$id, info = list(files = files_to_keep), ..., session = session))
+
 }

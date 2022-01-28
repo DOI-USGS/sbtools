@@ -2,7 +2,7 @@ context("basics")
 
 test_that("basic examples work", {
 	skip_on_cran()
-	
+
 	ping <- sb_ping()
 	
 	expect_true(ping)
