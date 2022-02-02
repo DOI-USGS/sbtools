@@ -68,7 +68,7 @@ item_file_download = function(sb_id, ..., names, destinations,
 
 	flist = merge(flist, data.frame(fname=names, dest=destinations, stringsAsFactors=FALSE))
 
-	for(i in 1:nrow(flist)) {
+	for(i in seq_along(flist)) {
 		tryCatch({
 			GET(url=flist[i,]$url, ..., 
 					write_disk(flist[i,]$dest, overwrite = overwrite_file), 
