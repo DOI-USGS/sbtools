@@ -92,6 +92,14 @@ sbtools_PUT <- function(url, body, ..., session) {
 #' @keywords internal
 sbtools_DELETE <- function(url, ..., session) {
 	check_session(session)
+	
+	uid <- tryCatch(user_id(session = session), 
+									error = function(e) "0")
+	
+	if(uid != 0 && grepl(uid, url)) {
+		stop("Deleting a user id is not supported.") #notest
+	}
+	
 	r = DELETE(url = url, ..., httrUserAgent(), accept_json(), 
 						 handle = session, timeout = httr::timeout(default_timeout()))
 	r <- handle_errors(r, url, "DELETE", NULL)
@@ -119,6 +127,11 @@ handle_errors <- function(x, url, method, types) {
 	tryCatch({
 	if(is(x, "list")) {
 		if(x$status == 404) warning("Could not access sciencebase")
+		return(NULL)
+	}
+		
+	if(x$status_code == 403) {
+		warning("Sciencebase returned '403 Forbidden'")
 		return(NULL)
 	}
 	

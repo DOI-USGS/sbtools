@@ -87,8 +87,11 @@ item_append_files = function(sb_id, files, ..., scrape_files = TRUE, session=cur
 									 body = multi_file_body(files), 
 									 session = session)
   
-	item <- as.sbitem(content(r))
-	
+	if(!is.null(r)) {
+		item <- as.sbitem(content(r))
+	} else {
+		return(NULL)
+	}
 	return(check_upload(item, files))
 	
 }

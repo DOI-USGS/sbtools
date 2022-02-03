@@ -10,6 +10,8 @@
 #' user_id()
 #' }
 user_id <- function(..., session = current_session()) {
+	if(!is.null(pkg.env$uid)) return(pkg.env$uid)
+	
 	if (is.null(session)) stop("Please authenticate first. See ?authenticate_sb", call. = FALSE)
 	args <- list(s = "Search", 
 							 parentId = "4f4e4772e4b07f02db47e231", 
@@ -17,5 +19,10 @@ user_id <- function(..., session = current_session()) {
 							 format = "json")
 	res <- content(query_items(args, ...))
 	url <- res$items[[1]]$link$url
-	basename(url)
+
+	out <- basename(url)
+	
+	pkg.env$uid <- out
+	
+	out
 }

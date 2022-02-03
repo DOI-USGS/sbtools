@@ -105,8 +105,18 @@ test_that("Test that surgical item rm", {
 	
 	item_rm(item)
 	
+	f <- file.path(tempdir(check = TRUE),
+								 "metadata6644450227216673613.xml")
+	cat("1234", file = f)
+	expect_warning(item_replace_files("4f4e4b24e4b07f02db6aea14", 
+																	files = f),
+								 "Sciencebase returned '403 Forbidden'")
+	
 	expect_silent(session_logout())
 	
+	expect_error(item_replace_files("4f4e4b24e4b07f02db6aea14", 
+																		files = f),
+							 "session is not authorized")
 })
 
 

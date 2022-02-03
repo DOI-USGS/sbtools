@@ -2,7 +2,7 @@ context("basics")
 
 test_that("basic examples work", {
 	skip_on_cran()
-	
+
 	ping <- sb_ping()
 	
 	expect_true(ping)
@@ -48,8 +48,8 @@ test_that("basic examples work", {
 	
 	expect_equal(basename(f), file_name)
 	
-	expect_error(item_file_download(item, dest_dir = tempdir(), overwrite_file = FALSE),
-							 "Path exists and overwrite is FALSE")
+	expect_warning(item_file_download(item, dest_dir = tempdir(), overwrite_file = FALSE),
+								 "metadata6644450227216673613.xml exists, and overwrite is false. Skipping.")
 
 	f <- item_file_download(item, names = file_name, 
 													destinations = file.path(tempdir(), file_name), 
@@ -67,7 +67,7 @@ test_that("basic examples work", {
 																	overwrite_file = TRUE),
 							 "Must have either names & destinations, or dest_dir for all files")
 	
-	set_endpoint('dev')
+	set_endpoint("dev")
 	
 	expect_equal(sbtools:::pkg.env$domain, "https://beta.sciencebase.gov/")
 	
