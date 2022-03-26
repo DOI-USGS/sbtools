@@ -71,10 +71,20 @@ test_that("basic examples work", {
 	
 	expect_equal(sbtools:::pkg.env$domain, "https://beta.sciencebase.gov/")
 	
+	expect_equal(sbtools:::pkg.env$graphql_url, 
+							 "https://api-beta.staging.sciencebase.gov/graphql")
+	
 	set_endpoint()
 	
-	expect_equal(sbtools:::pkg.env$domain, "https://www.sciencebase.gov/")
+	expect_equal(sbtools:::pkg.env$domain, 
+							 "https://www.sciencebase.gov/")
 
+	expect_equal(sbtools:::pkg.env$graphql_url, 
+							 "https://api.sciencebase.gov/graphql")
+	
+	expect_equal(sbtools:::pkg.env$auth_server_url,
+							 "https://www.sciencebase.gov/auth")
+	
 	types <- sb_datatypes()
 	
 	expect_equal(class(types), "character")
