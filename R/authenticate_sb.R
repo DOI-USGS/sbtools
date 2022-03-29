@@ -54,12 +54,16 @@ authenticate_sb = function(username, password){
 								), encode = "form")
 	
 	if(!token$status_code == 200) {
-		stop('Unable to authenticate to SB cloud. Check username and password')
+		
+		warning('Unable to authenticate to SB cloud. Standard login is available.')
+		
+	} else {
+	
+		pkg.env$keycloak_token <- jsonlite::fromJSON(rawToChar(token$content))
+		
+		pkg.env$keycloak_expire <- Sys.time() + pkg.env$keycloak_token$expires_in
+		
 	}
-	
-	pkg.env$keycloak_token <- jsonlite::fromJSON(rawToChar(token$content))
-	
-	pkg.env$keycloak_expire <- Sys.time() + pkg.env$keycloak_token$expires_in
 	
 	attributes(h) <- c(attributes(h), list(birthdate=Sys.time()))
 	pkg.env$session  = h

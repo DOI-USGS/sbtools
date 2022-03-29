@@ -120,3 +120,125 @@ multi_file_body <- function(files){
 	names(body) = rep('file', length(body))
 	return(body)
 }
+
+#' @title Upload File to Item Cloud Storage
+#' @description Adds a file to an item in cloud storage
+#'
+#' @template manipulate_item
+#' @inheritParams item_upload_create
+#'
+#' @return An object of class \code{sbitem} NOTE: cloud processing
+#' can take some time so the added file may not appear immediately.
+#'
+#' @import httr
+#'
+#' @examples \dontrun{
+#' res <- item_create(user_id(), "testing 123")
+#' cat("foo bar", file = "foobar.txt")
+#' item_append_files(res$id, "foobar.txt")
+#' }
+#' @export
+item_upload_cloud <- function(sb_id, files, ..., session=current_session()) {
+	item <- as.sbitem(sb_id)
+	
+	for(file in files) {
+		mimetype <- mime::guess_type(file, unknown = 'application/octet-stream')
+		
+		cloud_upload(file, mimetype, item$id, 1024)
+	}
+	
+}
+
+cloud_upload <- function(file, mimetype, itemid, chunk_size_bytes = pkg.env$chunk_size_bytes,
+												 session = current_session()) {
+	
+	f_size_bytes <- file.size(file)
+	f_chunks <- as.integer(f_size_bytes / chunk_size_bytes) + 1
+	
+	f_path <- paste(itemid, basename(file), sep = "/")
+	
+	gql <- httr::handle(url = pkg.env$graphql_url)
+	
+	session_id = create_multipart_upload_session(
+		f_path, mimetype, 
+		session_details(session = session)$username, gql)
+		
+	refresh_token_before_expired()
+	
+	f <- file(description = file, open = "rb")
+	
+	on.exit(close(f), add = TRUE)
+	
+	part_number <- 0
+	parts_header <- list()
+	
+	while ( length(chunk <- readBin(con = f, what = "raw", 
+																	n = chunk_size_bytes)) > 0 ) {
+		part_number <- part_number + 1
+		
+		refresh_token_before_expired()
+		
+		presignedUrl <- get_presigned_url_for_chunk(f_path, session_id, part_number, gql)
+		
+		put_chunk <- httr::PUT(presignedUrl, data = chunk)
+		
+		if(!put_chunk$status_code == 200) stop(paste("Error uploading file. \n",
+																					 "status:", put_chunk$status_code,
+																					 "content:", rawToChar(put_chunk$content)))
+		parts_header[[part_number]] <- list(ETag = put_chunk$headers$ETag,
+																				PartNumber = part_number)
+		
+	}
+	
+	
+	complete_multipart_upload(f_path, session_id, parts_header, gql)
+	
+}
+
+get_gql_header <- function() {
+	httr::add_headers(
+		.headers = c(`content-type` = "application/json", 
+								 accept = "application/json", 
+								 authorization = paste("Bearer", 
+								 											pkg.env$keycloak_token$access_token)))
+}
+
+run_gql_query <- function(q, gql) {
+	out <- httr::POST(pkg.env$graphql_url, get_gql_header(), 
+										body = jsonlite::toJSON(list(query = q), auto_unbox = TRUE),  
+										handle = gql)
+	
+	if(out$status_code == 200) {
+		jsonlite::fromJSON(rawToChar(out$content))
+	} else {
+		stop(paste("Error making multipart session.\n code:", out$status_code,
+							 "\n content:", rawToChar(out$content)))		
+	}
+	
+}
+
+#GraphQL Queries for interaction with ScienceBase Manager
+create_multipart_upload_session <- function(s3_filepath, content_type, username, gql) {
+
+	run_gql_query(sprintf(
+		'query { createMultipartUploadSession(object: "%s" contentType: "%s" username: "%s") }', 
+		s3_filepath, content_type, username), gql)$data$createMultipartUploadSession
+
+}
+
+get_presigned_url_for_chunk <- function(s3_filepath, upload_id, part_number, gql) {
+
+	run_gql_query(sprintf(
+		'query { getPreSignedUrlForChunk(object: "%s", upload_id: "%s", part_number: "%s") }',
+		s3_filepath, upload_id, part_number), gql)$data$getPreSignedUrlForChunk
+	
+}
+
+complete_multipart_upload <- function(item_str, upload_id, etag_payload, gql) {
+	
+	etag_payload_array = gsub('"', "", etag_payload)
+	
+	run_gql_query(sprintf(
+		'query { completeMultiPartUpload(object: "%s" upload_id: "%s" parts_eTags: %s) }',
+		item_str, upload_id, etag_payload_array), gql)
+}
