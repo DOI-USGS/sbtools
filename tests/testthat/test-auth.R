@@ -51,6 +51,9 @@ test_that("item creation, identifiers, and file upload works", {
 	expect_equal(ident[[1]]$scheme, "test_scheme")
 	expect_equal(ident[[1]]$key, rand_key)
 	
+	
+	item_upload_cloud(item$id, system.file("examples/data.csv", package="sbtools"))
+	
 	#remove the test item when done
 	item_rm(item)
 	
@@ -118,6 +121,5 @@ test_that("Test that surgical item rm", {
 																		files = f),
 							 "session is not authorized")
 })
-
 
 

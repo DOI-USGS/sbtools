@@ -55,3 +55,26 @@ session_renew = function(password, ..., username, session=current_session()){
 		invisible(authenticate_sb(sb_username, password))
 	}
 }
+
+
+refresh_token_before_expired <- function(refresh_amount_seconds = 600) {
+	
+	current_time <- Sys.time() + refresh_amount_seconds
+	
+	if(pkg.env$keycloak_expire - current_time < 0) {
+		token_refresh()
+		return(invisible(TRUE))
+	}
+	return(invisible(FALSE))
+}
+
+token_refresh <- function() {
+	
+	data = list(
+		client_id = pkg.env$keycloak_client_id,
+		grant_type = "refresh_token",
+		refresh_token = get_refresh_token())
+	
+	token_resp = httr::POST(pkg.env$token_url, data=data)
+	
+}

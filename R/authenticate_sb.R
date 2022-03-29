@@ -43,6 +43,24 @@ authenticate_sb = function(username, password){
 		stop('Unable to authenticate to SB. Check username and password')
 	}
 	
+	token_url <- pkg.env$token_url
+	
+	token <- POST(token_url, 
+								body = list(
+									client_id = pkg.env$keycloak_client_id,
+									grant_type = "password",
+									username = username,
+									password = password
+								), encode = "form")
+	
+	if(!token$status_code == 200) {
+		stop('Unable to authenticate to SB cloud. Check username and password')
+	}
+	
+	pkg.env$keycloak_token <- jsonlite::fromJSON(rawToChar(token$content))
+	
+	pkg.env$keycloak_expire <- Sys.time() + pkg.env$keycloak_token$expires_in
+	
 	attributes(h) <- c(attributes(h), list(birthdate=Sys.time()))
 	pkg.env$session  = h
 	pkg.env$username = username
@@ -65,4 +83,25 @@ readPassword <- function(prompt) {
 	}
 	return (pass)
 }
+
 globalVariables('.rs.askForPassword')
+
+get_refresh_token <- function() {
+	token <- pkg.env$keycloak_token$refresh_token
+	
+	if(is.null(token)) {
+		stop("no token found, must call athenticate_sb()")
+	}
+	
+	token
+}
+
+get_access_token <- function() {
+	token <- pkg.env$keycloak_token$access_token
+	
+	if(is.null(token)) {
+		stop("no token found, must call athenticate_sb()")
+	}
+	
+	token
+}

@@ -20,7 +20,8 @@ Imports:
     jsonlite,
     curl,
     httr (>= 1.0.0),
-    methods
+    methods,
+    mime
 Suggests:
     testthat,
     xml2,
