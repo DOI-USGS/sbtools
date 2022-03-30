@@ -59,9 +59,7 @@ authenticate_sb = function(username, password){
 		
 	} else {
 	
-		pkg.env$keycloak_token <- jsonlite::fromJSON(rawToChar(token$content))
-		
-		pkg.env$keycloak_expire <- Sys.time() + pkg.env$keycloak_token$expires_in
+		set_keycloak_env(token)
 		
 	}
 	
@@ -70,6 +68,12 @@ authenticate_sb = function(username, password){
 	pkg.env$username = username
 	
 	invisible(h)
+}
+
+set_keycloak_env <- function(token_resp) {
+	pkg.env$keycloak_token <- jsonlite::fromJSON(rawToChar(token_resp$content))
+	
+	pkg.env$keycloak_expire <- Sys.time() + pkg.env$keycloak_token$expires_in
 }
 
 #' Read in a password from the user

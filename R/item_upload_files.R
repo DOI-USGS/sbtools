@@ -126,11 +126,15 @@ multi_file_body <- function(files){
 #'
 #' @template manipulate_item
 #' @inheritParams item_upload_create
+#' @param status logical display upload status?
 #'
-#' @return An object of class \code{sbitem} NOTE: cloud processing
-#' can take some time so the added file may not appear immediately.
+#' @return Success message invisibly. NOTE: cloud processing
+#' can take some time so the added file may not appear immediately. 
+#' For this reason, a sciencebase item json is NOT returned as is
+#' done with other similar functions.
 #'
 #' @import httr
+#' @importFrom mime guess_type
 #'
 #' @examples \dontrun{
 #' res <- item_create(user_id(), "testing 123")
@@ -138,19 +142,25 @@ multi_file_body <- function(files){
 #' item_append_files(res$id, "foobar.txt")
 #' }
 #' @export
-item_upload_cloud <- function(sb_id, files, ..., session=current_session()) {
-	item <- as.sbitem(sb_id)
+item_upload_cloud <- function(sb_id, files, status = TRUE, session=current_session()) {
+
+	try(sb_id <- sb_id$id, silent = TRUE)
 	
 	for(file in files) {
-		mimetype <- mime::guess_type(file, unknown = 'application/octet-stream')
+		if(status)
+			message(paste("Uploading:", file))
 		
-		cloud_upload(file, mimetype, item$id, 1024)
+		mimetype <- guess_type(file, unknown = 'application/octet-stream')
+		
+		cloud_upload(file, mimetype, sb_id)
 	}
+	
+	return(invisible("Success"))
 	
 }
 
 cloud_upload <- function(file, mimetype, itemid, chunk_size_bytes = pkg.env$chunk_size_bytes,
-												 session = current_session()) {
+												 session = current_session(), status = TRUE) {
 	
 	f_size_bytes <- file.size(file)
 	f_chunks <- as.integer(f_size_bytes / chunk_size_bytes) + 1
@@ -172,6 +182,9 @@ cloud_upload <- function(file, mimetype, itemid, chunk_size_bytes = pkg.env$chun
 	part_number <- 0
 	parts_header <- list()
 	
+	if(status)
+		pb <- txtProgressBar(0, f_chunks, 1, "-", width = 50, style = 3)
+	
 	while ( length(chunk <- readBin(con = f, what = "raw", 
 																	n = chunk_size_bytes)) > 0 ) {
 		part_number <- part_number + 1
@@ -187,11 +200,14 @@ cloud_upload <- function(file, mimetype, itemid, chunk_size_bytes = pkg.env$chun
 																					 "content:", rawToChar(put_chunk$content)))
 		parts_header[[part_number]] <- list(ETag = put_chunk$headers$ETag,
 																				PartNumber = part_number)
-		
+		if(status)
+			setTxtProgressBar(pb, part_number)
 	}
 	
+	if(status)
+		close(pb)
 	
-	complete_multipart_upload(f_path, session_id, parts_header, gql)
+	return(invisible(complete_multipart_upload(f_path, session_id, parts_header, gql)))
 	
 }
 
@@ -200,7 +216,7 @@ get_gql_header <- function() {
 		.headers = c(`content-type` = "application/json", 
 								 accept = "application/json", 
 								 authorization = paste("Bearer", 
-								 											pkg.env$keycloak_token$access_token)))
+								 											get_access_token())))
 }
 
 run_gql_query <- function(q, gql) {
@@ -236,9 +252,13 @@ get_presigned_url_for_chunk <- function(s3_filepath, upload_id, part_number, gql
 
 complete_multipart_upload <- function(item_str, upload_id, etag_payload, gql) {
 	
-	etag_payload_array = gsub('"', "", etag_payload)
+	eta <- sapply(etag_payload, function(x) {
+		sprintf('{ETag: "%s", PartNumber: %i}', gsub('"', "", x$ETag), x$PartNumber)
+	})
+	
+	eta <- paste0("[", paste(eta, collapse = ","), "]")
 	
 	run_gql_query(sprintf(
 		'query { completeMultiPartUpload(object: "%s" upload_id: "%s" parts_eTags: %s) }',
-		item_str, upload_id, etag_payload_array), gql)
+		item_str, upload_id, eta), gql)
 }
