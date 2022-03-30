@@ -135,6 +135,7 @@ multi_file_body <- function(files){
 #'
 #' @import httr
 #' @importFrom mime guess_type
+#' @importFrom utils setTxtProgressBar txtProgressBar
 #'
 #' @examples \dontrun{
 #' res <- item_create(user_id(), "testing 123")

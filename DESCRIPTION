@@ -21,7 +21,8 @@ Imports:
     curl,
     httr (>= 1.0.0),
     methods,
-    mime
+    mime,
+    utils
 Suggests:
     testthat,
     xml2,
