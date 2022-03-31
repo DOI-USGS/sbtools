@@ -47,6 +47,6 @@ set_endpoint = function(endpoint=c("production", "development")){
 	pkg.env$token_url = paste0(pkg.env$domain, 
 														 "auth/realms/ScienceBase/protocol/openid-connect/token")
   pkg.env$keycloak_client_id = "sciencebasepy"
-  pkg.env$chunk_size_bytes = 1024^2 #bytes
+  pkg.env$chunk_size_bytes = 104857600  # 104857600 == 100MB
 	
 }
