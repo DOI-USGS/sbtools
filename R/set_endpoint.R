@@ -27,9 +27,11 @@ set_endpoint = function(endpoint=c("production", "development")){
 	
 	if(endpoint=="production"){
 		pkg.env$domain = "https://www.sciencebase.gov/"
+		pkg.env$graphql_url = "https://api.sciencebase.gov/graphql"
 		
 	}else if(endpoint=="development"){
 		pkg.env$domain   = "https://beta.sciencebase.gov/"
+		pkg.env$graphql_url = "https://api-beta.staging.sciencebase.gov/graphql"
 	}
 	
 	pkg.env$url_base = paste0(pkg.env$domain, "catalog/")
@@ -41,6 +43,10 @@ set_endpoint = function(endpoint=c("production", "development")){
 	pkg.env$url_upload_update = paste0(pkg.env$url_base, 'file/uploadAndUpdateItem/')
 	pkg.env$url_download = paste0(pkg.env$url_base, 'file/get/')
 	pkg.env$url_login = 'https://my.usgs.gov/josso/signon/usernamePasswordLogin.do'
-	
+	pkg.env$auth_server_url = paste0(pkg.env$domain, "auth")
+	pkg.env$token_url = paste0(pkg.env$domain, 
+														 "auth/realms/ScienceBase/protocol/openid-connect/token")
+  pkg.env$keycloak_client_id = "sciencebasepy"
+  pkg.env$chunk_size_bytes = 104857600  # 104857600 == 100MB
 	
 }
