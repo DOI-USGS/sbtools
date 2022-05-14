@@ -110,9 +110,9 @@ item_list_files = function(sb_id, recursive = FALSE, ..., session=current_sessio
 			cloud[[i]]$cuid <- files[[i]]$cuid
 			cloud[[i]]$key <- files[[i]]$key
 			cloud[[i]]$title <- ifelse(!is.null(files[[i]]$title), 
-																				files[[i]]$title, cloud[[i]]$title)
-			cloud[[i]]$usedForPreview <- ifelse(!is.null(files[[i]]$usedForPreview), 
-																								 files[[i]]$usedForPreview, cloud[[i]]$title)
+																				files[[i]]$title, "")
+			cloud[[i]]$useForPreview <- ifelse(!is.null(files[[i]]$useForPreview), 
+																								 files[[i]]$useForPreview, FALSE)
 		}
 	}
 	
