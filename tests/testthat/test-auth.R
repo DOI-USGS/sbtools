@@ -106,6 +106,14 @@ test_that("item creation, identifiers, and file upload works", {
 	
 	expect_true(attr(files, "cloud")[[1]]$cuid != "")
 	
+	unlink(dl_files)
+	
+	mess <- capture_messages(dl_files <- item_file_download(item, dest_dir = dir_name))
+	
+	expect_equal(length(mess), 2)
+	
+	expect_true(file.exists(file.path(dir_name, "data.csv")))
+	
 	#remove the test item when done
 	item_rm(item)
 	

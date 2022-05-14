@@ -63,9 +63,25 @@ item_file_download = function(sb_id, ..., names, destinations,
 
 	for(i in seq_len(nrow(flist))) {
 		tryCatch({
+			
+			if(flist[i, ]$cuid != "") {
+				
+				if(!exists("gql")) gql <- httr::handle(url = pkg.env$graphql_url)
+				
+				message("retrieving S3 URL")
+				
+				flist[i, ]$url <- get_cloud_download_url(flist[i, c("cuid", "key", "title", "useForPreview")], 
+																								 gql)[[1]]$getS3DownloadUrl$downloadUri[1]
+				
+			}
+			
+		  message(paste("downloading file", flist[i,]$dest))
+			
 			GET(url=flist[i,]$url, ..., 
 					write_disk(flist[i,]$dest, overwrite = overwrite_file), 
-					handle=session, timeout = httr::timeout(default_timeout()))
+					handle=session, timeout = httr::timeout(default_timeout()),
+					httr::progress())
+			
 		}, error = function(e) {
 			if(file.exists(flist[i,]$dest)) {
 				warning(paste(basename(flist[i,]$dest), "exists, and overwrite is false. Skipping."))

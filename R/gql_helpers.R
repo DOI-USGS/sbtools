@@ -6,6 +6,11 @@ get_gql_header <- function() {
 								 											get_access_token())))
 }
 
+#' @noRd
+#' @param q character gql query to embed into json body
+#' @param gql handle to pass to POST
+#' @param json character json to pass -- shoul include gql query and additional content. 
+#' json is optional - it will default to just the query.
 run_gql_query <- function(q, gql, json = jsonlite::toJSON(list(query = q), auto_unbox = TRUE)) {
 	out <- httr::POST(pkg.env$graphql_url, get_gql_header(), 
 										body = json,  
@@ -50,16 +55,16 @@ complete_multipart_upload <- function(item_str, upload_id, etag_payload, gql) {
 		item_str, upload_id, eta), gql)
 }
 
-bulk_cloud_download <- function(cr, gql) {
+get_cloud_download_url <- function(cr, gql) {
 	
 	query <- "query getS3DownloadUrl($input: SaveFileInputs){ getS3DownloadUrl(input: $input){ downloadUri }}"
 	
 	variables <- sprintf('{"input": {"selectedRows": {"cuid": "%s", "key": "%s", "title": "%s", "useForPreview": "%s"}}}',
-											 cr$cuid, cr$key, cr$title, cr$usedForPreview)
+											 cr$cuid, cr$key, cr$title, cr$useForPreview)
 	
 	variables <- list(input = list(selectedRows = list(cuid = cr$cuid, key = cr$key, title = cr$title, useForPreview = cr$useForPreview)))
 	
 	json <- jsonlite::toJSON(list(query = query, variables = variables), auto_unbox = TRUE)
 	
-	out <- run_gql_query(query, gql, json = json)
+	run_gql_query(query, gql, json = json)
 }

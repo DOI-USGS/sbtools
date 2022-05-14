@@ -93,7 +93,7 @@ item_list_files = function(sb_id, recursive = FALSE, ..., session=current_sessio
 										facet = rep("", lf))
 	
 	cloud <- rep(list(list(cuid = "", key = "", 
-														 title = "", usedForPreview = "")), 
+														 title = "", useForPreview = "")), 
 									 lf)
 	
 	if (length(files) == 0) {
