@@ -58,9 +58,9 @@ test_that("REST_helpers tests", {
 	
 	expect_equal(put_test$status_code, 404)
 	
-	delete_test <- sbtools_DELETE("https://www.sciencebase.gov/catalog/item/5c4f4a04e4b0708288f78e07", session = session)
+	expect_error(sbtools_DELETE("https://www.sciencebase.gov/catalog/item/5c4f4a04e4b0708288f78e07", session = session), 
+							 "session is not authorized.*")
 
-	expect_equal(delete_test$status_code, 404)
-	
-	expect_message(post_test <- sbtools_POST("https://www.sciencebase.gov/catalog/item/5c4f4a04e4b0708288f78e07", "test", session = session))
+	expect_error(post_test <- sbtools_POST("https://www.sciencebase.gov/catalog/item/5c4f4a04e4b0708288f78e07", "test", session = session),
+							 "session is not authorized.*")
 })

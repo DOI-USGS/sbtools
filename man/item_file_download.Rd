@@ -26,8 +26,8 @@ to download.}
 \item{destinations}{String vector list of destinations for requested files.
 Must be same length as \code{names}}
 
-\item{dest_dir}{A directory path for saving files when \code{names} parameter
-is omitted}
+\item{dest_dir}{A directory path for saving files when \code{names} destinations 
+parameter is not specified.}
 
 \item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
 last authenticated session}
@@ -53,5 +53,6 @@ item_file_download('627f1572d34e3bef0c9a30d8', dest_dir=tempdir())
 #downloads a specific file attached to this item
 item_file_download('627f1572d34e3bef0c9a30d8', names='example.txt',
 		destinations=file.path(tempdir(), 'out.txt'))
+		
 }
 }

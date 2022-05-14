@@ -10,8 +10,8 @@
 #'   to download.
 #' @param destinations String vector list of destinations for requested files.
 #'   Must be same length as \code{names}
-#' @param dest_dir A directory path for saving files when \code{names} parameter
-#'   is omitted
+#' @param dest_dir A directory path for saving files when \code{names} destinations 
+#' parameter is not specified.
 #' @param overwrite_file Boolean indicating if file should be overwritten if it
 #'   already exists locally
 #'   
@@ -25,6 +25,7 @@
 #' #downloads a specific file attached to this item
 #' item_file_download('627f1572d34e3bef0c9a30d8', names='example.txt',
 #' 		destinations=file.path(tempdir(), 'out.txt'))
+#' 		
 #' }
 #' @export
 item_file_download = function(sb_id, ..., names, destinations, 
