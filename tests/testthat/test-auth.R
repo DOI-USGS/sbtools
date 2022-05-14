@@ -72,6 +72,10 @@ test_that("item creation, identifiers, and file upload works", {
 	expect_equal(ident[[1]]$scheme, "test_scheme")
 	expect_equal(ident[[1]]$key, rand_key)
 	
+	item_rm(item)
+	
+	item = item_create(title="automated testing item")
+	
 	expect_message(
 	output <- capture_output(cloud_file <- item_upload_cloud(item, system.file("examples/data.csv", package="sbtools"), status = TRUE)),
 	"Uploading.*")
@@ -79,7 +83,29 @@ test_that("item creation, identifiers, and file upload works", {
 	expect_true(grepl("100%", output))
 	
 	expect_equal(cloud_file, "Success")
+	
+	found <- FALSE
+	w <- 1
+	
+	while(!found) {
 		
+		files <- item_list_files(item)
+		
+		if(nrow(files > 1) && grepl("data.csv", attr(files, "cloud")[[1]]$key)) {
+			found <- TRUE
+		} else {
+			Sys.sleep(5)
+		}
+		
+		w <- w + 1
+		
+		# 12 is arbitrary
+		if(w > 12) stop("cloud upload failed?")
+		
+	}
+	
+	expect_true(attr(files, "cloud")[[1]]$cuid != "")
+	
 	#remove the test item when done
 	item_rm(item)
 	

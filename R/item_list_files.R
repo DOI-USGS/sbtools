@@ -92,6 +92,10 @@ item_list_files = function(sb_id, recursive = FALSE, ..., session=current_sessio
 										url = rep("", lf),
 										facet = rep("", lf))
 	
+	cloud <- rep(list(list(cuid = "", key = "", 
+														 title = "", usedForPreview = "")), 
+									 lf)
+	
 	if (length(files) == 0) {
 		return(out)
 	}
@@ -102,7 +106,17 @@ item_list_files = function(sb_id, recursive = FALSE, ..., session=current_sessio
 		out[i,'url'] = files[[i]]$url
 		if(!is.null(f <- files[[i]]$facet_name))
 			out[i, "facet"] = f
+		if(!is.null(files[[i]]$cuid)) {
+			cloud[[i]]$cuid <- files[[i]]$cuid
+			cloud[[i]]$key <- files[[i]]$key
+			cloud[[i]]$title <- ifelse(!is.null(files[[i]]$title), 
+																				files[[i]]$title, cloud[[i]]$title)
+			cloud[[i]]$usedForPreview <- ifelse(!is.null(files[[i]]$usedForPreview), 
+																								 files[[i]]$usedForPreview, cloud[[i]]$title)
+		}
 	}
+	
+	attr(out, "cloud") <- cloud
 	
 	return(out)
 }
