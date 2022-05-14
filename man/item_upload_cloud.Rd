@@ -4,20 +4,26 @@
 \alias{item_upload_cloud}
 \title{Upload File to Item Cloud Storage}
 \usage{
-item_upload_cloud(sb_id, files, status = TRUE, session = current_session())
+item_upload_cloud(
+  sb_id,
+  files,
+  ...,
+  status = TRUE,
+  session = current_session()
+)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
 
 \item{files}{A string vector of paths to files to be uploaded}
 
+\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
+
 \item{status}{logical display upload status?}
 
 \item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
 last authenticated session}
-
-\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
-\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
 }
 \value{
 Success message invisibly. NOTE: cloud processing

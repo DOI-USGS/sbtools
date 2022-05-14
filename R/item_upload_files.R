@@ -143,7 +143,7 @@ multi_file_body <- function(files){
 #' item_append_files(res$id, "foobar.txt")
 #' }
 #' @export
-item_upload_cloud <- function(sb_id, files, status = TRUE, session=current_session()) {
+item_upload_cloud <- function(sb_id, files, ..., status = TRUE, session=current_session()) {
 
 	try(sb_id <- sb_id$id, silent = TRUE)
 	

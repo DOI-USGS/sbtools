@@ -33,6 +33,12 @@ check_session <- function(x) {
 		stop('session is not authorized. See ?authenticate_sb', call. = FALSE)	
 }
 
+session_authorized <- function(session){
+	
+	return(session_validate(session) && !is.null(session))
+	
+}
+
 session_val <- function(x) {
 	if (!session_validate(x)) {
 		stop('Session state is invalid, please re-authenticate', call. = FALSE)
