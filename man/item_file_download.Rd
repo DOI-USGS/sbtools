@@ -47,14 +47,11 @@ with the names as stored on SB.
 \examples{
 \dontrun{
 
-#downloads two files attached to this item
-item_file_download('548b2b31e4b03f64633662a4', dest_dir=tempdir())
+#downloads all files attached to this item
+item_file_download('627f1572d34e3bef0c9a30d8', dest_dir=tempdir())
 
 #downloads a specific file attached to this item
-item_file_download('548b2b31e4b03f64633662a4', names='gdp.txt',
-		destinations=file.path(tempdir(), 'fname.txt'))
+item_file_download('627f1572d34e3bef0c9a30d8', names='example.txt',
+		destinations=file.path(tempdir(), 'out.txt'))
 }
-}
-\author{
-Luke Winslow
 }
