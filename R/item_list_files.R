@@ -2,6 +2,9 @@
 #'
 #' @template manipulate_item
 #' @param recursive (logical) List files recursively. Default: \code{FALSE}
+#' @param fetch_cloud_urls (logical) fetch a tokenized cloud download URLs? Default: \code{TRUE}
+#' This option will take slightly longer but the `url` attribute of the returned list will
+#' work for direct file downloads or use with pther applications and libraries.
 #'
 #' @return 
 #' A data.frame with columns fname, size, url, and facet. 
@@ -47,7 +50,8 @@
 #' item_list_files(id = '56562348e4b071e7ea53e09d', recursive = FALSE) # default
 #' item_list_files(id = '56562348e4b071e7ea53e09d', recursive = TRUE)
 #' }
-item_list_files = function(sb_id, recursive = FALSE, ..., session=current_session()){
+item_list_files = function(sb_id, recursive = FALSE, fetch_cloud_urls = TRUE, ..., 
+													 session=current_session()){
 	
 	session_val(session)
 	
@@ -113,6 +117,22 @@ item_list_files = function(sb_id, recursive = FALSE, ..., session=current_sessio
 																				files[[i]]$title, "")
 			cloud[[i]]$useForPreview <- ifelse(!is.null(files[[i]]$useForPreview), 
 																								 files[[i]]$useForPreview, FALSE)
+			
+			if(fetch_cloud_urls) {
+				
+				if(!exists("gql")) gql <- httr::handle(url = pkg.env$graphql_url)
+				
+				message("retrieving S3 URL")
+				
+				out[i, 'url'] = get_cloud_download_url(
+					data.frame(cuid = cloud[[i]]$cuid,
+										 key = cloud[[i]]$key,
+										 title = cloud[[i]]$title,
+										 useForPreview = cloud[[i]]$useForPreview),
+					gql)[[1]]$getS3DownloadUrl$downloadUri[1]
+				
+			}
+			
 		}
 	}
 	

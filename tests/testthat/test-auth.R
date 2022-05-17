@@ -106,6 +106,9 @@ test_that("item creation, identifiers, and file upload works", {
 	
 	expect_true(attr(files, "cloud")[[1]]$cuid != "")
 	
+	expect_true(grepl("https://prod-is-usgs-sb-prod-content.s3.us-west-2.amazonaws.com",
+										files$url))
+	
 	unlink(dl_files)
 	
 	mess <- capture_messages(dl_files <- item_file_download(item, dest_dir = dir_name))
