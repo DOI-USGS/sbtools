@@ -62,11 +62,6 @@ test_that("basic examples work", {
 													overwrite_file = TRUE),
 							 "Length of names and destinations must be identical")
 	
-	expect_error(item_file_download(item, 
-																	destinations = file.path(tempdir(), file_name), 
-																	overwrite_file = TRUE),
-							 "Must have either names & destinations, or dest_dir for all files")
-	
 	set_endpoint("dev")
 	
 	expect_equal(sbtools:::pkg.env$domain, "https://beta.sciencebase.gov/")
