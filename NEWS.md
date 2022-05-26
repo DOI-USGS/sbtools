@@ -1,5 +1,6 @@
-# Version 1.1.18 (2022-01-25)
+# Version 1.1.18 (2022-05-26)
 
+- Added support for cloud file upload and download. See `item_upload_cloud()` and `item_list_files()` and `item_file_download()`. 
 - Added ability to pull jossoSessionId from `session_details()`, This is useful for pulling files directly from sciencebase via R functions that do not use the sbtools session for authentication. See `session_details()` description for more.
 - Removed deprecated `item_get_wfs()` function.
 - Renamed `master` branch to `main`. 
