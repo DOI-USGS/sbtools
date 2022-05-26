@@ -113,7 +113,7 @@ test_that("item creation, identifiers, and file upload works", {
 	
 	mess <- capture_messages(dl_files <- item_file_download(item, dest_dir = dir_name))
 	
-	expect_equal(length(mess), 2)
+	expect_equal(length(mess), 3)
 	
 	expect_true(file.exists(file.path(dir_name, "data.csv")))
 	
