@@ -59,10 +59,7 @@ get_cloud_download_url <- function(cr, gql) {
 	
 	query <- "query getS3DownloadUrl($input: SaveFileInputs){ getS3DownloadUrl(input: $input){ downloadUri }}"
 	
-	variables <- sprintf('{"input": {"selectedRows": {"cuid": "%s", "key": "%s", "title": "%s", "useForPreview": "%s"}}}',
-											 cr$cuid, cr$key, cr$title, cr$useForPreview)
-	
-	variables <- list(input = list(selectedRows = list(cuid = cr$cuid, key = cr$key, title = cr$title, useForPreview = cr$useForPreview)))
+	variables <- list(input = list(selectedRows = list(cuid = cr$cuid, key = cr$key, title = cr$title, useForPreview = as.logical(cr$useForPreview))))
 	
 	json <- jsonlite::toJSON(list(query = query, variables = variables), auto_unbox = TRUE)
 	
