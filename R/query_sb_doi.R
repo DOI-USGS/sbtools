@@ -1,6 +1,4 @@
 #' @title Query SB for specific DOI (Digital Object Identifier)
-#' 
-#' 
 #' @param doi DOI to search for as character
 #' @inheritParams query_sb
 #' 

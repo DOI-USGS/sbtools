@@ -1,6 +1,4 @@
 #' @title Query SB for items containing specific text
-#' 
-#' 
 #' @param text Text string for search
 #' @inheritParams query_sb
 #' 

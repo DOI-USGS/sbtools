@@ -1,6 +1,4 @@
 #' @title Query SB for specific data type
-#' 
-#' 
 #' @param datatype Character string indicating datatype. See \code{\link{sb_datatypes}} for full
 #' list of available datatypes.
 #' 
