@@ -18,7 +18,7 @@
 #' library("httr")
 #' res <- query_items(list(s = "Search", q = "water", format = "json"))
 #' 
-#' if(res$status != 404) {
+#' if(inherits(res, "response") && res$status != 404) {
 #'   ids <- vapply(httr::content(res)$items, "[[", "", "id")
 #'   lapply(ids[1:3], item_get)
 #' }

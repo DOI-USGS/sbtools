@@ -1,7 +1,4 @@
 #' @title Query SB for items within a date range
-#' 
-#' 
-#' 
 #' @param start Start date as \code{\link{POSIXct}} object. Defaults to 1970-01-01
 #' @param end   End date as \code{\link{POSIXct}} object. Defaults to today.
 #' @param date_type Which object timestamp to query against. Options are (case sensitive): 

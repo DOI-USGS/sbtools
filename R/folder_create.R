@@ -1,6 +1,4 @@
 #' @title Create a folder
-#' 
-#' 
 #' @template item_with_parent
 #' @param name (character) the folder name
 #' @return A \code{\link[httr]{response}} object
