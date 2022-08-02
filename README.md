@@ -7,12 +7,15 @@ Tools for interfacing R with ScienceBase data services.
 
 This package provides a rich interface to USGS's [ScienceBase](https://www.sciencebase.gov/), a data cataloging and collaborative data management platform. For further information, see the [sbtools manuscript in The R Journal](https://journal.r-project.org/archive/2016-1/winslow-chamberlain-appling-etal.pdf) (USGS IP-075498). See `citation('sbtools')` for how to cite the package.
 
-## Package Status
+### Recommended Citation:
 
-[![status](https://img.shields.io/badge/USGS-Support-yellow.svg)](https://owi.usgs.gov/R/packages.html#support)
+```
+  Winslow, LA, S Chamberlain, AP Appling, and JS Read. 2016. sbtools: 
+  A package connecting R to cloud-based data for collaborative online 
+  research. The R Journal 8:387-398.
+```
 
-This package is considered a 'support' package. For more information, see:
-[https://owi.usgs.gov/R/packages.html#support](https://owi.usgs.gov/R/packages.html#support)
+Package source code DOI: https://doi.org/10.5066/P912NGFV
 
 |Linux|Test Coverage|
 |----------|------------|
