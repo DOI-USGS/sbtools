@@ -29,8 +29,12 @@ default_timeout <- function(){
 set_expiration()
 
 check_session <- function(x) {
-	if (!session_authorized(x))
-		stop('session is not authorized. See ?authenticate_sb', call. = FALSE)	
+	if (!session_authorized(x)) {
+		warning('session is not authorized. See ?authenticate_sb')
+		FALSE 
+	} else {
+		TRUE
+	}
 }
 
 session_authorized <- function(session){
