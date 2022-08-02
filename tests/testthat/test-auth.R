@@ -180,7 +180,7 @@ test_that("Test that surgical item rm", {
 	
 	expect_silent(session_logout())
 	
-	expect_error(item_replace_files("4f4e4b24e4b07f02db6aea14", 
+	expect_warning(item_replace_files("4f4e4b24e4b07f02db6aea14", 
 																		files = f),
 							 "session is not authorized")
 })
