@@ -49,24 +49,24 @@ test_that("REST_helpers tests", {
 	expect_error(sbtools_GET("https://www.sciencebase.gov/catalog/item/a04e4b0708288f78e07", session = list(session = "borked")),
 							 "Session is not valid.")
 	
-	session <- httr::handle("https://google.com")
-	attributes(session) <- c(attributes(session), list(birthdate=Sys.time()))
+	borked_session <- httr::handle("https://google.com")
+	attributes(borked_session) <- c(attributes(borked_session), list(birthdate=Sys.time()))
 	
-	expect_warning(sbtools_GET("https://www.sciencebase.go/catalog/item/5c4f4a04e4b0708288f78e07", session = NULL))
+	expect_warning(sbtools_GET("https://www.sciencebase.go/catalog/item/5c4f4a04e4b0708288f78e07", borked_session = NULL))
 	
-	put_test <- sbtools_PUT("https://www.sciencebase.gov/catalog/item/5c4f4a04e4b0708288f78e07", "test", session = session)
+	put_test <- sbtools_PUT("https://www.sciencebase.gov/catalog/item/5c4f4a04e4b0708288f78e07", "test", session = borked_session)
 	
 	expect_equal(put_test$status_code, 404)
 
-	delete_test <- sbtools_DELETE("https://www.sciencebase.gov/catalog/item/5c4f4a04e4b0708288f78e07", session = session)
+	delete_test <- sbtools_DELETE("https://www.sciencebase.gov/catalog/item/5c4f4a04e4b0708288f78e07", session = borked_session)
 
 	expect_equal(delete_test$status_code, 404)
 	
-	expect_message(post_test <- sbtools_POST("https://www.sciencebase.gov/catalog/item/5c4f4a04e4b0708288f78e07", "test", session = session))
+	expect_message(post_test <- sbtools_POST("https://www.sciencebase.gov/catalog/item/5c4f4a04e4b0708288f78e07", "test", session = borked_session))
 	
-	# expect_error(sbtools_DELETE("https://www.sciencebase.gov/catalog/item/5c4f4a04e4b0708288f78e07", session = session), 
+	# expect_error(sbtools_DELETE("https://www.sciencebase.gov/catalog/item/5c4f4a04e4b0708288f78e07", session = borked_session), 
 	# 						 "session is not authorized.*")
 	# 
-	# expect_error(post_test <- sbtools_POST("https://www.sciencebase.gov/catalog/item/5c4f4a04e4b0708288f78e07", "test", session = session),
+	# expect_error(post_test <- sbtools_POST("https://www.sciencebase.gov/catalog/item/5c4f4a04e4b0708288f78e07", "test", session = borked_session),
 	# 						 "session is not authorized.*")
 })
