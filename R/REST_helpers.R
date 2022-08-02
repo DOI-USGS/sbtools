@@ -13,8 +13,9 @@ sbtools_POST <- function(url, body, ..., session){
 	supported_types <- c('text/plain', 'application/json')
 	check_session(session)
 	
-	r = POST(url=url, ..., httrUserAgent(), accept_json(), body=body, handle=session) 
-	handle_errors(r, url, "POST", supported_types)	
+	r = POST(url=url, ..., httrUserAgent(), accept_json(), body=body, handle=session, 
+					 timeout = httr::timeout(default_timeout())) 
+	r <- handle_errors(r, url, "POST", supported_types)	
 	# if (!strsplit(headers(r)[['content-type']], '[;]')[[1]][1] %in% supported_types)
 	# 	stop('POST failed to ',url,'. check authorization and/or content')
 	
@@ -37,9 +38,12 @@ sbtools_POST <- function(url, body, ..., session){
 sbtools_GET <- function(url, ..., session = NULL) {
 	supported_types <- c('text/plain','text/csv','text/tab-separated-values','application/json','application/x-gzip', 'application/pdf')
 	r <- tryCatch({
-		GET(url = url, ..., httrUserAgent(), handle = session)
+		GET(url = url, ..., httrUserAgent(), handle = session, timeout = httr::timeout(default_timeout()))
 	}, error = function(e) {
-		if(grepl("Item not found", e)) stop(e)
+		if(grepl("Item not found", e))  {
+			warning(e)
+			return(list(status = 404))
+		}
 		
 		if(!is.null(session) && !inherits(session, "curl_handle")) stop("Session is not valid.")
 		
@@ -48,7 +52,7 @@ sbtools_GET <- function(url, ..., session = NULL) {
 																		"error was:\n", e))
 																 return(list(status = 404))
 	})
-	handle_errors(r, url, "GET", supported_types)
+	r <- handle_errors(r, url, "GET", supported_types)
 	session_age_reset()
 	return(r)
 }
@@ -68,8 +72,8 @@ sbtools_GET <- function(url, ..., session = NULL) {
 #' @keywords internal
 sbtools_PUT <- function(url, body, ..., session) {
 	check_session(session)
-	r = PUT(url = url, ..., httrUserAgent(), body = body, handle = session)
-	handle_errors(r, url, "PUT", NULL)
+	r <- PUT(url = url, ..., httrUserAgent(), body = body, handle = session, timeout = httr::timeout(default_timeout()))
+	r <- handle_errors(r, url, "PUT", NULL)
 	session_age_reset()
 	return(r)
 }
@@ -88,8 +92,17 @@ sbtools_PUT <- function(url, body, ..., session) {
 #' @keywords internal
 sbtools_DELETE <- function(url, ..., session) {
 	check_session(session)
-	r = DELETE(url = url, ..., httrUserAgent(), accept_json(), handle = session)
-	handle_errors(r, url, "DELETE", NULL)
+	
+	uid <- tryCatch(user_id(session = session), 
+									error = function(e) "0")
+	
+	if(uid != 0 && grepl(uid, url)) {
+		stop("Deleting a user id is not supported.") #notest
+	}
+	
+	r = DELETE(url = url, ..., httrUserAgent(), accept_json(), 
+						 handle = session, timeout = httr::timeout(default_timeout()))
+	r <- handle_errors(r, url, "DELETE", NULL)
 	session_age_reset()
 	return(r)
 }
@@ -97,7 +110,8 @@ sbtools_DELETE <- function(url, ..., session) {
 # HEAD fxn
 sbtools_HEAD <- function(url, ..., session) {
 	session_val(session)
-	r <- tryCatch(HEAD(url = url, ..., httrUserAgent(), handle = session),
+	r <- tryCatch(HEAD(url = url, ..., httrUserAgent(), handle = session,
+										 timeout = httr::timeout(default_timeout())),
 					 error = function(e) {
 							warning(paste("Something went wrong with request: \n",
 														e))
@@ -110,20 +124,42 @@ sbtools_HEAD <- function(url, ..., session) {
 
 # helpers -------------
 handle_errors <- function(x, url, method, types) {
+	tryCatch({
 	if(is(x, "list")) {
 		if(x$status == 404) warning("Could not access sciencebase")
+		return(NULL)
+	}
+		
+	if(x$status_code == 403) {
+		warning("Sciencebase returned '403 Forbidden'")
 		return(NULL)
 	}
 	
 	if (!is.null(types)) {
 		if (!strsplit(headers(x)[['content-type']], '[;]')[[1]][1] %in% types) {
-			stop(method, ' failed to ', url, '. check authorization and/or content', call. = FALSE)
+			message(method, ' failed to ', url, '. check authorization and/or content', call. = FALSE)
+			return(NULL)
 		}
 	}
 	
 	if ('errors' %in% names(content(x))) {
-		stop(content(x)$errors$message, call. = FALSE)
+		
+		if(length(errors <- content(x)$errors) == 1) {
+			message(errors$message, call. = FALSE)
+		} else {
+			message(paste(sapply(errors, function (x) x$message), collapse = "\n"), call. = FALSE)
+		}
+		
+		return(NULL)
 	}
+	
+	return(x)
+	}, error = function(e) {
+		
+		message(paste("Error when calling sciencebase,", e))
+		return(NULL)
+		
+	})
 }
 
 #' @importFrom curl curl_version

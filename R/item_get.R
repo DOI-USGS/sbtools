@@ -10,8 +10,7 @@
 #' access is restricted due to permissions. 
 #' 
 #' 
-#' @examples 
-#' \donttest{
+#' @examples \donttest{
 #' # Get an item
 #' item_get("4f4e4b24e4b07f02db6aea14")
 #' 
@@ -19,7 +18,7 @@
 #' library("httr")
 #' res <- query_items(list(s = "Search", q = "water", format = "json"))
 #' 
-#' if(res$status != 404) {
+#' if(inherits(res, "response") && res$status != 404) {
 #'   ids <- vapply(httr::content(res)$items, "[[", "", "id")
 #'   lapply(ids[1:3], item_get)
 #' }
@@ -35,6 +34,8 @@ get_item <- function(id, ..., session=current_session()) {
 	
 	if(is(res, "list")) {
 		if(res$status == 404) return(NULL)
+	} else if(is.null(res)) {
+		return(NULL)
 	}
 	
 	return(as.sbitem(content(res)))

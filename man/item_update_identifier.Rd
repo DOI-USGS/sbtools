@@ -35,7 +35,6 @@ additional identifiers or update those already in place. See
 identifier.
 }
 \examples{
-
 \dontrun{
 
 session = authenticate_sb("user@usgs.gov")

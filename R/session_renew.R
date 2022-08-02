@@ -13,8 +13,7 @@
 #'   
 #' @return Returns the session object.
 #'   
-#' @examples
-#' \dontrun{
+#' @examples \dontrun{
 #' # an empty call is sufficient if the session is current, 
 #' # but will break if haven't been logged in before
 #' session_renew()
@@ -55,4 +54,32 @@ session_renew = function(password, ..., username, session=current_session()){
 		if(missing(password)) stop("re-authentication is necessary; need password")
 		invisible(authenticate_sb(sb_username, password))
 	}
+}
+
+
+refresh_token_before_expired <- function(refresh_amount_seconds = 600) {
+	
+	current_time <- Sys.time() + refresh_amount_seconds
+	
+	if(pkg.env$keycloak_expire - current_time < 0) {
+		return(token_refresh())
+	}
+	return(invisible(FALSE))
+}
+
+token_refresh <- function() {
+	
+	data = list(
+		client_id = pkg.env$keycloak_client_id,
+		grant_type = "refresh_token",
+		refresh_token = get_refresh_token())
+	
+	token <- httr::POST(pkg.env$token_url, body = data, encode = "form")
+	
+	if(!token$status_code == 200)
+		warning('Unable to refresh SB cloud token. Some functionality may not work.')
+	
+	set_keycloak_env(token)
+	
+	return(invisible(TRUE))
 }

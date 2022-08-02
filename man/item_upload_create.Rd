@@ -4,7 +4,13 @@
 \alias{item_upload_create}
 \title{#' Upload file(s) and create a new item}
 \usage{
-item_upload_create(parent_id, files, ..., session = current_session())
+item_upload_create(
+  parent_id,
+  files,
+  ...,
+  scrape_files = TRUE,
+  session = current_session()
+)
 }
 \arguments{
 \item{parent_id}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 
@@ -14,6 +20,13 @@ parent item (folder)}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
 \code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
+
+\item{scrape_files}{logical should the files be scraped for metadata? 
+If TRUE, sciencebase will attempt to create extensions based on the files.
+
+For example, for shapefiles, this will result in a shapefile extension 
+to be returned as a facet of the sciencebase item. 
+See item: "58069258e4b0824b2d1d422e" for an example.}
 
 \item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
 last authenticated session}

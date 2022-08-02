@@ -2,7 +2,7 @@ context("basics")
 
 test_that("basic examples work", {
 	skip_on_cran()
-	
+
 	ping <- sb_ping()
 	
 	expect_true(ping)
@@ -32,7 +32,9 @@ test_that("basic examples work", {
 	
 	expect_equal(length(w), 3)
 	
-	q <- query_sb_date(Sys.time(), Sys.time(), limit = 1)
+	q <- query_sb_date(start = as.POSIXct("2020-01-01"), 
+										 end = as.POSIXct("2021-01-01"), 
+										 limit = 1)
 		
 	expect_equal(length(q), 1)
 	
@@ -46,8 +48,8 @@ test_that("basic examples work", {
 	
 	expect_equal(basename(f), file_name)
 	
-	expect_error(item_file_download(item, dest_dir = tempdir(), overwrite_file = FALSE),
-							 "Path exists and overwrite is FALSE")
+	expect_warning(item_file_download(item, dest_dir = tempdir(), overwrite_file = FALSE),
+								 "metadata6644450227216673613.xml exists, and overwrite is false. Skipping.")
 
 	f <- item_file_download(item, names = file_name, 
 													destinations = file.path(tempdir(), file_name), 
@@ -60,19 +62,24 @@ test_that("basic examples work", {
 													overwrite_file = TRUE),
 							 "Length of names and destinations must be identical")
 	
-	expect_error(item_file_download(item, 
-																	destinations = file.path(tempdir(), file_name), 
-																	overwrite_file = TRUE),
-							 "Must have either names & destinations, or dest_dir for all files")
-	
-	set_endpoint('dev')
+	set_endpoint("dev")
 	
 	expect_equal(sbtools:::pkg.env$domain, "https://beta.sciencebase.gov/")
 	
+	expect_equal(sbtools:::pkg.env$graphql_url, 
+							 "https://api-beta.staging.sciencebase.gov/graphql")
+	
 	set_endpoint()
 	
-	expect_equal(sbtools:::pkg.env$domain, "https://www.sciencebase.gov/")
+	expect_equal(sbtools:::pkg.env$domain, 
+							 "https://www.sciencebase.gov/")
 
+	expect_equal(sbtools:::pkg.env$graphql_url, 
+							 "https://api.sciencebase.gov/graphql")
+	
+	expect_equal(sbtools:::pkg.env$auth_server_url,
+							 "https://www.sciencebase.gov/auth")
+	
 	types <- sb_datatypes()
 	
 	expect_equal(class(types), "character")
@@ -90,16 +97,6 @@ test_that("basic examples work", {
 	fields <- item_get_fields("4f4e4b24e4b07f02db6aea14", get_f)
 
 	expect_equal(names(fields), get_f)
-	
-	expect_warning(
-	wfs_data <- item_get_wfs("58c988bce4b0849ce97b4845"),
-	"item_get_wfs is going to be removed in a future version of sbtools")
-	
-	expect_equal(as.character(class(wfs_data)), "SpatialPointsDataFrame")
-	
-	suppressWarnings(wfs_data <- item_get_wfs("58c988bce4b0849ce97b4845", as_sf = TRUE))
-	
-	expect_equal(as.character(class(wfs_data))[1], "sf")
 	
 	qs <- query_sb_spatial(long=c(-104.4, -95.1), lat=c(37.5, 41.0), limit=3)
 	
@@ -127,7 +124,7 @@ test_that("basic examples work", {
 	
 	expect_equal(length(item_list_children(item_get('5060b03ae4b00fc20c4f3c8b'), limit = 5)), 5)
 	
-	expect_error(query_sb("test"), "query_list must be a list of query parameters")
+	expect_warning(query_sb("test"))
 	
 	res <- query_sb(list(parentId = "5474ec49e4b04d7459a7eab2"), limit = 1010)
 	

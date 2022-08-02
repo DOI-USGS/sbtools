@@ -4,14 +4,16 @@
 #' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}
 #' @return Boolean (TRUE) indicating if a connection to ScienceBase can be established 
 #' and if it is responding as expected. FALSE otherwise. 
-#' @examples 
+#' @examples \donttest{
 #' #TRUE if all is well and SB can be contacted
 #' sb_ping()
-#' 
+#' }
 sb_ping <- function(...) {
 
 	tryCatch({
-		x <- GET(paste0(pkg.env$url_item, 'ping'), ...)
+		x <- GET(paste0(pkg.env$url_item, 'ping'), 
+						 timeout = httr::timeout(default_timeout()),
+						 ...)
 		res = jsonlite::fromJSON(content(x, "text"))
 		if(is(res, 'list') & !is.null(res$result) & res$result == 'OK'){
 			return(TRUE)

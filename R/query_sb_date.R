@@ -1,7 +1,4 @@
 #' @title Query SB for items within a date range
-#' 
-#' 
-#' 
 #' @param start Start date as \code{\link{POSIXct}} object. Defaults to 1970-01-01
 #' @param end   End date as \code{\link{POSIXct}} object. Defaults to today.
 #' @param date_type Which object timestamp to query against. Options are (case sensitive): 
@@ -15,8 +12,7 @@
 #' @description 
 #' Queries ScienceBase for items with timestamps within a certain date/time range.
 #' 
-#' @examples
-#' \dontrun{
+#' @examples \dontrun{
 #' # find items updated today
 #' query_sb_date(Sys.time(), Sys.time())
 #' 
@@ -34,7 +30,7 @@ query_sb_date = function(start=as.POSIXct('1970-01-01'), end=Sys.time(), date_ty
 	}
 	
 	date_range = paste0('{"dateType":"', date_type, '","choice":"range","start":"', format(start, '%Y-%m-%d'),
-											'","end":"', format(start, '%Y-%m-%d'), '"}')
+											'","end":"', format(end, '%Y-%m-%d'), '"}')
 	
 	query_sb(list(dateRange = date_range), ..., limit=limit, session=session)
 	

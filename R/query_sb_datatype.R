@@ -1,6 +1,4 @@
 #' @title Query SB for specific data type
-#' 
-#' 
 #' @param datatype Character string indicating datatype. See \code{\link{sb_datatypes}} for full
 #' list of available datatypes.
 #' 
@@ -13,8 +11,7 @@
 #' @description 
 #' Queries ScienceBase for items with matching datatype.
 #' 
-#' @examples 
-#' \donttest{
+#' @examples \donttest{
 #' #query for items with WFS Layer data
 #' query_sb_datatype('Static Map Image')
 #' 
@@ -40,10 +37,10 @@ query_sb_datatype = function(datatype, ..., limit=20, session=current_session())
 #' coupled with \code{\link{query_sb_datatype}} to query based on the type of data
 #' 
 #' 
-#' @examples 
+#' @examples \dontrun{
 #' #return all datatypes (limit 50 by default)
 #' sb_datatypes()
-#' 
+#' }
 #' 
 #' @export
 sb_datatypes = function(limit=50, session=current_session()){

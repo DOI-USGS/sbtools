@@ -4,12 +4,22 @@
 \alias{item_list_files}
 \title{Get list of files attached to SB item}
 \usage{
-item_list_files(sb_id, recursive = FALSE, ..., session = current_session())
+item_list_files(
+  sb_id,
+  recursive = FALSE,
+  fetch_cloud_urls = TRUE,
+  ...,
+  session = current_session()
+)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
 
 \item{recursive}{(logical) List files recursively. Default: \code{FALSE}}
+
+\item{fetch_cloud_urls}{(logical) fetch a tokenized cloud download URLs? Default: \code{TRUE}
+This option will take slightly longer but the `url` attribute of the returned list will
+work for direct file downloads or use with pther applications and libraries.}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
 \code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
@@ -18,19 +28,31 @@ item_list_files(sb_id, recursive = FALSE, ..., session = current_session())
 last authenticated session}
 }
 \value{
-A data.frame with columns fname, size, and url. 
+A data.frame with columns fname, size, url, and facet. 
 If item has no attached files, returns a zero row data.frame.
 }
 \description{
-Lists all files attached to a SB item. Files can be downloaded from ScienceBase
-using \code{\link{item_file_download}}. (advanced) Recursive options lists all 
-files attached to an item and all children items.
+Lists all files attached to a SB item. Files can be downloaded 
+from ScienceBase using \code{\link{item_file_download}}. 
+
+(advanced) Recursive options lists all files attached to an item and all children items. 
+
+NOTE: A sciencebase item can contain so-called "extensions". The 
+sciencebase item data model refers to the information that describes
+an extension as a "facet". Some extension facets contain files 
+(such as with a shapefile). The "facet" attribute of the return from
+this function will contain the name of the facet the file came from
+if the file was found in a facet.
 }
 \examples{
-\donttest{
-item_list_files("4f4e4b24e4b07f02db6aea14")
-}
 \dontrun{
+
+#regular files
+item_list_files("4f4e4b24e4b07f02db6aea14")
+
+# files in facets
+item_list_files("5f6a285d82ce38aaa244912e")
+
 # list files recursively
 ## create item
 id <- item_create(user_id(), title="some title")

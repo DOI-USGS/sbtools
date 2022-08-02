@@ -16,5 +16,6 @@ session_logout <- function(..., session = current_session()) {
 		stop("Logout did not succeed", call. = FALSE)
 	}
 	pkg.env$session <- NULL
+	try(pkg.env$uid <- NULL, silent = TRUE)
 	invisible()
 }

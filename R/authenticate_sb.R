@@ -35,11 +35,32 @@ authenticate_sb = function(username, password){
 	h = handle(pkg.env$url_base)
 	
 	## authenticate
-	resp = GET(pkg.env$url_base, accept_json(), authenticate(username, password, type='basic'),
-						 handle=h)
+	resp = GET(pkg.env$url_base, accept_json(), 
+						 authenticate(username, password, type='basic'),
+						 handle=h, timeout = httr::timeout(default_timeout()))
 	
 	if(!any(resp$cookies$name %in% 'JSESSIONID')){
 		stop('Unable to authenticate to SB. Check username and password')
+	}
+	
+	token_url <- pkg.env$token_url
+	
+	token <- POST(token_url, 
+								body = list(
+									client_id = pkg.env$keycloak_client_id,
+									grant_type = "password",
+									username = username,
+									password = password
+								), encode = "form")
+	
+	if(!token$status_code == 200) {
+		
+		warning('Unable to authenticate to SB cloud. Standard login is available.')
+		
+	} else {
+	
+		set_keycloak_env(token)
+		
 	}
 	
 	attributes(h) <- c(attributes(h), list(birthdate=Sys.time()))
@@ -47,6 +68,12 @@ authenticate_sb = function(username, password){
 	pkg.env$username = username
 	
 	invisible(h)
+}
+
+set_keycloak_env <- function(token_resp) {
+	pkg.env$keycloak_token <- jsonlite::fromJSON(rawToChar(token_resp$content))
+	
+	pkg.env$keycloak_expire <- Sys.time() + pkg.env$keycloak_token$expires_in
 }
 
 #' Read in a password from the user
@@ -64,4 +91,25 @@ readPassword <- function(prompt) {
 	}
 	return (pass)
 }
+
 globalVariables('.rs.askForPassword')
+
+get_refresh_token <- function() {
+	token <- pkg.env$keycloak_token$refresh_token
+	
+	if(is.null(token)) {
+		stop("no token found, must call athenticate_sb()")
+	}
+	
+	token
+}
+
+get_access_token <- function() {
+	token <- pkg.env$keycloak_token$access_token
+	
+	if(is.null(token)) {
+		stop("no token found, must call athenticate_sb()")
+	}
+	
+	token
+}
