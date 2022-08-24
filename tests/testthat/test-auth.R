@@ -1,8 +1,8 @@
 context("test sb functionality requiring authentication")
 
 test_that("not_logged in tests", {
-	expect_error(sbtools:::get_access_token(), "no token found, must call athenticate_sb()")
-	expect_error(sbtools:::get_refresh_token(), "no token found, must call athenticate_sb()")
+	expect_error(sbtools:::get_access_token(), "no token found, must call authenticate_sb()")
+	expect_error(sbtools:::get_refresh_token(), "no token found, must call authenticate_sb()")
 	
 	expect_error(authenticate_sb(), 'username required for authentication')
 	
