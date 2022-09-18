@@ -42,6 +42,8 @@ set_endpoint = function(endpoint=c("production", "development")){
 	pkg.env$url_upload_create = paste0(pkg.env$url_base, 'file/uploadAndCreateItem/')
 	pkg.env$url_upload_update = paste0(pkg.env$url_base, 'file/uploadAndUpdateItem/')
 	pkg.env$url_download = paste0(pkg.env$url_base, 'file/get/')
+	pkg.env$url_upload_file = paste0(pkg.env$url_base, 'file/upload')
+	pkg.env$url_scrape = paste0(pkg.env$url_base, 'file/scrape')
 	pkg.env$url_login = 'https://my.usgs.gov/josso/signon/usernamePasswordLogin.do'
 	pkg.env$auth_server_url = paste0(pkg.env$domain, "auth")
 	pkg.env$token_url = paste0(pkg.env$domain, 

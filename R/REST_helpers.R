@@ -46,7 +46,7 @@ sbtools_GET <- function(url, ..., session = NULL) {
 			return(list(status = 404))
 		}
 		
-		if(!is.null(session) && !inherits(session, "curl_handle")) stop("Session is not valid.")
+		if(!is.null(session) && !(inherits(session, "curl_handle") | inherits(session, "handle"))) stop("Session is not valid.")
 		
 		warning(paste("Error when calling ScienceBase,", 
 																		"internet or server down? Original", 

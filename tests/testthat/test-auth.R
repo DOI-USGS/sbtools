@@ -76,6 +76,34 @@ test_that("item creation, identifiers, and file upload works", {
 	
 	item = item_create(title="automated testing item")
 	
+	test_file <- system.file("examples/data.csv", package="sbtools")
+
+	test_2 <- file.path(tempdir(check = TRUE), "test.csv")
+
+	file.copy(test_file, test_2)	
+	
+	item <- item_append_check(item, test_file)
+	
+	expect_equal(unname(tools::md5sum(test_file)), item$files[[1]]$checksum$value)
+	
+	item <- item_append_check(item, test_2)
+	
+	expect_equal(unname(tools::md5sum(test_2)), item$files[[2]]$checksum$value)
+	
+	item <- item_rm_files(item)
+	
+	expect_true(is.null(item$files))
+	
+	item <- item_append_check(item, c(test_file, test_2), title = c("one", "two"))
+	
+	expect_equal(length(item$files), 2)
+	
+	expect_equal(c(item$files[[1]]$title, item$files[[2]]$title), c("one", "two"))
+	
+	item_rm(item)
+	
+	item = item_create(title="automated testing item")
+	
 	expect_message(
 	output <- capture_output(cloud_file <- item_upload_cloud(item, system.file("examples/data.csv", package="sbtools"), status = TRUE)),
 	"Uploading.*")
