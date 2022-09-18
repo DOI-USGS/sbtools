@@ -98,7 +98,7 @@ get_refresh_token <- function() {
 	token <- pkg.env$keycloak_token$refresh_token
 	
 	if(is.null(token)) {
-		stop("no token found, must call athenticate_sb()")
+		stop("no token found, must call authenticate_sb()")
 	}
 	
 	token
@@ -108,7 +108,7 @@ get_access_token <- function() {
 	token <- pkg.env$keycloak_token$access_token
 	
 	if(is.null(token)) {
-		stop("no token found, must call athenticate_sb()")
+		stop("no token found, must call authenticate_sb()")
 	}
 	
 	token
