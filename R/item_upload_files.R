@@ -322,6 +322,14 @@ cloud_upload <- function(file, mimetype, itemid, chunk_size_bytes = pkg.env$chun
 		if(!put_chunk$status_code == 200) stop(paste("Error uploading file. \n",
 																					 "status:", put_chunk$status_code,
 																					 "content:", rawToChar(put_chunk$content)))
+		
+		# verify the chunk recieved is the same as held locally
+		if(cli::hash_raw_md5(chunk) != gsub("\"", "", put_chunk$headers$ETag)) {
+			stop(paste("Error uploading file. \n",
+								 "A chunk recieved by the server is different than the origin. \n",
+								 "Please try again."))
+		}
+		
 		parts_header[[part_number]] <- list(ETag = put_chunk$headers$ETag,
 																				PartNumber = part_number)
 		if(status)
@@ -331,6 +339,48 @@ cloud_upload <- function(file, mimetype, itemid, chunk_size_bytes = pkg.env$chun
 	if(status)
 		close(pb)
 	
-	return(invisible(complete_multipart_upload(f_path, session_id, parts_header, gql)))
+	complete <- complete_multipart_upload(f_path, session_id, parts_header, gql)
 	
+	item <- wait_till_up(itemid, basename(file))
+	
+	f <- which(sapply(item$files, function(x, file) {
+		x$name == basename(file)
+	}, file = file))
+	
+	item$files[[f]]$checksum <- as.character(tools::md5sum(file))
+	
+	res <- sbtools_PUT(paste0(pkg.env$url_item, item$id), 
+										 body = toJSON(unclass(item), 
+										 							auto_unbox = TRUE, 
+										 							null = "null"), 
+										 httr::accept_json(), 
+										 session = session)
+	
+	return(as.sbitem(content(res)))
+	
+}
+
+wait_till_up <- function(item, f) {
+	found <- FALSE
+	w <- 1
+	
+	while(!found) {
+		
+		files <- item_list_files(item)
+		
+		if(nrow(files > 1) && grepl(f, attr(files, "cloud")[[1]]$key)) {
+			found <- TRUE
+		} else {
+			Sys.sleep(5)
+		}
+		
+		w <- w + 1
+		
+		message("checking for uploaded file")
+		
+		if(w > 12) stop("cloud upload failed?")
+		
+	}
+	
+	return(as.sbitem(item))
 }
