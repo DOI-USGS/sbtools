@@ -4,7 +4,14 @@
 \alias{item_replace_files}
 \title{Replace files associated with an item}
 \usage{
-item_replace_files(sb_id, files, ..., all = FALSE, session = current_session())
+item_replace_files(
+  sb_id,
+  files,
+  ...,
+  all = FALSE,
+  scrape_files = FALSE,
+  session = current_session()
+)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
@@ -18,6 +25,13 @@ item_replace_files(sb_id, files, ..., all = FALSE, session = current_session())
 uploading new files. FALSE if only files with matching names should be replaced. 
 If you wish to upload files with duplicate names, see \code{\link{item_append_files}}.
 Defaults to FALSE.}
+
+\item{scrape_files}{logical should the files be scraped for metadata? 
+If TRUE, sciencebase will attempt to create extensions based on the files.
+
+For example, for shapefiles, this will result in a shapefile extension 
+to be returned as a facet of the sciencebase item. 
+See item: "58069258e4b0824b2d1d422e" for an example.}
 
 \item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
 last authenticated session}

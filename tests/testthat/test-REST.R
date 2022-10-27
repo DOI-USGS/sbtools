@@ -1,5 +1,7 @@
 context("sbtools_POST")
 
+assign("session", value = NULL, envir = sbtools:::pkg.env)
+
 test_that("generic post fails w/o auth", {
 	skip_on_cran()
 	
@@ -52,7 +54,9 @@ test_that("REST_helpers tests", {
 	borked_session <- httr::handle("https://google.com")
 	attributes(borked_session) <- c(attributes(borked_session), list(birthdate=Sys.time()))
 	
-	expect_warning(sbtools_GET("https://www.sciencebase.go/catalog/item/5c4f4a04e4b0708288f78e07", borked_session = NULL))
+	assign("session", value = borked_session, envir = sbtools:::pkg.env)
+	
+	expect_warning(sbtools_GET("https://www.sciencebase.go/catalog/item/5c4f4a04e4b0708288f78e07", session = borked_session))
 	
 	put_test <- sbtools_PUT("https://www.sciencebase.gov/catalog/item/5c4f4a04e4b0708288f78e07", "test", session = borked_session)
 	
@@ -63,6 +67,8 @@ test_that("REST_helpers tests", {
 	expect_equal(delete_test$status_code, 404)
 	
 	expect_message(post_test <- sbtools_POST("https://www.sciencebase.gov/catalog/item/5c4f4a04e4b0708288f78e07", "test", session = borked_session))
+	
+	assign("session", value = NULL, envir = sbtools:::pkg.env)
 	
 	# expect_error(sbtools_DELETE("https://www.sciencebase.gov/catalog/item/5c4f4a04e4b0708288f78e07", session = borked_session), 
 	# 						 "session is not authorized.*")

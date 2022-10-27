@@ -5,6 +5,7 @@
 #' uploading new files. FALSE if only files with matching names should be replaced. 
 #' If you wish to upload files with duplicate names, see \code{\link{item_append_files}}.
 #' Defaults to FALSE.
+#' @inheritParams item_upload_create
 #' 
 #' @description replaces existing files associated with an item with a new one. 
 #'   
@@ -13,7 +14,8 @@
 #' is required to manipulate facets. 
 #' 
 #' @export
-item_replace_files <- function(sb_id, files, ..., all=FALSE, session=current_session()){
+item_replace_files <- function(sb_id, files, ..., all=FALSE, 
+															 scrape_files = FALSE, session=current_session()){
 	
 	if(length(files) > 50){
 		warning('Trying to attach a large number of files to a SB item. SB imposes file limits which may cause this to fail')
@@ -24,5 +26,5 @@ item_replace_files <- function(sb_id, files, ..., all=FALSE, session=current_ses
 	}else{
 		item_rm_files(sb_id, files, ..., session=session)
 	}
-	item_append_files(sb_id, files = files, ..., session=session)
+	item_append_files(sb_id, files = files, ..., scrape = scrape_files, session=session)
 }

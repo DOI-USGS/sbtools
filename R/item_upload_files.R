@@ -65,6 +65,7 @@ item_upload_create = function(parent_id, files, ..., scrape_files = TRUE, sessio
 #' res <- item_create(user_id(), "testing 123")
 #' cat("foo bar", file = "foobar.txt")
 #' item_append_files(res$id, "foobar.txt")
+#' item_rm(res)
 #' }
 #' @export
 item_append_files = function(sb_id, files, ..., scrape_files = TRUE, session=current_session()){
@@ -77,7 +78,9 @@ item_append_files = function(sb_id, files, ..., scrape_files = TRUE, session=cur
 	
 	if(is.null(item)) return(NULL)
 	
-	params <- paste0("?id=", item$id)
+	sums <- lapply(files, tools::md5sum)
+	
+	params <- paste0("?id=", item$id, paste(paste0("&md5Checksum=", sums), collapse = ""))
 	
 	if(!scrape_files) {
 		params <- paste0(params, "&scrapeFile=false")
@@ -93,128 +96,6 @@ item_append_files = function(sb_id, files, ..., scrape_files = TRUE, session=cur
 		return(NULL)
 	}
 	return(check_upload(item, files))
-	
-}
-
-
-#' @title Upload File to Item With md5sum checks
-#' @description Adds a file to an item using the same
-#' method as is implemente by the Web User Interface.
-#' This method uses multiple web requests and may be
-#' more fragile than the standard append functions.
-#'
-#' @template manipulate_item
-#' @inheritParams item_upload_create
-#' @param title character titles for appended files must be same length as files.
-#' @return An object of class \code{sbitem}
-#'
-#' @import httr
-#'
-#' @examples \dontrun{
-#' res <- item_create(user_id(), "testing 123")
-#' cat("foo bar", file = "foobar.txt")
-#' item_append_check(res$id, "foobar.txt")
-#' item_rm(res)
-#' }
-#' @export
-item_append_check <- function(sb_id, files, ..., title = rep("", length(files)), 
-															session = current_session()) {
-	
-	item <- as.sbitem(sb_id)
-	
-	f <- 1
-	
-	for(file in files) {
-		
-		checksum <- as.character(tools::md5sum(file))
-		
-		resp <- sbtools_POST(pkg.env$url_upload_file, 
-												 body = list(`files[]` = httr::upload_file(file), md5Checksum = checksum), 
-												 encode = "multipart", 
-												 session = session)
-		
-		json <- fromJSON(rawToChar(resp$content), simplifyVector = FALSE)[[1]]
-		
-		# includes everything from what the web UI does.
-		requ <- toJSON(list(
-			files = list(list(name = basename(file), 
-												contentType = mime::guess_type(file), 
-												pathOnDisk = json$fileKey, 
-												imageWidth = NULL, 
-												imageHeight = NULL, 
-												processed = FALSE, 
-												stored = FALSE, 
-												uploadStatus = "done", 
-												uploadProgress = 0, 
-												dateUploaded = json$dateUploaded,
-												uploadedBy = json$uploadedBy, 
-												originalMetadata = FALSE, 
-												useForPreview = FALSE,
-												title = title[f], 
-												checksum = list(value = checksum, 
-																				type = "MD5"), 
-												s3Object = NULL, 
-												viewUrl = sprintf("/catalog/file/get/%s?f=%s", 
-																					item$id, json$fileKey)))),
-			auto_unbox = TRUE, null = "null")
-		
-		resp2 <- sbtools_POST(pkg.env$url_scrape, 
-													body = list(r=requ), 
-													encode = "form", 
-													session = session)
-		
-		json2 <- fromJSON(rawToChar(resp2$content), 
-											simplifyVector = FALSE)$files[[1]]
-		
-		f_url <- paste0(pkg.env$domain, json2$viewUrl)
-		
-		# Only includes things we want to set for now.
-		new_f <- list(name = json2$name, 
-									title = json2$title, 
-									contentType = json2$contentType, 
-									pathOnDisk = json2$pathOnDisk, 
-									size = file.size(file), 
-									dateUploaded = json2$dateUploaded, 
-									uploadedBy = json2$uploadedBy, 
-									originalMetadata = json2$originalMetadata, 
-									useForPreview = json2$useForPreview, 
-									checksum = json2$checksum, 
-									url = f_url, 
-									downloadUri = f_url)
-		
-		new_f <- list(name = json2$name, 
-									title = json2$title, 
-									contentType = json2$contentType, 
-									pathOnDisk = json2$pathOnDisk, 
-									size = file.size(file), 
-									dateUploaded = json2$dateUploaded, 
-									uploadedBy = json2$uploadedBy, 
-									originalMetadata = json2$originalMetadata, 
-									useForPreview = json2$useForPreview, 
-									checksum = json2$checksum, 
-									viewUrl = json2$viewUrl)
-
-		if(is.null(item$files)) {
-			
-			item$files <- list(new_f)
-		} else {
-			
-			item$files <- c(item$files, list(new_f))	
-		}
-		
-		res <- sbtools_PUT(paste0(pkg.env$url_item, item$id), 
-											 body = toJSON(unclass(item), 
-											 							auto_unbox = TRUE, 
-											 							null = "null"), 
-											 httr::accept_json(), 
-											 session = session)
-		
-		item <- as.sbitem(content(res))
-		
-		f <- f + 1
-	}
-	
-	item
 	
 }
 
@@ -343,11 +224,12 @@ cloud_upload <- function(file, mimetype, itemid, chunk_size_bytes = pkg.env$chun
 	
 	item <- wait_till_up(itemid, basename(file))
 	
-	f <- which(sapply(item$files, function(x, file) {
+	fi <- which(sapply(item$files, function(x, file) {
 		x$name == basename(file)
 	}, file = file))
 	
-	item$files[[f]]$checksum <- as.character(tools::md5sum(file))
+	item$files[[fi]]$checksum <- list(value = as.character(tools::md5sum(file)), 
+																	 type = 'MD5')
 	
 	res <- sbtools_PUT(paste0(pkg.env$url_item, item$id), 
 										 body = toJSON(unclass(item), 

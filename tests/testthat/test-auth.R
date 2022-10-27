@@ -82,23 +82,17 @@ test_that("item creation, identifiers, and file upload works", {
 
 	file.copy(test_file, test_2)	
 	
-	item <- item_append_check(item, test_file)
+	item <- item_append_files(item, test_file)
 	
 	expect_equal(unname(tools::md5sum(test_file)), item$files[[1]]$checksum$value)
 	
-	item <- item_append_check(item, test_2)
+	item <- item_append_files(item, test_2)
 	
 	expect_equal(unname(tools::md5sum(test_2)), item$files[[2]]$checksum$value)
 	
 	item <- item_rm_files(item)
 	
 	expect_true(is.null(item$files))
-	
-	item <- item_append_check(item, c(test_file, test_2), title = c("one", "two"))
-	
-	expect_equal(length(item$files), 2)
-	
-	expect_equal(c(item$files[[1]]$title, item$files[[2]]$title), c("one", "two"))
 	
 	item_rm(item)
 	
@@ -112,7 +106,7 @@ test_that("item creation, identifiers, and file upload works", {
 	
 	expect_equal(cloud_file, "Success")
 	
-	found <- FALSE
+  found <- FALSE
 	w <- 1
 	
 	while(!found) {
@@ -136,6 +130,10 @@ test_that("item creation, identifiers, and file upload works", {
 	
 	expect_true(grepl("https://prod-is-usgs-sb-prod-content.s3.us-west-2.amazonaws.com",
 										files$url))
+	
+	item <- item_get(item$id)
+	
+	expect_equal(item$files[[1]]$checksum$value, as.character(tools::md5sum(system.file("examples/data.csv", package="sbtools"))))
 	
 	unlink(dl_files)
 	
