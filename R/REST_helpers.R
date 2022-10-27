@@ -151,7 +151,7 @@ handle_errors <- function(x, url, method, types) {
 	if ('errors' %in% names(content(x))) {
 		
 		if(length(errors <- content(x)$errors) == 1) {
-			message(errors$message, call. = FALSE)
+			message(errors[[1]]$message, call. = FALSE)
 		} else {
 			message(paste(sapply(errors, function (x) x$message), collapse = "\n"), call. = FALSE)
 		}
