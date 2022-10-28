@@ -33,4 +33,5 @@ test_that("session age works on internal session",{
 	expect_false(suppressWarnings(session_expired()))
 	
 	sbtools:::session_set(NULL)
+	sbtools:::set_expiration(as.difftime("00:59:00"))
 })

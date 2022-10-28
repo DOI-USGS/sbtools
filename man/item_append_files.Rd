@@ -41,5 +41,6 @@ Adds a file to an item
 res <- item_create(user_id(), "testing 123")
 cat("foo bar", file = "foobar.txt")
 item_append_files(res$id, "foobar.txt")
+item_rm(res)
 }
 }
