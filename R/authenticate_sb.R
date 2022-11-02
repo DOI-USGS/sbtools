@@ -13,7 +13,11 @@
 #' @export
 authenticate_sb = function(username, password){
 	
-	if(missing(username) && !interactive()){
+	if(missing(username)) {
+		username <- try(session_details(session=current_session())$username)
+	}
+	
+	if(inherits(username, "try-error") && !interactive()){
 		
 		stop('username required for authentication')
 	
@@ -26,10 +30,18 @@ authenticate_sb = function(username, password){
 		
 	}
 	
-	if(!interactive() & missing(password)){
+	if(missing(password)) {
+		password <- try(keyring::key_get("sciencebase", username))
+	}
+	
+	if(!interactive() & inherits(password, "try-error")){
+		
 		stop('No password supplied to authenticate_sciencebase in a non-interactive session.')
-	}else{
+		
+	} else {
+		
 		password = ifelse(missing(password), readPassword('Please enter your Sciencebase password:'), password)
+		
 	}
 	
 	h = handle(pkg.env$url_base)

@@ -195,6 +195,7 @@ cloud_upload <- function(file, mimetype, itemid, chunk_size_bytes = pkg.env$chun
 		part_number <- part_number + 1
 		
 		refresh_token_before_expired()
+		session_renew()
 		
 		presignedUrl <- get_presigned_url_for_chunk(f_path, session_id, part_number, gql)
 		
@@ -246,22 +247,28 @@ wait_till_up <- function(item, f) {
 	found <- FALSE
 	w <- 1
 	
+	wait_time <- 5
+	
 	while(!found) {
+		
+		refresh_token_before_expired()
+		session_renew()
 		
 		files <- item_list_files(item)
 		
 		if(nrow(files > 1) && grepl(f, attr(files, "cloud")[[1]]$key)) {
 			found <- TRUE
 		} else {
-			Sys.sleep(5)
+			Sys.sleep(wait_time)
 		}
 		
 		w <- w + 1
 		
 		message("checking for uploaded file")
 		
-		if(w > 12) stop("cloud upload failed?")
-		
+		if(w > 20) stop("cloud upload failed?")
+	
+		wait_time <- wait_time * 2	
 	}
 	
 	return(as.sbitem(item))

@@ -1,7 +1,7 @@
 Package: sbtools
 Title: USGS ScienceBase Tools
 Maintainer: David Blodgett <dblodgett@usgs.gov>
-Version: 1.1.20
+Version: 1.1.21
 Authors@R: c(person("David", "Blodgett", role=c("cre"),
     email = "dblodgett@usgs.gov"),
     person("Luke", "Winslow", role = c("aut"),
@@ -23,7 +23,8 @@ Imports:
     methods,
     mime,
     utils,
-    cli
+    cli,
+    keyring
 Suggests:
     testthat,
     xml2,
