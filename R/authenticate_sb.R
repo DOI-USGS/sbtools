@@ -19,7 +19,7 @@ authenticate_sb = function(username, password){
 		username <- try(session_details(session=current_session())$username)
 	}
 	
-	if(inherits(username, "try-error") && !interactive()){
+	if((inherits(username, "try-error") | is.null(username)) && !interactive()){
 		
 		stop('username required for authentication')
 	
@@ -33,7 +33,7 @@ authenticate_sb = function(username, password){
 	}
 	
 	if(missing(password)) {
-		password <- try(keyring::key_get("sciencebase", username))
+		password <- try(keyring::key_get("sciencebase", username), silent = TRUE)
 	}
 	
 	if(!interactive() & inherits(password, "try-error")){
