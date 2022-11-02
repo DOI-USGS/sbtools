@@ -6,7 +6,9 @@
 #' enter them.
 #' 
 #' @param username Sciencebase username
-#' @param password Sciencebase password, prompts user if not supplied
+#' @param password Sciencebase password, prompts user if not supplied and
+#' no password is returned by `keyring::key_get("sciencebase", username)`.
+#' See \code{\link[keyring]{keyring-package}} documentation for more details.
 #'   
 #' @import httr
 #'   
