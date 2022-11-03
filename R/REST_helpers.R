@@ -14,7 +14,7 @@ sbtools_POST <- function(url, body, ..., session){
 	if(!check_session(session))
 		return(NULL)
 	
-	r = POST(url=url, ..., httrUserAgent(), accept_json(), body=body, handle=session, 
+	r = RETRY(verb = "POST", url=url, ..., httrUserAgent(), accept_json(), body=body, handle=session, 
 					 timeout = httr::timeout(default_timeout())) 
 	r <- handle_errors(r, url, "POST", supported_types)	
 	# if (!strsplit(headers(r)[['content-type']], '[;]')[[1]][1] %in% supported_types)
@@ -39,7 +39,8 @@ sbtools_POST <- function(url, body, ..., session){
 sbtools_GET <- function(url, ..., session = NULL) {
 	supported_types <- c('text/plain','text/csv','text/tab-separated-values','application/json','application/x-gzip', 'application/pdf')
 	r <- tryCatch({
-		GET(url = url, ..., httrUserAgent(), handle = session, timeout = httr::timeout(default_timeout()))
+		RETRY(verb = "GET", url = url, ..., httrUserAgent(), handle = session, 
+								timeout = httr::timeout(default_timeout()))
 	}, error = function(e) {
 		if(grepl("Item not found", e))  {
 			warning(e)
@@ -76,7 +77,8 @@ sbtools_PUT <- function(url, body, ..., session) {
 	if(!check_session(session))
 		return(NULL)
 	
-	r <- PUT(url = url, ..., httrUserAgent(), body = body, handle = session, timeout = httr::timeout(default_timeout()))
+	r <- RETRY(verb = "PUT", url = url, ..., httrUserAgent(), body = body, 
+						 handle = session, timeout = httr::timeout(default_timeout()))
 	r <- handle_errors(r, url, "PUT", NULL)
 	session_age_reset()
 	return(r)
@@ -106,7 +108,7 @@ sbtools_DELETE <- function(url, ..., session) {
 		stop("Deleting a user id is not supported.") #notest
 	}
 	
-	r = DELETE(url = url, ..., httrUserAgent(), accept_json(), 
+	r = RETRY(verb = "DELETE", url = url, ..., httrUserAgent(), accept_json(), 
 						 handle = session, timeout = httr::timeout(default_timeout()))
 	r <- handle_errors(r, url, "DELETE", NULL)
 	session_age_reset()
@@ -116,13 +118,13 @@ sbtools_DELETE <- function(url, ..., session) {
 # HEAD fxn
 sbtools_HEAD <- function(url, ..., session) {
 	session_val(session)
-	r <- tryCatch(HEAD(url = url, ..., httrUserAgent(), handle = session,
+	r <- tryCatch(RETRY("HEAD", url = url, ..., httrUserAgent(), handle = session,
 										 timeout = httr::timeout(default_timeout())),
-					 error = function(e) {
-							warning(paste("Something went wrong with request: \n",
-														e))
-					 		return(list(status_code = 400))
-					 })
+								error = function(e) {
+									warning(paste("Something went wrong with request: \n",
+																e))
+									return(list(status_code = 400))
+								})
 	log <- if (r$status_code == 200) TRUE else FALSE
 	session_age_reset()
 	return(log)

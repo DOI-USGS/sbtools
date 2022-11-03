@@ -9,7 +9,9 @@ authenticate_sb(username, password)
 \arguments{
 \item{username}{Sciencebase username}
 
-\item{password}{Sciencebase password, prompts user if not supplied}
+\item{password}{Sciencebase password, prompts user if not supplied and
+no password is returned by `keyring::key_get("sciencebase", username)`.
+See \code{\link[keyring]{keyring-package}} documentation for more details.}
 }
 \description{
 This connects to SB, authenticates and gets a session token for communicating

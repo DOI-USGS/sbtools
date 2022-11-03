@@ -11,7 +11,7 @@ session_logout <- function(..., session = current_session()) {
 	if (!is_logged_in(session = session)) {
 		stop("You're not logged in. See ?authenticate_sb", call. = FALSE)
 	}
-	ret <- httr::POST(paste0(pkg.env$url_base, 'j_spring_security_logout'), handle = session, ...)
+	ret <- RETRY("POST", paste0(pkg.env$url_base, 'j_spring_security_logout'), handle = session, ...)
 	if (ret$status_code != 200) {
 		stop("Logout did not succeed", call. = FALSE)
 	}

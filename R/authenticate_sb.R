@@ -6,14 +6,20 @@
 #' enter them.
 #' 
 #' @param username Sciencebase username
-#' @param password Sciencebase password, prompts user if not supplied
+#' @param password Sciencebase password, prompts user if not supplied and
+#' no password is returned by `keyring::key_get("sciencebase", username)`.
+#' See \code{\link[keyring]{keyring-package}} documentation for more details.
 #'   
 #' @import httr
 #'   
 #' @export
 authenticate_sb = function(username, password){
 	
-	if(missing(username) && !interactive()){
+	if(missing(username)) {
+		username <- try(session_details(session=current_session())$username)
+	}
+	
+	if((inherits(username, "try-error") | is.null(username)) && !interactive()){
 		
 		stop('username required for authentication')
 	
@@ -26,18 +32,26 @@ authenticate_sb = function(username, password){
 		
 	}
 	
-	if(!interactive() & missing(password)){
+	if(missing(password)) {
+		password <- try(keyring::key_get("sciencebase", username), silent = TRUE)
+	}
+	
+	if(!interactive() & inherits(password, "try-error")){
+		
 		stop('No password supplied to authenticate_sciencebase in a non-interactive session.')
-	}else{
+		
+	} else {
+		
 		password = ifelse(missing(password), readPassword('Please enter your Sciencebase password:'), password)
+		
 	}
 	
 	h = handle(pkg.env$url_base)
 	
 	## authenticate
-	resp = GET(pkg.env$url_base, accept_json(), 
-						 authenticate(username, password, type='basic'),
-						 handle=h, timeout = httr::timeout(default_timeout()))
+	resp = RETRY("GET", pkg.env$url_base, accept_json(), 
+							 authenticate(username, password, type='basic'),
+							 handle=h, timeout = httr::timeout(default_timeout()))
 	
 	if(!any(resp$cookies$name %in% 'JSESSIONID')){
 		stop('Unable to authenticate to SB. Check username and password')
@@ -45,13 +59,13 @@ authenticate_sb = function(username, password){
 	
 	token_url <- pkg.env$token_url
 	
-	token <- POST(token_url, 
-								body = list(
-									client_id = pkg.env$keycloak_client_id,
-									grant_type = "password",
-									username = username,
-									password = password
-								), encode = "form")
+	token <- RETRY("POST", token_url, 
+								 body = list(
+								 	client_id = pkg.env$keycloak_client_id,
+								 	grant_type = "password",
+								 	username = username,
+								 	password = password
+								 ), encode = "form")
 	
 	if(!token$status_code == 200) {
 		
