@@ -1,3 +1,9 @@
+# Version 1.1.21
+
+- All web calls now use `httr::RETRY()` to be a bit more robust. #213
+- Password management can now be done with the [`keyring` package.](https://r-lib.github.io/keyring/index.html)
+- File uploads for very large files should now be more robust with longer time out tolerances.
+
 # Version 1.1.20 (2022-10-27)
 
 Added checksum validation to both regular and cloud uploads.
