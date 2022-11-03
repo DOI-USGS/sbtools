@@ -49,9 +49,9 @@ authenticate_sb = function(username, password){
 	h = handle(pkg.env$url_base)
 	
 	## authenticate
-	resp = GET(pkg.env$url_base, accept_json(), 
-						 authenticate(username, password, type='basic'),
-						 handle=h, timeout = httr::timeout(default_timeout()))
+	resp = RETRY("GET", pkg.env$url_base, accept_json(), 
+							 authenticate(username, password, type='basic'),
+							 handle=h, timeout = httr::timeout(default_timeout()))
 	
 	if(!any(resp$cookies$name %in% 'JSESSIONID')){
 		stop('Unable to authenticate to SB. Check username and password')
@@ -59,13 +59,13 @@ authenticate_sb = function(username, password){
 	
 	token_url <- pkg.env$token_url
 	
-	token <- POST(token_url, 
-								body = list(
-									client_id = pkg.env$keycloak_client_id,
-									grant_type = "password",
-									username = username,
-									password = password
-								), encode = "form")
+	token <- RETRY("POST", token_url, 
+								 body = list(
+								 	client_id = pkg.env$keycloak_client_id,
+								 	grant_type = "password",
+								 	username = username,
+								 	password = password
+								 ), encode = "form")
 	
 	if(!token$status_code == 200) {
 		

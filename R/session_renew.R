@@ -91,7 +91,7 @@ token_refresh <- function() {
 		grant_type = "refresh_token",
 		refresh_token = get_refresh_token())
 	
-	token <- httr::POST(pkg.env$token_url, body = data, encode = "form")
+	token <- RETRY("POST", pkg.env$token_url, body = data, encode = "form")
 	
 	if(!token$status_code == 200)
 		warning('Unable to refresh SB cloud token. Some functionality may not work.')

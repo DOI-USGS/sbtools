@@ -199,7 +199,7 @@ cloud_upload <- function(file, mimetype, itemid, chunk_size_bytes = pkg.env$chun
 		
 		presignedUrl <- get_presigned_url_for_chunk(f_path, session_id, part_number, gql)
 		
-		put_chunk <- httr::PUT(presignedUrl, body = chunk)
+		put_chunk <- RETRY("PUT", presignedUrl, body = chunk)
 		
 		if(!put_chunk$status_code == 200) stop(paste("Error uploading file. \n",
 																					 "status:", put_chunk$status_code,
