@@ -254,9 +254,11 @@ wait_till_up <- function(item, f) {
 		refresh_token_before_expired()
 		session_renew()
 		
-		files <- item_list_files(item)
+		files <- item_list_files(item, fetch_cloud_urls = FALSE)
 		
-		if(nrow(files > 1) && grepl(f, attr(files, "cloud")[[1]]$key)) {
+		keys <- sapply(attr(files, "cloud"), function(x) x$key)
+		
+		if(nrow(files > 1) && any(grepl(f, keys))) {
 			found <- TRUE
 		} else {
 			Sys.sleep(wait_time)
