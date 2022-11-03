@@ -67,7 +67,7 @@ session_renew = function(password, ..., username, session=current_session()){
 		
 		# re-authenticate, handling missing parameters as needed
 		if(sb_username=="") stop("new authentication is necessary; call authenticate_sb()")
-		if(inherits("try-error")) stop("re-authentication is necessary; need password")
+		if(inherits(password, "try-error")) stop("re-authentication is necessary; need password")
 		
 		invisible(authenticate_sb(sb_username, password))
 	}
