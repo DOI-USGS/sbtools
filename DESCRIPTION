@@ -1,7 +1,7 @@
 Package: sbtools
 Title: USGS ScienceBase Tools
 Maintainer: David Blodgett <dblodgett@usgs.gov>
-Version: 1.1.21
+Version: 1.2.0.9000
 Authors@R: c(person("David", "Blodgett", role=c("cre"),
     email = "dblodgett@usgs.gov"),
     person("Luke", "Winslow", role = c("aut"),
