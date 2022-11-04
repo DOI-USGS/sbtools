@@ -1,4 +1,4 @@
-# Version 1.1.21
+# Version 1.1.21 (2022-11-03)
 
 - All web calls now use `httr::RETRY()` to be a bit more robust. #213
 - Password management can now be done with the [`keyring` package.](https://r-lib.github.io/keyring/index.html)
