@@ -101,11 +101,13 @@ For release of the sbtools package, a number of steps are required.
 1. Ensure all checks pass and code coverage is adequate.
 1. Ensure `NEWS.md` reflects updates in version.
 1. Update `DESCRIPTION` to reflect release version.
+1. Convert `DISCLAIMER.md` to approved language and rebuild `README.Rmd`.
+1. Create release candidate branch and commit release candidate.
 1. Build source package and upload to CRAN.
-1. Once accepted to CRAN, convert `DISCLAIMER.md` to approved language.
-1. Change references to main branch in `code.json` to release version.
-1. Commit changes and tag repository at release version. Push tag.
-1. Change `code.json` and `DISCLAIMER.md` back to development mode.
+1. Once accepted to CRAN, tag release candidate branch an push to repositories.
+1. Change `DISCLAIMER.md` back to development mode and increment description version.
+1. Merge release candidate and commit.
+1. Open PR/MR in development state.
 
 ```{r disclaimer, child="DISCLAIMER.md", eval=TRUE}
 
