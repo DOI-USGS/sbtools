@@ -1,0 +1,116 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+ScienceBase R Tools
+===
+
+Tools for interfacing R with ScienceBase data services.
+
+## Package Description
+
+This package provides a rich interface to USGS's [ScienceBase](https://www.sciencebase.gov/), a data cataloging and collaborative data management platform. For further information, see the [sbtools manuscript in The R Journal](https://journal.r-project.org/archive/2016-1/winslow-chamberlain-appling-etal.pdf) (USGS IP-075498). See `citation('sbtools')` for how to cite the package.
+
+### Recommended Citation:
+
+```
+  Winslow, LA, S Chamberlain, AP Appling, and JS Read. 2016. sbtools: 
+  A package connecting R to cloud-based data for collaborative online 
+  research. The R Journal 8:387-398.
+```
+
+Package source code DOI: https://doi.org/10.5066/P912NGFV
+
+|Linux|Test Coverage|
+|----------|------------|
+| ![R-CMD-check](https://github.com/usgs-r/sbtools/workflows/R-CMD-check/badge.svg) |[![codecov.io](https://codecov.io/github/USGS-R/sbtools/coverage.svg?branch=master)](https://codecov.io/github/USGS-R/sbtools?branch=master)|
+
+### Current CRAN information
+
+|Version|Monthly Downloads|Total Downloads|
+|----------|------------|------------|
+|[![CRAN version](https://www.r-pkg.org/badges/version/sbtools)](https://cran.r-project.org/package=sbtools)|[![](https://cranlogs.r-pkg.org/badges/sbtools)](https://cran.r-project.org/package=sbtools)|[![](https://cranlogs.r-pkg.org/badges/grand-total/sbtools)](https://cran.r-project.org/package=sbtools)|
+
+## Package Installation
+To install the `sbtools` package, you must be using R 3.0 or greater and run the following command:
+
+```r
+install.packages("sbtools")
+```
+
+To get cutting-edge changes, install from GitHub using the `devtools` packages:
+
+```r
+remotes::install_github("USGS-R/sbtools")
+```
+
+## Reporting bugs
+
+Please consider reporting bugs and asking questions on the Issues page:
+
+[https://github.com/USGS-R/sbtools/issues](https://github.com/USGS-R/sbtools/issues)
+
+
+Follow `@USGS_R` on Twitter for updates on USGS R packages:
+
+[![Twitter Follow](https://img.shields.io/twitter/follow/USGS_R.svg?style=social&label=Follow%20USGS_R)](https://twitter.com/USGS_R)
+
+## Examples
+
+```{r example, eval=TRUE}
+library(sbtools)
+
+# Query ScienceBase for data about Antarctica
+query_sb_text('Antarctica', limit=1)
+
+# Query for a specific DOI
+query_sb_doi('10.5066/F7M043G7')
+
+# Inspect the contents of the above item
+children <- item_list_children('557f0367e4b023124e8ef621')
+sapply(children, function(child) child$title)
+
+# Log in (requires a ScienceBase account) and create an item
+authenticate_sb(Sys.getenv("sb_user")) # type in password
+my_home_item <- user_id()
+new_item <- item_create(title = 'new test item', parent_id = my_home_item)
+test.txt <- file.path(tempdir(), 'test.txt')
+writeLines(c('this is','my data file'), "test.txt")
+item_append_files(new_item, "test.txt")
+item_list_files(new_item)$fname
+
+item_rm(new_item)
+unlink("test.txt")
+```
+
+## Release Procedure
+
+For release of the sbtools package, a number of steps are required.
+
+1. Ensure all checks pass and code coverage is adequate.
+1. Ensure `NEWS.md` reflects updates in version.
+1. Update `DESCRIPTION` to reflect release version.
+1. Build source package and upload to CRAN.
+1. Once accepted to CRAN, convert `DISCLAIMER.md` to approved language.
+1. Change references to main branch in `code.json` to release version.
+1. Commit changes and tag repository at release version. Push tag.
+1. Change `code.json` and `DISCLAIMER.md` back to development mode.
+
+```{r disclaimer, child="DISCLAIMER.md", eval=TRUE}
+
+```
+
+ [
+    ![CC0](https://i.creativecommons.org/p/zero/1.0/88x31.png)
+  ](https://creativecommons.org/publicdomain/zero/1.0/)

@@ -41,17 +41,34 @@ session_renew = function(password, ..., username, session=current_session()){
 			stop("username argument does not match session username")
 		}
 	}
+
+	if(missing(username) && !exists("sb_username"))
+		sb_username <- session_details(session=session)$username
 	
+	password <- try(keyring::key_get("sciencebase", sb_username))
+		
 	# either renew or re-authenticate as needed
 	if(is_logged_in(session=session)) {
-		# the GET call to 'status' resets the remote (SB) info on session age, while 
-		# sbtools_GET resets the local info on session age
-		sbtools_GET(url=paste0(pkg.env$url_base, "status?format=json"), session=session)
-		invisible(session)
+		
+		if(!inherits(password, "try-error")) {
+			
+			# just reauthenticate
+			invisible(authenticate_sb(username, password))
+			
+		} else {
+			
+			# the GET call to 'status' resets the remote (SB) info on session age, while 
+			# sbtools_GET resets the local info on session age
+			sbtools_GET(url=paste0(pkg.env$url_base, "status?format=json"), session=session)
+			invisible(session)
+			
+		}
 	} else {
+		
 		# re-authenticate, handling missing parameters as needed
 		if(sb_username=="") stop("new authentication is necessary; call authenticate_sb()")
-		if(missing(password)) stop("re-authentication is necessary; need password")
+		if(inherits(password, "try-error")) stop("re-authentication is necessary; need password")
+		
 		invisible(authenticate_sb(sb_username, password))
 	}
 }
@@ -74,7 +91,7 @@ token_refresh <- function() {
 		grant_type = "refresh_token",
 		refresh_token = get_refresh_token())
 	
-	token <- httr::POST(pkg.env$token_url, body = data, encode = "form")
+	token <- RETRY("POST", pkg.env$token_url, body = data, encode = "form")
 	
 	if(!token$status_code == 200)
 		warning('Unable to refresh SB cloud token. Some functionality may not work.')

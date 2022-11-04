@@ -3,52 +3,116 @@
     "name": "sbtools",
     "organization": "U.S. Geological Survey",
     "description": "USGS ScienceBase Tools",
-    "version": "1.1.16",
+    "version": "v1.1.21",
     "status": "Production",
-
     "permissions": {
       "usageType": "openSource",
       "licenses": [
         {
           "name": "Public Domain, CC0-1.0",
-          "URL": "https://code.usgs.gov/water/sbtools/blob/v1.1.15/LICENSE.md"
+          "URL": "https://code.usgs.gov/water/sbtools/-/raw/v1.1.21/LICENSE.md"
         }
-        ]
+      ]
     },
-
-    "homepageURL": "https://code.usgs.gov/water/sbtools",
-    "downloadURL": "https://code.usgs.gov/water/sbtools/-/archive/master/sbtools-master.zip",
-    "disclaimerURL": "https://code.usgs.gov/water/sbtools/-/blob/master/DISCLAIMER.md",
+    "homepageURL": "https://code.usgs.gov/water/sbtools/",
+    "downloadURL": "https://code.usgs.gov/water/sbtools/-/archive/v1.1.21/sbtools-v1.1.21.zip",
+    "disclaimerURL": "https://code.usgs.gov/water/sbtools/-/raw/v1.1.21/DISCLAIMER.md",
     "repositoryURL": "https://code.usgs.gov/water/sbtools.git",
     "vcs": "git",
-
-    "laborHours": 1000,
-
+    "laborHours": 1020,
     "tags": [
       "USGS",
       "sciencebase"
-      ],
-
+    ],
     "languages": [
       "R"
-      ],
-
+    ],
     "contact": {
       "name": "David Blodgett",
       "email": "dblodgett@usgs.gov"
     },
-
+    "date": {
+      "metadataLastUpdated": "2022-11-03"
+    }
+  },
+  {
+    "name": "sbtools",
+    "organization": "U.S. Geological Survey",
+    "description": "USGS ScienceBase Tools",
+    "version": "v1.1.20",
+    "status": "Production",
+    "permissions": {
+      "usageType": "openSource",
+      "licenses": [
+        {
+          "name": "Public Domain, CC0-1.0",
+          "URL": "https://code.usgs.gov/water/sbtools/-/raw/v1.1.20/LICENSE.md"
+        }
+      ]
+    },
+    "homepageURL": "https://code.usgs.gov/water/sbtools/",
+    "downloadURL": "https://code.usgs.gov/water/sbtools/-/archive/v1.1.20/sbtools-v1.1.20.zip",
+    "disclaimerURL": "https://code.usgs.gov/water/sbtools/-/raw/v1.1.20/DISCLAIMER.md",
+    "repositoryURL": "https://code.usgs.gov/water/sbtools.git",
+    "vcs": "git",
+    "laborHours": 1000,
+    "tags": [
+      "USGS",
+      "sciencebase"
+    ],
+    "languages": [
+      "R"
+    ],
+    "contact": {
+      "name": "David Blodgett",
+      "email": "dblodgett@usgs.gov"
+    },
+    "date": {
+      "metadataLastUpdated": "2022-10-27"
+    }
+  },
+  {
+    "name": "sbtools",
+    "organization": "U.S. Geological Survey",
+    "description": "USGS ScienceBase Tools",
+    "version": "v1.1.16",
+    "status": "Production",
+    "permissions": {
+      "usageType": "openSource",
+      "licenses": [
+        {
+          "name": "Public Domain, CC0-1.0",
+          "URL": "https://code.usgs.gov/water/sbtools/blob/v1.1.16/LICENSE.md"
+        }
+      ]
+    },
+    "homepageURL": "https://code.usgs.gov/water/sbtools",
+    "downloadURL": "https://code.usgs.gov/water/sbtools/-/archive/v1.1.16/sbtools-master.zip",
+    "disclaimerURL": "https://code.usgs.gov/water/sbtools/-/blob/v1.1.16/DISCLAIMER.md",
+    "repositoryURL": "https://code.usgs.gov/water/sbtools.git",
+    "vcs": "git",
+    "laborHours": 1000,
+    "tags": [
+      "USGS",
+      "sciencebase"
+    ],
+    "languages": [
+      "R"
+    ],
+    "contact": {
+      "name": "David Blodgett",
+      "email": "dblodgett@usgs.gov"
+    },
     "date": {
       "metadataLastUpdated": "2020-06-07"
     }
-  }, 
+  },
   {
     "name": "sbtools",
     "organization": "U.S. Geological Survey",
     "description": "USGS ScienceBase Tools",
     "version": "1.1.15",
     "status": "Production",
-
     "permissions": {
       "usageType": "openSource",
       "licenses": [
@@ -56,42 +120,35 @@
           "name": "Public Domain, CC0-1.0",
           "URL": "https://code.usgs.gov/water/sbtools/blob/v1.1.15/LICENSE.md"
         }
-        ]
+      ]
     },
-
     "homepageURL": "https://code.usgs.gov/water/sbtools",
     "downloadURL": "https://code.usgs.gov/water/sbtools/-/archive/v1.1.15/sbtools-v1.1.15.zip",
     "disclaimerURL": "https://code.usgs.gov/water/sbtools/-/blob/v1.1.15/DISCLAIMER.md",
     "repositoryURL": "https://code.usgs.gov/water/sbtools.git",
     "vcs": "git",
-
     "laborHours": 1000,
-
     "tags": [
       "USGS",
       "sciencebase"
-      ],
-
+    ],
     "languages": [
       "R"
-      ],
-
+    ],
     "contact": {
       "name": "David Blodgett",
       "email": "dblodgett@usgs.gov"
     },
-
     "date": {
       "metadataLastUpdated": "2020-06-07"
     }
-  }, 
+  },
   {
     "name": "sbtools",
     "organization": "U.S. Geological Survey",
     "description": "USGS ScienceBase Tools",
     "version": "1.1.14",
     "status": "Production",
-
     "permissions": {
       "usageType": "openSource",
       "licenses": [
@@ -99,33 +156,63 @@
           "name": "Public Domain, CC0-1.0",
           "URL": "https://code.usgs.gov/water/sbtools/blob/v1.1.14/LICENSE.md"
         }
-        ]
+      ]
     },
-
     "homepageURL": "https://code.usgs.gov/water/sbtools/-/tree/v1.1.14",
     "downloadURL": "https://code.usgs.gov/water/sbtools/-/archive/v1.1.14/sbtools-v1.1.14.zip",
     "disclaimerURL": "https://code.usgs.gov/water/sbtools/-/blob/v1.1.14/DISCLAIMER.md",
     "repositoryURL": "https://code.usgs.gov/water/sbtools.git",
     "vcs": "git",
-
     "laborHours": 1000,
-
     "tags": [
       "USGS",
       "sciencebase"
-      ],
-
+    ],
     "languages": [
       "R"
-      ],
-
+    ],
     "contact": {
       "name": "David Blodgett",
       "email": "dblodgett@usgs.gov"
     },
-
     "date": {
       "metadataLastUpdated": "2020-12-10"
     }
+  },
+  {
+    "name": "sbtools",
+    "organization": "U.S. Geological Survey",
+    "description": "USGS ScienceBase Tools",
+    "version": "main",
+    "status": "Production",
+    "permissions": {
+      "usageType": "openSource",
+      "licenses": [
+        {
+          "name": "Public Domain, CC0-1.0",
+          "URL": "https://code.usgs.gov/water/sbtools/-/raw/main/LICENSE.md"
+        }
+      ]
+    },
+    "homepageURL": "https://code.usgs.gov/water/sbtools/",
+    "downloadURL": "https://code.usgs.gov/water/sbtools/-/archive/main/sbtools-main.zip",
+    "disclaimerURL": "https://code.usgs.gov/water/sbtools/-/raw/main/DISCLAIMER.md",
+    "repositoryURL": "https://code.usgs.gov/water/sbtools.git",
+    "vcs": "git",
+    "laborHours": 1020,
+    "tags": [
+      "USGS",
+      "sciencebase"
+    ],
+    "languages": [
+      "R"
+    ],
+    "contact": {
+      "name": "David Blodgett",
+      "email": "dblodgett@usgs.gov"
+    },
+    "date": {
+      "metadataLastUpdated": "2022-11-03"
+    }
   }
-]
+] 

@@ -76,12 +76,12 @@ item_file_download = function(sb_id, ..., names, destinations,
 				
 			}
 			
-		  message(paste("downloading file", flist[i,]$dest))
+			message(paste("downloading file", flist[i,]$dest))
 			
-			GET(url=flist[i,]$url, ..., 
-					write_disk(flist[i,]$dest, overwrite = overwrite_file), 
-					handle=session, timeout = httr::timeout(default_timeout()),
-					httr::progress())
+			RETRY("GET", url=flist[i,]$url, ..., 
+						write_disk(flist[i,]$dest, overwrite = overwrite_file), 
+						handle=session, timeout = httr::timeout(default_timeout()),
+						httr::progress())
 			
 		}, error = function(e) {
 			if(file.exists(flist[i,]$dest)) {

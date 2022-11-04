@@ -11,7 +11,7 @@ test_that("session validation works appropriately", {
 	set_expiration(as.difftime("00:00:01"))
 	Sys.sleep(2)
 	expect_false(session_validate(session))
-	
+	set_expiration(as.difftime("00:59:00"))
 })
 
 

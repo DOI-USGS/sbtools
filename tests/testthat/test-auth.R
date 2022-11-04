@@ -1,8 +1,8 @@
 context("test sb functionality requiring authentication")
 
 test_that("not_logged in tests", {
-	expect_error(sbtools:::get_access_token(), "no token found, must call athenticate_sb()")
-	expect_error(sbtools:::get_refresh_token(), "no token found, must call athenticate_sb()")
+	expect_error(sbtools:::get_access_token(), "no token found, must call authenticate_sb()")
+	expect_error(sbtools:::get_refresh_token(), "no token found, must call authenticate_sb()")
 	
 	expect_error(authenticate_sb(), 'username required for authentication')
 	
@@ -76,6 +76,28 @@ test_that("item creation, identifiers, and file upload works", {
 	
 	item = item_create(title="automated testing item")
 	
+	test_file <- system.file("examples/data.csv", package="sbtools")
+
+	test_2 <- file.path(tempdir(check = TRUE), "test.csv")
+
+	file.copy(test_file, test_2)	
+	
+	item <- item_append_files(item, test_file)
+	
+	expect_equal(unname(tools::md5sum(test_file)), item$files[[1]]$checksum$value)
+	
+	item <- item_append_files(item, test_2)
+	
+	expect_equal(unname(tools::md5sum(test_2)), item$files[[2]]$checksum$value)
+	
+	item <- item_rm_files(item)
+	
+	expect_true(is.null(item$files))
+	
+	item_rm(item)
+	
+	item = item_create(title="automated testing item")
+	
 	expect_message(
 	output <- capture_output(cloud_file <- item_upload_cloud(item, system.file("examples/data.csv", package="sbtools"), status = TRUE)),
 	"Uploading.*")
@@ -84,7 +106,7 @@ test_that("item creation, identifiers, and file upload works", {
 	
 	expect_equal(cloud_file, "Success")
 	
-	found <- FALSE
+  found <- FALSE
 	w <- 1
 	
 	while(!found) {
@@ -108,6 +130,10 @@ test_that("item creation, identifiers, and file upload works", {
 	
 	expect_true(grepl("https://prod-is-usgs-sb-prod-content.s3.us-west-2.amazonaws.com",
 										files$url))
+	
+	item <- item_get(item$id)
+	
+	expect_equal(item$files[[1]]$checksum$value, as.character(tools::md5sum(system.file("examples/data.csv", package="sbtools"))))
 	
 	unlink(dl_files)
 	

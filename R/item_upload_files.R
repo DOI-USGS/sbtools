@@ -65,6 +65,7 @@ item_upload_create = function(parent_id, files, ..., scrape_files = TRUE, sessio
 #' res <- item_create(user_id(), "testing 123")
 #' cat("foo bar", file = "foobar.txt")
 #' item_append_files(res$id, "foobar.txt")
+#' item_rm(res)
 #' }
 #' @export
 item_append_files = function(sb_id, files, ..., scrape_files = TRUE, session=current_session()){
@@ -77,7 +78,9 @@ item_append_files = function(sb_id, files, ..., scrape_files = TRUE, session=cur
 	
 	if(is.null(item)) return(NULL)
 	
-	params <- paste0("?id=", item$id)
+	sums <- lapply(files, tools::md5sum)
+	
+	params <- paste0("?id=", item$id, paste(paste0("&md5Checksum=", sums), collapse = ""))
 	
 	if(!scrape_files) {
 		params <- paste0(params, "&scrapeFile=false")
@@ -192,14 +195,23 @@ cloud_upload <- function(file, mimetype, itemid, chunk_size_bytes = pkg.env$chun
 		part_number <- part_number + 1
 		
 		refresh_token_before_expired()
+		session_renew()
 		
 		presignedUrl <- get_presigned_url_for_chunk(f_path, session_id, part_number, gql)
 		
-		put_chunk <- httr::PUT(presignedUrl, body = chunk)
+		put_chunk <- RETRY("PUT", presignedUrl, body = chunk)
 		
 		if(!put_chunk$status_code == 200) stop(paste("Error uploading file. \n",
 																					 "status:", put_chunk$status_code,
 																					 "content:", rawToChar(put_chunk$content)))
+		
+		# verify the chunk recieved is the same as held locally
+		if(cli::hash_raw_md5(chunk) != gsub("\"", "", put_chunk$headers$ETag)) {
+			stop(paste("Error uploading file. \n",
+								 "A chunk recieved by the server is different than the origin. \n",
+								 "Please try again."))
+		}
+		
 		parts_header[[part_number]] <- list(ETag = put_chunk$headers$ETag,
 																				PartNumber = part_number)
 		if(status)
@@ -209,6 +221,57 @@ cloud_upload <- function(file, mimetype, itemid, chunk_size_bytes = pkg.env$chun
 	if(status)
 		close(pb)
 	
-	return(invisible(complete_multipart_upload(f_path, session_id, parts_header, gql)))
+	complete <- complete_multipart_upload(f_path, session_id, parts_header, gql)
 	
+	item <- wait_till_up(itemid, basename(file))
+	
+	fi <- which(sapply(item$files, function(x, file) {
+		x$name == basename(file)
+	}, file = file))
+	
+	item$files[[fi]]$checksum <- list(value = as.character(tools::md5sum(file)), 
+																	 type = 'MD5')
+	
+	res <- sbtools_PUT(paste0(pkg.env$url_item, item$id), 
+										 body = toJSON(unclass(item), 
+										 							auto_unbox = TRUE, 
+										 							null = "null"), 
+										 httr::accept_json(), 
+										 session = session)
+	
+	return(as.sbitem(content(res)))
+	
+}
+
+wait_till_up <- function(item, f) {
+	found <- FALSE
+	w <- 1
+	
+	wait_time <- 5
+	
+	while(!found) {
+		
+		refresh_token_before_expired()
+		session_renew()
+		
+		files <- item_list_files(item, fetch_cloud_urls = FALSE)
+		
+		keys <- sapply(attr(files, "cloud"), function(x) x$key)
+		
+		if(nrow(files > 1) && any(grepl(f, keys))) {
+			found <- TRUE
+		} else {
+			Sys.sleep(wait_time)
+		}
+		
+		w <- w + 1
+		
+		message("checking for uploaded file")
+		
+		if(w > 20) stop("cloud upload failed?")
+	
+		wait_time <- wait_time * 2	
+	}
+	
+	return(as.sbitem(item))
 }

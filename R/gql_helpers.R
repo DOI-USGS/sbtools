@@ -12,9 +12,9 @@ get_gql_header <- function() {
 #' @param json character json to pass -- shoul include gql query and additional content. 
 #' json is optional - it will default to just the query.
 run_gql_query <- function(q, gql, json = jsonlite::toJSON(list(query = q), auto_unbox = TRUE)) {
-	out <- httr::POST(pkg.env$graphql_url, get_gql_header(), 
-										body = json,  
-										handle = gql)
+	out <- RETRY("POST", pkg.env$graphql_url, get_gql_header(), 
+							 body = json,  
+							 handle = gql)
 	
 	if(out$status_code == 200) {
 		jsonlite::fromJSON(rawToChar(out$content))
