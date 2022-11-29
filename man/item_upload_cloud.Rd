@@ -38,6 +38,6 @@ Adds a file to an item in cloud storage
 \dontrun{
 res <- item_create(user_id(), "testing 123")
 cat("foo bar", file = "foobar.txt")
-item_append_files(res$id, "foobar.txt")
+item_upload_cloud(res$id, "foobar.txt")
 }
 }

@@ -65,3 +65,19 @@ get_cloud_download_url <- function(cr, gql) {
 	
 	run_gql_query(query, gql, json = json)
 }
+
+publish_cloud_object <- function(sb_id, fname, gql) {
+	
+	query <- "mutation handleMFActions($input: ManageFileInput!) {\n  handleMFActions(input: $input) {\n    percent\n    error\n    __typename\n  }\n}\n"	
+		
+	variables <- list(input = list(itemId = sb_id, filename = fname, 
+																 action = "publish", pathOnDisk = "__s3__"))
+	
+	json <- jsonlite::toJSON(list(operationName = "handleMFActions", 
+																variables = variables, query = query),
+													 auto_unbox = TRUE)
+	
+	run_gql_query(query, gql, json = json)
+	
+}
+

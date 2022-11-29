@@ -1,3 +1,7 @@
+# Version 0.2.1 (2022-11-28)
+
+- added `item_publish_cloud()` to push files to S3 public cloud storage.
+
 # Version 1.1.21 (2022-11-03)
 
 - All web calls now use `httr::RETRY()` to be a bit more robust. #213
