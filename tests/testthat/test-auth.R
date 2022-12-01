@@ -143,6 +143,12 @@ test_that("item creation, identifiers, and file upload works", {
 	
 	expect_true(file.exists(file.path(dir_name, "data.csv")))
 	
+	item_publish_cloud(item$id, "data.csv")
+	
+	item <- item_get(item$id)
+
+	expect_true(grepl("prod-is-usgs-sb-prod-publish", item$files[[1]]$publishedS3Ur))
+
 	#remove the test item when done
 	item_rm(item)
 	

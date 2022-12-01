@@ -143,7 +143,7 @@ multi_file_body <- function(files){
 #' @examples \dontrun{
 #' res <- item_create(user_id(), "testing 123")
 #' cat("foo bar", file = "foobar.txt")
-#' item_append_files(res$id, "foobar.txt")
+#' item_upload_cloud(res$id, "foobar.txt")
 #' }
 #' @export
 item_upload_cloud <- function(sb_id, files, ..., status = TRUE, session=current_session()) {
@@ -160,6 +160,33 @@ item_upload_cloud <- function(sb_id, files, ..., status = TRUE, session=current_
 	}
 	
 	return(invisible("Success"))
+	
+}
+
+#' @title Publish file to public cloud S3 bucket
+#' @description moves a cloud file from the S3 bucket only available via
+#' ScienceBase authenticated services to a public S3 bucket.
+#' @template manipulate_item
+#' @inheritParams item_upload_create
+#' @return web service response invisibly.
+#' @export
+#' 
+#' @examples \dontrun{
+#' res <- item_create(user_id(), "testing 123")
+#' cat("foo bar", file = "foobar.txt")
+#' item_upload_cloud(res$id, "foobar.txt")
+#' item_publish_cloud(res$id, "foobar.txt") 
+#' }
+#'
+item_publish_cloud <- function(sb_id, files, session = current_session()) {
+	
+	try(sb_id <- sb_id$id, silent = TRUE)
+	
+	gql <- httr::handle(url = pkg.env$graphql_url)
+	
+	for(file in files) {
+		invisible(publish_cloud_object(sb_id, file, gql))
+	}
 	
 }
 
@@ -249,7 +276,7 @@ wait_till_up <- function(item, f) {
 	
 	wait_time <- 5
 	
-	while(!found) {
+	while(!found | Sys.getenv("skip_sb_wait")  == "skip_sb_wait") {
 		
 		refresh_token_before_expired()
 		session_renew()
