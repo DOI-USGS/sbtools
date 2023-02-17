@@ -37,7 +37,7 @@ item_file_download = function(sb_id, ..., names, destinations,
 	if(!session_validate(session))
 		stop('Session state is invalid, please re-authenticate')
 
-	flist <- item_list_files(sb_id, ..., session=session)
+	flist <- item_list_files(sb_id, fetch_cloud_urls = FALSE, ..., session=session)
 	
 	if(nrow(flist) < 1)
 		stop(sb_id$id, ':Item has no attached files')

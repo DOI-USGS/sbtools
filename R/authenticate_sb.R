@@ -32,8 +32,13 @@ authenticate_sb = function(username, password){
 		
 	}
 	
+	keyring_pass = FALSE
 	if(missing(password)) {
+		
 		password <- try(keyring::key_get("sciencebase", username), silent = TRUE)
+		
+		if(!inherits(password, "try-error")) keyring_pass = TRUE
+		
 	}
 	
 	if(!interactive() & inherits(password, "try-error")){
@@ -42,7 +47,9 @@ authenticate_sb = function(username, password){
 		
 	} else {
 		
-		password = ifelse(missing(password), readPassword('Please enter your Sciencebase password:'), password)
+		password = ifelse(missing(password) | inherits(password, "try-error"), 
+											readPassword('Please enter your Sciencebase password:'), 
+											password)
 		
 	}
 	
@@ -54,6 +61,7 @@ authenticate_sb = function(username, password){
 							 handle=h, timeout = httr::timeout(default_timeout()))
 	
 	if(!any(resp$cookies$name %in% 'JSESSIONID')){
+		if(keyring_pass) stop("Sciencebase login failed with stored password?")
 		stop('Unable to authenticate to SB. Check username and password')
 	}
 	
