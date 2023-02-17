@@ -166,6 +166,11 @@ handle_errors <- function(x, url, method, types) {
 		
 		return(NULL)
 	}
+		
+		if(grepl("123456789", rawToChar(x$content))) {
+			message("The request was blocked by a firewall. Please contact the sbtools maintainer.")
+			message()
+		} 
 	
 	return(x)
 	}, error = function(e) {

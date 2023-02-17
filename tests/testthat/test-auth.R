@@ -1,5 +1,7 @@
 context("test sb functionality requiring authentication")
 
+user <- Sys.getenv("sb_user", unset=NA)
+
 test_that("not_logged in tests", {
 	expect_error(sbtools:::get_access_token(), "no token found, must call authenticate_sb()")
 	expect_error(sbtools:::get_refresh_token(), "no token found, must call authenticate_sb()")
@@ -8,6 +10,20 @@ test_that("not_logged in tests", {
 	
 	if(!interactive())
 		expect_error(authenticate_sb("dummy"), 'No password supplied to authenticate_sciencebase in a non-interactive session.')
+})
+
+test_that("authenticate_sb errors", {
+	skip_on_cran()
+	
+	if(is.na(user)){
+		skip("Authenticated tests skipped due to lack of login info")
+	}
+	
+	keyring::key_set_with_value("sciencebase", "test-user@usgs.gov", "broken")
+	
+	expect_error(authenticate_sb("test-user@usgs.gov"), 
+							 "Sciencebase login failed with stored password?")
+
 })
 
 test_that("authenticate_sb login results in valid session and renew works", {
@@ -139,7 +155,7 @@ test_that("item creation, identifiers, and file upload works", {
 	
 	mess <- capture_messages(dl_files <- item_file_download(item, dest_dir = dir_name))
 	
-	expect_equal(length(mess), 3)
+	expect_equal(length(mess), 2)
 	
 	expect_true(file.exists(file.path(dir_name, "data.csv")))
 	
