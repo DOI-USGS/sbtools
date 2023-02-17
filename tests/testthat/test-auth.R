@@ -171,6 +171,8 @@ test_that("item creation, identifiers, and file upload works", {
 	expect_message(item_get(item), 'Item not found*.')
 	
 	expect_silent(session_logout())
+	
+	expect_warning(item_list_files("57054bf2e4b0d4e2b756d364"))
 })
 
 
