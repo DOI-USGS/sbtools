@@ -118,7 +118,7 @@ item_list_files = function(sb_id, recursive = FALSE, fetch_cloud_urls = TRUE, ..
 			cloud[[i]]$useForPreview <- ifelse(!is.null(files[[i]]$useForPreview), 
 																								 files[[i]]$useForPreview, FALSE)
 			
-			if(fetch_cloud_urls) {
+			if(fetch_cloud_urls & is_logged_in()) {
 				
 				if(!exists("gql")) gql <- httr::handle(url = pkg.env$graphql_url)
 				
@@ -130,6 +130,10 @@ item_list_files = function(sb_id, recursive = FALSE, fetch_cloud_urls = TRUE, ..
 										 title = cloud[[i]]$title,
 										 useForPreview = cloud[[i]]$useForPreview),
 					gql)[[1]]$getS3DownloadUrl$downloadUri[1]
+				
+			} else if(fetch_cloud_urls & !is_logged_in()) {
+				
+				warning("Can't fetch cloud URLs as session is not logged in.")
 				
 			}
 			
