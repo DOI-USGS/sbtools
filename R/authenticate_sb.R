@@ -23,7 +23,7 @@ authenticate_sb = function(username, password){
 		
 		stop('username required for authentication')
 	
-	}else if(missing(username) && interactive()){
+	}else if(is.null(username) && interactive()){
 		
 		username = readline('Please enter your username:')
 		if(username == ""){
