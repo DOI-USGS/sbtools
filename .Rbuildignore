@@ -13,3 +13,4 @@ code.json
 .Renviron
 README.Rmd
 ^CRAN-SUBMISSION$
+cran-comments.md

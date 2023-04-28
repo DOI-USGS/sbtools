@@ -1,6 +1,6 @@
 citHeader("To cite the sbtools package in publications use:")
 citEntry(entry = "Article", 
-				 author = personList(
+				 author = c(
 				 	as.person("Luke A Winslow"), 
 				 	as.person("Scott Chamberlain"), 
 				 	as.person("Alison P Appling"), 
