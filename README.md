@@ -24,7 +24,7 @@ Package source code DOI: <https://doi.org/10.5066/P912NGFV>
 
 | Linux                                                                             | Test Coverage                                                                                                                                |
 |-----------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| ![R-CMD-check](https://github.com/doi-usgs/sbtools/workflows/R-CMD-check/badge.svg) | [![codecov.io](https://codecov.io/github/DOI-USGS/sbtools/coverage.svg?branch=master)](https://codecov.io/github/DOI-USGS/sbtools?branch=master) |
+| ![R-CMD-check](https://github.com/doi-usgs/sbtools/workflows/R-CMD-check/badge.svg) | [![codecov.io](https://codecov.io/github/DOI-USGS/sbtools/coverage.svg?branch=master)](https://app.codecov.io/github/DOI-USGS/sbtools?branch=master) |
 
 ### Current CRAN information
 

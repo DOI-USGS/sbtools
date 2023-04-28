@@ -16,7 +16,7 @@ item_list_children(
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
 
 \item{fields}{A character vector of requested data fields. Defaults to 'id' and 'title'. Full list of possible fields 
-is available online in \href{https://my.usgs.gov/confluence/display/sciencebase/ScienceBase+Catalog+Item+REST+Services#ScienceBaseCatalogItemRESTServices-ItemCoreObjects}{SB documentation}.}
+is available online in \href{https://www.usgs.gov/sciencebase-instructions-and-documentation/item-core-model}{SB documentation}.}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
 \code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
