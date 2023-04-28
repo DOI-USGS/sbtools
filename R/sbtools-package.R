@@ -29,7 +29,7 @@
 #' 
 #' @section Feedback:
 #' 
-#' Report any feedback or bugs at \url{https://github.com/USGS-R/sbtools/issues}
+#' Report any feedback or bugs at \url{https://github.com/DOI-USGS/sbtools/issues}
 #'
 #' @name sbtools-package
 #' @aliases sbtools
