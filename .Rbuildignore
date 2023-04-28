@@ -12,3 +12,4 @@ code.json
 .gitlab-ci.yml
 .Renviron
 README.Rmd
+^CRAN-SUBMISSION$
