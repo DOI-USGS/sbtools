@@ -4,18 +4,18 @@
 \alias{item_publish_cloud}
 \title{Publish file to public cloud S3 bucket}
 \usage{
-item_publish_cloud(sb_id, files, session = current_session())
+item_publish_cloud(sb_id, files, ..., session = current_session())
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
 
 \item{files}{A string vector of paths to files to be uploaded}
 
-\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
-last authenticated session}
-
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
 \code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
+
+\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
+last authenticated session}
 }
 \value{
 web service response invisibly.

@@ -178,7 +178,7 @@ item_upload_cloud <- function(sb_id, files, ..., status = TRUE, session=current_
 #' item_publish_cloud(res$id, "foobar.txt") 
 #' }
 #'
-item_publish_cloud <- function(sb_id, files, session = current_session()) {
+item_publish_cloud <- function(sb_id, files, ..., session = current_session()) {
 	
 	try(sb_id <- sb_id$id, silent = TRUE)
 	

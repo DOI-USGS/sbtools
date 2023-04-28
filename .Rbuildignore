@@ -11,3 +11,4 @@ LICENSE.md
 code.json
 .gitlab-ci.yml
 .Renviron
+README.Rmd
