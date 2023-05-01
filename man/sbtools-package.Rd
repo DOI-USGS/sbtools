@@ -37,7 +37,7 @@ Authenticated users can create, update, and remove items (\code{\link{item_list_
 \section{Feedback}{
 
 
-Report any feedback or bugs at \url{https://github.com/USGS-R/sbtools/issues}
+Report any feedback or bugs at \url{https://github.com/DOI-USGS/sbtools/issues}
 }
 
 \keyword{package}

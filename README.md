@@ -24,7 +24,7 @@ Package source code DOI: <https://doi.org/10.5066/P912NGFV>
 
 | Linux                                                                             | Test Coverage                                                                                                                                |
 |-----------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| ![R-CMD-check](https://github.com/usgs-r/sbtools/workflows/R-CMD-check/badge.svg) | [![codecov.io](https://codecov.io/github/USGS-R/sbtools/coverage.svg?branch=master)](https://codecov.io/github/USGS-R/sbtools?branch=master) |
+| ![R-CMD-check](https://github.com/doi-usgs/sbtools/workflows/R-CMD-check/badge.svg) | [![codecov.io](https://codecov.io/github/DOI-USGS/sbtools/coverage.svg?branch=master)](https://app.codecov.io/github/DOI-USGS/sbtools?branch=master) |
 
 ### Current CRAN information
 
@@ -45,19 +45,14 @@ To get cutting-edge changes, install from GitHub using the `devtools`
 packages:
 
 ``` r
-remotes::install_github("USGS-R/sbtools")
+remotes::install_github("DOI-USGS/sbtools")
 ```
 
 ## Reporting bugs
 
 Please consider reporting bugs and asking questions on the Issues page:
 
-<https://github.com/USGS-R/sbtools/issues>
-
-Follow `@USGS_R` on Twitter for updates on USGS R packages:
-
-[![Twitter
-Follow](https://img.shields.io/twitter/follow/USGS_R.svg?style=social&label=Follow%20USGS_R)](https://twitter.com/USGS_R)
+<https://github.com/DOI-USGS/sbtools/issues>
 
 ## Examples
 

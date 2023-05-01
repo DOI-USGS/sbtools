@@ -11,3 +11,6 @@ LICENSE.md
 code.json
 .gitlab-ci.yml
 .Renviron
+README.Rmd
+^CRAN-SUBMISSION$
+cran-comments.md

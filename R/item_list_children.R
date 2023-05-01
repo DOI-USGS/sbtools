@@ -6,7 +6,7 @@
 #' @param limit Max children returned.
 #' @param fields
 #' A character vector of requested data fields. Defaults to 'id' and 'title'. Full list of possible fields 
-#' is available online in \href{https://my.usgs.gov/confluence/display/sciencebase/ScienceBase+Catalog+Item+REST+Services#ScienceBaseCatalogItemRESTServices-ItemCoreObjects}{SB documentation}. 
+#' is available online in \href{https://www.usgs.gov/sciencebase-instructions-and-documentation/item-core-model}{SB documentation}. 
 #'  
 #'
 #' @return List of \code{sbitem} for each child item.
