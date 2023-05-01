@@ -1,4 +1,4 @@
-# Version 0.2.0 (2023-04-28)
+# Version 1.2.0 (2023-04-28)
 
 - added `item_publish_cloud()` to push files to S3 public cloud storage. #302
 - update URLs for new repository. #303
