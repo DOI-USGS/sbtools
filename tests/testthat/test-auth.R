@@ -1,12 +1,14 @@
 context("test sb functionality requiring authentication")
 
 user <- Sys.getenv("sb_user", unset=NA)
+token_text <- Sys.getenv("token_text", unset = NA)
 
 test_that("not_logged in tests", {
 	expect_error(sbtools:::get_access_token(), "no token found, must call authenticate_sb()")
 	expect_error(sbtools:::get_refresh_token(), "no token found, must call authenticate_sb()")
 	
-	expect_error(authenticate_sb(), 'username required for authentication')
+	if(!interactive())
+		expect_error(authenticate_sb(), 'username required for authentication')
 	
 	if(!interactive())
 		expect_error(authenticate_sb("dummy"), 'No password supplied to authenticate_sciencebase in a non-interactive session.')
@@ -33,7 +35,8 @@ test_that("authenticate_sb login results in valid session and renew works", {
 		skip("Authenticated tests skipped due to lack of login info")
 	}
 
-	expect_silent(authenticate_sb(Sys.getenv("sb_user", unset=""), Sys.getenv("sb_pass", unset="")))
+	expect_silent(authenticate_sb(Sys.getenv("sb_user", unset=""), 
+																Sys.getenv("sb_pass", unset="")))
 	expect_true(session_validate())
 	
 	expect_equal(nchar(user_id()), 24)

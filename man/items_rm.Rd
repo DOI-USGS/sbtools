@@ -4,7 +4,7 @@
 \alias{items_rm}
 \title{Remove items from SB}
 \usage{
-items_rm(sb_id, ..., recursive = FALSE, session = current_session())
+items_rm(sb_id, ..., recursive = FALSE)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}

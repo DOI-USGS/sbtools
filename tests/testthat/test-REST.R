@@ -11,11 +11,11 @@ test_that("generic post fails w/o auth", {
 	attributes(session) <- c(attributes(session), list(birthdate=Sys.time()))
 	
 	# auth passes locally, but POST fails due to files not existing:
-	expect_message(item_append_files("54e265a4e4b08de9379b4dfb", '/foo/bar/baz.zip', session=session), 'Item not found for')
+	expect_message(item_append_files("54e265a4e4b08de9379b4dfb", '/foo/bar/baz.zip'), 'Item not found for')
 	
 	# auth passes, and file is there, but auth fails on sciencebase.gov
 	files <- system.file('extdata',"This_works_new_extension.zip", package='sbtools')
-	expect_message(item_append_files("54e265a4e4b08de9379b4dfb", files, session=session), 
+	expect_message(item_append_files("54e265a4e4b08de9379b4dfb", files), 
 							 'Item not found for')
 })
 
@@ -32,11 +32,11 @@ test_that("generic get w/ and w/o auth", {
 
 	# public access to public items, with or without login
 	expect_is(item_get(public_item, session = NULL), 'sbitem')
-	expect_is(item_get(public_item, session = session), 'sbitem')
+	expect_is(item_get(public_item), 'sbitem')
 	
 	# 'not found' error for missing items, with or without login
 	expect_message(item_get(non_item, session = NULL), 'Item not found')
-	expect_message(item_get(non_item, session = session), 'Item not found')
+	expect_message(item_get(non_item), 'Item not found')
 	
 })
 

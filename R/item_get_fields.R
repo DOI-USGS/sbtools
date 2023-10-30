@@ -15,10 +15,10 @@
 #' item_get_fields("4f4e4b24e4b07f02db6aea14", 'title')
 #' item_get_fields("4f4e4b24e4b07f02db6aea14", 'title', drop = FALSE)
 #' }
-item_get_fields = function(sb_id, fields, ..., drop=TRUE, session=current_session()){
+item_get_fields = function(sb_id, fields, ..., drop=TRUE){
 	sb_id = as.sbitem(sb_id)
 	query <- list('fields'=paste0(fields, collapse=","), 'type'='json')
-	r <- sbtools_GET(url=paste0(pkg.env$url_item, sb_id$id), ..., query = query, session=session)
+	r <- sbtools_GET(url=paste0(pkg.env$url_item, sb_id$id), ..., query = query)
 	if(is(r, "list") && r$status == 404) {
 		return(NULL)
 	}

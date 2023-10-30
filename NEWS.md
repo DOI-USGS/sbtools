@@ -1,3 +1,10 @@
+# version 1.3.0
+
+- Added `initialize_sciencebase_session()` to support tokenized login for users who no longer have access to their username and password.
+- Sciencebase `session` object no longer returned by `authenticate_sb()`
+- `current_session()` now returns the active login token.
+- Removed `session_logout()` and `session_age_reset()`
+
 # Version 1.2.0 (2023-04-28)
 
 - added `item_publish_cloud()` to push files to S3 public cloud storage. #302

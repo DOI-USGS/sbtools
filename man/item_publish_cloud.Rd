@@ -4,7 +4,7 @@
 \alias{item_publish_cloud}
 \title{Publish file to public cloud S3 bucket}
 \usage{
-item_publish_cloud(sb_id, files, ..., session = current_session())
+item_publish_cloud(sb_id, files, ...)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}

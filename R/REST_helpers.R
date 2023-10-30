@@ -3,24 +3,23 @@
 #' 
 #' @param url a base url for the POST
 #' @param body a POST body
-#' @param session a sbtools session object
 #' @param ... additional params passed to \code{\link[httr]{POST}}
 #' @import httr
 #' @export
 #' @keywords internal
-sbtools_POST <- function(url, body, ..., session){
+sbtools_POST <- function(url, body, ...){
 	
 	supported_types <- c('text/plain', 'application/json')
-	if(!check_session(session))
+	if(!check_session())
 		return(NULL)
 	
-	r = RETRY(verb = "POST", url=url, ..., httrUserAgent(), accept_json(), body=body, handle=session, 
+	r = RETRY(verb = "POST", url=url, ..., httrUserAgent(), accept_json(), body=body, get_token_header(), 
 					 timeout = httr::timeout(default_timeout())) 
 	r <- handle_errors(r, url, "POST", supported_types)	
 	# if (!strsplit(headers(r)[['content-type']], '[;]')[[1]][1] %in% supported_types)
 	# 	stop('POST failed to ',url,'. check authorization and/or content')
 	
-	session_age_reset()
+	refresh_token_before_expired()
 	return(r)
 }
 
@@ -32,14 +31,13 @@ sbtools_POST <- function(url, body, ..., session){
 #' @param url a base url for the GET
 #' @param ... additional params passed to \code{\link[httr]{GET}}, often 
 #'   including \code{query}
-#' @param session a sbtools session object
 #' @import httr
 #' @export
 #' @keywords internal
-sbtools_GET <- function(url, ..., session = NULL) {
+sbtools_GET <- function(url, ...) {
 	supported_types <- c('text/plain','text/csv','text/tab-separated-values','application/json','application/x-gzip', 'application/pdf')
 	r <- tryCatch({
-		RETRY(verb = "GET", url = url, ..., httrUserAgent(), handle = session, 
+		RETRY(verb = "GET", url = url, ..., httrUserAgent(), get_token_header(), 
 								timeout = httr::timeout(default_timeout()))
 	}, error = function(e) {
 		if(grepl("Item not found", e))  {
@@ -47,7 +45,7 @@ sbtools_GET <- function(url, ..., session = NULL) {
 			return(list(status = 404))
 		}
 		
-		if(!is.null(session) && !(inherits(session, "curl_handle") | inherits(session, "handle"))) stop("Session is not valid.")
+		if(!is_logged_in()) stop("Session is not valid.")
 		
 		warning(paste("Error when calling ScienceBase,", 
 																		"internet or server down? Original", 
@@ -55,7 +53,7 @@ sbtools_GET <- function(url, ..., session = NULL) {
 																 return(list(status = 404))
 	})
 	r <- handle_errors(r, url, "GET", supported_types)
-	session_age_reset()
+	refresh_token_before_expired()
 	return(r)
 }
 
@@ -68,19 +66,18 @@ sbtools_GET <- function(url, ..., session = NULL) {
 #' @param ... additional params passed to \code{\link[httr]{PUT}}, e.g.,
 #'   \code{accept_json()}
 #' @param body the PUT body as in \code{\link[httr]{PUT}}
-#' @param session a sbtools session object
 #' @import httr
 #' @export
 #' @keywords internal
-sbtools_PUT <- function(url, body, ..., session) {
+sbtools_PUT <- function(url, body, ...) {
 	
-	if(!check_session(session))
+	if(!check_session())
 		return(NULL)
 	
 	r <- RETRY(verb = "PUT", url = url, ..., httrUserAgent(), body = body, 
-						 handle = session, timeout = httr::timeout(default_timeout()))
+						 get_token_header(), timeout = httr::timeout(default_timeout()))
 	r <- handle_errors(r, url, "PUT", NULL)
-	session_age_reset()
+	refresh_token_before_expired()
 	return(r)
 }
 
@@ -92,16 +89,15 @@ sbtools_PUT <- function(url, body, ..., session) {
 #' @param url a base url for the DELETE
 #' @param ... additional params passed to \code{\link[httr]{DELETE}}, e.g., 
 #'   \code{accept_json()}
-#' @param session a sbtools session object
 #' @import httr
 #' @export
 #' @keywords internal
-sbtools_DELETE <- function(url, ..., session) {
+sbtools_DELETE <- function(url, ...) {
 	
-	if(!check_session(session))
+	if(!check_session())
 		return(NULL)
 	
-	uid <- tryCatch(user_id(session = session), 
+	uid <- tryCatch(user_id(), 
 									error = function(e) "0")
 	
 	if(uid != 0 && grepl(uid, url)) {
@@ -109,16 +105,16 @@ sbtools_DELETE <- function(url, ..., session) {
 	}
 	
 	r = RETRY(verb = "DELETE", url = url, ..., httrUserAgent(), accept_json(), 
-						 handle = session, timeout = httr::timeout(default_timeout()))
+						 get_token_header(), timeout = httr::timeout(default_timeout()))
 	r <- handle_errors(r, url, "DELETE", NULL)
-	session_age_reset()
+	refresh_token_before_expired()
 	return(r)
 }
 
 # HEAD fxn
-sbtools_HEAD <- function(url, ..., session) {
-	session_val(session)
-	r <- tryCatch(RETRY("HEAD", url = url, ..., httrUserAgent(), handle = session,
+sbtools_HEAD <- function(url, ...) {
+	session_val()
+	r <- tryCatch(RETRY("HEAD", url = url, ..., httrUserAgent(), get_token_header(),
 										 timeout = httr::timeout(default_timeout())),
 								error = function(e) {
 									warning(paste("Something went wrong with request: \n",
@@ -126,7 +122,7 @@ sbtools_HEAD <- function(url, ..., session) {
 									return(list(status_code = 400))
 								})
 	log <- if (r$status_code == 200) TRUE else FALSE
-	session_age_reset()
+	refresh_token_before_expired()
 	return(log)
 }
 

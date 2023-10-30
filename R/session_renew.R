@@ -26,14 +26,17 @@
 #' }
 #' @import httr
 #' @export
-session_renew = function(password, ..., username, session=current_session()){
+session_renew = function(password, ..., username){
 	
-	# if we'll need the current username, find it now. use the existing session
-	# info on SB if available; otherwise use the username stored locally
-	if(!missing(username) || !is_logged_in(session=session)) {
-		sb_username <- session_details(session=session)$username
-		if(is.null(sb_username)) sb_username <- pkg.env$username
-	}
+	# # if we'll need the current username, find it now. use the existing session
+	# # info on SB if available; otherwise use the username stored locally
+	# if(!missing(username) || !is_logged_in()) {
+	# 	# TODO: bring back session_details?
+	# 	# sb_username <- session_details(session=session)$username
+	# 	sb_username <- pkg.env$username
+	# }
+	
+	sb_username <- pkg.env$username
 	
 	# if username is provided, confirm that it matches the stored username
 	if(!missing(username)) {
@@ -42,13 +45,14 @@ session_renew = function(password, ..., username, session=current_session()){
 		}
 	}
 
-	if(missing(username) && !exists("sb_username"))
-		sb_username <- session_details(session=session)$username
+	# TODO bring back session_details?
+	# if(missing(username) && !exists("sb_username"))
+	# 	sb_username <- session_details(session=session)$username
 	
 	password <- try(keyring::key_get("sciencebase", sb_username))
 		
 	# either renew or re-authenticate as needed
-	if(is_logged_in(session=session)) {
+	if(is_logged_in()) {
 		
 		if(!inherits(password, "try-error")) {
 			
@@ -57,17 +61,14 @@ session_renew = function(password, ..., username, session=current_session()){
 			
 		} else {
 			
-			# the GET call to 'status' resets the remote (SB) info on session age, while 
-			# sbtools_GET resets the local info on session age
-			sbtools_GET(url=paste0(pkg.env$url_base, "status?format=json"), session=session)
-			invisible(session)
+			token_refresh()
 			
 		}
 	} else {
 		
 		# re-authenticate, handling missing parameters as needed
-		if(sb_username=="") stop("new authentication is necessary; call authenticate_sb()")
-		if(inherits(password, "try-error")) stop("re-authentication is necessary; need password")
+		if(sb_username=="") stop("new authentication is necessary")
+		if(inherits(password, "try-error")) stop("re-authentication is necessary")
 		
 		invisible(authenticate_sb(sb_username, password))
 	}
@@ -84,10 +85,10 @@ refresh_token_before_expired <- function(refresh_amount_seconds = 600) {
 	return(invisible(FALSE))
 }
 
-token_refresh <- function() {
+token_refresh <- function(client_id = pkg.env$keycloak_client_id) {
 	
 	data = list(
-		client_id = pkg.env$keycloak_client_id,
+		client_id = client_id,
 		grant_type = "refresh_token",
 		refresh_token = get_refresh_token())
 	

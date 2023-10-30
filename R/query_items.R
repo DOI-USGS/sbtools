@@ -120,12 +120,12 @@
 #' ## note, you have to pass the q parameter if you pass the lq parameter
 #' content(query_items(list(s = "Search", q = "", lq = '"sage OR grouse"')))
 #' }
-query_items = function(query_list, ..., session = current_session()) {
+query_items = function(query_list, ...) {
 	qury <- query_list[!names(query_list) %in% query_filters()]
 	filters <- query_list[names(query_list) %in% query_filters()]
 	filters <- paste(names(filters), unname(filters), sep = "=")
 	qury <- c(qury, as.list(setNames(filters, rep("filter", length(filters)))))
-	return(sbtools_GET(url = pkg.env$url_items, ..., query = qury, session = session))
+	return(sbtools_GET(url = pkg.env$url_items, ..., query = qury))
 }
 
 query_filters <- function(x) {

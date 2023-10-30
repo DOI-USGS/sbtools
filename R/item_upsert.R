@@ -21,14 +21,15 @@
 #' )
 #' }
 item_upsert <- function(parent_id = user_id(), title = NULL, ...,
-												info = NULL, session=current_session()){
+												info = NULL){
 	
 	item <- as.sbitem(parent_id)
 	if (is.null(title)) {
 		message("title is NULL - re-using title from input SB item")
 		title <- item$title
 	}
-	body <- comp(list('parentId' = item$id, 'title' = title))
+	
+	body <- Filter(Negate(is.null), list('parentId' = item$id, 'title' = title))
 	
 	#Bring in additional metadata if supplied
 	if (!is.null(info) && is.list(info)) {

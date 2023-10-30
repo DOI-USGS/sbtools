@@ -4,14 +4,7 @@
 \alias{item_replace_files}
 \title{Replace files associated with an item}
 \usage{
-item_replace_files(
-  sb_id,
-  files,
-  ...,
-  all = FALSE,
-  scrape_files = FALSE,
-  session = current_session()
-)
+item_replace_files(sb_id, files, ..., all = FALSE, scrape_files = FALSE)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}

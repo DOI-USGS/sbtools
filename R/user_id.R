@@ -9,10 +9,10 @@
 #' @examples \dontrun{
 #' user_id()
 #' }
-user_id <- function(..., session = current_session()) {
+user_id <- function(...) {
 	if(!is.null(pkg.env$uid)) return(pkg.env$uid)
 	
-	if (is.null(session)) stop("Please authenticate first. See ?authenticate_sb", call. = FALSE)
+	if (is.null(current_session())) stop("Please authenticate first. See ?initialize_sciencebase_session", call. = FALSE)
 	args <- list(s = "Search", 
 							 parentId = "4f4e4772e4b07f02db47e231", 
 							 lq = paste0("title.untouched:", pkg.env$username), 

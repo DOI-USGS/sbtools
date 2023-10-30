@@ -20,9 +20,9 @@
 #' }
 #' 
 #' @export
-query_sb_datatype = function(datatype, ..., limit=20, session=current_session()){
+query_sb_datatype = function(datatype, ..., limit=20){
 	
-	res = query_sb(list(filter=paste0('browseType=', datatype)), ..., session=session, limit=limit)
+	res = query_sb(list(filter=paste0('browseType=', datatype)), ..., limit=limit)
 	
 	return(res)
 }
@@ -43,11 +43,11 @@ query_sb_datatype = function(datatype, ..., limit=20, session=current_session())
 #' }
 #' 
 #' @export
-sb_datatypes = function(limit=50, session=current_session()){
+sb_datatypes = function(limit=50){
 
 	query = list(q="", format="json", max=limit)
 	
-	r = sbtools_GET(paste0(pkg.env$domain, 'vocab/categories/browseTypes'), query=query, session=session)
+	r = sbtools_GET(paste0(pkg.env$domain, 'vocab/categories/browseTypes'), query=query)
 	
 	if(is(r, "list") && r$status == 404) {
 		return(NULL)

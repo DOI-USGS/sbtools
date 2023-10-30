@@ -4,7 +4,7 @@
 \alias{identifier_exists}
 \title{Check if identifier exists}
 \usage{
-identifier_exists(sb_id, ..., session = current_session())
+identifier_exists(sb_id, ...)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}

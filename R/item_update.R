@@ -18,14 +18,14 @@
 #' out$title
 #' }
 #' @export
-item_update = function(sb_id, info, ..., session=current_session()){
+item_update = function(sb_id, info, ...){
 	
 	item <- as.sbitem(sb_id)
 	is_info_list(info)
 	
 	r = sbtools_PUT(url = paste0(pkg.env$url_item, item$id), 
 									body = toJSON(info, auto_unbox = TRUE, null='null'),
-									..., accept_json(), session = session)
+									..., accept_json())
 	
 	# catch 405, which is, I think, expired login
 	if ('errors' %in% names(content(r))) {

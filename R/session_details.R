@@ -1,8 +1,5 @@
 #' @title Get session info
 #' 
-#' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}
-#' @param session SB session object from \code{\link{authenticate_sb}}
-#' 
 #' @description
 #' Get the details associated with current ScienceBase user session. 
 #' 
@@ -17,7 +14,7 @@
 #' session_details()
 #'  
 #' # If logged in, can use jossoSessionId for downloads.
-#' authenticate_sb()
+#' initialize_sciencebase_session()
 #' 
 #' temp_json <- tempfile(fileext = ".json")
 #' 
@@ -40,10 +37,10 @@
 #' 
 #' }
 #' @export
-session_details <- function(..., session = current_session()) {
+session_details <- function() {
+	stop("not working with new login requirements")
 	x <- RETRY("GET", paste0(pkg.env$url_base, "jossoHelper/sessionInfo?includeJossoSessionId=true"), 
-						 handle = session, timeout = httr::timeout(default_timeout()),
-					 ...)
+						 get_token_header(), timeout = httr::timeout(default_timeout()))
 	stop_for_status(x)
 	jsonlite::fromJSON(content(x, "text"))
 }

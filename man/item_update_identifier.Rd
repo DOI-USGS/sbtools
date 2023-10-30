@@ -4,14 +4,7 @@
 \alias{item_update_identifier}
 \title{Add custom identifier to an existing item}
 \usage{
-item_update_identifier(
-  sb_id,
-  scheme,
-  type,
-  key,
-  ...,
-  session = current_session()
-)
+item_update_identifier(sb_id, scheme, type, key, ...)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
@@ -37,8 +30,8 @@ identifier.
 \examples{
 \dontrun{
 
-session = authenticate_sb("user@usgs.gov")
-item_update_identifier("5485fd99e4b02acb4f0c7e81", "scheme", "type", "key", session=session)
+initialize_sciencebase_session()
+item_update_identifier("5485fd99e4b02acb4f0c7e81", "scheme", "type", "key")
 
 }
 

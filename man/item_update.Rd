@@ -4,7 +4,7 @@
 \alias{item_update}
 \title{Update a SB item with new metadata}
 \usage{
-item_update(sb_id, info, ..., session = current_session())
+item_update(sb_id, info, ...)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}

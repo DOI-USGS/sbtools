@@ -22,7 +22,7 @@
 #' out <- items_update(res, info = list( list(title = aname()), list(title = aname()) ) )
 #' vapply(out, "[[", "", "title")
 #' }
-items_update <- function(sb_id, info, ..., session=current_session()){
+items_update <- function(sb_id, info, ...){
 	
 	if (length(sb_id) == 1) sb_id <- list(sb_id)
 	item <- vapply(sb_id, function(z) as.sbitem(z)$id, "")
@@ -37,7 +37,7 @@ items_update <- function(sb_id, info, ..., session=current_session()){
 	
 	res <- sbtools_PUT(url = pkg.env$url_items, 
 										 body = toJSON(body, auto_unbox = TRUE), 
-										 ..., accept_json(), session = session)
+										 ..., accept_json())
 	
 	# catch 405, which is, I think, expired login
 	if ('errors' %in% names(content(res))) {

@@ -4,12 +4,7 @@
 \alias{session_details}
 \title{Get session info}
 \usage{
-session_details(..., session = current_session())
-}
-\arguments{
-\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}}
-
-\item{session}{SB session object from \code{\link{authenticate_sb}}}
+session_details()
 }
 \value{
 list, if not logged in states that, but if logged in, user details
@@ -28,7 +23,7 @@ Get the details associated with current ScienceBase user session.
 session_details()
  
 # If logged in, can use jossoSessionId for downloads.
-authenticate_sb()
+initialize_sciencebase_session()
 
 temp_json <- tempfile(fileext = ".json")
 

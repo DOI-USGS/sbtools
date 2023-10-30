@@ -10,7 +10,6 @@ item_file_download(
   names,
   destinations,
   dest_dir = getwd(),
-  session = current_session(),
   overwrite_file = FALSE
 )
 }
@@ -29,11 +28,11 @@ Must be same length as \code{names}}
 \item{dest_dir}{A directory path for saving files when \code{names} destinations 
 parameter is not specified.}
 
-\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
-last authenticated session}
-
 \item{overwrite_file}{Boolean indicating if file should be overwritten if it
 already exists locally}
+
+\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
+last authenticated session}
 }
 \value{
 Character vector of full paths to local files

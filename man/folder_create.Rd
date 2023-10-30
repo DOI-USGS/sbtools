@@ -4,7 +4,7 @@
 \alias{folder_create}
 \title{Create a folder}
 \usage{
-folder_create(parent_id = user_id(), name, ..., session = current_session())
+folder_create(parent_id = user_id(), name, ...)
 }
 \arguments{
 \item{parent_id}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 

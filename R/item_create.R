@@ -18,7 +18,7 @@
 #' x <- folder_create(user_id(), "foobar456")
 #' item_create(x, "foobar456-item")
 #' }
-item_create = function(parent_id = user_id(), title, ..., info, session=current_session()){
+item_create = function(parent_id = user_id(), title, ..., info){
 		
 	item <- as.sbitem(parent_id)
 	body = list('parentId' = item$id, 'title' = title)
@@ -28,7 +28,7 @@ item_create = function(parent_id = user_id(), title, ..., info, session=current_
 		body = c(body, info)
 	}
 	
-	r = sbtools_POST(url = pkg.env$url_item, ..., body = toJSON(body, auto_unbox = TRUE), session = session)
+	r = sbtools_POST(url = pkg.env$url_item, ..., body = toJSON(body, auto_unbox = TRUE))
 	
 	return(as.sbitem(content(r)))
 }

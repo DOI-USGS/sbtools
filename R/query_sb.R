@@ -83,7 +83,7 @@
 #' 
 #'
 #' @export
-query_sb = function(query_list, ..., limit=20, session = current_session()){
+query_sb = function(query_list, ..., limit=20){
 	
 	tryCatch({
 		
@@ -114,7 +114,7 @@ query_sb = function(query_list, ..., limit=20, session = current_session()){
 	}
 	
 	tryCatch({
-		result <- query_items(query_list, ..., session=session)
+		result <- query_items(query_list, ...)
 	}, error = function(e) {
 		result <- list(status = 404)
 		warning(paste("unhandled error with sciencebase request. \n", 
@@ -140,7 +140,7 @@ query_sb = function(query_list, ..., limit=20, session = current_session()){
 		while(offset < limit){
 			query_list['offset'] = offset
 			
-			result = query_items(query_list, ..., session=session)
+			result = query_items(query_list, ...)
 			res_obj = httr::content(result, type='application/json')
 			#concatenate it onto output list
 			out = c(out, lapply(content(result)$items, as.sbitem))

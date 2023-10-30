@@ -4,7 +4,7 @@
 \alias{item_exists}
 \title{check if identifier touple already exists on SB}
 \usage{
-item_exists(scheme, type, key, ..., session = current_session())
+item_exists(scheme, type, key, ...)
 }
 \arguments{
 \item{scheme}{the identifier scheme}
@@ -14,8 +14,6 @@ item_exists(scheme, type, key, ..., session = current_session())
 \item{key}{the identifier key}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}}
-
-\item{session}{an SB session}
 }
 \value{
 boolean for whether item exists

@@ -17,15 +17,15 @@
 #' query_sb_doi('10.5066/F7Z60M35')
 #' }
 #' @export
-query_sb_doi = function(doi, ..., limit=20, session=current_session()){
+query_sb_doi = function(doi, ..., limit=20){
 	
 	#query twice with and without DOI appended. 
 	
 	res = query_item_identifier(scheme='https://www.sciencebase.gov/vocab/category/item/identifier', 
-															type='DOI', key=doi, ..., session=session, limit=limit)
+															type='DOI', key=doi, ..., limit=limit)
 	
 	res2 = query_item_identifier(scheme='https://www.sciencebase.gov/vocab/category/item/identifier', 
-															 type='DOI', key=paste0('doi:', doi), ..., session=session, limit=limit)
+															 type='DOI', key=paste0('doi:', doi), ..., limit=limit)
 	
 	res_ids = c(res, res2)
 	

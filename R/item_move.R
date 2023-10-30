@@ -22,8 +22,8 @@
 #' # test identical
 #' identical(res2$parentId, fold2$id)
 #' }
-item_move <- function(sb_id, id_new, ..., session = current_session()) {
+item_move <- function(sb_id, id_new, ...) {
 	id <- as.sbitem(sb_id)
 	id_new <- as.sbitem(id_new)
-	item_update(id, list(parentId = id_new$id), ..., session = session)
+	item_update(id, list(parentId = id_new$id), ...)
 }

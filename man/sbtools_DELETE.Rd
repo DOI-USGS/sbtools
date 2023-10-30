@@ -4,15 +4,13 @@
 \alias{sbtools_DELETE}
 \title{generic DELETEs for sbtools package}
 \usage{
-sbtools_DELETE(url, ..., session)
+sbtools_DELETE(url, ...)
 }
 \arguments{
 \item{url}{a base url for the DELETE}
 
 \item{...}{additional params passed to \code{\link[httr]{DELETE}}, e.g., 
 \code{accept_json()}}
-
-\item{session}{a sbtools session object}
 }
 \description{
 package wrapped for generic DELETEs that test sessions internally and wrap

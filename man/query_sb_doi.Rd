@@ -4,7 +4,7 @@
 \alias{query_sb_doi}
 \title{Query SB for specific DOI (Digital Object Identifier)}
 \usage{
-query_sb_doi(doi, ..., limit = 20, session = current_session())
+query_sb_doi(doi, ..., limit = 20)
 }
 \arguments{
 \item{doi}{DOI to search for as character}
@@ -14,8 +14,6 @@ query_sb_doi(doi, ..., limit = 20, session = current_session())
 \item{limit}{Maximum number of returned items. Will do paging to retrieve
 results when limit is over 1000. Use with caution, queries 10k results
 are slow.}
-
-\item{session}{Session object from \code{\link{authenticate_sb}}}
 }
 \value{
 A list of \code{\link{sbitem}} objects. List of length 0 

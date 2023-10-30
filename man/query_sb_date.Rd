@@ -9,8 +9,7 @@ query_sb_date(
   end = Sys.time(),
   date_type = "lastUpdated",
   ...,
-  limit = 20,
-  session = current_session()
+  limit = 20
 )
 }
 \arguments{
@@ -28,8 +27,6 @@ query_sb_date(
 \item{limit}{Maximum number of returned items. Will do paging to retrieve
 results when limit is over 1000. Use with caution, queries 10k results
 are slow.}
-
-\item{session}{Session object from \code{\link{authenticate_sb}}}
 }
 \description{
 Queries ScienceBase for items with timestamps within a certain date/time range.

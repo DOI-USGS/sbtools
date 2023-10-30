@@ -23,7 +23,7 @@
 #' }
 #' 
 #' @export
-query_sb_date = function(start=as.POSIXct('1970-01-01'), end=Sys.time(), date_type='lastUpdated', ..., limit=20, session=current_session()){
+query_sb_date = function(start=as.POSIXct('1970-01-01'), end=Sys.time(), date_type='lastUpdated', ..., limit=20){
 	
 	if(!date_type %in% valid_date_types){
 		stop('date_type choice must be identical (including case) to listed options in documentation. See ?query_sb_date')
@@ -32,7 +32,7 @@ query_sb_date = function(start=as.POSIXct('1970-01-01'), end=Sys.time(), date_ty
 	date_range = paste0('{"dateType":"', date_type, '","choice":"range","start":"', format(start, '%Y-%m-%d'),
 											'","end":"', format(end, '%Y-%m-%d'), '"}')
 	
-	query_sb(list(dateRange = date_range), ..., limit=limit, session=session)
+	query_sb(list(dateRange = date_range), ..., limit=limit)
 	
 }
 

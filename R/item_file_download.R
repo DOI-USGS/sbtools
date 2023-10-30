@@ -29,15 +29,15 @@
 #' }
 #' @export
 item_file_download = function(sb_id, ..., names, destinations, 
-															dest_dir = getwd(), session=current_session(), 
+															dest_dir = getwd(), 
 															overwrite_file = FALSE){
 	
 	sb_id = as.sbitem(sb_id)
 	
-	if(!session_validate(session))
+	if(!session_validate())
 		stop('Session state is invalid, please re-authenticate')
 
-	flist <- item_list_files(sb_id, fetch_cloud_urls = FALSE, ..., session=session)
+	flist <- item_list_files(sb_id, fetch_cloud_urls = FALSE, ...)
 	
 	if(nrow(flist) < 1)
 		stop(sb_id$id, ':Item has no attached files')
@@ -80,7 +80,7 @@ item_file_download = function(sb_id, ..., names, destinations,
 			
 			RETRY("GET", url=flist[i,]$url, ..., 
 						write_disk(flist[i,]$dest, overwrite = overwrite_file), 
-						handle=session, timeout = httr::timeout(default_timeout()),
+						get_token_header(), timeout = httr::timeout(default_timeout()),
 						httr::progress())
 			
 		}, error = function(e) {

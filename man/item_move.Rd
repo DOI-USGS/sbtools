@@ -4,7 +4,7 @@
 \alias{item_move}
 \title{Move item from one folder to another}
 \usage{
-item_move(sb_id, id_new, ..., session = current_session())
+item_move(sb_id, id_new, ...)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}

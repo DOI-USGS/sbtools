@@ -29,7 +29,6 @@ Suggests:
     testthat,
     xml2,
     sf,
-    sp,
     tools
 License: CC0
 URL: https://github.com/DOI-USGS/sbtools

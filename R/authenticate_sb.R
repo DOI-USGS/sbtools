@@ -16,7 +16,7 @@
 authenticate_sb = function(username, password){
 	
 	if(missing(username)) {
-		username <- try(session_details(session=current_session())$username)
+		username <- try(session_details()$username)
 	}
 	
 	if((inherits(username, "try-error") | is.null(username)) && !interactive()){
@@ -31,6 +31,8 @@ authenticate_sb = function(username, password){
 		}
 		
 	}
+	
+	pkg.env$username <- username
 	
 	keyring_pass = FALSE
 	if(missing(password)) {
@@ -62,10 +64,12 @@ authenticate_sb = function(username, password){
 	
 	if(!any(resp$cookies$name %in% 'JSESSIONID')){
 		if(keyring_pass) stop("Sciencebase login failed with stored password?")
-		stop('Unable to authenticate to SB. Check username and password')
+		warning('Unable to authenticate to legacy SB.')
 	}
 	
 	token_url <- pkg.env$token_url
+	
+	pkg.env$keycloak_client_id <- "sciencebasepy"
 	
 	token <- RETRY("POST", token_url, 
 								 body = list(
@@ -85,17 +89,44 @@ authenticate_sb = function(username, password){
 		
 	}
 	
-	attributes(h) <- c(attributes(h), list(birthdate=Sys.time()))
-	pkg.env$session  = h
-	pkg.env$username = username
-	
-	invisible(h)
+	return(invisible(TRUE))
 }
 
 set_keycloak_env <- function(token_resp) {
 	pkg.env$keycloak_token <- jsonlite::fromJSON(rawToChar(token_resp$content))
 	
 	pkg.env$keycloak_expire <- Sys.time() + pkg.env$keycloak_token$expires_in
+}
+
+#' Initialize ScienceBase Session
+#' @description opens a browser for two factor authentication. A token can be
+#' retrieved from the user drop down in the upper right once logged in.
+#' The token should be pasted into the console. Can also be called with a pre-
+#' fetched token.
+#' @param token_text character json formatted token text
+#' @param username email address of sciencebase user.
+#' @export
+#' 
+initialize_sciencebase_session <- function(username, token_text = NULL) {
+	if(is.null(token_text)) {
+		message("A browser will open ", pkg.env$manager_app)
+		message("Log in and retrieve a token from the user menu in the upper right.")
+		message("Paste the token in the dialogue box that opens.")
+		utils::browseURL(pkg.env$manager_app)
+		token_text <- readPassword('Please enter your Sciencebase token string:')
+	}
+	
+	pkg.env$username <- username
+	
+	try(initialize_keycloack_env(token_text))
+}
+
+initialize_keycloack_env <- function(token_text) {
+	pkg.env$keycloak_token <- jsonlite::fromJSON(token_text)
+	
+	pkg.env$keycloak_expire <- Sys.time()
+	
+	token_refresh()
 }
 
 #' Read in a password from the user
@@ -134,4 +165,14 @@ get_access_token <- function() {
 	}
 	
 	token
+}
+
+get_token_header <- function() {
+	if(is.null(current_session())) return(httr::add_headers())
+	
+	httr::add_headers(
+		.headers = c(`content-type` = "application/json", 
+								 accept = "application/json", 
+								 authorization = paste("Bearer", 
+								 											get_access_token())))
 }

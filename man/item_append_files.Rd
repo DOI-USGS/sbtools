@@ -4,13 +4,7 @@
 \alias{item_append_files}
 \title{Upload File to Item}
 \usage{
-item_append_files(
-  sb_id,
-  files,
-  ...,
-  scrape_files = TRUE,
-  session = current_session()
-)
+item_append_files(sb_id, files, ..., scrape_files = TRUE)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}

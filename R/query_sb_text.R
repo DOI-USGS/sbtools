@@ -19,9 +19,9 @@
 #' }
 #' 
 #' @export
-query_sb_text = function(text, ..., limit=20, session=current_session()){
+query_sb_text = function(text, ..., limit=20){
 	
-	res = query_sb(list(q=text), limit=limit, session=session)
+	res = query_sb(list(q=text), limit=limit)
 	
 	return(res)
 }

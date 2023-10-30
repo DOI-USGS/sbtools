@@ -1,8 +1,5 @@
 #' a convienence function for getting the age of a session. 
 #' 
-#' See pkg.env$session_birthdate for time when session was created.
-#' See pkg.env$session_expires for session age when session goes stale
-#' 
 #' @template manipulate_item
 #' @return difftime object
 #' @examples \dontrun{
@@ -11,12 +8,12 @@
 #' }
 #' @export
 #' @keywords internal
-session_age <- function(session = current_session()){
+session_age <- function(){
 	
-	if(is.null(session)){
+	if(is.null(pkg.env$keycloak_expire)){
 		return(NULL)
 	}
-	return(Sys.time() - attr(session, "birthdate"))
+	return(Sys.time() - pkg.env$keycloak_expire)
 	
 }
 #' Check whether an SB session is expired
@@ -27,12 +24,13 @@ session_age <- function(session = current_session()){
 #' 
 #' @export
 #' @keywords internal
-session_expired <- function(session = current_session()){
+session_expired <- function() {
 	
-	if(is.null(session)){
+	if(is.null(session_age())){
 		return(FALSE)
 	}
-	return(session_age(session) > pkg.env$session_expires)
+	
+	return(session_age() > 0)
 	
 }
 

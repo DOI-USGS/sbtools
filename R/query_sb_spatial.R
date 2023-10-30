@@ -1,7 +1,7 @@
 #' @title Query SB based on spatial extent
 #' 
 #' @inheritParams query_sb
-#' @param bbox An sp spatial data object. The bounding box of the object is used for the query.
+#' @param bbox An sf spatial data object. The bounding box of the object is used for the query.
 #' @param long A vector of longitude values that will define the boundaries of a bounding box. Min and Max of supplied longitudes are used. (alternate option to bbox).
 #' @param lat A vector of latitude values that will define the boundaries of a bounding box. Min and Max of supplied latitude are used. (alternate option to bbox).
 #' @param bb_wkt A character string using the Well Known Text (WKT) standard for defining spatial data. Must be a POLYGON WKT object. 
@@ -22,11 +22,18 @@
 #' }
 #' @export
 #' 
-query_sb_spatial = function(bbox, long, lat, bb_wkt, ..., limit=20, session=current_session()){
+query_sb_spatial = function(bbox, long, lat, bb_wkt, ..., limit=20){
 	
 	if(!missing(bbox)){
-		message("bbox must be from an sp object in WGS84 Lon/Lat")
-		bb_wkt = make_wkt(bbox@bbox)
+		bbox <- sf::st_bbox(bbox)
+		
+		bb = matrix(nrow=2, ncol=2)
+		bb[1,1] = bbox[1]
+		bb[2,1] = bbox[2]
+		bb[1,2] = bbox[3]
+		bb[2,2] = bbox[4]
+		
+		bb_wkt = make_wkt(bb)
 	}else if(!missing(long) & !missing(lat)){
 		bb = matrix(nrow=2, ncol=2)
 		bb[1,1] = min(long)
@@ -39,7 +46,7 @@ query_sb_spatial = function(bbox, long, lat, bb_wkt, ..., limit=20, session=curr
 		#We'll just assume this is fine then and will be passed to query_sb
 		
 	}else{
-		stop('Must supply either bbox sp object or bb_min and bb_max vectors')
+		stop('Must supply either sf object or bb_min and bb_max vectors')
 	}
   
 	query_sb(list(spatialQuery = bb_wkt), limit=limit)

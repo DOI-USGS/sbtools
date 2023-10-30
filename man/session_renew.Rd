@@ -4,7 +4,7 @@
 \alias{session_renew}
 \title{Checks current session and re-authenticates if necessary}
 \usage{
-session_renew(password, ..., username, session = current_session())
+session_renew(password, ..., username)
 }
 \arguments{
 \item{password}{The password to use, if needed, to renew the session.}

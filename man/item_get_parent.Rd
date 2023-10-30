@@ -4,7 +4,7 @@
 \alias{item_get_parent}
 \title{Get an item's parent ID}
 \usage{
-item_get_parent(sb_id, ..., session = current_session())
+item_get_parent(sb_id, ...)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}

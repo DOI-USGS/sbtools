@@ -25,7 +25,7 @@
 #' )
 #' }
 items_upsert <- function(parent_id = user_id(), title = NULL, ...,
-												info = NULL, session=current_session()){
+												info = NULL){
 	
 	if (!length(parent_id) > 0) stop("parent_id must be of length > 0", call. = FALSE)
 	if (length(parent_id) > 1) {

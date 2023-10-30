@@ -4,7 +4,7 @@
 \alias{sbtools_PUT}
 \title{generic PUTs for sbtools package}
 \usage{
-sbtools_PUT(url, body, ..., session)
+sbtools_PUT(url, body, ...)
 }
 \arguments{
 \item{url}{a base url for the PUT}
@@ -13,8 +13,6 @@ sbtools_PUT(url, body, ..., session)
 
 \item{...}{additional params passed to \code{\link[httr]{PUT}}, e.g.,
 \code{accept_json()}}
-
-\item{session}{a sbtools session object}
 }
 \description{
 package wrapped for generic PUTs that test sessions internally and wrap some 

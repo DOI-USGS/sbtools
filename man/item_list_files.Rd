@@ -4,13 +4,7 @@
 \alias{item_list_files}
 \title{Get list of files attached to SB item}
 \usage{
-item_list_files(
-  sb_id,
-  recursive = FALSE,
-  fetch_cloud_urls = TRUE,
-  ...,
-  session = current_session()
-)
+item_list_files(sb_id, recursive = FALSE, fetch_cloud_urls = TRUE, ...)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}

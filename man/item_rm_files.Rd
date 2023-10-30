@@ -4,7 +4,7 @@
 \alias{item_rm_files}
 \title{Remove files associated with an item}
 \usage{
-item_rm_files(sb_id, files, ..., session = current_session())
+item_rm_files(sb_id, files, ...)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}

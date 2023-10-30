@@ -28,10 +28,12 @@ set_endpoint = function(endpoint=c("production", "development")){
 	if(endpoint=="production"){
 		pkg.env$domain = "https://www.sciencebase.gov/"
 		pkg.env$graphql_url = "https://api.sciencebase.gov/graphql"
+		pkg.env$manager_app = "https://sciencebase.usgs.gov/manager/"
 		
 	}else if(endpoint=="development"){
 		pkg.env$domain   = "https://beta.sciencebase.gov/"
 		pkg.env$graphql_url = "https://api-beta.staging.sciencebase.gov/graphql"
+		pkg.env$manager_app = "https://beta.staging.sciencebase.gov/manager/"
 	}
 	
 	pkg.env$url_base = paste0(pkg.env$domain, "catalog/")
@@ -46,9 +48,14 @@ set_endpoint = function(endpoint=c("production", "development")){
 	pkg.env$url_scrape = paste0(pkg.env$url_base, 'file/scrape')
 	pkg.env$url_login = 'https://my.usgs.gov/josso/signon/usernamePasswordLogin.do'
 	pkg.env$auth_server_url = paste0(pkg.env$domain, "auth")
-	pkg.env$token_url = paste0(pkg.env$domain, 
-														 "auth/realms/ScienceBase/protocol/openid-connect/token")
-  pkg.env$keycloak_client_id = "sciencebasepy"
+	if(endpoint == "production") {
+		pkg.env$token_url = paste0("https://www.sciencebase.gov/", 
+															 "auth/realms/ScienceBase/protocol/openid-connect/token")
+	} else if(endpoint == "development") {
+		pkg.env$token_url = paste0("https://www.sciencebase.gov/", 
+															 "auth/realms/ScienceBase-B/protocol/openid-connect/token")
+	}
+  pkg.env$keycloak_client_id = "files-ui"
   pkg.env$chunk_size_bytes = 104857600  # 104857600 == 100MB
 	
 }

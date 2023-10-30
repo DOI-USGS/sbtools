@@ -20,9 +20,9 @@
 #' item_list_children(item_get('5060b03ae4b00fc20c4f3c8b'))
 #' }
 #' @export
-item_list_children = function(sb_id, fields=c('id', 'title'), ..., session=current_session(), limit=20){
+item_list_children = function(sb_id, fields=c('id', 'title'), ..., limit=20){
 
-	if(!session_validate(session)){
+	if(!session_validate()){
 		stop('Session state is invalid, please re-authenticate')
 	}
 
@@ -33,7 +33,7 @@ item_list_children = function(sb_id, fields=c('id', 'title'), ..., session=curre
 		fields = c('id', fields)
 	}
 
-	out = query_sb(list(parentId=item$id, fields=paste(fields, collapse=',', sep=',')), limit=limit, session=session)
+	out = query_sb(list(parentId=item$id, fields=paste(fields, collapse=',', sep=',')), limit=limit)
 	
 	return(out)
 }

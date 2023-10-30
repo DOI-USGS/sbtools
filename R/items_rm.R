@@ -17,14 +17,14 @@
 #' res <- items_create(title = c(aname(), aname()))
 #' items_rm(res)
 #' }
-items_rm <- function(sb_id, ..., recursive=FALSE, session=current_session()){
+items_rm <- function(sb_id, ..., recursive=FALSE){
 	
-	if (recursive) return(lapply(sb_id, item_rm_recursive, session = session, ...))
+	if (recursive) return(lapply(sb_id, item_rm_recursive, ...))
 	
 	item <- vapply(sb_id, function(z) as.sbitem(z)$id, "")
 	
 	invisible(lapply(item, function(x) {
-		children <- item_list_children(x, ..., limit = 2, session = session)
+		children <- item_list_children(x, ..., limit = 2)
 		if (NROW(children) > 0) {
 			stop('Item has children. To remove children, grandchildren, etc. set recursive=TRUE.', 
 					 call. = FALSE)
@@ -34,5 +34,5 @@ items_rm <- function(sb_id, ..., recursive=FALSE, session=current_session()){
 	body <- lapply(item, function(z) setNames(as.list(z), "id"))
 	sbtools_DELETE(paste0(pkg.env$url_items, "?format=json"), 
 								 body = jsonlite::toJSON(body, auto_unbox = TRUE), 
-								 ..., accept_json(), session = session)
+								 ..., accept_json())
 }

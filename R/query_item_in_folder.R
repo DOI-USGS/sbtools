@@ -14,10 +14,10 @@
 #' @return A list of matching items as sbitem objects.
 #' 
 #' @export
-query_item_in_folder <- function(text, folder, ..., session=current_session(), limit=20) {
+query_item_in_folder <- function(text, folder, ..., limit=20) {
 	# create and run the query
 	
-	res = query_sb(list(q=text, folderId=folder), ..., session=session, limit=limit)
+	res = query_sb(list(q=text, folderId=folder), ..., limit=limit)
 	
 	return(res)
 }

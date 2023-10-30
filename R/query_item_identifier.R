@@ -33,7 +33,7 @@
 #' }
 #' 
 #' @export
-query_item_identifier = function(scheme, type=NULL, key=NULL, ..., session=current_session(), limit=20){
+query_item_identifier = function(scheme, type=NULL, key=NULL, ..., limit=20){
 	
 	# prepare query
 	filter_all = list('scheme'=scheme, 'type'=type, 'key'=key)
@@ -41,7 +41,7 @@ query_item_identifier = function(scheme, type=NULL, key=NULL, ..., session=curre
 	filter = paste0('itemIdentifier=', toJSON(filter_items, auto_unbox=TRUE))
 	query = list('filter'=filter)
 	
-	return(query_sb(query_list=query, ..., limit=limit, session=session))
+	return(query_sb(query_list=query, ..., limit=limit))
 	
 }
 
@@ -55,7 +55,7 @@ query_item_identifier = function(scheme, type=NULL, key=NULL, ..., session=curre
 # import httr
 # import XML
 # keywords internal
-# query_item_title <- function(title, ..., session=current_session()) {
+# query_item_title <- function(title, ...) {
 # 
 # 	if(length(title) != 1) stop("need exactly 1 title")
 # 	url = paste0("https://www.sciencebase.gov/catalog/csw?service=CSW&version=2.0.2&request=getRecords&resultType=results&",

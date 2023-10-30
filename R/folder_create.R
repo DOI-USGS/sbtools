@@ -13,7 +13,7 @@
 #' folder_create(name="foobar345")
 #' }
 #' @export
-folder_create = function(parent_id = user_id(), name, ..., session = current_session()) {
+folder_create = function(parent_id = user_id(), name, ...) {
 	item <- as.sbitem(parent_id)
 	
  	body <- list(id = unbox(""), 
@@ -21,7 +21,7 @@ folder_create = function(parent_id = user_id(), name, ..., session = current_ses
  							 parentId = unbox(item$id), 
  							 systemTypes = "Folder")
 
-	r = sbtools_POST(url = pkg.env$url_item, ..., body = toJSON(body, auto_unbox = FALSE), session = session)
+	r = sbtools_POST(url = pkg.env$url_item, ..., body = toJSON(body, auto_unbox = FALSE))
 	
 	stop_for_status(r)
 	return(as.sbitem(content(r)))

@@ -4,13 +4,7 @@
 \alias{query_item_in_folder}
 \title{Search within an SB folder}
 \usage{
-query_item_in_folder(
-  text,
-  folder,
-  ...,
-  session = current_session(),
-  limit = 20
-)
+query_item_in_folder(text, folder, ..., limit = 20)
 }
 \arguments{
 \item{text}{text in the title, abstract, etc. of the desired item}
@@ -19,10 +13,10 @@ query_item_in_folder(
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}}
 
+\item{limit}{Max number of matching items to return}
+
 \item{session}{(optional) SB Session to use, not provided queries public 
 items only}
-
-\item{limit}{Max number of matching items to return}
 }
 \value{
 A list of matching items as sbitem objects.

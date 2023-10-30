@@ -4,7 +4,7 @@
 \alias{user_id}
 \title{Get your parent ID}
 \usage{
-user_id(..., session = current_session())
+user_id(...)
 }
 \arguments{
 \item{...}{Additional parameters are passed on to \code{\link[httr]{POST}}}

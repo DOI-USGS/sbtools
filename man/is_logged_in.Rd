@@ -4,12 +4,7 @@
 \alias{is_logged_in}
 \title{Check whether you're logged into a ScienceBase session}
 \usage{
-is_logged_in(..., session = current_session())
-}
-\arguments{
-\item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}}
-
-\item{session}{SB session object from \code{\link{authenticate_sb}}}
+is_logged_in()
 }
 \value{
 Logical, \code{TRUE} or \code{FALSE}

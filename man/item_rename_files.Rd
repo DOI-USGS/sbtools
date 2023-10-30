@@ -4,7 +4,7 @@
 \alias{item_rename_files}
 \title{Rename item attached files}
 \usage{
-item_rename_files(sb_id, names, new_names, ..., session = current_session())
+item_rename_files(sb_id, names, new_names, ...)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}

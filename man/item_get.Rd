@@ -4,7 +4,7 @@
 \alias{item_get}
 \title{Retrieve SB item}
 \usage{
-item_get(sb_id, ..., session = current_session())
+item_get(sb_id, ...)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}

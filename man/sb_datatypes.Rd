@@ -4,14 +4,12 @@
 \alias{sb_datatypes}
 \title{Query SB for all available datatypes}
 \usage{
-sb_datatypes(limit = 50, session = current_session())
+sb_datatypes(limit = 50)
 }
 \arguments{
 \item{limit}{Maximum number of returned items. Will do paging to retrieve
 results when limit is over 1000. Use with caution, queries 10k results
 are slow.}
-
-\item{session}{Session object from \code{\link{authenticate_sb}}}
 }
 \description{
 Queries ScienceBase for the list of all available datatypes. This can be

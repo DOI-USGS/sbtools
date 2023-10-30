@@ -1,18 +1,10 @@
-get_gql_header <- function() {
-	httr::add_headers(
-		.headers = c(`content-type` = "application/json", 
-								 accept = "application/json", 
-								 authorization = paste("Bearer", 
-								 											get_access_token())))
-}
-
 #' @noRd
 #' @param q character gql query to embed into json body
 #' @param gql handle to pass to POST
 #' @param json character json to pass -- shoul include gql query and additional content. 
 #' json is optional - it will default to just the query.
 run_gql_query <- function(q, gql, json = jsonlite::toJSON(list(query = q), auto_unbox = TRUE)) {
-	out <- RETRY("POST", pkg.env$graphql_url, get_gql_header(), 
+	out <- RETRY("POST", pkg.env$graphql_url, get_token_header(), 
 							 body = json,  
 							 handle = gql)
 	

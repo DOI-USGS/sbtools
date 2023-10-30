@@ -6,7 +6,6 @@
 #' @param type the identifier type
 #' @param key the identifier key
 #' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}
-#' @param session an SB session
 #' @return boolean for whether item exists
 #'
 #' @examples \dontrun{
@@ -14,13 +13,13 @@
 #' item_exists('mda_streams','site_root','nwis_01018035')
 #' }
 #' @export
-item_exists = function(scheme, type, key, ..., session=current_session()){
+item_exists = function(scheme, type, key, ...){
 
-	if(!session_validate(session)){
+	if(!session_validate()){
 		stop('Session state is invalid, please re-authenticate')
 	}
 
-	items <- query_item_identifier(scheme=scheme, type=type, key=key, ..., session=session)
+	items <- query_item_identifier(scheme=scheme, type=type, key=key, ...)
 	if (length(items) > 0){
 		return(TRUE)
 	} else {

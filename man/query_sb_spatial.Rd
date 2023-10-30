@@ -4,18 +4,10 @@
 \alias{query_sb_spatial}
 \title{Query SB based on spatial extent}
 \usage{
-query_sb_spatial(
-  bbox,
-  long,
-  lat,
-  bb_wkt,
-  ...,
-  limit = 20,
-  session = current_session()
-)
+query_sb_spatial(bbox, long, lat, bb_wkt, ..., limit = 20)
 }
 \arguments{
-\item{bbox}{An sp spatial data object. The bounding box of the object is used for the query.}
+\item{bbox}{An sf spatial data object. The bounding box of the object is used for the query.}
 
 \item{long}{A vector of longitude values that will define the boundaries of a bounding box. Min and Max of supplied longitudes are used. (alternate option to bbox).}
 
@@ -28,8 +20,6 @@ query_sb_spatial(
 \item{limit}{Maximum number of returned items. Will do paging to retrieve
 results when limit is over 1000. Use with caution, queries 10k results
 are slow.}
-
-\item{session}{Session object from \code{\link{authenticate_sb}}}
 }
 \description{
 Queries ScienceBase based on a spatial bounding box. Accepts either an sp spatial data object

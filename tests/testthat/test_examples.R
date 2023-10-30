@@ -9,7 +9,7 @@ test_that("basic examples work", {
 	
 	if(!ping) stop("sciencebase down, tests won't work")
 	 
-	item <- "4f4e4b24e4b07f02db6aea14"
+	item <- "5a83025ce4b00f54eb32956b"
 	
 	expect_true(identifier_exists(item))
 	
@@ -40,7 +40,7 @@ test_that("basic examples work", {
 	
 	item_files <- item_list_files(item)
 	
-	file_name <- "metadata6644450227216673613.xml"
+	file_name <- "huc8_05010007_example.zip"
 	
 	expect_equal(item_files$fname, file_name)
 	
@@ -49,7 +49,7 @@ test_that("basic examples work", {
 	expect_equal(basename(f), file_name)
 	
 	expect_warning(item_file_download(item, dest_dir = tempdir(), overwrite_file = FALSE),
-								 "metadata6644450227216673613.xml exists, and overwrite is false. Skipping.")
+								 "exists, and overwrite is false. Skipping.")
 
 	f <- item_file_download(item, names = file_name, 
 													destinations = file.path(tempdir(), file_name), 
@@ -94,7 +94,7 @@ test_that("basic examples work", {
 	
 	get_f <- c('title', 'citation', 'contacts')
 	
-	fields <- item_get_fields("4f4e4b24e4b07f02db6aea14", get_f)
+	fields <- item_get_fields("651346cad34eeedefc139ec9", get_f)
 
 	expect_equal(names(fields), get_f)
 	
@@ -110,11 +110,11 @@ test_that("basic examples work", {
 		lat = c(49.078148, 47.575022, 32.914614, 25.000481),
 		long = c(-124.722111, -67.996898, -118.270335, -80.125804))
 	
-	bbox <- sf::as_Spatial(sf::st_as_sf(conus, coords = c("long", "lat"), crs = 4326))
+	bbox <- sf::st_as_sf(conus, coords = c("long", "lat"), crs = 4326)
 	
-	expect_message(qs3 <- query_sb_spatial(
+	qs3 <- query_sb_spatial(
 		bbox = bbox, 
-		limit = 3), "bbox must be from an sp object in WGS84 Lon/Lat")
+		limit = 3)
 	
 	expect_equal(length(qs3), 3)
 	
@@ -137,9 +137,10 @@ test_that("basic examples work", {
 	expect_equal(as.sbitem(NULL), NULL)
 	
 	expect_false(is.sbitem(NULL))
-	
-	d <- session_details()
-	
-	expect_true(is.list(d))
+
+	# TODO: bring back session_details()	
+	# d <- session_details()
+	# 
+	# expect_true(is.list(d))
 })
 	

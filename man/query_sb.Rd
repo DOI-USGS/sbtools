@@ -4,7 +4,7 @@
 \alias{query_sb}
 \title{Query SB for items using generic query parameters}
 \usage{
-query_sb(query_list, ..., limit = 20, session = current_session())
+query_sb(query_list, ..., limit = 20)
 }
 \arguments{
 \item{query_list}{List of item query selectors. See Details.}

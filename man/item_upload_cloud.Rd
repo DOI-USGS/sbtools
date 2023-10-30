@@ -4,13 +4,7 @@
 \alias{item_upload_cloud}
 \title{Upload File to Item Cloud Storage}
 \usage{
-item_upload_cloud(
-  sb_id,
-  files,
-  ...,
-  status = TRUE,
-  session = current_session()
-)
+item_upload_cloud(sb_id, files, ..., status = TRUE)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}

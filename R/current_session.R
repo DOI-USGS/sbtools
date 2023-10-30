@@ -1,11 +1,9 @@
 #' @title Return current cached session
 #' 
 #' @description 
-#' Returns the currently cached SB session. If there
+#' Returns the currently cached SB session token. If there
 #' is no authenticated session, returns NULL. Emits a
 #' warning if the session has expired. 
-#' 
-#' 
 #' 
 #' @examples \donttest{
 #' 
@@ -15,8 +13,8 @@
 #' }
 #'@export
 current_session = function(){
-	if(session_expired(pkg.env$session)){
-		warning('SB authentication expired, SB interaction may fail. Please re-authenticate using authenticate_sb().')
+	if(session_expired()){
+		warning('SB authentication expired, SB interaction may fail. Please re-authenticate.')
 	}
-	return(pkg.env$session)
+	return(pkg.env$keycloak_token)
 }

@@ -4,7 +4,7 @@
 \alias{item_get_fields}
 \title{Retrieve specific fields from an SB item}
 \usage{
-item_get_fields(sb_id, fields, ..., drop = TRUE, session = current_session())
+item_get_fields(sb_id, fields, ..., drop = TRUE)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}

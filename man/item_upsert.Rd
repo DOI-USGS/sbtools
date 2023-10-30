@@ -4,13 +4,7 @@
 \alias{item_upsert}
 \title{Upsert an SB item}
 \usage{
-item_upsert(
-  parent_id = user_id(),
-  title = NULL,
-  ...,
-  info = NULL,
-  session = current_session()
-)
+item_upsert(parent_id = user_id(), title = NULL, ..., info = NULL)
 }
 \arguments{
 \item{parent_id}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 

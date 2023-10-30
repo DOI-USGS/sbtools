@@ -22,12 +22,12 @@
 #' res <- item_create(user_id(), "item-to-delete")
 #' item_rm(res)
 #' }
-item_rm = function(sb_id, ..., limit=1000, recursive=FALSE, session=current_session()){
+item_rm = function(sb_id, ..., limit=1000, recursive=FALSE){
 	
-	if (isTRUE(recursive)) return(item_rm_recursive(sb_id, ..., limit=limit, session = session))
+	if (isTRUE(recursive)) return(item_rm_recursive(sb_id, ..., limit=limit))
 	
 	item <- as.sbitem(sb_id)
-	children = item_list_children(item$id, ..., limit = 2, session = session)
+	children = item_list_children(item$id, ..., limit = 2)
 	
 	if (length(children) > 0) {
 		stop('Item has children. To remove children, grandchildren, etc. set recursive=TRUE.', 
@@ -35,7 +35,7 @@ item_rm = function(sb_id, ..., limit=1000, recursive=FALSE, session=current_sess
 	}
 	
 	r = sbtools_DELETE(paste0(pkg.env$url_item, item$id, '?format=json'), ..., 
-										 accept_json(), session = session)
+										 accept_json())
 	
 	return(r)
 	

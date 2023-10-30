@@ -4,13 +4,7 @@
 \alias{item_upload_create}
 \title{#' Upload file(s) and create a new item}
 \usage{
-item_upload_create(
-  parent_id,
-  files,
-  ...,
-  scrape_files = TRUE,
-  session = current_session()
-)
+item_upload_create(parent_id, files, ..., scrape_files = TRUE)
 }
 \arguments{
 \item{parent_id}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 
