@@ -171,8 +171,6 @@ get_token_header <- function() {
 	if(is.null(current_session())) return(httr::add_headers())
 	
 	httr::add_headers(
-		.headers = c(`content-type` = "application/json", 
-								 accept = "application/json", 
-								 authorization = paste("Bearer", 
-								 											get_access_token())))
+		.headers = c(authorization = paste("Bearer", 
+																			 get_access_token())))
 }

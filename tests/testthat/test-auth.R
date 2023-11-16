@@ -173,7 +173,7 @@ test_that("item creation, identifiers, and file upload works", {
 	
 	expect_message(item_get(item), 'Item not found*.')
 	
-	expect_silent(session_logout())
+	assign("keycloak_expire", NULL, envir = sbtools:::pkg.env)
 	
 	expect_warning(item_list_files("57054bf2e4b0d4e2b756d364"))
 })
@@ -231,7 +231,7 @@ test_that("Test that surgical item rm", {
 																	files = f),
 								 "Sciencebase returned '403 Forbidden'")
 	
-	expect_silent(session_logout())
+	assign("keycloak_expire", NULL, envir = sbtools:::pkg.env)
 	
 	expect_warning(item_replace_files("4f4e4b24e4b07f02db6aea14", 
 																		files = f),

@@ -4,7 +4,7 @@
 #' @param json character json to pass -- shoul include gql query and additional content. 
 #' json is optional - it will default to just the query.
 run_gql_query <- function(q, gql, json = jsonlite::toJSON(list(query = q), auto_unbox = TRUE)) {
-	out <- RETRY("POST", pkg.env$graphql_url, get_token_header(), 
+	out <- RETRY("POST", pkg.env$graphql_url, get_token_header(), content_type_json(),
 							 body = json,  
 							 handle = gql)
 	
