@@ -10,6 +10,10 @@
 #' @export
 session_validate = function(){
 	
+	if(is.null(session_age()) & !is.null(current_session())) {
+		return(FALSE)
+	}
+	
 	if(is.null(current_session())){
 		return(TRUE)
 	}

@@ -22,9 +22,11 @@ item_replace_files <- function(sb_id, files, ..., all=FALSE,
 	}
 	
 	if(all){
-		item_rm_files(sb_id, ...)
+		item <- item_rm_files(sb_id, ...)
 	}else{
-		item_rm_files(sb_id, files, ...)
+		item <- item_rm_files(sb_id, files, ...)
 	}
-	item_append_files(sb_id, files = files, ..., scrape = scrape_files)
+	
+	if(!is.null(item))
+		item_append_files(sb_id, files = files, ..., scrape = scrape_files)
 }

@@ -14,9 +14,11 @@
 #'   
 #' @export
 authenticate_sb = function(username, password){
-	
+
+	# TODO: bring back session_details?	
 	if(missing(username)) {
-		username <- try(session_details()$username)
+		stop("username required for authentication")
+		# username <- try(session_details()$username)
 	}
 	
 	if((inherits(username, "try-error") | is.null(username)) && !interactive()){
@@ -93,9 +95,11 @@ authenticate_sb = function(username, password){
 }
 
 set_keycloak_env <- function(token_resp) {
-	pkg.env$keycloak_token <- jsonlite::fromJSON(rawToChar(token_resp$content))
+	try({
+		pkg.env$keycloak_token <- jsonlite::fromJSON(rawToChar(token_resp$content))
 	
-	pkg.env$keycloak_expire <- Sys.time() + pkg.env$keycloak_token$expires_in
+		pkg.env$keycloak_expire <- Sys.time() + pkg.env$keycloak_token$expires_in
+	}, silent = TRUE)
 }
 
 #' Initialize ScienceBase Session
@@ -148,11 +152,12 @@ readPassword <- function(prompt) {
 globalVariables('.rs.askForPassword')
 
 get_refresh_token <- function() {
-	token <- pkg.env$keycloak_token$refresh_token
+	token <- try(pkg.env$keycloak_token$refresh_token, silent = TRUE)
 	
-	if(is.null(token)) {
+	if(inherits(token, "try-error") | is.null(token)) {
 		stop("no token found, must call authenticate_sb()")
 	}
+	
 	
 	token
 }
@@ -168,7 +173,7 @@ get_access_token <- function() {
 }
 
 get_token_header <- function() {
-	if(is.null(current_session())) return(httr::add_headers())
+	if(is.null(current_session()) | is.null(session_age())) return(httr::add_headers())
 	
 	httr::add_headers(
 		.headers = c(authorization = paste("Bearer", 

@@ -45,15 +45,17 @@ sbtools_GET <- function(url, ...) {
 			return(list(status = 404))
 		}
 		
-		if(!is_logged_in()) stop("Session is not valid.")
-		
 		warning(paste("Error when calling ScienceBase,", 
 																		"internet or server down? Original", 
 																		"error was:\n", e))
 																 return(list(status = 404))
 	})
 	r <- handle_errors(r, url, "GET", supported_types)
-	refresh_token_before_expired()
+	
+	if(!is.null(r)) {
+		refresh_token_before_expired()
+	}
+	
 	return(r)
 }
 
@@ -134,9 +136,18 @@ handle_errors <- function(x, url, method, types) {
 		return(NULL)
 	}
 		
+	if(x$status_code == 404) {
+		warning("Sciencebase returned '404' -- item doesn't exist or is secured")
+		return(NULL)
+	}
+		
 	if(x$status_code == 403) {
 		warning("Sciencebase returned '403 Forbidden'")
 		return(NULL)
+	}
+		
+	if(x$status_code == 405) {
+		warning("Sciencebase returned '405 not allowed'")
 	}
 	
 	if (!is.null(types)) {
@@ -152,11 +163,11 @@ handle_errors <- function(x, url, method, types) {
 		
 		if("mesage" %in% names(errors)) {
 		
-			message(paste(sapply(errors, function (x) x$message), collapse = "\n"), call. = FALSE)
+			message(paste(sapply(errors, function (x) x$message), collapse = "\n"))
 
 		} else {
 			
-			message(paste(errors, collapse = "\n"), call. = FALSE)
+			message(paste(errors, collapse = "\n"))
 			
 		}
 		

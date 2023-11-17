@@ -79,8 +79,8 @@ item_file_download = function(sb_id, ..., names, destinations,
 			message(paste("downloading file", flist[i,]$dest))
 			
 			RETRY("GET", url=flist[i,]$url, ..., 
-						write_disk(flist[i,]$dest, overwrite = overwrite_file), 
-						get_token_header(), timeout = httr::timeout(default_timeout()),
+						write_disk(flist[i,]$dest, overwrite = overwrite_file),
+						timeout = httr::timeout(default_timeout()),
 						httr::progress())
 			
 		}, error = function(e) {

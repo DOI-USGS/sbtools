@@ -54,20 +54,20 @@ session_renew = function(password, ..., username){
 	# either renew or re-authenticate as needed
 	if(is_logged_in()) {
 		
-		if(!inherits(password, "try-error")) {
-			
-			# just reauthenticate
-			invisible(authenticate_sb(username, password))
-			
-		} else {
+		# if(!inherits(password, "try-error")) {
+		# 	
+		# 	# just reauthenticate
+		# 	invisible(authenticate_sb(username, password))
+		# 	
+		# } else {
 			
 			token_refresh()
 			
-		}
+		# }
 	} else {
 		
 		# re-authenticate, handling missing parameters as needed
-		if(sb_username=="") stop("new authentication is necessary")
+		if(sb_username=="" | inherits(sb_username, "try-error")) stop("new authentication is necessary")
 		if(inherits(password, "try-error")) stop("re-authentication is necessary")
 		
 		invisible(authenticate_sb(sb_username, password))
@@ -79,7 +79,8 @@ refresh_token_before_expired <- function(refresh_amount_seconds = 600) {
 	
 	current_time <- Sys.time() + refresh_amount_seconds
 	
-	if(pkg.env$keycloak_expire - current_time < 0) {
+	if(!is.null(pkg.env$keycloak_token) && 
+		 (is.null(pkg.env$keycloak_expire) || pkg.env$keycloak_expire - current_time < 0)) {
 		return(token_refresh())
 	}
 	return(invisible(FALSE))

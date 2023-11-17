@@ -1,4 +1,4 @@
-context("recursive")
+
 test_that("recursive file list works right", {
 	skip_on_cran()
 	
