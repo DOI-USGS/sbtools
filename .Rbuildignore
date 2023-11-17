@@ -14,3 +14,7 @@ code.json
 README.Rmd
 ^CRAN-SUBMISSION$
 cran-comments.md
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$
