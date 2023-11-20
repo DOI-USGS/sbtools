@@ -35,8 +35,8 @@ test_that("authenticate_sb login results in valid session and renew works", {
 		skip("Authenticated tests skipped due to lack of login info")
 	}
 
-	expect_silent(authenticate_sb(Sys.getenv("sb_user", unset=""), 
-																Sys.getenv("sb_pass", unset="")))
+	authenticate_sb(Sys.getenv("sb_user", unset=""), 
+									Sys.getenv("sb_pass", unset=""))
 	
 	on.exit(sbtools:::clean_session())
 	

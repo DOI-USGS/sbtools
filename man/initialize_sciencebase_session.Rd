@@ -12,8 +12,10 @@ initialize_sciencebase_session(username, token_text = NULL)
 \item{token_text}{character json formatted token text}
 }
 \description{
-opens a browser for two factor authentication. A token can be
-retrieved from the user drop down in the upper right once logged in.
-The token should be pasted into the console. Can also be called with a pre-
-fetched token.
+Unless `token_text` is provided, will open a browser for two 
+factor authentication. Once logged in, 
+retrieve the token from the user drop down in the upper right hand corner of 
+the browser. Click the icon with the silhouette of a person, and select 
+Copy API Token.' The token should be pasted into the popup prompt. 
+If the token text is provided as input, no popup prompt will be raised.
 }

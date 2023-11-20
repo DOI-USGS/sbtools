@@ -15,23 +15,15 @@
 #' @export
 authenticate_sb = function(username, password){
 
+	message("authenticate_sb will stop working in favor of initialize_sciencebase_session when sciencebase turns off username and password login")
+	
 	# TODO: bring back session_details?	
-	if(missing(username)) {
-		stop("username required for authentication")
-		# username <- try(session_details()$username)
-	}
+	username <- get_username(username)
 	
 	if((inherits(username, "try-error") | is.null(username)) && !interactive()){
 		
 		stop('username required for authentication')
 	
-	}else if(is.null(username) && interactive()){
-		
-		username = readline('Please enter your username:')
-		if(username == ""){
-			stop('Empty username supplied, stopping')
-		}
-		
 	}
 	
 	pkg.env$username <- username
@@ -94,6 +86,29 @@ authenticate_sb = function(username, password){
 	return(invisible(TRUE))
 }
 
+get_username <- function(username) {
+	if(missing(username)) {
+		if(interactive()) {
+			
+			username = readline('Please enter your username:')
+			
+			if(username == ""){
+				stop('Empty username supplied, stopping')
+			} 
+			
+		}else {
+			
+			stop("username required for authentication")
+		}
+		# username <- try(session_details()$username)
+	} 
+	
+	pkg.env$username <- username
+	
+	username
+	
+}
+
 set_keycloak_env <- function(token_resp) {
 	try({
 		json <- jsonlite::fromJSON(rawToChar(token_resp$content))
@@ -102,23 +117,29 @@ set_keycloak_env <- function(token_resp) {
 			pkg.env$keycloak_token <- json
 			
 			pkg.env$keycloak_expire <- Sys.time() + pkg.env$keycloak_token$expires_in
+
 		}
 	}, silent = TRUE)
 }
 
 #' Initialize ScienceBase Session
-#' @description opens a browser for two factor authentication. A token can be
-#' retrieved from the user drop down in the upper right once logged in.
-#' The token should be pasted into the console. Can also be called with a pre-
-#' fetched token.
+#' @description Unless `token_text` is provided, will open a browser for two 
+#' factor authentication. Once logged in, 
+#' retrieve the token from the user drop down in the upper right hand corner of 
+#' the browser. Click the icon with the silhouette of a person, and select 
+#' Copy API Token.' The token should be pasted into the popup prompt. 
+#' If the token text is provided as input, no popup prompt will be raised.
 #' @param token_text character json formatted token text
 #' @param username email address of sciencebase user.
 #' @export
 #' 
 initialize_sciencebase_session <- function(username, token_text = NULL) {
+	
+	username <- get_username(username)
+	
 	if(is.null(token_text)) {
 		message("A browser will open ", pkg.env$manager_app)
-		message("Log in and retrieve a token from the user menu in the upper right.")
+		message("Log in and copy a token from the 'User' menu in the upper right.")
 		message("Paste the token in the dialogue box that opens.")
 		utils::browseURL(pkg.env$manager_app)
 		token_text <- readPassword('Please enter your Sciencebase token string:')
@@ -173,7 +194,6 @@ get_refresh_token <- function() {
 	if(inherits(token, "try-error") | is.null(token)) {
 		stop("no token found, must call authenticate_sb()")
 	}
-	
 	
 	token
 }
