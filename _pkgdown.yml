@@ -1,0 +1,60 @@
+url: ~
+template:
+  bootstrap: 5
+
+reference:
+  - title: Basics
+  - contents:
+    - '`sbtools-package`'
+    - '`authenticate_sb`'
+    - '`current_session`'
+    - '`initialize_sciencebase_session`'
+    - '`sb_ping`'
+    - '`session_details`'
+    - '`session_renew`'
+    - '`session_validate`'
+    - '`set_endpoint`'
+    - '`user_id`'
+    - '`is_logged_in`'
+  - title: Item Operations
+  - contents:
+    - '`sbitem`'
+    - '`folder_create`'
+    - '`identifier_exists`'
+    - '`items_create`'
+    - '`items_update`'
+    - '`items_upsert`'
+    - '`item_append_files`'
+    - '`item_create`'
+    - '`item_exists`'
+    - '`item_get`'
+    - '`item_get_fields`'
+    - '`item_get_parent`'
+    - '`item_list_children`'
+    - '`item_move`'
+    - '`item_rm`'
+  - title: File Operations
+  - contents:  
+    - '`item_file_download`'
+    - '`item_list_files`'
+    - '`item_publish_cloud`'
+    - '`item_rename_files`'
+    - '`item_replace_files`'
+    - '`item_rm_files`'
+    - '`item_update`'
+    - '`item_update_identifier`'
+    - '`item_upload_cloud`'
+    - '`item_upload_create`'
+    - '`item_upsert`'
+  - title: Query Functions
+  - contents:  
+    - '`query_items`'
+    - '`query_item_identifier`'
+    - '`query_item_in_folder`'
+    - '`query_sb`'
+    - '`query_sb_datatype`'
+    - '`query_sb_date`'
+    - '`query_sb_doi`'
+    - '`query_sb_spatial`'
+    - '`query_sb_text`'
+    - '`sb_datatypes`'
