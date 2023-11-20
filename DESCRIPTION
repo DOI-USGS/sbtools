@@ -29,7 +29,9 @@ Suggests:
     testthat,
     xml2,
     sf,
-    tools
+    tools,
+    knitr,
+    rmarkdown
 License: CC0
 URL: https://github.com/DOI-USGS/sbtools, http://doi-usgs.github.io/sbtools/
 BugReports: https://github.com/DOI-USGS/sbtools/issues
