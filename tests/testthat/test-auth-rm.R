@@ -7,6 +7,9 @@ test_that("Test that surgical item rm", {
 	}
 	
 	authenticate_sb(Sys.getenv("sb_user", unset=""), Sys.getenv("sb_pass", unset=""))
+	
+	on.exit(sbtools:::clean_session())
+	
 	item = item_create(title="file add rm test item")
 	
 	expect_s3_class(item_append_files(item, system.file("examples/data.csv", package="sbtools")), "sbitem")

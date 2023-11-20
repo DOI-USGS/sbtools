@@ -96,9 +96,13 @@ authenticate_sb = function(username, password){
 
 set_keycloak_env <- function(token_resp) {
 	try({
-		pkg.env$keycloak_token <- jsonlite::fromJSON(rawToChar(token_resp$content))
-	
-		pkg.env$keycloak_expire <- Sys.time() + pkg.env$keycloak_token$expires_in
+		json <- jsonlite::fromJSON(rawToChar(token_resp$content))
+		
+		if(!"error" %in% names(json)) {
+			pkg.env$keycloak_token <- json
+			
+			pkg.env$keycloak_expire <- Sys.time() + pkg.env$keycloak_token$expires_in
+		}
 	}, silent = TRUE)
 }
 
@@ -131,6 +135,18 @@ initialize_keycloack_env <- function(token_text) {
 	pkg.env$keycloak_expire <- Sys.time()
 	
 	token_refresh()
+}
+
+clean_session <- function() {
+	pkg.env$keycloak_token <- NULL
+	
+	pkg.env$keycloak_expire <- NULL
+	
+	pkg.env$keycloak_client_id <- "files-ui"
+	
+	pkg.env$username = ""
+	
+	pkg.env$uid <- NULL
 }
 
 #' Read in a password from the user

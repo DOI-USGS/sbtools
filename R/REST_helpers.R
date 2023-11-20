@@ -10,7 +10,7 @@
 sbtools_POST <- function(url, body, ...){
 	
 	supported_types <- c('text/plain', 'application/json')
-	if(!check_session())
+	if(!check_session(TRUE))
 		return(NULL)
 	
 	r = RETRY(verb = "POST", url=url, ..., httrUserAgent(), accept_json(), body=body, get_token_header(), 
@@ -73,7 +73,7 @@ sbtools_GET <- function(url, ...) {
 #' @keywords internal
 sbtools_PUT <- function(url, body, ...) {
 	
-	if(!check_session())
+	if(!check_session(TRUE))
 		return(NULL)
 	
 	r <- RETRY(verb = "PUT", url = url, ..., httrUserAgent(), body = body, 
@@ -96,7 +96,7 @@ sbtools_PUT <- function(url, body, ...) {
 #' @keywords internal
 sbtools_DELETE <- function(url, ...) {
 	
-	if(!check_session())
+	if(!check_session(TRUE))
 		return(NULL)
 	
 	uid <- tryCatch(user_id(), 

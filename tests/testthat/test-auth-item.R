@@ -7,6 +7,8 @@ test_that("item creation, identifiers, and file upload works", {
 	
 	authenticate_sb(Sys.getenv("sb_user", unset=""), Sys.getenv("sb_pass", unset=""))
 	
+	on.exit(sbtools:::clean_session())
+	
 	#create an item
 	item = item_create(title="automated testing item")
 	expect_s3_class(item, 'sbitem')
@@ -116,5 +118,7 @@ test_that("item creation, identifiers, and file upload works", {
 	assign("keycloak_expire", NULL, envir = sbtools:::pkg.env)
 	assign("keycloak_token", NULL, envir = sbtools:::pkg.env)
 	
-	expect_warning(expect_warning(item_list_files("57054bf2e4b0d4e2b756d364")))
+	warnings <- testthat::capture_warnings(item_list_files("57054bf2e4b0d4e2b756d364"))
+	
+	expect_true(grepl("fetch cloud URLs", warnings[1]))
 })

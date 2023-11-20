@@ -95,10 +95,12 @@ token_refresh <- function(client_id = pkg.env$keycloak_client_id) {
 	
 	token <- RETRY("POST", pkg.env$token_url, body = data, encode = "form")
 	
-	if(!token$status_code == 200)
+	if(!token$status_code == 200) {
 		warning('Unable to refresh SB cloud token. Some functionality may not work.')
-	
-	set_keycloak_env(token)
+		return(invisible(FALSE))
+	} else {
+		set_keycloak_env(token)
+	}
 	
 	return(invisible(TRUE))
 }
