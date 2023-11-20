@@ -29,10 +29,10 @@ Retrieve specific fields from an SB item
 \examples{
 \donttest{
 # Get certain fields from an item
-item_get_fields("4f4e4b24e4b07f02db6aea14", c('title', 'citation', 'contacts'))
+item_get_fields("63cb38b2d34e06fef14f40ad", c('title', 'citation', 'contacts'))
 
 #' # If only 1 field selection, do or don't drop list format
-item_get_fields("4f4e4b24e4b07f02db6aea14", 'title')
-item_get_fields("4f4e4b24e4b07f02db6aea14", 'title', drop = FALSE)
+item_get_fields("63cb38b2d34e06fef14f40ad", 'title')
+item_get_fields("63cb38b2d34e06fef14f40ad", 'title', drop = FALSE)
 }
 }
