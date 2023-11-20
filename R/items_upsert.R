@@ -53,8 +53,7 @@ items_upsert <- function(parent_id = user_id(), title = NULL, ...,
 	}
 	
 	res <- sbtools_POST(url = paste0(pkg.env$url_items, "upsert"),
-											..., body = toJSON(body, auto_unbox = TRUE),
-											session = session)
+											..., body = toJSON(body, auto_unbox = TRUE))
 	
 	lapply(content(res), as.sbitem)
 }

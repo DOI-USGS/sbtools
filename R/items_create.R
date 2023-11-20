@@ -9,8 +9,6 @@
 #' item include a named list of variables
 #' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
 #' \code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}
-#' @param session Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
-#' last authenticated session
 #' @return One or more objects of class \code{sbitem} in a list
 #' @details The length of the \code{title} and \code{info} values must be the same
 #' length - however, the \code{parent_id} can be of length 1 or equal to the length 
@@ -47,8 +45,7 @@
 #' (x <- folder_create(user_id(), aname()))
 #' items_create(x, title = c(aname(), aname()))
 #' }
-items_create <- function(parent_id = user_id(), title, ..., info = NULL, 
-												session = current_session()) {
+items_create <- function(parent_id = user_id(), title, ..., info = NULL) {
 	
 	if (!length(parent_id) > 0) stop("parent_id must be of length > 0", call. = FALSE)
 	if (length(parent_id) > 1) {
@@ -71,8 +68,7 @@ items_create <- function(parent_id = user_id(), title, ..., info = NULL,
 	}
 
 	res <- sbtools_POST(url = pkg.env$url_items, ..., 
-											body = toJSON(body, auto_unbox = TRUE),
-											session = session)
+											body = toJSON(body, auto_unbox = TRUE))
 
 	lapply(content(res), as.sbitem)
 }

@@ -254,8 +254,7 @@ cloud_upload <- function(file, mimetype, itemid, chunk_size_bytes = pkg.env$chun
 										 body = toJSON(unclass(item), 
 										 							auto_unbox = TRUE, 
 										 							null = "null"), 
-										 httr::accept_json(), 
-										 session = current_session())
+										 httr::accept_json())
 	
 	return(as.sbitem(content(res)))
 	

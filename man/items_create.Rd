@@ -4,13 +4,7 @@
 \alias{items_create}
 \title{Create many new SB items}
 \usage{
-items_create(
-  parent_id = user_id(),
-  title,
-  ...,
-  info = NULL,
-  session = current_session()
-)
+items_create(parent_id = user_id(), title, ..., info = NULL)
 }
 \arguments{
 \item{parent_id}{An \code{\link{sbitem}} object or character ScienceBase ID 
@@ -24,9 +18,6 @@ If length 1, then we recycle it for every item.}
 
 \item{info}{(optional) list of metadata info for the new items. for each 
 item include a named list of variables}
-
-\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
-last authenticated session}
 }
 \value{
 One or more objects of class \code{sbitem} in a list
