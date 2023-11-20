@@ -14,9 +14,6 @@ session_renew(password, ..., username)
 \item{username}{Optional. Used only to confirm that the current username is 
 what you expect; if you want to switch usernames, use 
 \code{authenticate_sb()} instead of this function.}
-
-\item{session}{SB session object from \code{\link{authenticate_sb}}. Default 
-is the current session.}
 }
 \value{
 Returns the session object.

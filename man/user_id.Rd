@@ -8,8 +8,6 @@ user_id(...)
 }
 \arguments{
 \item{...}{Additional parameters are passed on to \code{\link[httr]{POST}}}
-
-\item{session}{Session object from \code{\link{authenticate_sb}}}
 }
 \value{
 A single character string, your user id

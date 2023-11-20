@@ -70,7 +70,10 @@ test_that("authenticate_sb login results in valid session and renew works (new)"
 	}
 	
 	if(!initialize_sciencebase_session(Sys.getenv("sb_user"), Sys.getenv("token_text"))) {
+		sbtools:::clean_session()
+		
 		skip("token didn't work, refresh it?")
+		
 	}
 	
 	on.exit(sbtools:::clean_session())

@@ -2,7 +2,7 @@
 test_that("recursive file list works right", {
 	skip_on_cran()
 	
-	if(!sb_ping()) stop("sciencebase unavailable, tests won't work")
+	if(!sb_ping()) skip("sciencebase unavailable, tests won't work")
 	
 	sb_id <- "59cadcffe4b017cf314095a7"
 	

@@ -7,8 +7,6 @@
 #' @param username Optional. Used only to confirm that the current username is 
 #'   what you expect; if you want to switch usernames, use 
 #'   \code{authenticate_sb()} instead of this function.
-#' @param session SB session object from \code{\link{authenticate_sb}}. Default 
-#'   is the current session.
 #' @param ... Any additional parameters are currently ignored.
 #'   
 #' @return Returns the session object.

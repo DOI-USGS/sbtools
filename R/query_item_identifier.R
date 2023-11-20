@@ -6,8 +6,6 @@
 #' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}
 #' @param type (optional) The identifier type
 #' @param key (optional) The identifier key
-#' @param session (optional) SB Session to use, not provided queries public 
-#'   items only
 #' @param limit Max number of matching items to return
 #' @return The SB item id for the matching item. NULL if no matching item found.
 #' @import jsonlite

@@ -15,9 +15,6 @@ item_upload_cloud(sb_id, files, ..., status = TRUE)
 \code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
 
 \item{status}{logical display upload status?}
-
-\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
-last authenticated session}
 }
 \value{
 Success message invisibly. NOTE: cloud processing

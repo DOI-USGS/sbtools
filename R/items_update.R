@@ -5,8 +5,6 @@
 #' corresponding to the item
 #' @param info list of metadata info (key-value pairs) to change on the item
 #' @param ... Additional parameters are passed on to \code{\link[httr]{PUT}}
-#' @param session Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
-#' last authenticated session
 #' 
 #' @description 
 #' A method to update multiple ScienceBase items with a single call and a single HTTP service

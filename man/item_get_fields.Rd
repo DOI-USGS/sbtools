@@ -16,9 +16,6 @@ item_get_fields(sb_id, fields, ..., drop = TRUE)
 
 \item{drop}{logical. If only one field is selected, should the
 list format be dropped?}
-
-\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
-last authenticated session}
 }
 \value{
 List serialization of chosen metadata for an SB item

@@ -25,9 +25,6 @@ If TRUE, sciencebase will attempt to create extensions based on the files.
 For example, for shapefiles, this will result in a shapefile extension 
 to be returned as a facet of the sciencebase item. 
 See item: "58069258e4b0824b2d1d422e" for an example.}
-
-\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
-last authenticated session}
 }
 \description{
 replaces existing files associated with an item with a new one. 

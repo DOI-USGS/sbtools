@@ -10,8 +10,6 @@ query_items(query_list, ...)
 \item{query_list}{List of item query selectors. See Details.}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}}
-
-\item{session}{Session object from \code{\link{authenticate_sb}}}
 }
 \value{
 An object of class \code{\link[httr]{response}}

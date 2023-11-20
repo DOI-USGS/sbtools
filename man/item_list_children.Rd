@@ -16,9 +16,6 @@ is available online in \href{https://www.usgs.gov/sciencebase-instructions-and-d
 \code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
 
 \item{limit}{Max children returned.}
-
-\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
-last authenticated session}
 }
 \value{
 List of \code{sbitem} for each child item.

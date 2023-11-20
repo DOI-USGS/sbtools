@@ -13,9 +13,6 @@ corresponding to the item}
 \item{info}{list of metadata info (key-value pairs) to change on the item}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{PUT}}}
-
-\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
-last authenticated session}
 }
 \value{
 One or more objects of class \code{sbitem} in a list

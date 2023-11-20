@@ -5,7 +5,6 @@
 #' results when limit is over 1000. Use with caution, queries 10k results
 #' are slow.
 #' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}
-#' @param session Session object from \code{\link{authenticate_sb}}
 #' 
 #' @seealso \code{\link{query_items}}
 #' 

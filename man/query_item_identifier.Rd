@@ -16,9 +16,6 @@ query_item_identifier(scheme, type = NULL, key = NULL, ..., limit = 20)
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}}
 
 \item{limit}{Max number of matching items to return}
-
-\item{session}{(optional) SB Session to use, not provided queries public 
-items only}
 }
 \value{
 The SB item id for the matching item. NULL if no matching item found.

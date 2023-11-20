@@ -15,9 +15,6 @@ items_rm(sb_id, ..., recursive = FALSE)
 \item{recursive}{logical, FALSE by default. CAUTION: setting recursive=TRUE
 means that not only will this item be deleted, but so will all its child
 items and their child items and so on.}
-
-\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
-last authenticated session}
 }
 \value{
 \pkg{httr} \code{\link[httr]{response}} object

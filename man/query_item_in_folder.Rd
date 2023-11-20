@@ -14,9 +14,6 @@ query_item_in_folder(text, folder, ..., limit = 20)
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}}
 
 \item{limit}{Max number of matching items to return}
-
-\item{session}{(optional) SB Session to use, not provided queries public 
-items only}
 }
 \value{
 A list of matching items as sbitem objects.

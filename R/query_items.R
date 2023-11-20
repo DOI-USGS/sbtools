@@ -2,7 +2,6 @@
 #' 
 #' @param query_list List of item query selectors. See Details.
 #' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}
-#' @param session Session object from \code{\link{authenticate_sb}}
 #' @return An object of class \code{\link[httr]{response}}
 #' @export
 #' @details The following is a list of query parameters you can use 

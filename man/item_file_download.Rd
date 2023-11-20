@@ -30,9 +30,6 @@ parameter is not specified.}
 
 \item{overwrite_file}{Boolean indicating if file should be overwritten if it
 already exists locally}
-
-\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
-last authenticated session}
 }
 \value{
 Character vector of full paths to local files

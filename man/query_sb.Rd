@@ -14,8 +14,6 @@ query_sb(query_list, ..., limit = 20)
 \item{limit}{Maximum number of returned items. Will do paging to retrieve
 results when limit is over 1000. Use with caution, queries 10k results
 are slow.}
-
-\item{session}{Session object from \code{\link{authenticate_sb}}}
 }
 \value{
 A list of \code{\link{sbitem}} objects
