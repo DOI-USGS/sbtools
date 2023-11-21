@@ -76,11 +76,6 @@
 <dd><p>logical. If only one field is selected, should the
 list format be dropped?</p></dd>
 
-
-<dt>session</dt>
-<dd><p>Session object from <code><a href="authenticate_sb.html">authenticate_sb</a></code>. Defaults to anonymous or 
-last authenticated session</p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -93,32 +88,458 @@ last authenticated session</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="co"># Get certain fields from an item</span></span></span>
-<span class="r-in"><span><span class="fu">item_get_fields</span><span class="op">(</span><span class="st">"4f4e4b24e4b07f02db6aea14"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'title'</span>, <span class="st">'citation'</span>, <span class="st">'contacts'</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Request failed [404]. Retrying in 1.4 seconds...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Request failed [404]. Retrying in 1.2 seconds...</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Sciencebase returned '404' -- item doesn't exist or is secured</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Request failed [404]. Retrying in 1 seconds...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Request failed [404]. Retrying in 1.7 seconds...</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Sciencebase returned '404' -- item doesn't exist or is secured</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in content(r):</span> is.response(x) is not TRUE</span>
+<span class="r-in"><span><span class="fu">item_get_fields</span><span class="op">(</span><span class="st">"63cb38b2d34e06fef14f40ad"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'title'</span>, <span class="st">'citation'</span>, <span class="st">'contacts'</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $title</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Mainstem Rivers of the Conterminous United States (ver. 2.0, February 2023)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $citation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Blodgett, D.L., 2023, Mainstem Rivers of the Conterminous United States (ver. 2.0, February 2023): U.S. Geological Survey data release, https://doi.org/10.5066/P92U7ZUT."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "David L Blodgett"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$oldPartyId</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 16124</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Point of Contact"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$contactType</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "person"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$onlineResource</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://usgs.gov/staff-profiles/david-l-blodgett"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$email</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "dblodgett@usgs.gov"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$jobTitle</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Civil Engineer"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$firstName</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "David"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$middleName</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "L"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$lastName</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Blodgett"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$organization</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$organization$displayText</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Office of the Chief Operating Officer"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$primaryLocation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$primaryLocation$name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "David L Blodgett/WRD/USGS/DOI - Primary Location"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$primaryLocation$building</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Forest Products Laboratory"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$primaryLocation$buildingCode</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "ACB"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$primaryLocation$officePhone</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "6086285855"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$primaryLocation$streetAddress</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$primaryLocation$streetAddress$line1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "One Gifford Pinchot Drive"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$primaryLocation$streetAddress$city</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Madison"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$primaryLocation$streetAddress$state</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "WI"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$primaryLocation$streetAddress$zip</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "53726"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$primaryLocation$streetAddress$country</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "US"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$primaryLocation$mailAddress</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$primaryLocation$mailAddress$line1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "8505 Research Way"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$primaryLocation$mailAddress$city</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Middleton"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$primaryLocation$mailAddress$state</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "WI"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$primaryLocation$mailAddress$zip</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "53562-3581"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$primaryLocation$mailAddress$country</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "US"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[1]]$orcId</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "0000-0001-9489-1710"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "David L Blodgett"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$oldPartyId</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 16124</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Originator"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$contactType</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "person"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$onlineResource</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://usgs.gov/staff-profiles/david-l-blodgett"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$email</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "dblodgett@usgs.gov"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$jobTitle</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Civil Engineer"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$firstName</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "David"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$middleName</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "L"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$lastName</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Blodgett"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$organization</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$organization$displayText</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Office of the Chief Operating Officer"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$primaryLocation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$primaryLocation$name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "David L Blodgett/WRD/USGS/DOI - Primary Location"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$primaryLocation$building</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Forest Products Laboratory"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$primaryLocation$buildingCode</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "ACB"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$primaryLocation$officePhone</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "6086285855"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$primaryLocation$streetAddress</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$primaryLocation$streetAddress$line1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "One Gifford Pinchot Drive"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$primaryLocation$streetAddress$city</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Madison"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$primaryLocation$streetAddress$state</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "WI"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$primaryLocation$streetAddress$zip</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "53726"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$primaryLocation$streetAddress$country</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "US"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$primaryLocation$mailAddress</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$primaryLocation$mailAddress$line1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "8505 Research Way"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$primaryLocation$mailAddress$city</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Middleton"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$primaryLocation$mailAddress$state</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "WI"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$primaryLocation$mailAddress$zip</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "53562-3581"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$primaryLocation$mailAddress$country</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "US"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[2]]$orcId</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "0000-0001-9489-1710"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "David L Blodgett"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$oldPartyId</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 16124</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Metadata Contact"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$contactType</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "person"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$onlineResource</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://usgs.gov/staff-profiles/david-l-blodgett"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$email</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "dblodgett@usgs.gov"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$jobTitle</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Civil Engineer"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$firstName</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "David"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$middleName</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "L"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$lastName</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Blodgett"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$organization</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$organization$displayText</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Office of the Chief Operating Officer"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$primaryLocation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$primaryLocation$name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "David L Blodgett/WRD/USGS/DOI - Primary Location"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$primaryLocation$building</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Forest Products Laboratory"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$primaryLocation$buildingCode</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "ACB"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$primaryLocation$officePhone</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "6086285855"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$primaryLocation$streetAddress</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$primaryLocation$streetAddress$line1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "One Gifford Pinchot Drive"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$primaryLocation$streetAddress$city</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Madison"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$primaryLocation$streetAddress$state</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "WI"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$primaryLocation$streetAddress$zip</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "53726"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$primaryLocation$streetAddress$country</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "US"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$primaryLocation$mailAddress</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$primaryLocation$mailAddress$line1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "8505 Research Way"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$primaryLocation$mailAddress$city</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Middleton"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$primaryLocation$mailAddress$state</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "WI"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$primaryLocation$mailAddress$zip</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "53562-3581"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$primaryLocation$mailAddress$country</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "US"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[3]]$orcId</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "0000-0001-9489-1710"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[4]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[4]]$name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "U.S. Geological Survey"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[4]]$oldPartyId</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 18139</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[4]]$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Publisher"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[4]]$contactType</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "organization"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[4]]$onlineResource</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "http://www.usgs.gov/"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[4]]$active</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[4]]$aliases</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[4]]$aliases[[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "{\"name\":\"USGS\"}"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[4]]$aliases[[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "{\"name\":\"Geological Survey (U.S.)\"}"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[4]]$aliases[[3]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "{\"name\":\"U.S. GEOLOGICAL SURVEY\"}"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[4]]$fbmsCodes</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[4]]$fbmsCodes[[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "GG00000000"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[4]]$logoUrl</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "http://my.usgs.gov/static-cache/images/dataOwner/v1/logosMed/USGSLogo.gif"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[4]]$smallLogoUrl</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "http://my.usgs.gov/static-cache/images/dataOwner/v1/logosSmall/USGSLogo.gif"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[4]]$organization</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> named list()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[4]]$primaryLocation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[4]]$primaryLocation$name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "U.S. Geological Survey - Location"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[4]]$primaryLocation$streetAddress</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> named list()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[4]]$primaryLocation$mailAddress</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> named list()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[5]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[5]]$name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "U.S. Geological Survey - ScienceBase"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[5]]$oldPartyId</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 70157</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[5]]$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Distributor"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[5]]$contactType</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "organization"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[5]]$onlineResource</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "https://www.sciencebase.gov"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[5]]$email</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "sciencebase@usgs.gov"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[5]]$organization</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> named list()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[5]]$primaryLocation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[5]]$primaryLocation$name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "U.S. Geological Survey - ScienceBase - Location"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[5]]$primaryLocation$officePhone</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "18882758747"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[5]]$primaryLocation$streetAddress</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> named list()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[5]]$primaryLocation$mailAddress</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[5]]$primaryLocation$mailAddress$line1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Denver Federal Center"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[5]]$primaryLocation$mailAddress$line2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Building 810"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[5]]$primaryLocation$mailAddress$mailStopCode</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "302"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[5]]$primaryLocation$mailAddress$city</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Denver"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[5]]$primaryLocation$mailAddress$state</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "CO"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[5]]$primaryLocation$mailAddress$zip</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "80225"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[5]]$primaryLocation$mailAddress$country</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "United States"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[6]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[6]]$name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Integrated Modeling &amp; Prediction Division"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[6]]$oldPartyId</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 77212</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[6]]$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "SDC Data Owner"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[6]]$contactType</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "organization"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[6]]$active</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[6]]$organization</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> named list()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[6]]$primaryLocation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[6]]$primaryLocation$name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Water - Integrated Modeling and Prediction Division - Location"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[6]]$primaryLocation$streetAddress</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> named list()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[6]]$primaryLocation$mailAddress</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> named list()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[7]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[7]]$name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Water Resources"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[7]]$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "USGS Mission Area"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[7]]$contactType</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "organization"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[7]]$organization</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[7]]$organization$directoryId</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "64247"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[7]]$organization$displayText</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Water Resources"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[7]]$primaryLocation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[7]]$primaryLocation$streetAddress</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> named list()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $contacts[[7]]$primaryLocation$mailAddress</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> named list()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">#' # If only 1 field selection, do or don't drop list format</span></span></span>
-<span class="r-in"><span><span class="fu">item_get_fields</span><span class="op">(</span><span class="st">"4f4e4b24e4b07f02db6aea14"</span>, <span class="st">'title'</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Request failed [404]. Retrying in 1.1 seconds...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Request failed [404]. Retrying in 1 seconds...</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Sciencebase returned '404' -- item doesn't exist or is secured</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Request failed [404]. Retrying in 1 seconds...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Request failed [404]. Retrying in 1 seconds...</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Sciencebase returned '404' -- item doesn't exist or is secured</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in content(r):</span> is.response(x) is not TRUE</span>
-<span class="r-in"><span><span class="fu">item_get_fields</span><span class="op">(</span><span class="st">"4f4e4b24e4b07f02db6aea14"</span>, <span class="st">'title'</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Request failed [404]. Retrying in 1 seconds...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Request failed [404]. Retrying in 2 seconds...</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Sciencebase returned '404' -- item doesn't exist or is secured</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Request failed [404]. Retrying in 1.6 seconds...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Request failed [404]. Retrying in 1.9 seconds...</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Sciencebase returned '404' -- item doesn't exist or is secured</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in content(r):</span> is.response(x) is not TRUE</span>
+<span class="r-in"><span><span class="fu">item_get_fields</span><span class="op">(</span><span class="st">"63cb38b2d34e06fef14f40ad"</span>, <span class="st">'title'</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Mainstem Rivers of the Conterminous United States (ver. 2.0, February 2023)"</span>
+<span class="r-in"><span><span class="fu">item_get_fields</span><span class="op">(</span><span class="st">"63cb38b2d34e06fef14f40ad"</span>, <span class="st">'title'</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $title</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Mainstem Rivers of the Conterminous United States (ver. 2.0, February 2023)"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
