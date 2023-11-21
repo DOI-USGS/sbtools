@@ -131,3 +131,70 @@ query_filters <- function(x) {
 	c("projectStatus", "spatialQuery", "tags", "ancestors", "browseCategory", 
 		"browseType", "extentQuery", "dateRange")
 }
+
+#' @title Search within an SB folder
+#' 
+#' @description 
+#' Search for text in the title, abstract, etc. within an SB folder and any
+#' subfolders.
+#' 
+#' @param text text in the title, abstract, etc. of the desired item
+#' @param folder an SB item ID for the folder to search in
+#' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}
+#' @param limit Max number of matching items to return
+#' 
+#' @return A list of matching items as sbitem objects.
+#' 
+#' @export
+query_item_in_folder <- function(text, folder, ..., limit=20) {
+	# create and run the query
+	
+	res = query_sb(list(q=text, folderId=folder), ..., limit=limit)
+	
+	return(res)
+}
+
+#' Query SB for items based on custom identifier
+#' 
+#' Find all items under a scheme or also query by for a specific type and key
+#' 
+#' @param scheme The identifier scheme
+#' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}
+#' @param type (optional) The identifier type
+#' @param key (optional) The identifier key
+#' @param limit Max number of matching items to return
+#' @return The SB item id for the matching item. NULL if no matching item found.
+#' @import jsonlite
+#' @import httr
+#' 
+#' @examples \dontrun{
+#' authenticate_sb()
+#' 
+#' ex_item = item_create(title='identifier example')
+#' item_update_identifier(ex_item, 'project1', 'dataset1', 'key1')
+#' ex2_item = item_create(title='identifier example 2')
+#' item_update_identifier(ex2_item, 'project1', 'dataset1', 'key2')
+#' 
+#' 
+#' #query the specific item
+#' query_item_identifier('project1', 'dataset1', 'key1')
+#' 
+#' #or get the collection of items based on the ID hierarchy
+#' query_item_identifier('project1')
+#' 
+#' item_rm(ex_item)
+#' item_rm(ex2_item)
+#' }
+#' 
+#' @export
+query_item_identifier = function(scheme, type=NULL, key=NULL, ..., limit=20){
+	
+	# prepare query
+	filter_all = list('scheme'=scheme, 'type'=type, 'key'=key)
+	filter_items = Filter(Negate(is.null), filter_all)
+	filter = paste0('itemIdentifier=', toJSON(filter_items, auto_unbox=TRUE))
+	query = list('filter'=filter)
+	
+	return(query_sb(query_list=query, ..., limit=limit))
+	
+}
