@@ -65,6 +65,8 @@ test_that("authenticate_sb login results in valid session and renew works", {
 test_that("authenticate_sb login results in valid session and renew works (new)", {
 	skip_on_cran()
 	
+	sbtools:::clean_session()
+	
 	if(is.na(Sys.getenv("token_text", unset=NA)) | is.na(Sys.getenv("sb_user"))){
 		skip("Authenticated tests skipped due to lack of login info")
 	}

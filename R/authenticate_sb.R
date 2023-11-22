@@ -158,6 +158,7 @@ initialize_keycloack_env <- function(token_text) {
 	token_refresh()
 }
 
+# utility to clean environment for testing
 clean_session <- function() {
 	pkg.env$keycloak_token <- NULL
 	
@@ -165,9 +166,27 @@ clean_session <- function() {
 	
 	pkg.env$keycloak_client_id <- "files-ui"
 	
+	if(grepl("beta", pkg.env$domain))
+		pkg.env$keycloak_client_id <- "catalog"
+	
 	pkg.env$username = ""
 	
 	pkg.env$uid <- NULL
+}
+
+# utility to update .Renviron file for testing
+update_renv <- function(key, text, f = ".Renviron") {
+	
+	renv <- readLines(f)
+	
+	change_line <- which(grepl(paste0("^", key), renv))
+	
+	text <- gsub("[\r\n]", "", text)
+	
+	renv[4] <- paste0(key, "='", text, "'")
+	
+	writeLines(renv, f)
+	
 }
 
 #' Read in a password from the user

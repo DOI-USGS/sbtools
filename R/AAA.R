@@ -83,11 +83,13 @@ set_endpoint = function(endpoint=c("production", "development")){
 		pkg.env$domain = "https://www.sciencebase.gov/"
 		pkg.env$graphql_url = "https://api.sciencebase.gov/graphql"
 		pkg.env$manager_app = "https://sciencebase.usgs.gov/manager/"
+		pkg.env$keycloak_client_id = "files-ui"
 		
 	}else if(endpoint=="development"){
 		pkg.env$domain   = "https://beta.sciencebase.gov/"
 		pkg.env$graphql_url = "https://api-beta.staging.sciencebase.gov/graphql"
 		pkg.env$manager_app = "https://beta.staging.sciencebase.gov/manager/"
+		pkg.env$keycloak_client_id = "catalog"
 	}
 	
 	pkg.env$url_base = paste0(pkg.env$domain, "catalog/")
@@ -109,7 +111,7 @@ set_endpoint = function(endpoint=c("production", "development")){
 		pkg.env$token_url = paste0("https://www.sciencebase.gov/", 
 															 "auth/realms/ScienceBase-B/protocol/openid-connect/token")
 	}
-	pkg.env$keycloak_client_id = "files-ui"
+	
 	pkg.env$chunk_size_bytes = 104857600  # 104857600 == 100MB
 	
 }
