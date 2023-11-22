@@ -22,7 +22,7 @@
 #' res <- item_create(user_id(), "item-to-delete")
 #' item_rm(res)
 #' }
-item_rm = function(sb_id, ..., limit=1000, recursive=FALSE){
+item_rm = function(sb_id, ..., limit=1000, recursive=FALSE) {
 	
 	if (isTRUE(recursive)) return(item_rm_recursive(sb_id, ..., limit=limit))
 	
@@ -34,8 +34,7 @@ item_rm = function(sb_id, ..., limit=1000, recursive=FALSE){
 				 call. = FALSE)
 	}
 	
-	r = sbtools_DELETE(paste0(pkg.env$url_item, item$id, '?format=json'), ..., 
-										 accept_json())
+	r = delete_item_query(item$id)
 	
 	return(r)
 	
@@ -124,9 +123,6 @@ items_rm <- function(sb_id, ..., recursive=FALSE){
 		}
 	}))
 	
-	body <- lapply(item, function(z) setNames(as.list(z), "id"))
-	sbtools_DELETE(paste0(pkg.env$url_items, "?format=json"), 
-								 body = jsonlite::toJSON(body, auto_unbox = TRUE), 
-								 ..., accept_json())
+	lapply(item, function(z) item_rm)
 }
 

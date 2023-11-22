@@ -73,3 +73,16 @@ publish_cloud_object <- function(sb_id, fname, gql) {
 	
 }
 
+delete_item_query <- function(id) {
+	query <- "mutation DeleteItemQuery($input: DeleteItemInput!){\n deleteItem(input: $input){\n itemId\n  __typename }\n}\n"
+	
+	variables <- list(input = list(itemId = id))
+	
+	json <- jsonlite::toJSON(list(operationName = "DeleteItemQuery", 
+																query = query,
+																variables = variables),
+													 auto_unbox = TRUE)
+	
+	run_gql_query(query, httr::handle(url = pkg.env$graphql_url), json = json)
+}
+
