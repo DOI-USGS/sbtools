@@ -83,36 +83,6 @@ sbtools_PUT <- function(url, body, ...) {
 	return(r)
 }
 
-#' generic DELETEs for sbtools package
-#' 
-#' package wrapped for generic DELETEs that test sessions internally and wrap
-#' some errors
-#' 
-#' @param url a base url for the DELETE
-#' @param ... additional params passed to \code{\link[httr]{DELETE}}, e.g., 
-#'   \code{accept_json()}
-#' @import httr
-#' @export
-#' @keywords internal
-sbtools_DELETE <- function(url, ...) {
-	
-	if(!check_session(TRUE))
-		return(NULL)
-	
-	uid <- tryCatch(user_id(), 
-									error = function(e) "0")
-	
-	if(uid != 0 && grepl(uid, url)) {
-		stop("Deleting a user id is not supported.") #notest
-	}
-	
-	r = RETRY(verb = "DELETE", url = url, ..., httrUserAgent(), accept_json(), 
-						 get_token_header(), timeout = httr::timeout(default_timeout()))
-	r <- handle_errors(r, url, "DELETE", NULL)
-	refresh_token_before_expired()
-	return(r)
-}
-
 # HEAD fxn
 sbtools_HEAD <- function(url, ...) {
 	session_val()

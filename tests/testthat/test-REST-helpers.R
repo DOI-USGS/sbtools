@@ -18,7 +18,7 @@ test_that("REST_helpers tests", {
 	
 	expect_equal(put_test, NULL)
 	
-	delete_test <- suppressWarnings(sbtools_DELETE("https://www.sciencebase.gov/catalog/item/5c4f4a04e4b0708288f78e07"))
+	delete_test <- suppressWarnings(item_rm("https://www.sciencebase.gov/catalog/item/5c4f4a04e4b0708288f78e07"))
 	
 	expect_equal(delete_test, NULL)
 	

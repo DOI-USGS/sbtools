@@ -4,6 +4,7 @@
 - Sciencebase `session` object no longer returned by `authenticate_sb()`
 - `current_session()` now returns the active login token.
 - Removed `session_logout()` and `session_age_reset()`
+- removed `sbtools_DELETE()` as the method is no longer the accepted way to delete sciencebase items.
 
 # Version 1.2.0 (2023-04-28)
 

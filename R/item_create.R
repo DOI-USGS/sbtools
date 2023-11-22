@@ -43,7 +43,7 @@ item_create = function(parent_id = user_id(), title, ..., info){
 #' @param info (optional) list of metadata info for the new items. for each 
 #' item include a named list of variables
 #' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
-#' \code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}
+#' \code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}.
 #' @return One or more objects of class \code{sbitem} in a list
 #' @details The length of the \code{title} and \code{info} values must be the same
 #' length - however, the \code{parent_id} can be of length 1 or equal to the length 

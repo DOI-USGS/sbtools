@@ -23,7 +23,8 @@
 item_list_children = function(sb_id, fields=c('id', 'title'), ..., limit=20){
 
 	if(!session_validate()){
-		stop('Session state is invalid, please re-authenticate')
+		warning('Session state is invalid, please re-authenticate')
+		return(NULL)
 	}
 
 	item <- as.sbitem(sb_id)

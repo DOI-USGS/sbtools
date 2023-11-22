@@ -34,6 +34,8 @@ item_rm = function(sb_id, ..., limit=1000, recursive=FALSE) {
 				 call. = FALSE)
 	}
 	
+	if(is.null(item)) return(NULL)
+	
 	r = delete_item_query(item$id)
 	
 	return(r)
