@@ -14,7 +14,7 @@ If length 1, then we recycle it for every item.}
 \item{title}{Two or more titles for the new SB items}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
-\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}.}
 
 \item{info}{(optional) list of metadata info for the new items. for each 
 item include a named list of variables}

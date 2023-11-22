@@ -13,7 +13,7 @@ parent item (folder)}
 \item{files}{A string vector of paths to files to be uploaded}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
-\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}}
 
 \item{scrape_files}{logical should the files be scraped for metadata? 
 If TRUE, sciencebase will attempt to create extensions based on the files.

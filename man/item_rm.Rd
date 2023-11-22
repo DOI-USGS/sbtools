@@ -10,7 +10,7 @@ item_rm(sb_id, ..., limit = 1000, recursive = FALSE)
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
-\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}.}
 
 \item{limit}{The maximum number of child items to remove when called with
 recursive=TRUE.}

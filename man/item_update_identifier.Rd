@@ -16,7 +16,7 @@ item_update_identifier(sb_id, scheme, type, key, ...)
 \item{key}{The identifier key}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
-\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}.}
 }
 \description{
 Adds or updates an item's alternative identifier. This can add 

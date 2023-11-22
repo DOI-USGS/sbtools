@@ -12,7 +12,7 @@ item_publish_cloud(sb_id, files, ...)
 \item{files}{A string vector of paths to files to be uploaded}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
-\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}.}
 }
 \value{
 web service response invisibly.

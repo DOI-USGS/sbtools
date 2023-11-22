@@ -13,7 +13,7 @@ item_move(sb_id, id_new, ...)
 that can be coerced to a SB item ID by \code{\link{as.sbitem}}}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
-\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}.}
 }
 \value{
 An object of class \code{sbitem}. Same as \code{id}, but with new 

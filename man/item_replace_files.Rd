@@ -12,7 +12,7 @@ item_replace_files(sb_id, files, ..., all = FALSE, scrape_files = FALSE)
 \item{files}{A character vector of file paths}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
-\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}.}
 
 \item{all}{A boolean indicating if all attached files should be removed before
 uploading new files. FALSE if only files with matching names should be replaced. 

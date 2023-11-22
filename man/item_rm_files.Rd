@@ -13,7 +13,7 @@ item_rm_files(sb_id, files, ...)
 If not supplied, defaults to removing all attached files.}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
-\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}.}
 }
 \value{
 An updated object of class \code{sbitem}

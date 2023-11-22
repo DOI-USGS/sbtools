@@ -12,7 +12,7 @@ item_get_fields(sb_id, fields, ..., drop = TRUE)
 \item{fields}{a vector of fields}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
-\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}.}
 
 \item{drop}{logical. If only one field is selected, should the
 list format be dropped?}

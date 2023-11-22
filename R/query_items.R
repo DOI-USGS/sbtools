@@ -123,8 +123,8 @@ query_items = function(query_list, ...) {
 	qury <- query_list[!names(query_list) %in% query_filters()]
 	filters <- query_list[names(query_list) %in% query_filters()]
 	filters <- paste(names(filters), unname(filters), sep = "=")
-	qury <- c(qury, as.list(setNames(filters, rep("filter", length(filters)))))
-	return(sbtools_GET(url = pkg.env$url_items, ..., query = qury))
+	query <- c(qury, as.list(stats::setNames(filters, rep("filter", length(filters)))))
+	return(sbtools_GET(url = pkg.env$url_items, ..., query = query))
 }
 
 query_filters <- function(x) {
