@@ -86,10 +86,12 @@ sbtools:::clean_session()
 
 The new way uses `initialize_sciencebase_session()` to open a browser window. Once logged in, you can get a token from the user drop down in the upper right. For this example, that token has been saved as an environment variable.
 
-For this to work, a `token_text` environment variable must be available and valid.
+If the token has been entered previously and is still valid, it will not be requested again.
 
 ```{r}
-initialize_sciencebase_session(Sys.getenv("sb_user"), Sys.getenv("token_text"))
+user <- Sys.getenv("sb_user") # this should be your science base user id
+
+initialize_sciencebase_session(user)
 
 my_home_item <- user_id()
 

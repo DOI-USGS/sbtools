@@ -24,7 +24,8 @@ Imports:
     mime,
     utils,
     cli,
-    keyring
+    keyring,
+    tools
 Suggests:
     testthat,
     xml2,

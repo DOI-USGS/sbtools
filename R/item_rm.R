@@ -38,7 +38,7 @@ item_rm = function(sb_id, ..., limit=1000, recursive=FALSE) {
 	
 	r = delete_item_query(item$id)
 	
-	return(r)
+	return(invisible(r))
 	
 }
 

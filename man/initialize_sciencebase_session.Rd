@@ -4,18 +4,24 @@
 \alias{initialize_sciencebase_session}
 \title{Initialize ScienceBase Session}
 \usage{
-initialize_sciencebase_session(username, token_text = NULL)
+initialize_sciencebase_session(username = NULL, token_text = NULL)
 }
 \arguments{
-\item{username}{email address of sciencebase user.}
+\item{username}{email address of sciencebase user. Will be retrieved from the 
+`sb_user` environment variable if set. A prompt will be raised if not provided.}
 
-\item{token_text}{character json formatted token text}
+\item{token_text}{character json formatted token text. `token_text` is 
+stashed in \link[tools]{R_user_dir} and does not need to be re-entered unless 
+it becomes stale.
+
+If the token text is provided as input, no popup prompt will be raised.}
 }
 \description{
 Unless `token_text` is provided, will open a browser for two 
-factor authentication. Once logged in, 
-retrieve the token from the user drop down in the upper right hand corner of 
-the browser. Click the icon with the silhouette of a person, and select 
-Copy API Token.' The token should be pasted into the popup prompt. 
-If the token text is provided as input, no popup prompt will be raised.
+factor authentication. 
+
+Once logged in, retrieve the token from the user drop down in the upper 
+right hand corner of the browser. Click the icon with the silhouette of 
+a person, and select 'Copy API Token.' The token should be pasted into the 
+popup prompt.
 }

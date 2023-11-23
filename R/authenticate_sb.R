@@ -18,7 +18,7 @@ authenticate_sb = function(username, password){
 	message("authenticate_sb will stop working in favor of initialize_sciencebase_session when sciencebase turns off username and password login")
 	
 	# TODO: bring back session_details?	
-	username <- get_username(username)
+	username <- try(get_username(username), silent = TRUE)
 	
 	if((inherits(username, "try-error") | is.null(username)) && !interactive()){
 		
@@ -86,8 +86,16 @@ authenticate_sb = function(username, password){
 	return(invisible(TRUE))
 }
 
-get_username <- function(username) {
-	if(missing(username)) {
+get_username <- function(username = NULL) {
+	if(is.null(username)) {
+		
+		username <- Sys.getenv("sb_user")
+		
+		if(username != "") {
+			pkg.env$username <- username
+			return(username)
+		}
+		
 		if(interactive()) {
 			
 			username = readline('Please enter your username:')
@@ -124,30 +132,60 @@ set_keycloak_env <- function(token_resp) {
 
 #' Initialize ScienceBase Session
 #' @description Unless `token_text` is provided, will open a browser for two 
-#' factor authentication. Once logged in, 
-#' retrieve the token from the user drop down in the upper right hand corner of 
-#' the browser. Click the icon with the silhouette of a person, and select 
-#' Copy API Token.' The token should be pasted into the popup prompt. 
+#' factor authentication. 
+#' 
+#' Once logged in, retrieve the token from the user drop down in the upper 
+#' right hand corner of the browser. Click the icon with the silhouette of 
+#' a person, and select 'Copy API Token.' The token should be pasted into the 
+#' popup prompt. 
+#' 
+#' @param token_text character json formatted token text. `token_text` is 
+#' stashed in \link[tools]{R_user_dir} and does not need to be re-entered unless 
+#' it becomes stale.
+#' 
 #' If the token text is provided as input, no popup prompt will be raised.
-#' @param token_text character json formatted token text
-#' @param username email address of sciencebase user.
+#' 
+#' @param username email address of sciencebase user. Will be retrieved from the 
+#' `sb_user` environment variable if set. A prompt will be raised if not provided.
 #' @export
 #' 
-initialize_sciencebase_session <- function(username, token_text = NULL) {
+initialize_sciencebase_session <- function(username = NULL, token_text = NULL) {
 	
 	username <- get_username(username)
 	
 	if(is.null(token_text)) {
+		
+		token <- gsub("[\r\n]", "", grab_token())
+		
+		if(token != "") {
+			check_current <- try(
+				initialize_keycloack_env(
+					token), silent = TRUE)
+			
+			if(isTRUE(check_current)) {
+				pkg.env$username <- username
+				return(TRUE)
+			}
+		}
+		
 		message("A browser will open ", pkg.env$manager_app)
 		message("Log in and copy a token from the 'User' menu in the upper right.")
 		message("Paste the token in the dialogue box that opens.")
 		utils::browseURL(pkg.env$manager_app)
 		token_text <- readPassword('Please enter your Sciencebase token string:')
+		
 	}
 	
 	pkg.env$username <- username
 	
-	try(initialize_keycloack_env(token_text))
+	worked <- try(initialize_keycloack_env(token_text))
+	
+	if(!inherits(worked, "try-error")) {
+		stache_token(token_text)
+		TRUE
+	} else {
+		FALSE
+	}
 }
 
 initialize_keycloack_env <- function(token_text) {
@@ -174,19 +212,18 @@ clean_session <- function() {
 	pkg.env$uid <- NULL
 }
 
-# utility to update .Renviron file for testing
-update_renv <- function(key, text, f = ".Renviron") {
+stache_token <- function(token_text) {
+	dir.create(dirname(pkg.env$token_stache), recursive = TRUE, showWarnings = FALSE)
 	
-	renv <- readLines(f)
-	
-	change_line <- which(grepl(paste0("^", key), renv))
-	
-	text <- gsub("[\r\n]", "", text)
-	
-	renv[4] <- paste0(key, "='", text, "'")
-	
-	writeLines(renv, f)
-	
+	write(token_text, file = pkg.env$token_stache)
+}
+
+grab_token <- function() {
+	if(file.exists(pkg.env$token_stache)) {
+		readChar(pkg.env$token_stache, file.info(pkg.env$token_stache)$size)
+	} else {
+		""
+	}
 }
 
 #' Read in a password from the user

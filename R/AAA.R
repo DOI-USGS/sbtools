@@ -3,6 +3,7 @@
 pkg.env <- new.env()
 pkg.env$username = ""
 
+pkg.env$token_stache <- file.path(tools::R_user_dir(package = "sbtools"), "token")
 
 .onLoad = function(libname, pkgname){
 	set_endpoint()

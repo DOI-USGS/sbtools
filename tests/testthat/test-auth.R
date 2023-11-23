@@ -1,5 +1,4 @@
 user <- Sys.getenv("sb_user", unset=NA)
-token_text <- Sys.getenv("token_text", unset = NA)
 
 test_that("not_logged in tests", {
 	expect_error(sbtools:::get_access_token(), "no token found, must call authenticate_sb()")
@@ -67,11 +66,15 @@ test_that("authenticate_sb login results in valid session and renew works (new)"
 	
 	sbtools:::clean_session()
 	
-	if(is.na(Sys.getenv("token_text", unset=NA)) | is.na(Sys.getenv("sb_user"))){
+	token <- sbtools:::grab_token()
+	
+	if(token == "" | is.na(Sys.getenv("sb_user"))){
 		skip("Authenticated tests skipped due to lack of login info")
 	}
 	
-	if(!initialize_sciencebase_session(Sys.getenv("sb_user"), Sys.getenv("token_text"))) {
+	unlink(sbtools:::pkg.env$token_stache, force = TRUE)
+	
+	if(!initialize_sciencebase_session(Sys.getenv("sb_user"), token)) {
 		sbtools:::clean_session()
 		
 		skip("token didn't work, refresh it?")
@@ -79,6 +82,10 @@ test_that("authenticate_sb login results in valid session and renew works (new)"
 	}
 	
 	on.exit(sbtools:::clean_session())
+	
+	expect_true(file.exists(sbtools:::pkg.env$token_stache))
+	
+	expect_true(initialize_sciencebase_session())
 	
 	expect_true(session_validate())
 	
