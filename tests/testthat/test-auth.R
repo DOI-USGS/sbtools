@@ -1,6 +1,7 @@
 user <- Sys.getenv("sb_user", unset=NA)
 
 test_that("not_logged in tests", {
+	skip("retired pattern")
 	expect_error(sbtools:::get_access_token(), "no token found, must call authenticate_sb()")
 	expect_error(sbtools:::get_refresh_token(), "no token found, must call authenticate_sb()")
 	
@@ -12,7 +13,7 @@ test_that("not_logged in tests", {
 })
 
 test_that("authenticate_sb errors", {
-	skip_on_cran()
+	skip("retired pattern")
 	
 	if(is.na(user)){
 		skip("Authenticated tests skipped due to lack of login info")
@@ -27,15 +28,14 @@ test_that("authenticate_sb errors", {
 
 })
 
-test_that("authenticate_sb login results in valid session and renew works", {
+test_that("initialize_scienbase_session login results in valid session and renew works", {
 	skip_on_cran()
 	
 	if(is.na(Sys.getenv("sb_user", unset=NA))){
 		skip("Authenticated tests skipped due to lack of login info")
 	}
 
-	authenticate_sb(Sys.getenv("sb_user", unset=""), 
-									Sys.getenv("sb_pass", unset=""))
+	initialize_sciencebase_session()
 	
 	on.exit(sbtools:::clean_session())
 	
@@ -61,7 +61,7 @@ test_that("authenticate_sb login results in valid session and renew works", {
 })
 
 
-test_that("authenticate_sb login results in valid session and renew works (new)", {
+test_that("login results in valid session and renew works (new)", {
 	skip_on_cran()
 	
 	sbtools:::clean_session()

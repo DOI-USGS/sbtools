@@ -5,7 +5,7 @@ test_that("item creation, identifiers, and file upload works", {
 		skip("Authenticated tests skipped due to lack of login info")
 	}
 	
-	authenticate_sb(Sys.getenv("sb_user", unset=""), Sys.getenv("sb_pass", unset=""))
+	initialize_sciencebase_session()
 	
 	on.exit(sbtools:::clean_session())
 	
