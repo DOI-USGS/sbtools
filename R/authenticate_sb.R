@@ -63,8 +63,6 @@ authenticate_sb = function(username, password){
 	
 	token_url <- pkg.env$token_url
 	
-	pkg.env$keycloak_client_id <- "sciencebasepy"
-	
 	token <- RETRY("POST", token_url, 
 								 body = list(
 								 	client_id = pkg.env$keycloak_client_id,
@@ -202,10 +200,7 @@ clean_session <- function() {
 	
 	pkg.env$keycloak_expire <- NULL
 	
-	pkg.env$keycloak_client_id <- "files-ui"
-	
-	if(grepl("beta", pkg.env$domain))
-		pkg.env$keycloak_client_id <- "catalog"
+	pkg.env$keycloak_client_id <- "catalog"
 	
 	pkg.env$username = ""
 	
