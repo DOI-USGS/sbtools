@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 oldoption <- options(scipen = 9999)
 ```
 
-`sbtools` provides access and upload utilities for [ScienceBase](https://sciencebase.gov)
+`sbtools` provides access and upload utilities for [ScienceBase](https://www.sciencebase.gov)
 
 Much of sbtools does not require authentication.
 

@@ -23,7 +23,7 @@ In addition to login modifications, a pkgdown site was created, and the package 
 # Version 1.1.21 (2022-11-03)
 
 - All web calls now use `httr::RETRY()` to be a bit more robust. #213
-- Password management can now be done with the [`keyring` package.](https://r-lib.github.io/keyring/index.html)
+- Password management can now be done with the `keyring`
 - File uploads for very large files should now be more robust with longer time out tolerances.
 
 # Version 1.1.20 (2022-10-27)

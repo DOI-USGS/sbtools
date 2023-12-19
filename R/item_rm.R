@@ -63,9 +63,9 @@ item_rm = function(sb_id, ..., limit=1000, recursive=FALSE) {
 #' # then delete the whole folder
 #' sbtools:::item_rm_recursive(folder)
 #' }
-item_rm_recursive = function(id, ..., limit) {
+item_rm_recursive = function(sb_id, ..., limit) {
 	
-	id <- as.sbitem(id)$id
+	id <- as.sbitem(sb_id)$id
 	# check args
 	if(length(id) != 1) stop('expecting exactly 1 id')
 	
