@@ -1,7 +1,7 @@
 Package: sbtools
 Title: USGS ScienceBase Tools
 Maintainer: David Blodgett <dblodgett@usgs.gov>
-Version: 1.2.0
+Version: 1.3.0
 Authors@R: c(person("David", "Blodgett", role=c("cre"),
     email = "dblodgett@usgs.gov"),
     person("Luke", "Winslow", role = c("aut"),
@@ -24,15 +24,19 @@ Imports:
     mime,
     utils,
     cli,
-    keyring
+    keyring,
+    tools
 Suggests:
     testthat,
     xml2,
     sf,
-    sp,
-    tools
+    knitr,
+    rmarkdown
 License: CC0
 URL: https://github.com/DOI-USGS/sbtools
 BugReports: https://github.com/DOI-USGS/sbtools/issues
 RoxygenNote: 7.2.3
+VignetteBuilder: knitr
+Config/testthat/parallel: true
+Config/testthat/edition: 3
 Encoding: UTF-8

@@ -61,34 +61,6 @@ Please consider reporting bugs and asking questions on the Issues page:
 
 [https://github.com/DOI-USGS/sbtools/issues](https://github.com/DOI-USGS/sbtools/issues)
 
-## Examples
-
-```{r example, eval=TRUE}
-library(sbtools)
-
-# Query ScienceBase for data about Antarctica
-query_sb_text('Antarctica', limit=1)
-
-# Query for a specific DOI
-query_sb_doi('10.5066/F7M043G7')
-
-# Inspect the contents of the above item
-children <- item_list_children('557f0367e4b023124e8ef621')
-sapply(children, function(child) child$title)
-
-# Log in (requires a ScienceBase account) and create an item
-authenticate_sb(Sys.getenv("sb_user")) # type in password
-my_home_item <- user_id()
-new_item <- item_create(title = 'new test item', parent_id = my_home_item)
-test.txt <- file.path(tempdir(), 'test.txt')
-writeLines(c('this is','my data file'), "test.txt")
-item_append_files(new_item, "test.txt")
-item_list_files(new_item)$fname
-
-item_rm(new_item)
-unlink("test.txt")
-```
-
 ## Release Procedure
 
 For release of the sbtools package, a number of steps are required.

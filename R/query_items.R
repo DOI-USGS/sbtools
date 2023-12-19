@@ -2,7 +2,6 @@
 #' 
 #' @param query_list List of item query selectors. See Details.
 #' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}
-#' @param session Session object from \code{\link{authenticate_sb}}
 #' @return An object of class \code{\link[httr]{response}}
 #' @export
 #' @details The following is a list of query parameters you can use 
@@ -120,15 +119,112 @@
 #' ## note, you have to pass the q parameter if you pass the lq parameter
 #' content(query_items(list(s = "Search", q = "", lq = '"sage OR grouse"')))
 #' }
-query_items = function(query_list, ..., session = current_session()) {
+query_items = function(query_list, ...) {
 	qury <- query_list[!names(query_list) %in% query_filters()]
 	filters <- query_list[names(query_list) %in% query_filters()]
 	filters <- paste(names(filters), unname(filters), sep = "=")
-	qury <- c(qury, as.list(setNames(filters, rep("filter", length(filters)))))
-	return(sbtools_GET(url = pkg.env$url_items, ..., query = qury, session = session))
+	query <- c(qury, as.list(stats::setNames(filters, rep("filter", length(filters)))))
+	return(sbtools_GET(url = pkg.env$url_items, ..., query = query))
 }
 
 query_filters <- function(x) {
 	c("projectStatus", "spatialQuery", "tags", "ancestors", "browseCategory", 
 		"browseType", "extentQuery", "dateRange")
 }
+
+#' @title Search within an SB folder
+#' 
+#' @description 
+#' Search for text in the title, abstract, etc. within an SB folder and any
+#' subfolders.
+#' 
+#' @param text text in the title, abstract, etc. of the desired item
+#' @param folder an SB item ID for the folder to search in
+#' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}
+#' @param limit Max number of matching items to return
+#' 
+#' @return A list of matching items as sbitem objects.
+#' 
+#' @export
+query_item_in_folder <- function(text, folder, ..., limit=20) {
+	# create and run the query
+	
+	res = query_sb(list(q=text, folderId=folder), ..., limit=limit)
+	
+	return(res)
+}
+
+#' Query SB for items based on custom identifier
+#' 
+#' Find all items under a scheme or also query by for a specific type and key
+#' 
+#' @param scheme The identifier scheme
+#' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}
+#' @param type (optional) The identifier type
+#' @param key (optional) The identifier key
+#' @param limit Max number of matching items to return
+#' @return The SB item id for the matching item. NULL if no matching item found.
+#' @import jsonlite
+#' @import httr
+#' 
+#' @examples \dontrun{
+#' authenticate_sb()
+#' 
+#' ex_item = item_create(title='identifier example')
+#' item_update_identifier(ex_item, 'project1', 'dataset1', 'key1')
+#' ex2_item = item_create(title='identifier example 2')
+#' item_update_identifier(ex2_item, 'project1', 'dataset1', 'key2')
+#' 
+#' 
+#' #query the specific item
+#' query_item_identifier('project1', 'dataset1', 'key1')
+#' 
+#' #or get the collection of items based on the ID hierarchy
+#' query_item_identifier('project1')
+#' 
+#' item_rm(ex_item)
+#' item_rm(ex2_item)
+#' }
+#' 
+#' @export
+query_item_identifier = function(scheme, type=NULL, key=NULL, ..., limit=20){
+	
+	# prepare query
+	filter_all = list('scheme'=scheme, 'type'=type, 'key'=key)
+	filter_items = Filter(Negate(is.null), filter_all)
+	filter = paste0('itemIdentifier=', toJSON(filter_items, auto_unbox=TRUE))
+	query = list('filter'=filter)
+	
+	return(query_sb(query_list=query, ..., limit=limit))
+	
+}
+
+#' check if identifier touple already exists on SB
+#'
+#' returns TRUE if touple already belongs to a sciencebase item, FALSE if not
+#'
+#' @param scheme the identifier scheme
+#' @param type the identifier type
+#' @param key the identifier key
+#' @param ... Additional parameters are passed on to \code{\link[httr]{GET}}
+#' @return boolean for whether item exists
+#'
+#' @examples \dontrun{
+#' item_exists('mda_streams','ts_doobs','nwis_01018035')
+#' item_exists('mda_streams','site_root','nwis_01018035')
+#' }
+#' @export
+item_exists = function(scheme, type, key, ...){
+	
+	if(!session_validate()){
+		stop('Session state is invalid, please re-authenticate')
+	}
+	
+	items <- query_item_identifier(scheme=scheme, type=type, key=key, ...)
+	if (length(items) > 0){
+		return(TRUE)
+	} else {
+		return(FALSE)
+	}
+}
+

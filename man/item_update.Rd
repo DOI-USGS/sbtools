@@ -4,7 +4,7 @@
 \alias{item_update}
 \title{Update a SB item with new metadata}
 \usage{
-item_update(sb_id, info, ..., session = current_session())
+item_update(sb_id, info, ...)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
@@ -12,10 +12,7 @@ item_update(sb_id, info, ..., session = current_session())
 \item{info}{list of metadata info (key-value pairs) to change on the item}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
-\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
-
-\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
-last authenticated session}
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}.}
 }
 \value{
 An object of class \code{sbitem}

@@ -1,0 +1,116 @@
+---
+title: "sbtools -- getting started"
+author: "dblodgett@usgs.gov"
+date: "2023-11-17"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{sbtools -- getting started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+
+local <- (Sys.getenv("BUILD_VIGNETTES") == "TRUE")
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width=6, 
+  fig.height=4,
+  eval=local
+)
+
+oldoption <- options(scipen = 9999)
+```
+
+`sbtools` provides access and upload utilities for [ScienceBase](https://www.sciencebase.gov)
+
+Much of sbtools does not require authentication.
+
+```{r}
+## Examples
+
+library(sbtools)
+
+# Query ScienceBase for data about Antarctica
+query_sb_text('Antarctica', limit=1)
+
+# Query for a specific DOI
+query_sb_doi('10.5066/P92U7ZUT')
+
+# Inspect the contents of the above item
+children <- item_list_children('5669a79ee4b08895842a1d47')
+
+sapply(children, function(child) child$title)
+
+item_get(children[[1]])
+```
+`sbtools` uses an `sbitem` S3 object that is a list containing the `sbjson` associated with the item in question.
+
+```{r}
+
+item <- item_get(children[[1]])
+
+class(item)
+
+class(unclass(item))
+
+```
+Much of `sbtools` is intended to be used after authentication. This part of `sbtools` is changing in Winter, 2023-2024 as ScienceBase transitions for password-based authentication to two factor and token based authentication. This next section was rendered with the author's (dblodgett@usgs.gov) private credentials.
+
+The old way used `authenticate_sb()` with a username and password. The password could be cached using the `keyring` package.
+
+```{r}
+authenticate_sb(Sys.getenv("sb_user"))
+
+my_home_item <- user_id()
+
+new_item <- item_create(title = 'new test item', parent_id = my_home_item)
+
+test.txt <- file.path(tempdir(), 'test.txt')
+
+writeLines(c('this is','my data file'), test.txt)
+
+item_append_files(new_item, test.txt)
+
+item_list_files(new_item)$fname
+
+item_rm(new_item)
+
+unlink(test.txt)
+
+# restart or clean session to reauthenticate differently
+sbtools:::clean_session()
+```
+
+The new way uses `initialize_sciencebase_session()` to open a browser window. Once logged in, you can get a token from the user drop down in the upper right. For this example, that token has been saved as an environment variable.
+
+If the token has been entered previously and is still valid, it will not be requested again.
+
+```{r}
+user <- Sys.getenv("sb_user") # this should be your science base user id
+
+initialize_sciencebase_session(user)
+
+my_home_item <- user_id()
+
+new_item <- item_create(title = 'new test item', parent_id = my_home_item)
+
+test.txt <- file.path(tempdir(), 'test.txt')
+
+writeLines(c('this is','my data file'), test.txt)
+
+item_append_files(new_item, test.txt)
+
+item_list_files(new_item)$fname
+
+item_rm(new_item)
+
+unlink(test.txt)
+```
+
+```{r teardown, include=FALSE}
+options(oldoption)
+sbtools:::clean_session()
+```

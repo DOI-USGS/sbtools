@@ -17,12 +17,12 @@
 #' # identifier does not exist
 #' identifier_exists(sb_id = "aaaaaaakkkkkkkbbbbbb")
 #' }
-identifier_exists <- function(sb_id, ..., session = current_session()) {
+identifier_exists <- function(sb_id, ...) {
 	#sb_id = as.sbitem(sb_id)
 	if(is(sb_id, 'sbitem')){
-		sbtools_HEAD(url = paste0(pkg.env$url_item, sb_id$id), ..., session = session)
+		sbtools_HEAD(url = paste0(pkg.env$url_item, sb_id$id), ...)
 	}else{
-		sbtools_HEAD(url = paste0(pkg.env$url_item, sb_id), ..., session = session)
+		sbtools_HEAD(url = paste0(pkg.env$url_item, sb_id), ...)
 	}
 }
 

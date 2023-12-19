@@ -13,18 +13,18 @@
 #'  
 #' @examples \dontrun{
 #'
-#' session = authenticate_sb("user@@usgs.gov")
-#' item_update_identifier("5485fd99e4b02acb4f0c7e81", "scheme", "type", "key", session=session)
+#' initialize_sciencebase_session()
+#' item_update_identifier("5485fd99e4b02acb4f0c7e81", "scheme", "type", "key")
 #'
 #' }
 #'
 #'@export
-item_update_identifier = function(sb_id, scheme, type, key, ..., session=current_session()) {
+item_update_identifier = function(sb_id, scheme, type, key, ...) {
 	
 	sb_id = as.sbitem(sb_id)
 	
 	#first, query for that identifier
-	existing_id = query_item_identifier(scheme=scheme, type=type, key=key, ..., session=session)
+	existing_id = query_item_identifier(scheme=scheme, type=type, key=key, ...)
 	
 	#if it exists, but has a different ID, we are trying to set a duplicate
 	if(length(existing_id) > 0 && existing_id[[1]]$id != sb_id$id) {
@@ -36,7 +36,7 @@ item_update_identifier = function(sb_id, scheme, type, key, ..., session=current
 	}
 	
 	#now, try to fetch the item. This is the item we will be updating
-	original = item_get(sb_id, ..., session=session)
+	original = item_get(sb_id, ...)
 	
 	if(!is.null(original$errors)) {
 		stop('Item with that ID does not exist or you do not have permission to read it.')
@@ -50,7 +50,7 @@ item_update_identifier = function(sb_id, scheme, type, key, ..., session=current
 	
 	r = sbtools_PUT(url=paste0(pkg.env$url_item, sb_id$id), 
 									body=toJSON(info), 
-									..., accept_json(), session=session)
+									..., accept_json())
 	
 	return(r)
 	

@@ -4,13 +4,7 @@
 \alias{item_append_files}
 \title{Upload File to Item}
 \usage{
-item_append_files(
-  sb_id,
-  files,
-  ...,
-  scrape_files = TRUE,
-  session = current_session()
-)
+item_append_files(sb_id, files, ..., scrape_files = TRUE)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
@@ -18,7 +12,7 @@ item_append_files(
 \item{files}{A string vector of paths to files to be uploaded}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
-\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}.}
 
 \item{scrape_files}{logical should the files be scraped for metadata? 
 If TRUE, sciencebase will attempt to create extensions based on the files.
@@ -26,9 +20,6 @@ If TRUE, sciencebase will attempt to create extensions based on the files.
 For example, for shapefiles, this will result in a shapefile extension 
 to be returned as a facet of the sciencebase item. 
 See item: "58069258e4b0824b2d1d422e" for an example.}
-
-\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
-last authenticated session}
 }
 \value{
 An object of class \code{sbitem}

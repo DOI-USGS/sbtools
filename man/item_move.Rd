@@ -4,7 +4,7 @@
 \alias{item_move}
 \title{Move item from one folder to another}
 \usage{
-item_move(sb_id, id_new, ..., session = current_session())
+item_move(sb_id, id_new, ...)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
@@ -13,10 +13,7 @@ item_move(sb_id, id_new, ..., session = current_session())
 that can be coerced to a SB item ID by \code{\link{as.sbitem}}}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
-\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
-
-\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
-last authenticated session}
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}.}
 }
 \value{
 An object of class \code{sbitem}. Same as \code{id}, but with new 

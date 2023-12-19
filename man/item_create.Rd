@@ -4,13 +4,7 @@
 \alias{item_create}
 \title{Create a new SB item}
 \usage{
-item_create(
-  parent_id = user_id(),
-  title,
-  ...,
-  info,
-  session = current_session()
-)
+item_create(parent_id = user_id(), title, ..., info)
 }
 \arguments{
 \item{parent_id}{An \code{\link{sbitem}} object or character ScienceBase ID corresponding to the 
@@ -19,12 +13,9 @@ parent item (folder)}
 \item{title}{The title of the new SB item}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
-\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}}
 
 \item{info}{(optional) list of metadata info for the new item}
-
-\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
-last authenticated session}
 }
 \value{
 An object of class \code{sbitem}

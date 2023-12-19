@@ -25,10 +25,13 @@
 #' res2$files
 #' }
 #' @export
-item_rm_files <- function(sb_id, files,..., session=current_session()){
+item_rm_files <- function(sb_id, files,...){
 	
 	#force a pull of the item to refresh the file info
 	sb_id = as.sbitem(sb_id)
+	
+	if(is.null(sb_id)) return(NULL)
+	
 	item = get_item(sb_id$id)
 	
 	#if item has no files, we have nothing to do
@@ -50,6 +53,6 @@ item_rm_files <- function(sb_id, files,..., session=current_session()){
 		return(item)
 	}
 	
-	as.sbitem(item_update(item$id, info = list(files = files_to_keep), ..., session = session))
+	as.sbitem(item_update(item$id, info = list(files = files_to_keep), ...))
 
 }

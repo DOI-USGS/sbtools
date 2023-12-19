@@ -20,7 +20,7 @@
 #' file <- system.file("examples", "books.json", package = "sbtools")
 #' item_upload_create(user_id(), file)
 #' }
-item_upload_create = function(parent_id, files, ..., scrape_files = TRUE, session=current_session()){
+item_upload_create = function(parent_id, files, ..., scrape_files = TRUE){
 	
 	if(length(files) > 50){
 		warning('Trying to attach a large number of files to a SB item. SB imposes file limits which may cause this to fail')
@@ -36,14 +36,7 @@ item_upload_create = function(parent_id, files, ..., scrape_files = TRUE, sessio
 	
 	r = sbtools_POST(url = paste0(pkg.env$url_upload_create, item$id, params), 
 									 ...,
-									 body = multi_file_body(files), 
-									 session = session)
-	
-	
-	#check to see if we've been redirected to the login page
-	if (grepl('josso/signon', r$url)) {
-		stop('Not authenticated or lack of permission to parent object\nAunthenticate with the authenticate_sb function.')
-	}
+									 body = multi_file_body(files))
 	
 	item <- as.sbitem(content(r))
 	
@@ -68,7 +61,7 @@ item_upload_create = function(parent_id, files, ..., scrape_files = TRUE, sessio
 #' item_rm(res)
 #' }
 #' @export
-item_append_files = function(sb_id, files, ..., scrape_files = TRUE, session=current_session()){
+item_append_files = function(sb_id, files, ..., scrape_files = TRUE){
 	
 	if(length(files) > 50){
 		warning('Trying to attach a large number of files to a SB item. SB imposes file limits which may cause this to fail')
@@ -87,8 +80,7 @@ item_append_files = function(sb_id, files, ..., scrape_files = TRUE, session=cur
 	}
 	
 	r = sbtools_POST(url = paste0(pkg.env$url_upload, params), ...,
-									 body = multi_file_body(files), 
-									 session = session)
+									 body = multi_file_body(files))
   
 	if(!is.null(r)) {
 		item <- as.sbitem(content(r))
@@ -146,7 +138,7 @@ multi_file_body <- function(files){
 #' item_upload_cloud(res$id, "foobar.txt")
 #' }
 #' @export
-item_upload_cloud <- function(sb_id, files, ..., status = TRUE, session=current_session()) {
+item_upload_cloud <- function(sb_id, files, ..., status = TRUE) {
 
 	try(sb_id <- sb_id$id, silent = TRUE)
 	
@@ -178,7 +170,7 @@ item_upload_cloud <- function(sb_id, files, ..., status = TRUE, session=current_
 #' item_publish_cloud(res$id, "foobar.txt") 
 #' }
 #'
-item_publish_cloud <- function(sb_id, files, ..., session = current_session()) {
+item_publish_cloud <- function(sb_id, files, ...) {
 	
 	try(sb_id <- sb_id$id, silent = TRUE)
 	
@@ -190,8 +182,7 @@ item_publish_cloud <- function(sb_id, files, ..., session = current_session()) {
 	
 }
 
-cloud_upload <- function(file, mimetype, itemid, chunk_size_bytes = pkg.env$chunk_size_bytes,
-												 session = current_session(), status = TRUE) {
+cloud_upload <- function(file, mimetype, itemid, chunk_size_bytes = pkg.env$chunk_size_bytes, status = TRUE) {
 	
 	f_size_bytes <- file.size(file)
 	f_chunks <- as.integer(f_size_bytes / chunk_size_bytes) + 1
@@ -202,7 +193,7 @@ cloud_upload <- function(file, mimetype, itemid, chunk_size_bytes = pkg.env$chun
 	
 	session_id = create_multipart_upload_session(
 		f_path, mimetype, 
-		session_details(session = session)$username, gql)
+		pkg.env$username, gql)
 		
 	refresh_token_before_expired()
 	
@@ -263,8 +254,7 @@ cloud_upload <- function(file, mimetype, itemid, chunk_size_bytes = pkg.env$chun
 										 body = toJSON(unclass(item), 
 										 							auto_unbox = TRUE, 
 										 							null = "null"), 
-										 httr::accept_json(), 
-										 session = current_session())
+										 httr::accept_json())
 	
 	return(as.sbitem(content(res)))
 	

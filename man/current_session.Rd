@@ -7,7 +7,7 @@
 current_session()
 }
 \description{
-Returns the currently cached SB session. If there
+Returns the currently cached SB session token. If there
 is no authenticated session, returns NULL. Emits a
 warning if the session has expired.
 }

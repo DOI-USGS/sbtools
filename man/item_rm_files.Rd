@@ -4,7 +4,7 @@
 \alias{item_rm_files}
 \title{Remove files associated with an item}
 \usage{
-item_rm_files(sb_id, files, ..., session = current_session())
+item_rm_files(sb_id, files, ...)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
@@ -13,10 +13,7 @@ item_rm_files(sb_id, files, ..., session = current_session())
 If not supplied, defaults to removing all attached files.}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
-\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
-
-\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
-last authenticated session}
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}.}
 }
 \value{
 An updated object of class \code{sbitem}

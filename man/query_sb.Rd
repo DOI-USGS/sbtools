@@ -4,7 +4,7 @@
 \alias{query_sb}
 \title{Query SB for items using generic query parameters}
 \usage{
-query_sb(query_list, ..., limit = 20, session = current_session())
+query_sb(query_list, ..., limit = 20)
 }
 \arguments{
 \item{query_list}{List of item query selectors. See Details.}
@@ -14,8 +14,6 @@ query_sb(query_list, ..., limit = 20, session = current_session())
 \item{limit}{Maximum number of returned items. Will do paging to retrieve
 results when limit is over 1000. Use with caution, queries 10k results
 are slow.}
-
-\item{session}{Session object from \code{\link{authenticate_sb}}}
 }
 \value{
 A list of \code{\link{sbitem}} objects

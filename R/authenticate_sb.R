@@ -14,23 +14,19 @@
 #'   
 #' @export
 authenticate_sb = function(username, password){
+
+	message("authenticate_sb will stop working in favor of initialize_sciencebase_session when sciencebase turns off username and password login")
 	
-	if(missing(username)) {
-		username <- try(session_details(session=current_session())$username)
-	}
+	# TODO: bring back session_details?	
+	username <- try(get_username(username), silent = TRUE)
 	
 	if((inherits(username, "try-error") | is.null(username)) && !interactive()){
 		
 		stop('username required for authentication')
 	
-	}else if(is.null(username) && interactive()){
-		
-		username = readline('Please enter your username:')
-		if(username == ""){
-			stop('Empty username supplied, stopping')
-		}
-		
 	}
+	
+	pkg.env$username <- username
 	
 	keyring_pass = FALSE
 	if(missing(password)) {
@@ -62,7 +58,7 @@ authenticate_sb = function(username, password){
 	
 	if(!any(resp$cookies$name %in% 'JSESSIONID')){
 		if(keyring_pass) stop("Sciencebase login failed with stored password?")
-		stop('Unable to authenticate to SB. Check username and password')
+		warning('Unable to authenticate to legacy SB.')
 	}
 	
 	token_url <- pkg.env$token_url
@@ -85,17 +81,144 @@ authenticate_sb = function(username, password){
 		
 	}
 	
-	attributes(h) <- c(attributes(h), list(birthdate=Sys.time()))
-	pkg.env$session  = h
-	pkg.env$username = username
+	return(invisible(TRUE))
+}
+
+get_username <- function(username = NULL) {
+	if(is.null(username)) {
+		
+		username <- Sys.getenv("sb_user")
+		
+		if(username != "") {
+			pkg.env$username <- username
+			return(username)
+		}
+		
+		if(interactive()) {
+			
+			username = readline('Please enter your username:')
+			
+			if(username == ""){
+				stop('Empty username supplied, stopping')
+			} 
+			
+		}else {
+			
+			stop("username required for authentication")
+		}
+		# username <- try(session_details()$username)
+	} 
 	
-	invisible(h)
+	pkg.env$username <- username
+	
+	username
+	
 }
 
 set_keycloak_env <- function(token_resp) {
-	pkg.env$keycloak_token <- jsonlite::fromJSON(rawToChar(token_resp$content))
+	try({
+		json <- jsonlite::fromJSON(rawToChar(token_resp$content))
+		
+		if(!"error" %in% names(json)) {
+			pkg.env$keycloak_token <- json
+			
+			pkg.env$keycloak_expire <- Sys.time() + pkg.env$keycloak_token$expires_in
+
+		}
+	}, silent = TRUE)
+}
+
+#' Initialize ScienceBase Session
+#' @description Unless `token_text` is provided, will open a browser for two 
+#' factor authentication. 
+#' 
+#' Once logged in, retrieve the token from the user drop down in the upper 
+#' right hand corner of the browser. Click the icon with the silhouette of 
+#' a person, and select 'Copy API Token.' The token should be pasted into the 
+#' popup prompt. 
+#' 
+#' @param token_text character json formatted token text. `token_text` is 
+#' stashed in \link[tools]{R_user_dir} and does not need to be re-entered unless 
+#' it becomes stale.
+#' 
+#' If the token text is provided as input, no popup prompt will be raised.
+#' 
+#' @param username email address of sciencebase user. Will be retrieved from the 
+#' `sb_user` environment variable if set. A prompt will be raised if not provided.
+#' @export
+#' 
+initialize_sciencebase_session <- function(username = NULL, token_text = NULL) {
 	
-	pkg.env$keycloak_expire <- Sys.time() + pkg.env$keycloak_token$expires_in
+	username <- get_username(username)
+	
+	if(is.null(token_text)) {
+		
+		token <- gsub("[\r\n]", "", grab_token())
+		
+		if(token != "") {
+			check_current <- try(
+				initialize_keycloack_env(
+					token), silent = TRUE)
+			
+			if(isTRUE(check_current)) {
+				pkg.env$username <- username
+				return(TRUE)
+			}
+		}
+		
+		message("A browser will open ", pkg.env$manager_app)
+		message("Log in and copy a token from the 'User' menu in the upper right.")
+		message("Paste the token in the dialogue box that opens.")
+		utils::browseURL(pkg.env$manager_app)
+		token_text <- readPassword('Please enter your Sciencebase token string:')
+		
+	}
+	
+	pkg.env$username <- username
+	
+	worked <- try(initialize_keycloack_env(token_text))
+	
+	if(!inherits(worked, "try-error")) {
+		stache_token(token_text)
+		TRUE
+	} else {
+		FALSE
+	}
+}
+
+initialize_keycloack_env <- function(token_text) {
+	pkg.env$keycloak_token <- jsonlite::fromJSON(token_text)
+	
+	pkg.env$keycloak_expire <- Sys.time()
+	
+	token_refresh()
+}
+
+# utility to clean environment for testing
+clean_session <- function() {
+	pkg.env$keycloak_token <- NULL
+	
+	pkg.env$keycloak_expire <- NULL
+	
+	pkg.env$keycloak_client_id <- "catalog"
+	
+	pkg.env$username = ""
+	
+	pkg.env$uid <- NULL
+}
+
+stache_token <- function(token_text) {
+	dir.create(dirname(pkg.env$token_stache), recursive = TRUE, showWarnings = FALSE)
+	
+	write(token_text, file = pkg.env$token_stache)
+}
+
+grab_token <- function() {
+	if(file.exists(pkg.env$token_stache)) {
+		readChar(pkg.env$token_stache, file.info(pkg.env$token_stache)$size)
+	} else {
+		""
+	}
 }
 
 #' Read in a password from the user
@@ -117,9 +240,9 @@ readPassword <- function(prompt) {
 globalVariables('.rs.askForPassword')
 
 get_refresh_token <- function() {
-	token <- pkg.env$keycloak_token$refresh_token
+	token <- try(pkg.env$keycloak_token$refresh_token, silent = TRUE)
 	
-	if(is.null(token)) {
+	if(inherits(token, "try-error") | is.null(token)) {
 		stop("no token found, must call authenticate_sb()")
 	}
 	
@@ -134,4 +257,23 @@ get_access_token <- function() {
 	}
 	
 	token
+}
+
+get_token_header <- function() {
+	if(is.null(current_session()) | is.null(session_age())) return(httr::add_headers())
+	
+	httr::add_headers(
+		.headers = c(authorization = paste("Bearer", 
+																			 get_access_token())))
+}
+
+#' Check whether you're logged into a ScienceBase session
+#' 
+#' @export
+#' @return Logical, \code{TRUE} or \code{FALSE}
+#' @examples \dontrun{
+#' is_logged_in()
+#' }
+is_logged_in <- function() {
+	!is.null(current_session()) && !session_expired()
 }

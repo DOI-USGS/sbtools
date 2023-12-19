@@ -4,15 +4,13 @@
 \alias{sbtools_GET}
 \title{generic GETs for sbtools package}
 \usage{
-sbtools_GET(url, ..., session = NULL)
+sbtools_GET(url, ...)
 }
 \arguments{
 \item{url}{a base url for the GET}
 
 \item{...}{additional params passed to \code{\link[httr]{GET}}, often 
 including \code{query}}
-
-\item{session}{a sbtools session object}
 }
 \description{
 package wrapped for generic GETs that test sessions internally and wrap some

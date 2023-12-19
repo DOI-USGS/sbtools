@@ -4,13 +4,7 @@
 \alias{item_list_files}
 \title{Get list of files attached to SB item}
 \usage{
-item_list_files(
-  sb_id,
-  recursive = FALSE,
-  fetch_cloud_urls = TRUE,
-  ...,
-  session = current_session()
-)
+item_list_files(sb_id, recursive = FALSE, fetch_cloud_urls = TRUE, ...)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
@@ -22,10 +16,7 @@ This option will take slightly longer but the `url` attribute of the returned li
 work for direct file downloads or use with pther applications and libraries.}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
-\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
-
-\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
-last authenticated session}
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}.}
 }
 \value{
 A data.frame with columns fname, size, url, and facet. 

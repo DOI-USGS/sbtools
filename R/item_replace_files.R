@@ -15,16 +15,18 @@
 #' 
 #' @export
 item_replace_files <- function(sb_id, files, ..., all=FALSE, 
-															 scrape_files = FALSE, session=current_session()){
+															 scrape_files = FALSE){
 	
 	if(length(files) > 50){
 		warning('Trying to attach a large number of files to a SB item. SB imposes file limits which may cause this to fail')
 	}
 	
 	if(all){
-		item_rm_files(sb_id, ..., session=session)
+		item <- item_rm_files(sb_id, ...)
 	}else{
-		item_rm_files(sb_id, files, ..., session=session)
+		item <- item_rm_files(sb_id, files, ...)
 	}
-	item_append_files(sb_id, files = files, ..., scrape = scrape_files, session=session)
+	
+	if(!is.null(item))
+		item_append_files(sb_id, files = files, ..., scrape = scrape_files)
 }

@@ -4,14 +4,7 @@
 \alias{item_replace_files}
 \title{Replace files associated with an item}
 \usage{
-item_replace_files(
-  sb_id,
-  files,
-  ...,
-  all = FALSE,
-  scrape_files = FALSE,
-  session = current_session()
-)
+item_replace_files(sb_id, files, ..., all = FALSE, scrape_files = FALSE)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
@@ -19,7 +12,7 @@ item_replace_files(
 \item{files}{A character vector of file paths}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
-\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}.}
 
 \item{all}{A boolean indicating if all attached files should be removed before
 uploading new files. FALSE if only files with matching names should be replaced. 
@@ -32,9 +25,6 @@ If TRUE, sciencebase will attempt to create extensions based on the files.
 For example, for shapefiles, this will result in a shapefile extension 
 to be returned as a facet of the sciencebase item. 
 See item: "58069258e4b0824b2d1d422e" for an example.}
-
-\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
-last authenticated session}
 }
 \description{
 replaces existing files associated with an item with a new one. 

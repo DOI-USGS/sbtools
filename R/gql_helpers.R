@@ -1,18 +1,10 @@
-get_gql_header <- function() {
-	httr::add_headers(
-		.headers = c(`content-type` = "application/json", 
-								 accept = "application/json", 
-								 authorization = paste("Bearer", 
-								 											get_access_token())))
-}
-
 #' @noRd
 #' @param q character gql query to embed into json body
 #' @param gql handle to pass to POST
 #' @param json character json to pass -- shoul include gql query and additional content. 
 #' json is optional - it will default to just the query.
 run_gql_query <- function(q, gql, json = jsonlite::toJSON(list(query = q), auto_unbox = TRUE)) {
-	out <- RETRY("POST", pkg.env$graphql_url, get_gql_header(), 
+	out <- RETRY("POST", pkg.env$graphql_url, get_token_header(), content_type_json(),
 							 body = json,  
 							 handle = gql)
 	
@@ -79,5 +71,18 @@ publish_cloud_object <- function(sb_id, fname, gql) {
 	
 	run_gql_query(query, gql, json = json)
 	
+}
+
+delete_item_query <- function(id) {
+	query <- "mutation DeleteItemQuery($input: DeleteItemInput!){\n deleteItem(input: $input){\n itemId\n  __typename }\n}\n"
+	
+	variables <- list(input = list(itemId = id))
+	
+	json <- jsonlite::toJSON(list(operationName = "DeleteItemQuery", 
+																query = query,
+																variables = variables),
+													 auto_unbox = TRUE)
+	
+	run_gql_query(query, httr::handle(url = pkg.env$graphql_url), json = json)
 }
 

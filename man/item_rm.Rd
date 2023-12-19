@@ -4,19 +4,13 @@
 \alias{item_rm}
 \title{Remove item from SB}
 \usage{
-item_rm(
-  sb_id,
-  ...,
-  limit = 1000,
-  recursive = FALSE,
-  session = current_session()
-)
+item_rm(sb_id, ..., limit = 1000, recursive = FALSE)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
-\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}.}
 
 \item{limit}{The maximum number of child items to remove when called with
 recursive=TRUE.}
@@ -24,9 +18,6 @@ recursive=TRUE.}
 \item{recursive}{logical, FALSE by default. CAUTION: setting recursive=TRUE
 means that not only will this item be deleted, but so will all its child
 items and their child items and so on.}
-
-\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
-last authenticated session}
 }
 \value{
 \pkg{httr} \code{\link[httr]{response}} object

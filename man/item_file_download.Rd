@@ -10,7 +10,6 @@ item_file_download(
   names,
   destinations,
   dest_dir = getwd(),
-  session = current_session(),
   overwrite_file = FALSE
 )
 }
@@ -18,7 +17,7 @@ item_file_download(
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
-\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}.}
 
 \item{names}{String vector list of file names attached to item that you wish
 to download.}
@@ -28,9 +27,6 @@ Must be same length as \code{names}}
 
 \item{dest_dir}{A directory path for saving files when \code{names} destinations 
 parameter is not specified.}
-
-\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
-last authenticated session}
 
 \item{overwrite_file}{Boolean indicating if file should be overwritten if it
 already exists locally}

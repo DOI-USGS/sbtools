@@ -50,13 +50,12 @@
 #' item_list_files(id = '56562348e4b071e7ea53e09d', recursive = FALSE) # default
 #' item_list_files(id = '56562348e4b071e7ea53e09d', recursive = TRUE)
 #' }
-item_list_files = function(sb_id, recursive = FALSE, fetch_cloud_urls = TRUE, ..., 
-													 session=current_session()){
+item_list_files = function(sb_id, recursive = FALSE, fetch_cloud_urls = TRUE, ...){
 	
-	session_val(session)
+	session_val()
 	
 	id <- as.sbitem(sb_id)
-	item <- item_get(id, session = session)
+	item <- item_get(id)
 	
 	if (recursive) {
 		if (item$hasChildren) {
@@ -67,7 +66,7 @@ item_list_files = function(sb_id, recursive = FALSE, fetch_cloud_urls = TRUE, ..
 			
 			while (i <= length(children)) {
 
-				next_children <- item_list_children(children[[i]], session = session)
+				next_children <- item_list_children(children[[i]])
 
 				children <- c(children, next_children)
 				

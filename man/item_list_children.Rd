@@ -4,13 +4,7 @@
 \alias{item_list_children}
 \title{Return IDs for all child items}
 \usage{
-item_list_children(
-  sb_id,
-  fields = c("id", "title"),
-  ...,
-  session = current_session(),
-  limit = 20
-)
+item_list_children(sb_id, fields = c("id", "title"), ..., limit = 20)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}
@@ -19,10 +13,7 @@ item_list_children(
 is available online in \href{https://www.usgs.gov/sciencebase-instructions-and-documentation/item-core-model}{SB documentation}.}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
-\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}, or \code{\link[httr]{DELETE}}}
-
-\item{session}{Session object from \code{\link{authenticate_sb}}. Defaults to anonymous or 
-last authenticated session}
+\code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}.}
 
 \item{limit}{Max children returned.}
 }

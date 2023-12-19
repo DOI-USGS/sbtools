@@ -17,14 +17,14 @@
 #' }
 #' 
 #' @export
-item_rename_files = function(sb_id, names, new_names, ..., session=current_session()){
+item_rename_files = function(sb_id, names, new_names, ...){
 	
 	if(length(names) != length(new_names)){
 		stop('`names` and `new_names` must be identical length character vectors')
 	}
 	
 	#force download refresh of item
-	it = item_get(sb_id, ..., session=session)
+	it = item_get(sb_id, ...)
 	name_list = sapply(it$files, FUN=function(x){x$name})
 	
 	if(!all(names %in% name_list)){
@@ -36,6 +36,6 @@ item_rename_files = function(sb_id, names, new_names, ..., session=current_sessi
 		it$files[[indx]]$name = new_names[i]
 	}
 	
-	item_update(it, info = list(files=it$files), ..., session=session)
+	item_update(it, info = list(files=it$files), ...)
 	
 }
