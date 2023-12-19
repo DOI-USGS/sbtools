@@ -30,7 +30,6 @@ Suggests:
     testthat,
     xml2,
     sf,
-    tools,
     knitr,
     rmarkdown
 License: CC0

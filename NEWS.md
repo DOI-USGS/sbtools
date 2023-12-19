@@ -1,10 +1,17 @@
 # version 1.3.0
 
-- Added `initialize_sciencebase_session()` to support tokenized login for users who no longer have access to their username and password.
+In this release, sbtools underwent a significant migration from `josso` login to `keycloak`-based two factor authentication. See #314 for details of the changes.
+
+A vignette showing the old and new login methods is now included see: `vignette("sbtools")`
+
+In addition to login modifications, a pkgdown site was created, and the package code was reorganized significantly. 
+
+- Added `initialize_sciencebase_session()` to support tokenized login.
 - Sciencebase `session` object no longer returned by `authenticate_sb()`
 - `current_session()` now returns the active login token.
-- Removed `session_logout()` and `session_age_reset()`
-- removed `sbtools_DELETE()` as the method is no longer the accepted way to delete sciencebase items.
+- Removed `session_logout()` and `session_age_reset()` there is now an internal function `sbtools:::clean_session()` to accomplish the same goal.
+- Removed `sbtools_DELETE()` as the method is no longer the accepted way to delete sciencebase items.
+- Modified item deletion functions to use a delete helper that ensures files are removed from all locations.
 
 # Version 1.2.0 (2023-04-28)
 
