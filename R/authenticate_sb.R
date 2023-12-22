@@ -158,11 +158,12 @@ initialize_sciencebase_session <- function(username = NULL, token_text = NULL) {
 		if(token != "") {
 			check_current <- try(
 				initialize_keycloack_env(
-					token), silent = TRUE)
+					token, warn_on_fail = FALSE), 
+				silent = TRUE)
 			
 			if(isTRUE(check_current)) {
 				pkg.env$username <- username
-				return(TRUE)
+				return(invisible(TRUE))
 			}
 		}
 		
@@ -180,18 +181,18 @@ initialize_sciencebase_session <- function(username = NULL, token_text = NULL) {
 	
 	if(!inherits(worked, "try-error")) {
 		stache_token(token_text)
-		TRUE
+		return(invisible(TRUE))
 	} else {
-		FALSE
+		return(invisible(FALSE))
 	}
 }
 
-initialize_keycloack_env <- function(token_text) {
+initialize_keycloack_env <- function(token_text, warn_on_fail = TRUE) {
 	pkg.env$keycloak_token <- jsonlite::fromJSON(token_text)
 	
 	pkg.env$keycloak_expire <- Sys.time()
 	
-	token_refresh()
+	token_refresh(warn_on_fail = warn_on_fail)
 }
 
 # utility to clean environment for testing
@@ -207,15 +208,46 @@ clean_session <- function() {
 	pkg.env$uid <- NULL
 }
 
-stache_token <- function(token_text) {
-	dir.create(dirname(pkg.env$token_stache), recursive = TRUE, showWarnings = FALSE)
+#' Get or set token stache data directory
+#' @description if left unset, will return the user data dir
+#' as returned by `tools::R_user_dir` for this package.
+#' @param dir path of desired token stache file
+#' @return character path of data directory (silent when setting)
+#' @importFrom tools R_user_dir
+#' @noRd
+#'
+token_stache_path <- function(dir = NULL) {
 	
-	write(token_text, file = pkg.env$token_stache)
+	if(is.null(dir)) {
+		token_stache <- try(get("token_stache", envir = pkg.env), silent = TRUE)
+	
+		if(inherits(token_stache, "try-error")) {
+			assign("token_stache", 
+						 file.path(tools::R_user_dir(package = "sbtools"), "token"),
+						 envir = pkg.env)
+		}
+		
+		return(get("token_stache", envir = pkg.env))
+	} else {
+		assign("token_stache", 
+					 dir,
+					 envir = pkg.env)
+		return(invisible(get("token_stache", envir = pkg.env)))
+	}
+	
+	
+}
+
+stache_token <- function(token_text) {
+	dir.create(dirname(token_stache_path()), recursive = TRUE, showWarnings = FALSE)
+	
+	write(token_text, file = token_stache_path())
 }
 
 grab_token <- function() {
-	if(file.exists(pkg.env$token_stache)) {
-		readChar(pkg.env$token_stache, file.info(pkg.env$token_stache)$size)
+	
+	if(file.exists(token_stache_path())) {
+		readChar(token_stache_path(), file.info(token_stache_path())$size)
 	} else {
 		""
 	}
@@ -232,7 +264,9 @@ readPassword <- function(prompt) {
 	if (exists(".rs.askForPassword", mode = "function")) {
 		pass <- .rs.askForPassword(prompt)
 	} else {
-		pass <- readline(prompt)
+		message("paste your token - expecting up to four lines")
+		pass <- readLines(n = 4)
+		pass <- paste(token, collapse = "")
 	}
 	return (pass)
 }

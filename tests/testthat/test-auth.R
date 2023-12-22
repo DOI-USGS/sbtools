@@ -72,7 +72,7 @@ test_that("login results in valid session and renew works (new)", {
 		skip("Authenticated tests skipped due to lack of login info")
 	}
 	
-	unlink(sbtools:::pkg.env$token_stache, force = TRUE)
+	unlink(sbtools:::token_stache_path(), force = TRUE)
 	
 	if(!initialize_sciencebase_session(Sys.getenv("sb_user"), token)) {
 		sbtools:::clean_session()
@@ -83,7 +83,7 @@ test_that("login results in valid session and renew works (new)", {
 	
 	on.exit(sbtools:::clean_session())
 	
-	expect_true(file.exists(sbtools:::pkg.env$token_stache))
+	expect_true(file.exists(sbtools:::token_stache_path()))
 	
 	expect_true(initialize_sciencebase_session())
 	
