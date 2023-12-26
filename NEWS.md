@@ -1,3 +1,7 @@
+# version 1.3.1
+
+Improved handling of cached token.
+
 # version 1.3.0
 
 In this release, sbtools underwent a significant migration from `josso` login to `keycloak`-based two factor authentication. See #314 for details of the changes.
