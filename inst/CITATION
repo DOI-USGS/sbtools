@@ -1,5 +1,3 @@
-citHeader("To cite sbtools in publications, please use:")
-
 bibentry(bibtype = "Article",
          author = c(
 				 	as.person("Luke A Winslow"), 
