@@ -33,7 +33,7 @@ Suggests:
     knitr,
     rmarkdown
 License: CC0
-URL: https://github.com/DOI-USGS/sbtools
+URL: https://github.com/DOI-USGS/sbtools, https://doi-usgs.github.io/sbtools/
 BugReports: https://github.com/DOI-USGS/sbtools/issues
 RoxygenNote: 7.2.3
 VignetteBuilder: knitr
