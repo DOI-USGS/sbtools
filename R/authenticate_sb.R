@@ -264,9 +264,8 @@ readPassword <- function(prompt) {
 	if (exists(".rs.askForPassword", mode = "function")) {
 		pass <- .rs.askForPassword(prompt)
 	} else {
-		message("paste your token - expecting up to four lines")
-		pass <- readLines(n = 4)
-		pass <- paste(token, collapse = "")
+		message("paste your token")
+		pass <- readLines(n = 1)
 	}
 	return (pass)
 }
