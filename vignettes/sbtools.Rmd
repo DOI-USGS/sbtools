@@ -61,7 +61,9 @@ Much of `sbtools` is intended to be used after authentication. This part of `sbt
 
 The old way used `authenticate_sb()` with a username and password. The password could be cached using the `keyring` package.
 
-```{r}
+NOTE: This method no longer works and is shown here for reference with regard to old code and workflows.
+
+```{r, eval=FALSE}
 authenticate_sb(Sys.getenv("sb_user"))
 
 my_home_item <- user_id()

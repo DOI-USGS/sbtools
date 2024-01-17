@@ -161,14 +161,14 @@ refresh_token_before_expired <- function(refresh_amount_seconds = 600) {
 	return(invisible(FALSE))
 }
 
-token_refresh <- function(client_id = pkg.env$keycloak_client_id) {
+token_refresh <- function(client_id = pkg.env$keycloak_client_id, warn_on_fail = TRUE) {
 	
 	data = list(
 		client_id = client_id,
 		grant_type = "refresh_token",
 		refresh_token = get_refresh_token())
 	
-	token <- RETRY("POST", pkg.env$token_url, body = data, encode = "form")
+	token <- RETRY("POST", pkg.env$token_url, body = data, encode = "form", quiet = TRUE)
 	
 	if(!token$status_code == 200) {
 		warning('Unable to refresh SB cloud token. Some functionality may not work.')
