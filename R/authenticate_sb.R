@@ -15,7 +15,12 @@
 #' @export
 authenticate_sb = function(username, password){
 
-	message("authenticate_sb will stop working in favor of initialize_sciencebase_session when sciencebase turns off username and password login")
+	message(
+		"authenticate_sb no longer works for individual login sessions, because ",
+		"sciencebase now requires multi-factor authentication.\n\n",
+		"Use initialize_sciencebase_session() ",
+		"instead (except in the rare case where you are using a role account)."
+	)
 	
 	# TODO: bring back session_details?	
 	username <- try(get_username(username), silent = TRUE)
@@ -58,7 +63,6 @@ authenticate_sb = function(username, password){
 	
 	if(!any(resp$cookies$name %in% 'JSESSIONID')){
 		if(keyring_pass) stop("Sciencebase login failed with stored password?")
-		warning('Unable to authenticate to legacy SB.')
 	}
 	
 	token_url <- pkg.env$token_url
