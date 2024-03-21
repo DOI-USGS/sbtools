@@ -21,8 +21,8 @@ item tree hierarchy.
 }
 \examples{
 \donttest{
-item_get_parent("4f4e4b24e4b07f02db6aea14")
+item_get_parent("57976a0ce4b021cadec97890")
 
-item_get_parent(item_get("4f4e4b24e4b07f02db6aea14"))
+item_get_parent(item_get("57976a0ce4b021cadec97890"))
 }
 }

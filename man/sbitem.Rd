@@ -26,20 +26,20 @@ ScienceBase item class
 \examples{
 \donttest{
 # Single item from item_get()
-item_get("4f4e4b24e4b07f02db6aea14")
+item_get("57976a0ce4b021cadec97890")
 
 # Get many w/ e.g., an lapply() call
 library("httr")
 res <- query_items(list(s = "Search", q = "water", format = "json"))
-if(res$status != 404) {
+if(res$status == 200) {
   ids <- vapply(httr::content(res)$items, "[[", "", "id")
   (out <- lapply(ids[1:3], item_get))
 }
 # create item class from only an item ID
-as.sbitem("4f4e4b24e4b07f02db6aea14")
+as.sbitem("5ebe92af82ce476925e44b8f")
 
 # sbitem gives back itself
-(x <- as.sbitem("4f4e4b24e4b07f02db6aea14"))
+(x <- as.sbitem("5ebe92af82ce476925e44b8f"))
 as.sbitem(x)
 }
 }
