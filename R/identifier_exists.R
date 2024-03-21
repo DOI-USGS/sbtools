@@ -12,7 +12,7 @@
 #' @return Logical, \code{TRUE} or \code{FALSE}
 #' @examples \donttest{
 #' # identifier exists
-#' identifier_exists(sb_id = "4f4e4b24e4b07f02db6aea14")
+#' identifier_exists(sb_id = "57976a0ce4b021cadec97890")
 #' 
 #' # identifier does not exist
 #' identifier_exists(sb_id = "aaaaaaakkkkkkkbbbbbb")
