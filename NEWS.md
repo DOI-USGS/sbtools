@@ -1,3 +1,11 @@
+# version 1.3.2
+
+- `item_rm_files()` now uses cloud end point. #315
+- `initialize_sciencebase_session()` has less warnings. #319 and #323
+- `initialize_sciencebase_session()` works at the terminal now. #317
+- `initialize_sciencebase_session()` caching works better. #318
+- improve test coverage #316
+
 # version 1.3.1
 
 Improved handling of cached token.

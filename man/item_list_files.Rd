@@ -39,10 +39,10 @@ if the file was found in a facet.
 \dontrun{
 
 #regular files
-item_list_files("4f4e4b24e4b07f02db6aea14")
+item_list_files("57976a0ce4b021cadec97890")
 
 # files in facets
-item_list_files("5f6a285d82ce38aaa244912e")
+item_list_files("5ebe92af82ce476925e44b8f")
 
 # list files recursively
 ## create item
