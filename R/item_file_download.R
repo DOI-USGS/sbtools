@@ -81,7 +81,7 @@ item_file_download = function(sb_id, ..., names, destinations,
 			RETRY("GET", url=flist[i,]$url, ..., 
 						write_disk(flist[i,]$dest, overwrite = overwrite_file),
 						timeout = httr::timeout(default_timeout()),
-						httr::progress())
+						httr::progress(), get_token_header())
 			
 		}, error = function(e) {
 			if(file.exists(flist[i,]$dest)) {
