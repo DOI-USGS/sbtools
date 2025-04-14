@@ -124,7 +124,7 @@ session_renew = function(password, ..., username){
 	# if(missing(username) && !exists("sb_username"))
 	# 	sb_username <- session_details(session=session)$username
 	
-	password <- try(keyring::key_get("sciencebase", sb_username))
+	password <- try(keyring::key_get("sciencebase", sb_username), silent = TRUE)
 	
 	# either renew or re-authenticate as needed
 	if(is_logged_in()) {
