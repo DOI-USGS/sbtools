@@ -3,14 +3,14 @@ test_that("REST_helpers tests", {
 	
 	item <- sbtools_GET("https://www.sciencebase.gov/catalog/item/5c4f4a04e4b0708288f78e07")
 	
-	expect_message(sbtools_GET("https://www.sciencebase.gov/catalog/item/a04e4b0708288f78e07"), 
-								 "Invalid Item ID")
+	expect_warning(sbtools_GET("https://www.sciencebase.gov/catalog/item/a04e4b0708288f78e07"), 
+								 "item doesn't exist or is secured")
 	
 	assign("keycloak_expire", NULL, envir = sbtools:::pkg.env)
 	assign("keycloak_token", "baddy", envir = sbtools:::pkg.env)
 	
-	expect_message(sbtools_GET("https://www.sciencebase.gov/catalog/item/a04e4b0708288f78e07"),
-								 "Invalid Item ID")
+	expect_warning(sbtools_GET("https://www.sciencebase.gov/catalog/item/a04e4b0708288f78e07"),
+								 "item doesn't exist or is secured")
 	
 	expect_warning(expect_warning(try(sbtools_GET("https://www.sciencebase.go/catalog/item/5c4f4a04e4b0708288f78e07"), silent = TRUE)))
 	

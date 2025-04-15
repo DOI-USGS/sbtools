@@ -33,6 +33,5 @@
 #'
 #' @name sbtools-package
 #' @aliases sbtools
-#' @docType package
 #' @keywords package
 NULL
