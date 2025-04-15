@@ -1,3 +1,8 @@
+# version 1.4.0
+
+- removed `items_create()`, `items_upsert()`, and `items_update()` as they are no longer supported by sciencebase.
+- Fixed bugs related to sciencebase updates.
+
 # version 1.3.2
 
 - `item_rm_files()` now uses cloud end point. #315

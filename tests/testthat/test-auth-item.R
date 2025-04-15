@@ -106,6 +106,8 @@ test_that("item creation, identifiers, and file upload works", {
 	
 	item_publish_cloud(item$id, "data.csv")
 	
+	Sys.sleep(5)
+	
 	item <- item_get(item$id)
 	
 	expect_true(grepl("prod-is-usgs-sb-prod-publish", item$files[[1]]$publishedS3Ur))
