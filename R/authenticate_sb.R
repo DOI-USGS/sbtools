@@ -98,6 +98,17 @@ get_username <- function(username = NULL) {
 			return(username)
 		}
 		
+		username_file <- file.path(dirname(token_stache_path()), "username")
+		
+		if(file.exists(username_file)) {
+			username <- readLines(username_file, 1)
+		}
+		
+		if(username != "") {
+			pkg.env$username <- username
+			return(username)
+		}
+		
 		if(interactive()) {
 			
 			username = readline('Please enter your username:')
@@ -148,7 +159,9 @@ set_keycloak_env <- function(token_resp) {
 #' If the token text is provided as input, no popup prompt will be raised.
 #' 
 #' @param username email address of sciencebase user. Will be retrieved from the 
-#' `sb_user` environment variable if set. A prompt will be raised if not provided.
+#' `sb_user` environment variable if set or retrieved from a `username` file cached
+#' in the `token_text` directory. A prompt will be raised if not provided.
+#' 
 #' @export
 #' 
 initialize_sciencebase_session <- function(username = NULL, token_text = NULL) {
@@ -184,7 +197,7 @@ initialize_sciencebase_session <- function(username = NULL, token_text = NULL) {
 	worked <- try(initialize_keycloack_env(token_text))
 	
 	if(!inherits(worked, "try-error")) {
-		stache_token(token_text)
+		stache_token(username, token_text)
 		return(invisible(TRUE))
 	} else {
 		return(invisible(FALSE))
@@ -242,9 +255,10 @@ token_stache_path <- function(dir = NULL) {
 	
 }
 
-stache_token <- function(token_text) {
+stache_token <- function(username, token_text) {
 	dir.create(dirname(token_stache_path()), recursive = TRUE, showWarnings = FALSE)
 	
+	write(username, file = file.path(dirname(token_stache_path()), "username"))
 	write(token_text, file = token_stache_path())
 }
 

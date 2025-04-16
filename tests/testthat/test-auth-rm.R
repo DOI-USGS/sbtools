@@ -2,12 +2,8 @@
 test_that("Test that surgical item rm", {
 	skip_on_cran()
 	
-	if(is.na(Sys.getenv("sb_user", unset=NA))){
-		skip("Authenticated tests skipped due to lack of login info")
-	}
-	
-	initialize_sciencebase_session()
-	
+	try_auth()
+
 	on.exit(sbtools:::clean_session())
 	
 	item = item_create(title="file add rm test item")

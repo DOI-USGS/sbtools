@@ -8,7 +8,8 @@ initialize_sciencebase_session(username = NULL, token_text = NULL)
 }
 \arguments{
 \item{username}{email address of sciencebase user. Will be retrieved from the 
-`sb_user` environment variable if set. A prompt will be raised if not provided.}
+`sb_user` environment variable if set or retrieved from a `username` file cached
+in the `token_text` directory. A prompt will be raised if not provided.}
 
 \item{token_text}{character json formatted token text. `token_text` is 
 stashed in \link[tools]{R_user_dir} and does not need to be re-entered unless 
