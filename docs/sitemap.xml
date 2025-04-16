@@ -10,6 +10,8 @@
 <url><loc>/reference/authenticate_sb.html</loc></url>
 <url><loc>/reference/current_session.html</loc></url>
 <url><loc>/reference/folder_create.html</loc></url>
+<url><loc>/reference/get_cached_token.html</loc></url>
+<url><loc>/reference/get_username.html</loc></url>
 <url><loc>/reference/identifier_exists.html</loc></url>
 <url><loc>/reference/index.html</loc></url>
 <url><loc>/reference/initialize_sciencebase_session.html</loc></url>
@@ -59,6 +61,7 @@
 <url><loc>/reference/session_renew.html</loc></url>
 <url><loc>/reference/session_validate.html</loc></url>
 <url><loc>/reference/set_endpoint.html</loc></url>
+<url><loc>/reference/token_stache_path.html</loc></url>
 <url><loc>/reference/user_id.html</loc></url>
 </urlset>
 
