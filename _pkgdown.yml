@@ -16,6 +16,9 @@ reference:
     - '`set_endpoint`'
     - '`user_id`'
     - '`is_logged_in`'
+    - '`get_username`'
+    - '`get_cached_token`'
+    - '`token_stache_path`'
   - title: Item Operations
   - contents:
     - '`sbitem`'

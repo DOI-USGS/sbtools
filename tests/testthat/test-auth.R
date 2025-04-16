@@ -35,8 +35,8 @@ test_that("login results in valid session and renew works (new)", {
 	
 	sbtools:::clean_session()
 	
-	token <- sbtools:::grab_token()
-	user <- try(sbtools:::get_username())
+	token <- get_cached_token()
+	user <- try(get_username())
 	
 	if(token == "" | inherits(user, "try-error")) {
 		skip("Authenticated tests skipped due to lack of login info")

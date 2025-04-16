@@ -1,7 +1,7 @@
 try_auth <- function() {
 	skipit <- TRUE
 	
-	user <- try(sbtools:::get_username())
+	user <- try(get_username())
 	
 	if(!inherits(user, "try-error")) {
 		skipit <- !initialize_sciencebase_session()
