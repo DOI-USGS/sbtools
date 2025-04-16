@@ -2,6 +2,9 @@
 
 - removed `items_create()`, `items_upsert()`, and `items_update()` as they are no longer supported by sciencebase.
 - Fixed bugs related to sciencebase updates.
+- added `get_username()` as exported function.
+- added `get_cached_token()` as exported function.
+- added `token_stache_path()` as exported function.
 
 # version 1.3.2
 

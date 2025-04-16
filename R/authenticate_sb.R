@@ -1,5 +1,7 @@
 
-#' Authenticate to SB for subsequent calls
+#' Authenticate to SB for subsequent calls [DEPRECATED]
+#' 
+#' THIS AUTHENTICATION METHOD NO LONGER WORKS FOR INDIVIDUAL LOGIN SESSIONS
 #' 
 #' This connects to SB, authenticates and gets a session token for communicating
 #' with SB. If you do not supply a username or password, you will be prompted to
@@ -88,10 +90,35 @@ authenticate_sb = function(username, password){
 	return(invisible(TRUE))
 }
 
+#' Get or set ScienceBase username
+#' @description
+#' Used to retrieve the current user name. Will request the username be entered
+#' if no user is provided and `interactive()` is TRUE.
+#' 
+#' This is largely an internal function, but is exported for awareness and
+#' use in automated pipelines.
+#' 
+#' @param username character if NULL, will be retrieved from the `sb_user`
+#' environment variable or the `username` file stored at `token_stache_path()`
+#' @return character string containing a username. Throws an error if no
+#' username is found and `interactive()` is FALSE
+#' @export
+#' 
 get_username <- function(username = NULL) {
 	if(is.null(username)) {
 		
 		username <- Sys.getenv("sb_user")
+		
+		if(username != "") {
+			pkg.env$username <- username
+			return(username)
+		}
+		
+		username_file <- file.path(dirname(token_stache_path()), "username")
+		
+		if(file.exists(username_file)) {
+			username <- readLines(username_file, 1)
+		}
 		
 		if(username != "") {
 			pkg.env$username <- username
@@ -106,11 +133,11 @@ get_username <- function(username = NULL) {
 				stop('Empty username supplied, stopping')
 			} 
 			
-		}else {
+		} else {
 			
 			stop("username required for authentication")
+			
 		}
-		# username <- try(session_details()$username)
 	} 
 	
 	pkg.env$username <- username
@@ -148,7 +175,9 @@ set_keycloak_env <- function(token_resp) {
 #' If the token text is provided as input, no popup prompt will be raised.
 #' 
 #' @param username email address of sciencebase user. Will be retrieved from the 
-#' `sb_user` environment variable if set. A prompt will be raised if not provided.
+#' `sb_user` environment variable if set or retrieved from a `username` file cached
+#' in the `token_text` directory. A prompt will be raised if not provided.
+#' 
 #' @export
 #' 
 initialize_sciencebase_session <- function(username = NULL, token_text = NULL) {
@@ -157,7 +186,7 @@ initialize_sciencebase_session <- function(username = NULL, token_text = NULL) {
 	
 	if(is.null(token_text)) {
 		
-		token <- gsub("[\r\n]", "", grab_token())
+		token <- get_cached_token()
 		
 		if(token != "") {
 			check_current <- try(
@@ -184,7 +213,7 @@ initialize_sciencebase_session <- function(username = NULL, token_text = NULL) {
 	worked <- try(initialize_keycloack_env(token_text))
 	
 	if(!inherits(worked, "try-error")) {
-		stache_token(token_text)
+		stache_token(username, token_text)
 		return(invisible(TRUE))
 	} else {
 		return(invisible(FALSE))
@@ -213,19 +242,26 @@ clean_session <- function() {
 }
 
 #' Get or set token stache data directory
-#' @description if left unset, will return the user data dir
-#' as returned by `tools::R_user_dir` for this package.
-#' @param dir path of desired token stache file
+#' @description Will check the `SBTOOLS_TOKEN_STACHE` environment variable 
+#' and will check if the `token_stache_path` has been set durring the current
+#' session previously. If the environment variable or session-variable are not
+#' found, returns `file.path(tools::R_user_dir(package = "sbtools"), "token")`.
+#' @param dir path of desired token stache file. See description for behavior
+#' if left unset.
 #' @return character path of data directory (silent when setting)
 #' @importFrom tools R_user_dir
-#' @noRd
+#' @export
 #'
 token_stache_path <- function(dir = NULL) {
 	
 	if(is.null(dir)) {
-		token_stache <- try(get("token_stache", envir = pkg.env), silent = TRUE)
-	
-		if(inherits(token_stache, "try-error")) {
+		token_stache <- Sys.getenv("SBTOOLS_TOKEN_STACHE")
+		
+		if(token_stache == "") {
+			token_stache <- try(get("token_stache", envir = pkg.env), silent = TRUE)	
+		}
+		
+		if(inherits(token_stache, "try-error") | token_stache == "") {
 			assign("token_stache", 
 						 file.path(tools::R_user_dir(package = "sbtools"), "token"),
 						 envir = pkg.env)
@@ -239,19 +275,26 @@ token_stache_path <- function(dir = NULL) {
 		return(invisible(get("token_stache", envir = pkg.env)))
 	}
 	
-	
 }
 
-stache_token <- function(token_text) {
+stache_token <- function(username, token_text) {
 	dir.create(dirname(token_stache_path()), recursive = TRUE, showWarnings = FALSE)
 	
+	write(username, file = file.path(dirname(token_stache_path()), "username"))
 	write(token_text, file = token_stache_path())
 }
 
-grab_token <- function() {
+
+#' get cached sciencebase token
+#' @description
+#' tries to retrieve a cached token from `token_stache_path()`
+#' @return character containing the token (which may be stale) or an empty string
+#' @export
+get_cached_token <- function() {
 	
 	if(file.exists(token_stache_path())) {
-		readChar(token_stache_path(), file.info(token_stache_path())$size)
+		gsub("[\r\n]", "", 
+				 readChar(token_stache_path(), file.info(token_stache_path())$size))
 	} else {
 		""
 	}

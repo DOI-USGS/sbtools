@@ -91,7 +91,7 @@ The new way uses `initialize_sciencebase_session()` to open a browser window. On
 If the token has been entered previously and is still valid, it will not be requested again.
 
 ```{r}
-user <- Sys.getenv("sb_user") # this should be your science base user id
+user <- get_username()
 
 initialize_sciencebase_session(user)
 

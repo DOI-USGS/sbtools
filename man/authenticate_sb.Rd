@@ -2,7 +2,7 @@
 % Please edit documentation in R/authenticate_sb.R
 \name{authenticate_sb}
 \alias{authenticate_sb}
-\title{Authenticate to SB for subsequent calls}
+\title{Authenticate to SB for subsequent calls [DEPRECATED]}
 \usage{
 authenticate_sb(username, password)
 }
@@ -14,6 +14,9 @@ no password is returned by `keyring::key_get("sciencebase", username)`.
 See \code{\link[keyring]{keyring-package}} documentation for more details.}
 }
 \description{
+THIS AUTHENTICATION METHOD NO LONGER WORKS FOR INDIVIDUAL LOGIN SESSIONS
+}
+\details{
 This connects to SB, authenticates and gets a session token for communicating
 with SB. If you do not supply a username or password, you will be prompted to
 enter them.
