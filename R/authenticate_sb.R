@@ -90,7 +90,7 @@ authenticate_sb = function(username, password){
 	return(invisible(TRUE))
 }
 
-#' get or set sciencebase username
+#' Get or set ScienceBase username
 #' @description
 #' Used to retrieve the current user name. Will request the username be entered
 #' if no user is provided and `interactive()` is TRUE.
