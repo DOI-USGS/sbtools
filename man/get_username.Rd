@@ -2,7 +2,7 @@
 % Please edit documentation in R/authenticate_sb.R
 \name{get_username}
 \alias{get_username}
-\title{get or set sciencebase username}
+\title{Get or set ScienceBase username}
 \usage{
 get_username(username = NULL)
 }
