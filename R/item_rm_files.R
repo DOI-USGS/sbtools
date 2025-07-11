@@ -27,10 +27,11 @@
 #' @export
 item_rm_files <- function(sb_id, files,...){
 	
-	#force a pull of the item to refresh the file info
-	item = as.sbitem(sb_id)
+	sb_id = as.sbitem(sb_id)
 	
 	if(is.null(sb_id)) return(NULL)
+	
+	item = get_item(sb_id$id)
 	
 	#if item has no files, we have nothing to do
 	if(is.null(item$files)){
@@ -39,7 +40,7 @@ item_rm_files <- function(sb_id, files,...){
 	
 	#if files not supplied, set files vector to of files is just going to be empty
 	if(missing(files)){
-		remove <- sb_id$files
+		remove <- item$files
 	}else{
 		#match the names supplied with the names of item files (sticking to basename, might have paths supplied)
 		fnames = sapply(item$files, function(x) x$name)
@@ -55,9 +56,9 @@ item_rm_files <- function(sb_id, files,...){
 		cuid <- f$cuid
 		file <- f$name
 		
-		if(is.null(cuid))
-		
 		delete_file_query(item$id, cuid, file)
 	}
+	
+	return(get_item(sb_id$id))
 
 }
