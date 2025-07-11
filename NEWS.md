@@ -5,6 +5,7 @@
 - added `get_username()` as exported function.
 - added `get_cached_token()` as exported function.
 - added `token_stache_path()` as exported function.
+- fixed bug related to file downloads #332 and #335
 
 # version 1.3.2
 

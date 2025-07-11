@@ -86,3 +86,16 @@ delete_item_query <- function(id) {
 	run_gql_query(query, httr::handle(url = pkg.env$graphql_url), json = json)
 }
 
+# {"operationName":"DeleteQuery","variables":{"input":{"cuid":null,"key":"65cbc0b3d34ef4b119cb37e9/rf1.csv"}},"query":"mutation DeleteQuery($input: DeleteFileInput!) {\n  deleteFile(input: $input) {\n    id\n    __typename\n  }\n}\n"}
+delete_file_query <- function(id, cuid, file) {
+	query <- "mutation DeleteQuery($input: DeleteFileInput!) {\n  deleteFile(input: $input) {\n    id\n    __typename\n  }\n}\n"
+	
+	variables <- list(input = list(cuid = cuid, key = paste0(id, "/", file)))
+	
+	json = jsonlite::toJSON(list(operationName = "DeleteQuery",
+															 query = query,
+															 variables = variables),
+													auto_unbox = TRUE, null = 'null')
+	
+	run_gql_query(query, httr::handle(url = pkg.env$graphql_url), json = json)
+}

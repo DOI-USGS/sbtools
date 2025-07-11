@@ -4,7 +4,7 @@
 \alias{item_rm_recursive}
 \title{Remove an item completely by recursively removing its child items}
 \usage{
-item_rm_recursive(sb_id, ..., limit)
+item_rm_recursive(sb_id, ..., limit = 1000)
 }
 \arguments{
 \item{sb_id}{An \code{\link{sbitem}} object or a character ScienceBase ID corresponding to the item}

@@ -27,7 +27,6 @@
 #' @export
 item_rm_files <- function(sb_id, files,...){
 	
-	#force a pull of the item to refresh the file info
 	sb_id = as.sbitem(sb_id)
 	
 	if(is.null(sb_id)) return(NULL)
@@ -41,18 +40,25 @@ item_rm_files <- function(sb_id, files,...){
 	
 	#if files not supplied, set files vector to of files is just going to be empty
 	if(missing(files)){
-		files_to_keep = vector()
+		remove <- item$files
 	}else{
 		#match the names supplied with the names of item files (sticking to basename, might have paths supplied)
-		fnames = sapply(item$files, function(x)x$name)
-		files_to_keep = item$files[!fnames %in% basename(files)]
-		#files_to_keep = lapply(files_to_keep, function(x){x[c('name', 'title', 'contentType')]})
+		fnames = sapply(item$files, function(x) x$name)
+		remove = item$files[fnames %in% basename(files)]
 	}
 
-	if(length(files_to_keep) == 0 && is.list(files_to_keep)) {
+	if(length(remove) == 0 && is.list(0)) {
+		# nothing to do
 		return(item)
 	}
 	
-	as.sbitem(item_update(item$id, info = list(files = files_to_keep), ...))
+	for(f in remove) {
+		cuid <- f$cuid
+		file <- f$name
+		
+		delete_file_query(item$id, cuid, file)
+	}
+	
+	return(get_item(sb_id$id))
 
 }
