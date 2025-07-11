@@ -1,3 +1,7 @@
+# version 1.4.1
+
+- improved `item_rm_files()` to use the cloud file removal utility.  #334 and #336
+
 # version 1.4.0
 
 - removed `items_create()`, `items_upsert()`, and `items_update()` as they are no longer supported by sciencebase.
