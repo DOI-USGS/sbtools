@@ -126,6 +126,10 @@ handle_errors <- function(x, url, method, types) {
 			return(NULL)
 		}
 	}
+		
+		if(grepl("getSBJSON\\(", rawToChar(x$content))) {
+			x$content <- charToRaw(gsub("\\);", "", gsub("getSBJSON\\(", "", rawToChar(x$content))))
+		}
 	
 	if ('errors' %in% names(content(x))) {
 		
