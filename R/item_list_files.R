@@ -4,7 +4,7 @@
 #' @param recursive (logical) List files recursively. Default: \code{FALSE}
 #' @param fetch_cloud_urls (logical) fetch a tokenized cloud download URLs? Default: \code{TRUE}
 #' This option will take slightly longer but the `url` attribute of the returned list will
-#' work for direct file downloads or use with pther applications and libraries.
+#' work for direct file downloads or use with other applications and libraries.
 #'
 #' @return 
 #' A data.frame with columns fname, size, url, and facet. 
@@ -154,7 +154,9 @@ get_facet_files <- function(item) {
 					 	list(name = y$name,
 					 			 size = y$size,
 					 			 url = y$downloadUri,
-					 			 facet_name = x$name)
+					 			 facet_name = x$name,
+					 			 cuid = y$cuid,
+					 			 key = y$key)
 					 	
 					 }, n = x$name)
 		

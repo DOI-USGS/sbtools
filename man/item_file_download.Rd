@@ -10,7 +10,8 @@ item_file_download(
   names,
   destinations,
   dest_dir = getwd(),
-  overwrite_file = FALSE
+  overwrite_file = FALSE,
+  fetch_cloud_urls = FALSE
 )
 }
 \arguments{
@@ -30,6 +31,10 @@ parameter is not specified.}
 
 \item{overwrite_file}{Boolean indicating if file should be overwritten if it
 already exists locally}
+
+\item{fetch_cloud_urls}{(logical) fetch a tokenized cloud download URLs? Default: \code{TRUE}
+This option will take slightly longer but the `url` attribute of the returned list will
+work for direct file downloads or use with other applications and libraries.}
 }
 \value{
 Character vector of full paths to local files

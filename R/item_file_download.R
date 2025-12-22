@@ -14,6 +14,9 @@
 #' parameter is not specified.
 #' @param overwrite_file Boolean indicating if file should be overwritten if it
 #'   already exists locally
+#' @param fetch_cloud_urls (logical) fetch a tokenized cloud download URLs? Default: \code{TRUE}
+#' This option will take slightly longer but the `url` attribute of the returned list will
+#' work for direct file downloads or use with other applications and libraries.
 #'   
 #' @return Character vector of full paths to local files 
 #'
@@ -30,14 +33,15 @@
 #' @export
 item_file_download = function(sb_id, ..., names, destinations, 
 															dest_dir = getwd(), 
-															overwrite_file = FALSE){
+															overwrite_file = FALSE,
+															fetch_cloud_urls = FALSE){
 	
 	sb_id = as.sbitem(sb_id)
 	
 	if(!session_validate())
 		stop('Session state is invalid, please re-authenticate')
 
-	flist <- item_list_files(sb_id, fetch_cloud_urls = FALSE, ...)
+	flist <- item_list_files(sb_id, fetch_cloud_urls = fetch_cloud_urls, ...)
 	
 	if(nrow(flist) < 1)
 		stop(sb_id$id, ':Item has no attached files')

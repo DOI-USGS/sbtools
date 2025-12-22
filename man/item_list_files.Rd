@@ -13,7 +13,7 @@ item_list_files(sb_id, recursive = FALSE, fetch_cloud_urls = TRUE, ...)
 
 \item{fetch_cloud_urls}{(logical) fetch a tokenized cloud download URLs? Default: \code{TRUE}
 This option will take slightly longer but the `url` attribute of the returned list will
-work for direct file downloads or use with pther applications and libraries.}
+work for direct file downloads or use with other applications and libraries.}
 
 \item{...}{Additional parameters are passed on to \code{\link[httr]{GET}}, \code{\link[httr]{POST}},
 \code{\link[httr]{HEAD}}, \code{\link[httr]{PUT}}.}
