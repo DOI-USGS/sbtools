@@ -12,3 +12,20 @@ test_that("recursive file list works right", {
 	
 	expect_true(nrow(files) > 100)
 })
+
+test_that("cloud facets", {
+	
+	skip_on_cran()
+	
+	if(!sb_ping()) skip("sciencebase unavailable, tests won't work")
+	
+	sbid <- "69330512d4be02765ea81805"
+	
+	item <- item_get(sbid)
+	
+	files <- item_list_files(sbid)
+	
+	# verify that a cloud shapefile is in here
+	expect_true(any(sapply(attr(files, "cloud"), \(x) x$cuid != "" & grepl("shp", x$key))))
+	
+})

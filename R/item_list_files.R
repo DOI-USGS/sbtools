@@ -151,10 +151,22 @@ get_facet_files <- function(item) {
 		lapply(x$files, 
 					 function(y, n) {
 					 	
-					 	list(name = y$name,
-					 			 size = y$size,
-					 			 url = y$downloadUri,
-					 			 facet_name = x$name)
+					 	out <- list(name = y$name,
+					 							size = y$size,
+					 							url = y$downloadUri,
+					 							facet_name = n)
+					 	
+					 	if(!is.null(y$cuid)) {
+					 		
+					 		out <- c(out,
+					 						 list(cuid = y$cuid,
+					 						 		 key = y$key,
+					 						 		 title = y$title,
+					 						 		 useForPreview = y$useForPreview))
+					 		
+					 	}
+					 	
+					 	out
 					 	
 					 }, n = x$name)
 		
