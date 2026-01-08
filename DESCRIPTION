@@ -35,7 +35,7 @@ Suggests:
 License: CC0
 URL: https://github.com/DOI-USGS/sbtools, https://doi-usgs.github.io/sbtools/
 BugReports: https://github.com/DOI-USGS/sbtools/issues
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 VignetteBuilder: knitr
 Config/testthat/parallel: false
 Config/testthat/edition: 3
