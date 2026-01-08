@@ -119,9 +119,9 @@ test_that("basic examples work", {
 	
 	expect_equal(length(query_sb_text('Lees Ferry')), 20)
 	
-	expect_equal(length(item_list_children(item_get('5060b03ae4b00fc20c4f3c8b'))), 20)
+	expect_equal(length(item_list_children(item_get('6644ea91d34e1955f5a42b46'))), 4)
 	
-	expect_equal(length(item_list_children(item_get('5060b03ae4b00fc20c4f3c8b'), limit = 5)), 5)
+	expect_equal(length(item_list_children(item_get('6644ea91d34e1955f5a42b46'), limit = 2)), 2)
 	
 	expect_warning(query_sb("test"))
 	
