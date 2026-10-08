@@ -11,7 +11,7 @@ Authors@R: c(person("David", "Blodgett", role=c("cre"),
     person("Alison", "Appling", role = c("ctb"),
     email = "aappling@usgs.gov"),
     person("Jordan", "Read", role   = c("ctb"),
-    email = "jread@usgs.gov"))
+    email = "jread@cuahsi.org"))
 Description: Tools for interacting with U.S. Geological Survey ScienceBase
     <https://www.sciencebase.gov> interfaces. ScienceBase is a data cataloging and
     collaborative data management platform. Functions included for querying
